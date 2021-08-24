@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fitness_99/global/router/app_pages.dart';
+import 'package:fitness_99/helpers/auth.helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +26,14 @@ class LoginController extends GetxController {
     }
   }
 
-  void validatePassword() {}
+  bool validatePassword() {
+    if (passwordTED.value.text.isEmpty) {
+      passwordErr.value = 'Enter password';
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   // void addData() async {
   //   try {
@@ -50,32 +59,25 @@ class LoginController extends GetxController {
   // }
 
   void login() {
-    validateEmail();
-    //   if (_form.currentState?.validate() ?? false) {
-    //     setState(() {
-    //       _apiCalling = true;
-    //     });s
-    //     AuthenticationHelper()
-    //         .signIn(email: emailTED.text, password: passwordTED.text)
-    //         .then((result) {
-    //       if (result == null) {
-    //         Navigator.pop(context);
+    if (validateEmail() && validateEmail()) {
+      apiCalling = true;
+    }
+    AuthenticationHelper()
+        .signIn(email: emailTED.text, password: passwordTED.text)
+        .then((result) {
+      if (result == null) {
+        Get.back();
+        Get.offNamed(Routes.ChatScreen);
+      } else {
+        apiCalling = false;
 
-    //         Navigator.pushReplacementNamed(context, ProfileScreen.id);
-    //       } else {
-    //         setState(() {
-    //           _apiCalling = false;
-    //         });
-    //         ScaffoldMessenger.of(context).clearSnackBars();
-
-    //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //           content: Text(
-    //             result,
-    //             style: TextStyle(fontSize: 16),
-    //           ),
-    //         ));
-    //       }
-    //     });
+        Get.snackbar(
+          'Invalid Credentials',
+          'The entered values are invalid',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+    });
   }
   // }
 }

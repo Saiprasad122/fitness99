@@ -72,7 +72,7 @@ class SignUpScreenView extends StatelessWidget {
                           40 * AppSizedBoxConfigs.responsiveHeightValueToDivide,
                     ),
                     InkWell(
-                      onTap: signup,
+                      onTap: controller.signup,
                       child: Container(
                         height: 45 *
                             AppSizedBoxConfigs.responsiveHeightValueToDivide,
@@ -108,32 +108,5 @@ class SignUpScreenView extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void signup() {
-    // if (_form.currentState?.validate() ?? false) {
-    //   setState(() {
-    //     _apiCalling = true;
-    //   });
-    //   AuthenticationHelper()
-    //       .signUp(email: emailTED.text, password: passwordTED.text)
-    //       .then((result) {
-    //     if (result == null) {
-    //       Navigator.pop(context);
-    //       Navigator.pushReplacementNamed(context, ProfileScreen.id);
-    //     } else {
-    //       setState(() {
-    //         _apiCalling = false;
-    //       });
-    //       ScaffoldMessenger.of(context).clearSnackBars();
-    //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //         content: Text(
-    //           result,
-    //           style: TextStyle(fontSize: 16),
-    //         ),
-    //       ));
-    //     }
-    //   });
-    // }
   }
 }
