@@ -1,4 +1,4 @@
-import 'package:fitness_99/controllers/splashscreen_controller.dart';
+import 'package:fitness_99/controllers/auth_screen_controller/splashscreen_controller.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +8,7 @@ class SplashScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final splashController = Get.put(SplashViewController());
+    Get.put(SplashViewController());
 
     return Scaffold(
       backgroundColor: Colors.white,

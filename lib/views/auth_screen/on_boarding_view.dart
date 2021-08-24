@@ -1,4 +1,5 @@
 // import 'package:fitness_99_project/screens/auth/auth.export.dart';
+import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,7 @@ class OnBoardingView extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.toNamed('/loginScreen');
+                      Get.toNamed(Routes.LoginScreen);
                     },
                     child: Container(
                       height:
@@ -88,7 +89,7 @@ class OnBoardingView extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.toNamed('/signUpScreen');
+                      Get.toNamed(Routes.SignupScreen);
                     },
                     child: Container(
                       height:

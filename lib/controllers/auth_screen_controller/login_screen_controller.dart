@@ -3,6 +3,7 @@ import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/helpers/auth.helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -12,7 +13,7 @@ class LoginController extends GetxController {
   final form = GlobalKey<FormState>();
   final emailErr = ''.obs;
   final passwordErr = ''.obs;
-  bool apiCalling = false;
+  final apiCalling = false.obs;
 
   bool validateEmail() {
     if (emailTED.value.text.isEmpty) {
@@ -59,25 +60,30 @@ class LoginController extends GetxController {
   // }
 
   void login() {
+    validateEmail();
+    validatePassword();
     if (validateEmail() && validateEmail()) {
-      apiCalling = true;
-    }
-    AuthenticationHelper()
-        .signIn(email: emailTED.text, password: passwordTED.text)
-        .then((result) {
-      if (result == null) {
-        Get.back();
-        Get.offNamed(Routes.DashboardScreen);
-      } else {
-        apiCalling = false;
+      apiCalling.value = true;
 
-        Get.snackbar(
-          'Invalid Credentials',
-          'The entered values are invalid',
-          snackPosition: SnackPosition.BOTTOM,
-        );
-      }
-    });
+      AuthenticationHelper()
+          .signIn(email: emailTED.value.text, password: passwordTED.value.text)
+          .then((result) async {
+        if (result == null) {
+          SharedPreferences preferences = await SharedPreferences.getInstance();
+          preferences.setString('email', emailTED.value.text);
+          print('THe shard pref is ${preferences.getString('email')}');
+          Get.back();
+          Get.offNamed(Routes.ChatScreen);
+        } else {
+          apiCalling.value = false;
+          Get.snackbar(
+            'Invalid Credentials',
+            'The entered values are invalid',
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
+      });
+    }
   }
   // }
 }
