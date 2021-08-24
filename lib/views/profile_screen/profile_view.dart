@@ -1,4 +1,5 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/profile_screen/components/redirect_list.component.dart';
 import 'package:flutter/material.dart';
 
 class ProfileView extends StatelessWidget {
@@ -85,18 +86,18 @@ class ProfileView extends StatelessWidget {
             ),
             Divider(
               height: 2,
-              color: Colors.black,
+              color: AppColors.greyDark,
               thickness: 0.8,
             ),
             Container(
-              height: 50,
+              height: 60,
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
@@ -115,7 +116,7 @@ class ProfileView extends StatelessWidget {
                     width: 2,
                   ),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
@@ -127,15 +128,33 @@ class ProfileView extends StatelessWidget {
                         style: TextStyles.sgproRegular.greyMid.f16,
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
             Divider(
               height: 2,
-              color: Colors.black,
+              color: AppColors.greyMid,
               thickness: 0.8,
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            RedirectListComponent(
+                imageUrl: 'assets/images/tabbar/target.png',
+                title: 'Personal Goals'),
+            RedirectListComponent(
+                imageUrl: 'assets/images/tabbar/dos&donts.png',
+                title: 'Can do'),
+            RedirectListComponent(
+                imageUrl: 'assets/images/tabbar/dos&donts.png',
+                title: 'Cannot do'),
+            RedirectListComponent(
+                imageUrl: 'assets/images/tabbar/categories.png',
+                title: 'Categories'),
+            RedirectListComponent(
+                imageUrl: 'assets/images/tabbar/timer.png',
+                title: 'Preference Time'),
           ],
         ),
       ),

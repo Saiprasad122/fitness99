@@ -1,10 +1,6 @@
-import 'package:fitness_99/views/auth_screen/login_view.dart';
-import 'package:fitness_99/views/auth_screen/on_boarding_view.dart';
-import 'package:fitness_99/views/auth_screen/sign_up_view.dart';
-import 'package:fitness_99/views/auth_screen/splash_sceen.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen.dart';
 import 'package:fitness_99/views/dashboard.dart';
-import 'package:fitness_99/views/profile_screen/profile_view.dart';
+import 'package:fitness_99/views/views.export.dart';
 import 'package:get/get.dart';
 
 class AppPages {
