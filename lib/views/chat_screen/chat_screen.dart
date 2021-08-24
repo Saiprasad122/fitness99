@@ -1,5 +1,7 @@
+import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ChatScreenView extends StatelessWidget {
   const ChatScreenView({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class ChatScreenView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -37,13 +40,27 @@ class ChatScreenView extends StatelessWidget {
                   ),
                   prefixIcon: Icon(
                     Icons.search_rounded,
-                    color: Colors.blue,
+                    color: Colors.amber[800],
                   ),
                   hintText: 'Search',
                   hintStyle: TextStyles.sgproRegular.f18.greyLight,
                 ),
               ),
-              Image.asset('assets/gifs/Chat.gif')
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: SvgPicture.asset(
+                        'assets/svgs/Chatting.svg',
+                        height: AppSizedBoxConfigs.screenHeight * 0.5,
+                      ),
+                    ),
+                    Center(child: Text('Your Chat list is empty'))
+                  ],
+                ),
+              ),
             ],
           ),
         ),
