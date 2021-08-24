@@ -21,9 +21,16 @@ class _DashboardViewState extends State<DashboardView>
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         children: const [
           ChatScreenView(),
           ChatScreenView(),

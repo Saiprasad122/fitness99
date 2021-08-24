@@ -11,10 +11,9 @@ class SplashViewController extends GetxController {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       print('THe shard pref is ${preferences.getString('email')}');
       if (preferences.getString('email') != null) {
-        Get.offNamed(Routes.ChatScreen);
+        Get.offNamed(Routes.DashboardScreen);
       } else {
-        Get.back();
-        Get.put(Routes.OnBoardScreen);
+        Get.offNamed(Routes.OnBoardScreen);
       }
     });
     super.onInit();
