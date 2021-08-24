@@ -64,7 +64,7 @@ class SignUpScreenController extends GetxController {
             '',
             snackPosition: SnackPosition.BOTTOM,
           );
-          Get.offNamed(Routes.ChatScreen);
+          Get.offNamed(Routes.DashboardScreen);
         } else {
           apiCalling.value = false;
           // ScaffoldMessenger.of(context).clearSnackBars();

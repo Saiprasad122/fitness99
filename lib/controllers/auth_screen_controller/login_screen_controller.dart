@@ -73,7 +73,7 @@ class LoginController extends GetxController {
           preferences.setString('email', emailTED.value.text);
           print('THe shard pref is ${preferences.getString('email')}');
           Get.back();
-          Get.offNamed(Routes.ChatScreen);
+          Get.offNamed(Routes.DashboardScreen);
         } else {
           apiCalling.value = false;
           Get.snackbar(
