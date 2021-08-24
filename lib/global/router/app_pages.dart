@@ -17,6 +17,7 @@ class AppPages {
     GetPage(name: Routes.ChatScreen, page: () => ChatScreenView()),
     GetPage(name: Routes.ProfileScreen, page: () => ProfileView()),
     GetPage(name: Routes.DashboardScreen, page: () => DashboardView()),
+    GetPage(name: Routes.moreOptionsScreen, page: () => MoreOptionsScreen()),
   ];
 }
 
@@ -28,6 +29,7 @@ abstract class Routes {
   static const ChatScreen = _Paths.chatScreen;
   static const ProfileScreen = _Paths.profileScreen;
   static const DashboardScreen = _Paths.dashboardScreen;
+  static const moreOptionsScreen = _Paths.moreOptionsScreen;
 }
 
 abstract class _Paths {
@@ -38,6 +40,7 @@ abstract class _Paths {
   static const chatScreen = '/chatScreen';
   static const profileScreen = '/profileScreen';
   static const dashboardScreen = '/dashboardScreen';
+  static const moreOptionsScreen = '/moreOptionsScreen';
 }
 
 // Route<T> getRoute<T>(Widget page) {

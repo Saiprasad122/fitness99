@@ -7,3 +7,4 @@ export './chat_screen/chat_screen.dart';
 export './profile_screen/profile_view.dart';
 export './search_screen/search_screen.dart';
 export './dashboard.dart';
+export './more_screen/more_options_screen.dart';

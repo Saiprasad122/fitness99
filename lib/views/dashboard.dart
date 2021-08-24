@@ -1,5 +1,6 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen.dart';
+import 'package:fitness_99/views/more_screen/more_options_screen.dart';
 import 'package:fitness_99/views/profile_screen/profile_view.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class _DashboardViewState extends State<DashboardView>
           ChatScreenView(),
           ChatScreenView(),
           ProfileView(),
-          ChatScreenView()
+          MoreOptionsScreen()
         ],
         controller: _tabController,
       ),
