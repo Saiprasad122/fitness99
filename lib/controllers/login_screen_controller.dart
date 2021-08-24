@@ -67,7 +67,7 @@ class LoginController extends GetxController {
         .then((result) {
       if (result == null) {
         Get.back();
-        Get.offNamed(Routes.ChatScreen);
+        Get.offNamed(Routes.DashboardScreen);
       } else {
         apiCalling = false;
 
