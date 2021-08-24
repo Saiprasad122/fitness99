@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
-import 'package:fitness_99/views/auth_screen/on_boarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'global/router/app_pages.dart';
@@ -26,7 +25,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: AppPages.INITIAL,
-      home: OnBoardingView(),
     );
   }
 }

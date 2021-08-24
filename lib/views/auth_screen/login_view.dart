@@ -2,7 +2,7 @@
 // import 'package:fitness_99_project/screens/auth/auth.export.dart';
 // import 'package:fitness_99_project/screens/screens.export.dart';
 // import 'package:fitness_99_project/utils.dart';
-import 'package:fitness_99/controllers/login_screen_controller.dart';
+import 'package:fitness_99/controllers/auth_screen_controller/login_screen_controller.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
@@ -34,10 +34,7 @@ class LoginScreenView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 50 *
-                            AppSizedBoxConfigs.responsiveHeightValueToDivide,
-                      ),
+                      const SizedBox(height: 50),
                       Text('Welcome Back,',
                           style: TextStyles.sgproRegular.f20.white),
                       SizedBox(
@@ -126,21 +123,23 @@ class LoginScreenView extends StatelessWidget {
               ),
             ),
           ),
-          if (controller.apiCalling)
-            Positioned.fill(
-                child: SizedBox.expand(
-              child: Container(
-                color: Colors.black45,
-                child: Center(
-                  child: SizedBox(
-                    height:
-                        60 * AppSizedBoxConfigs.responsiveHeightValueToDivide,
-                    width: AppSizedBoxConfigs.screenWidth * 0.15,
-                    child: CircularProgressIndicator(),
+          if (controller.apiCalling.value)
+            Obx(
+              () => Positioned.fill(
+                  child: SizedBox.expand(
+                child: Container(
+                  color: Colors.black45,
+                  child: Center(
+                    child: SizedBox(
+                      height:
+                          60 * AppSizedBoxConfigs.responsiveHeightValueToDivide,
+                      width: AppSizedBoxConfigs.screenWidth * 0.15,
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                 ),
-              ),
-            ))
+              )),
+            )
         ],
       ),
     );
