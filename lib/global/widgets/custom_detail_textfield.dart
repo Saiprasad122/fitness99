@@ -26,8 +26,7 @@ class CustomDetailsTextField extends StatelessWidget {
     this.focusNode,
     this.isObscureText = false,
     this.obscuringText = '*',
-    // ignore: empty_constructor_bodies
-  }) {}
+  });
 
   @override
   Widget build(BuildContext context) => Column(

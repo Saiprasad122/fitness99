@@ -2,6 +2,7 @@ import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen.dart';
 import 'package:fitness_99/views/more_screen/more_options_screen.dart';
 import 'package:fitness_99/views/profile_screen/profile_view.dart';
+import 'package:fitness_99/views/search_screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class DashboardView extends StatefulWidget {
@@ -33,7 +34,7 @@ class _DashboardViewState extends State<DashboardView>
         physics: NeverScrollableScrollPhysics(),
         children: const [
           ChatScreenView(),
-          ChatScreenView(),
+          SearchScreenView(),
           ChatScreenView(),
           ProfileView(),
           MoreOptionsScreen()
