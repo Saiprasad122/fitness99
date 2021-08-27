@@ -7,7 +7,6 @@ class CustomDetailsTextField extends StatelessWidget {
   final TextInputType? textInputType;
   final String? hintText;
   final IconData? iconData;
-  final String? Function(String?)? validator;
   final errText;
   final Key? key;
   final FocusNode? focusNode;
@@ -16,11 +15,10 @@ class CustomDetailsTextField extends StatelessWidget {
 
   CustomDetailsTextField({
     required this.displayText,
-    required this.iconData,
     required this.hintText,
+    required this.iconData,
     this.textEditingController,
     this.textInputType,
-    this.validator,
     this.errText = '',
     this.key,
     this.focusNode,
@@ -39,7 +37,7 @@ class CustomDetailsTextField extends StatelessWidget {
               style: TextStyles.sgproLight.f20.greyMid,
             ),
           ),
-          TextFormField(
+          TextField(
             key: key,
             focusNode: focusNode,
             obscureText: isObscureText,
@@ -59,7 +57,6 @@ class CustomDetailsTextField extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.grey),
               ),
             ),
-            validator: validator,
           ),
           const SizedBox(height: 2),
           Padding(

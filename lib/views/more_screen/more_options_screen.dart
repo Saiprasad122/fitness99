@@ -26,7 +26,7 @@ class MoreOptionsScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 20.0,
+            height: 10.0,
           ),
           RedirectListComponent(
             imageUrl: 'assets/svgs/more_options/products.svg',

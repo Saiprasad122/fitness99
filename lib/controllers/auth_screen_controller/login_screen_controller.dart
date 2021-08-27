@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
+import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/helpers/auth.helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class LoginController extends GetxController {
     if (emailTED.value.text.isEmpty) {
       emailErr.value = 'Enter email address';
       return false;
-    } else if (!emailTED.value.text.isEmail) {
+    } else if (!GetUtils.isEmail(emailTED.value.text)) {
       emailErr.value = 'Enter valid email address';
       return false;
     } else {
@@ -69,6 +70,11 @@ class LoginController extends GetxController {
           .signIn(email: emailTED.value.text, password: passwordTED.value.text)
           .then((result) async {
         if (result == null) {
+          customSnackBar(
+            'Login Successfully',
+            '',
+            'success',
+          );
           SharedPreferences preferences = await SharedPreferences.getInstance();
           preferences.setString('email', emailTED.value.text);
           print('THe shard pref is ${preferences.getString('email')}');
@@ -76,10 +82,10 @@ class LoginController extends GetxController {
           Get.offNamed(Routes.DashboardScreen);
         } else {
           apiCalling.value = false;
-          Get.snackbar(
-            'Invalid Credentials',
+          customSnackBar(
+            'Invalid Credentials!',
             'The entered values are invalid',
-            snackPosition: SnackPosition.BOTTOM,
+            'fail',
           );
         }
       });

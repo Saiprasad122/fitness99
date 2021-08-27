@@ -1,5 +1,6 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen.dart';
+import 'package:fitness_99/views/create_screen/create_screen.dart';
 import 'package:fitness_99/views/more_screen/more_options_screen.dart';
 import 'package:fitness_99/views/profile_screen/profile_view.dart';
 import 'package:fitness_99/views/search_screen/search_screen.dart';
@@ -35,7 +36,7 @@ class _DashboardViewState extends State<DashboardView>
         children: const [
           ChatScreenView(),
           SearchScreenView(),
-          ChatScreenView(),
+          CreateScreen(),
           ProfileView(),
           MoreOptionsScreen()
         ],

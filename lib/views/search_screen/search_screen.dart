@@ -11,31 +11,52 @@ class SearchScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Search Groups',
-                style: TextStyles.sgproBold.f34,
-              ),
-              const SizedBox(height: 15),
-              CustomSearchFeild(),
-              SizedBox(height: 15),
-              ListTile(
-                leading:
-                    SvgPicture.asset('assets/images/search_screen/fitness.svg'),
-                title: Text(
-                  'Hemanth',
-                  style: TextStyles.sgproRegular.f18,
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Search Groups',
+                  style: TextStyles.sgproBold.f34,
                 ),
-                subtitle: Text(
-                  'Stronger today',
-                  style: TextStyles.sgproRegular.f18.greyMid,
-                ),
-              )
-            ],
+                const SizedBox(height: 15),
+                CustomSearchFeild(),
+                SizedBox(height: 15),
+                ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 20,
+                  itemBuilder: (context, i) => TextButton(
+                    style: ButtonStyle(
+                      overlayColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Colors.grey;
+                        return Colors.grey;
+                      }),
+                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          EdgeInsets.zero),
+                    ),
+                    onPressed: () {},
+                    child: ListTile(
+                      leading: Image.asset(
+                          'assets/images/search_screen/fitness.png'),
+                      title: Text(
+                        'Hemanth',
+                        style: TextStyles.sgproRegular.f18,
+                      ),
+                      subtitle: Text(
+                        'Stronger today',
+                        style: TextStyles.sgproRegular.f18.greyMid,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
