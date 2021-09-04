@@ -59,9 +59,11 @@ class OnBoardingView extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text('its easier to sign up',
-                      style: TextStyles.sgproLight.f16.greyLight
-                          .copyWith(letterSpacing: 1)),
+                  Text(
+                    'its easier to sign up',
+                    style: TextStyles.sgproLight.f16.greyLight
+                        .copyWith(letterSpacing: 1),
+                  ),
                   SizedBox(
                     height:
                         30 * AppSizedBoxConfigs.responsiveHeightValueToDivide,

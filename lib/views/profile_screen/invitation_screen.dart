@@ -13,7 +13,7 @@ class InvitationScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'Invitations',
-          style: TextStyles.sgproMedium.f26.black,
+          style: TextStyles.sgproBold.f26.black,
         ),
         leading: IconButton(
           onPressed: () => Get.back(),

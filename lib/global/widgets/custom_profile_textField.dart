@@ -1,5 +1,6 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomProfileTextField extends StatelessWidget {
   final String displayText;
@@ -12,6 +13,8 @@ class CustomProfileTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final bool isObscureText;
   final String obscuringText;
+  final int? maxLength;
+  final List<TextInputFormatter>? textInputFormatter;
 
   CustomProfileTextField({
     required this.displayText,
@@ -24,6 +27,8 @@ class CustomProfileTextField extends StatelessWidget {
     this.focusNode,
     this.isObscureText = false,
     this.obscuringText = '*',
+    this.maxLength,
+    this.textInputFormatter,
   });
 
   @override
@@ -34,7 +39,7 @@ class CustomProfileTextField extends StatelessWidget {
           children: [
             Text(
               displayText,
-              style: TextStyles.sgproMedium.f20.greyMid,
+              style: TextStyles.sgproMedium.f22.greyMid,
             ),
             TextField(
               key: key,
@@ -43,6 +48,8 @@ class CustomProfileTextField extends StatelessWidget {
               obscuringCharacter: obscuringText,
               style: TextStyles.sgproRegular.f20,
               controller: textEditingController,
+              maxLength: maxLength,
+              inputFormatters: textInputFormatter,
               keyboardType: textInputType,
               autofocus: false,
               decoration: InputDecoration(
@@ -57,7 +64,7 @@ class CustomProfileTextField extends StatelessWidget {
             Text(
               errText,
               style:
-                  TextStyles.sgproRegular.f16.copyWith(color: Colors.red[700]),
+                  TextStyles.sgproRegular.f18.copyWith(color: Colors.red[700]),
             )
           ],
         ),

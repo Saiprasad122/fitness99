@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       getPages: AppPages.routes,
       builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 0.8),
-          child: child!),
+        data: MediaQuery.of(context).copyWith(textScaleFactor: 0.95),
+        child: child!,
+      ),
       title: '99Fitness',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

@@ -12,6 +12,8 @@ class AppPages {
     GetPage(name: Routes.DashboardScreen, page: () => DashboardView()),
     GetPage(name: Routes.ChatScreen, page: () => ChatScreenView()),
     GetPage(name: Routes.SearchScreen, page: () => SearchScreenView()),
+    GetPage(name: Routes.DisplayGroupScreen, page: () => DisplayGroupScreen()),
+    GetPage(name: Routes.CreateGroupScreen, page: () => CreateGroupScreen()),
     GetPage(name: Routes.ProfileScreen, page: () => ProfileView()),
     GetPage(name: Routes.EditProfileScreen, page: () => EditProfileScreen()),
     GetPage(name: Routes.PersonalGoalsAdd, page: () => PersonalGoalsAdd()),
@@ -24,6 +26,7 @@ class AppPages {
     GetPage(name: Routes.CategoriesScreen, page: () => CategoriesScreen()),
     GetPage(
         name: Routes.PreferenceTimeScreen, page: () => PreferenceTimeScreen()),
+    GetPage(name: Routes.PreferenceTimeAdd, page: () => PreferenceTimeAdd()),
     GetPage(name: Routes.InvitationScreen, page: () => InvitationScreen()),
     GetPage(name: Routes.moreOptionsScreen, page: () => MoreOptionsScreen()),
   ];
@@ -37,6 +40,8 @@ abstract class Routes {
   static const DashboardScreen = _Paths.dashboardScreen;
   static const ChatScreen = _Paths.chatScreen;
   static const SearchScreen = _Paths.searchSreen;
+  static const DisplayGroupScreen = _Paths.displayGroupScreen;
+  static const CreateGroupScreen = _Paths.createGroupScreen;
   static const ProfileScreen = _Paths.profileScreen;
   static const EditProfileScreen = _Paths.editProfileScreen;
   static const PersonalGoalsAdd = _Paths.personalGoalsAdd;
@@ -47,6 +52,7 @@ abstract class Routes {
   static const CannotDoDisplay = _Paths.cannotDoDisplay;
   static const CategoriesScreen = _Paths.categoriesScreen;
   static const PreferenceTimeScreen = _Paths.preferenceTimeScreen;
+  static const PreferenceTimeAdd = _Paths.preferenceTimeAdd;
   static const InvitationScreen = _Paths.invitationScree;
   static const moreOptionsScreen = _Paths.moreOptionsScreen;
 }
@@ -59,6 +65,8 @@ abstract class _Paths {
   static const dashboardScreen = '/dashboardScreen';
   static const chatScreen = '/chatScreen';
   static const searchSreen = '/searchScreen';
+  static const displayGroupScreen = '/displayGroupScreen';
+  static const createGroupScreen = '/createGroupScreen';
   static const profileScreen = '/profileScreen';
   static const editProfileScreen = '/editProfileScreen';
   static const personalGoalsAdd = '/personalGoalsAdd';
@@ -69,6 +77,7 @@ abstract class _Paths {
   static const cannotDoAdd = '/cannotDoAdd';
   static const categoriesScreen = '/categoriesScreen';
   static const preferenceTimeScreen = '/preferenceTimeScreen';
+  static const preferenceTimeAdd = '/preferenceTimeAdd';
   static const invitationScree = '/invitationScreen';
   static const moreOptionsScreen = '/moreOptionsScreen';
 }

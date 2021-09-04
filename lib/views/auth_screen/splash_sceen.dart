@@ -8,6 +8,8 @@ class SplashScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //initializing the app fonts, sizes, textstyles, etc configs
+    AppFontSizeConfigs().init(context);
     Get.put(SplashViewController());
 
     return Scaffold(

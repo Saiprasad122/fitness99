@@ -1,6 +1,6 @@
 import 'package:fitness_99/controllers/profile_screen/edit_profile_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/global/widgets/custom_detail_textfield.dart';
+import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
 import 'package:fitness_99/global/widgets/custom_profile_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,22 +54,11 @@ class EditProfileScreen extends StatelessWidget {
               hintText: '9876XXXXXX',
               textInputType: TextInputType.number,
               errText: controller.numberErr.value,
+              textInputFormatter: [controller.numberTextInputFormatter],
               textEditingController: controller.numberTED,
             ),
             Spacer(),
-            GestureDetector(
-              child: Container(
-                height: 50,
-                color: Colors.lightBlueAccent,
-                child: Center(
-                  child: Text(
-                    'SUBMIT',
-                    style: TextStyles.sgproMedium.f20.white,
-                  ),
-                ),
-              ),
-              onTap: controller.submit,
-            ),
+            CustomBottomButton(text: 'Submit', onTap: controller.submit)
           ],
         ),
       ),

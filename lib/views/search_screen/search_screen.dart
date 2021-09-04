@@ -2,7 +2,6 @@ import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_search_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchScreenView extends StatelessWidget {
   const SearchScreenView({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class SearchScreenView extends StatelessWidget {
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

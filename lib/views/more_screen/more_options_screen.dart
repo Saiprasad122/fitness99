@@ -11,56 +11,59 @@ class MoreOptionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Padding(
-      padding: const EdgeInsets.only(top: 8.0, left: 20.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: 40,
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Atish Manala',
-              style: TextStyles.sgproBold.black.f26,
+        child: SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0, left: 20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 40,
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Atish Manala',
+                style: TextStyles.sgproMedium.black.f30,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          RedirectListComponent(
-            imageUrl: 'assets/svgs/more_options/products.svg',
-            title: 'Products',
-            dividerUnderTitle: true,
-            rightArrow: false,
-            height: 45,
-          ),
-          RedirectListComponent(
-            imageUrl: 'assets/svgs/more_options/cart.svg',
-            title: 'MyOrders',
-            dividerUnderTitle: true,
-            rightArrow: false,
-            height: 45,
-          ),
-          RedirectListComponent(
-            imageUrl: 'assets/svgs/more_options/tag.svg',
-            title: 'Subscriptions',
-            dividerUnderTitle: true,
-            rightArrow: false,
-            height: 45,
-          ),
-          RedirectListComponent(
-            imageUrl: 'assets/svgs/more_options/logout.svg',
-            title: 'Log Out',
-            dividerUnderTitle: true,
-            rightArrow: false,
-            height: 45,
-            onTap: () async {
-              await AuthenticationHelper().signOut();
-              Get.offNamedUntil(Routes.OnBoardScreen, (route) => false);
-            },
-          ),
-        ],
+            const SizedBox(
+              height: 10.0,
+            ),
+            RedirectListComponent(
+              imageUrl: 'assets/svgs/more_options/products.svg',
+              title: 'Products',
+              dividerUnderTitle: true,
+              rightArrow: false,
+              height: 45,
+            ),
+            RedirectListComponent(
+              imageUrl: 'assets/svgs/more_options/cart.svg',
+              title: 'MyOrders',
+              dividerUnderTitle: true,
+              rightArrow: false,
+              height: 45,
+            ),
+            RedirectListComponent(
+              imageUrl: 'assets/svgs/more_options/tag.svg',
+              title: 'Subscriptions',
+              dividerUnderTitle: true,
+              rightArrow: false,
+              height: 45,
+            ),
+            RedirectListComponent(
+              imageUrl: 'assets/svgs/more_options/logout.svg',
+              title: 'Log Out',
+              dividerUnderTitle: true,
+              rightArrow: false,
+              height: 45,
+              onTap: () async {
+                await AuthenticationHelper().signOut();
+                Get.offNamedUntil(Routes.OnBoardScreen, (route) => false);
+              },
+            ),
+          ],
+        ),
       ),
     ));
   }

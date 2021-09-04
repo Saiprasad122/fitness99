@@ -1,4 +1,7 @@
+import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
+import 'package:fitness_99/views/profile_screen/components/availability_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +26,40 @@ class PreferenceTimeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Center(
+                child: Column(
+                  children: [
+                    SizedBox(height: 30),
+                    AvailabiltyComponent(day: 'Sunday'),
+                    SizedBox(height: 30),
+                    AvailabiltyComponent(day: 'Monday'),
+                    SizedBox(height: 30),
+                    AvailabiltyComponent(day: 'Tuesday'),
+                    SizedBox(height: 30),
+                    AvailabiltyComponent(day: 'Wednesday'),
+                    SizedBox(height: 30),
+                    AvailabiltyComponent(day: 'Thursday'),
+                    SizedBox(height: 30),
+                    AvailabiltyComponent(day: 'Friday'),
+                    SizedBox(height: 30),
+                    AvailabiltyComponent(day: 'Saturday'),
+                    SizedBox(height: 10)
+                  ],
+                ),
+              ),
+            ),
+          ),
+          CustomBottomButton(
+            text: 'Add your availability',
+            onTap: () => Get.toNamed(Routes.PreferenceTimeAdd),
+          )
+        ],
+      ),
     );
   }
 }

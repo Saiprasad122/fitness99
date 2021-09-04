@@ -16,18 +16,18 @@ class CustomSearchFeild extends StatelessWidget {
         child: TextField(
           onChanged: onChanged,
           onSubmitted: onSubmitted,
-          style: TextStyles.sgproRegular.f18,
+          style: TextStyles.sgproRegular.f20,
           maxLines: 1,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.zero,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(25),
               borderSide: BorderSide(
                 color: Colors.grey,
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(25),
               borderSide: BorderSide(
                 color: Colors.grey,
               ),
@@ -37,7 +37,7 @@ class CustomSearchFeild extends StatelessWidget {
               color: Colors.amber[800],
             ),
             hintText: 'Search',
-            hintStyle: TextStyles.sgproRegular.f18.greyLight,
+            hintStyle: TextStyles.sgproRegular.f20.greyLight,
           ),
         ),
       );

@@ -1,6 +1,6 @@
 import 'package:fitness_99/global/router/app_pages.dart';
-import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
 import 'package:fitness_99/global/widgets/custom_profile_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,7 @@ class PersonalGoalsAdd extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'Personal Goals',
-          style: TextStyles.sgproMedium.f26.black,
+          style: TextStyles.sgproBold.f26.black,
         ),
         leading: IconButton(
           onPressed: () => Get.back(),
@@ -32,18 +32,9 @@ class PersonalGoalsAdd extends StatelessWidget {
             hintText: 'Enter your personal gaol here',
           ),
           Spacer(),
-          GestureDetector(
-            child: Container(
-              height: 50,
-              color: Colors.lightBlueAccent,
-              child: Center(
-                child: Text(
-                  'AddNew',
-                  style: TextStyles.sgproMedium.f20.white,
-                ),
-              ),
-            ),
-            onTap: () => Get.toNamed(Routes.PersonalGoalsAdd),
+          CustomBottomButton(
+            text: 'Submit',
+            onTap: () => Get.toNamed(Routes.CannotDoAdd),
           ),
         ],
       ),
