@@ -1,7 +1,7 @@
-// import 'package:fitness_99_project/helpers/auth.helper.dart';
 import 'package:fitness_99/controllers/auth_screen_controller/signup_screen_controller.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/global/widgets/custom_button.dart';
 import 'package:fitness_99/global/widgets/custom_detail_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,34 +15,37 @@ class SignUpScreenView extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          Image.asset(
-            'assets/images/onboard_img/fitness_signup_bg.png',
-            fit: BoxFit.fill,
-            filterQuality: FilterQuality.high,
+          Scaffold(
+            backgroundColor: Colors.white,
+            resizeToAvoidBottomInset: false,
+            body: Image.asset(
+              'assets/images/onboard_img/fitness_signup_bg.png',
+              fit: BoxFit.fill,
+              filterQuality: FilterQuality.high,
+            ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: Center(
-              child: Form(
-                key: controller.form,
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            resizeToAvoidBottomInset: true,
+            body: SingleChildScrollView(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                constraints:
+                    BoxConstraints(maxHeight: AppSizedBoxConfigs.screenHeight),
                 child: Obx(
                   () => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 50 *
-                            AppSizedBoxConfigs.responsiveHeightValueToDivide,
-                      ),
+                      const SizedBox(height: 45),
                       Text('Hello,', style: TextStyles.sgproRegular.f24.white),
-                      SizedBox(
-                        height: 20 *
-                            AppSizedBoxConfigs.responsiveHeightValueToDivide,
-                      ),
+                      const SizedBox(height: 18),
                       Text(
                         'SIGN UP',
                         style: TextStyles.sgproBold.f42.white,
                       ),
+                      const SizedBox(height: 20),
                       const Spacer(),
                       CustomDetailsTextField(
                         displayText: 'User Name',
@@ -52,9 +55,7 @@ class SignUpScreenView extends StatelessWidget {
                         errText: controller.nameErr.value,
                         textEditingController: controller.nameTED,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       CustomDetailsTextField(
                         displayText: 'Email Adress',
                         iconData: Icons.email,
@@ -74,24 +75,11 @@ class SignUpScreenView extends StatelessWidget {
                         errText: controller.passwordErr.value,
                         textEditingController: controller.passwordTED,
                       ),
-                      SizedBox(
-                        height: 40 *
-                            AppSizedBoxConfigs.responsiveHeightValueToDivide,
-                      ),
-                      InkWell(
+                      const SizedBox(height: 35),
+                      CustomButton(
+                        text: 'SUBMIT',
                         onTap: controller.signup,
-                        child: Container(
-                          height: 45 *
-                              AppSizedBoxConfigs.responsiveHeightValueToDivide,
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: Colors.yellow[700],
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Text('SUBMIT',
-                              style: TextStyles.sgproMedium.f20.white),
-                        ),
+                        color: Colors.amber[700],
                       ),
                       const Spacer()
                     ],
@@ -100,19 +88,27 @@ class SignUpScreenView extends StatelessWidget {
               ),
             ),
           ),
-          if (controller.apiCalling.value)
-            Positioned.fill(
-                child: SizedBox.expand(
-              child: Container(
-                color: Colors.black45,
-                child: Center(
-                  child: SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: CircularProgressIndicator()),
-                ),
-              ),
-            ))
+          Obx(
+            () => controller.apiCalling.value
+                ? Positioned.fill(
+                    child: SizedBox.expand(
+                      child: Container(
+                        color: Colors.black45,
+                        child: Center(
+                          child: const SizedBox(
+                            height: 60,
+                            width: 60,
+                            child: CircularProgressIndicator(
+                              color: Colors.blue,
+                              strokeWidth: 5,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
+          )
         ],
       ),
     );

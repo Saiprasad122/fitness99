@@ -20,7 +20,7 @@ void customSnackBar(
       style: TextStyles.sgproRegular.f16.white,
     ),
     snackPosition: SnackPosition.BOTTOM,
-    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     backgroundColor: successOrFail == 'success' ? Colors.green : Colors.red,
   );
 }

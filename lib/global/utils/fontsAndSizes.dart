@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
 abstract class AppFontFamily {
-  // static String get sfproSemiBold => 'SF-pro-semibold';
-  // static String get sfproRegular => 'SF-pro-regular';
-  // static String get sfproMedium => 'SF-pro-medium';
-  // static String get sfproBold => 'SF-pro-bold';
-  // static String get sfproLight => 'SF-pro-light';
   static String get sgproRegular => 'SohoGothicPro-Regular';
   static String get sgproMedium => 'SohoGothicPro-Medium';
   static String get sgproBold => 'SohoGothicPro-Bold';

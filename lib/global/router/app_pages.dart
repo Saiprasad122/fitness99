@@ -1,14 +1,23 @@
+import 'package:fitness_99/bindings/splash_screen_binding.dart';
 import 'package:fitness_99/views/views.export.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
 class AppPages {
   static const INITIAL = Routes.SplashScreen;
+  static final initialBindings = SplashScreenBinding();
 
   static final routes = [
-    GetPage(name: Routes.SplashScreen, page: () => SplashScreenView()),
+    GetPage(
+      name: Routes.SplashScreen,
+      page: () => SplashScreenView(),
+    ),
     GetPage(name: Routes.OnBoardScreen, page: () => OnBoardingView()),
     GetPage(name: Routes.SignupScreen, page: () => SignUpScreenView()),
     GetPage(name: Routes.LoginScreen, page: () => LoginScreenView()),
+    GetPage(
+        name: Routes.ForgotPasswordScreeen,
+        page: () => ForgotPasswordScreeen()),
     GetPage(name: Routes.DashboardScreen, page: () => DashboardView()),
     GetPage(name: Routes.ChatScreen, page: () => ChatScreenView()),
     GetPage(name: Routes.SearchScreen, page: () => SearchScreenView()),
@@ -37,6 +46,7 @@ abstract class Routes {
   static const OnBoardScreen = _Paths.onBoardingScreen;
   static const SignupScreen = _Paths.signUpScreen;
   static const LoginScreen = _Paths.loginScreen;
+  static const ForgotPasswordScreeen = _Paths.forgotPasswordScreen;
   static const DashboardScreen = _Paths.dashboardScreen;
   static const ChatScreen = _Paths.chatScreen;
   static const SearchScreen = _Paths.searchSreen;
@@ -62,6 +72,7 @@ abstract class _Paths {
   static const onBoardingScreen = '/onBoardScreen';
   static const signUpScreen = '/signUpScreen';
   static const loginScreen = '/loginScreen';
+  static const forgotPasswordScreen = '/forgotPasswordScreen';
   static const dashboardScreen = '/dashboardScreen';
   static const chatScreen = '/chatScreen';
   static const searchSreen = '/searchScreen';
@@ -82,16 +93,16 @@ abstract class _Paths {
   static const moreOptionsScreen = '/moreOptionsScreen';
 }
 
-// Route<T> getRoute<T>(Widget page) {
-//   return PageRouteBuilder(
-//     pageBuilder: (context, animation, secondaryAnimation) => page,
-//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-//       final tween = Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
-//           .chain(CurveTween(curve: Curves.easeOutQuart));
-//       return SlideTransition(
-//         position: animation.drive(tween),
-//         child: child,
-//       );
-//     },
-//   );
-// }
+Route<T> getRoute<T>(Widget page) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => page,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      final tween = Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
+          .chain(CurveTween(curve: Curves.easeOutQuart));
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}

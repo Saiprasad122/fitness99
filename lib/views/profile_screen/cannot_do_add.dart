@@ -28,7 +28,7 @@ class CannotDoAdd extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           CustomProfileTextField(
             displayText: 'Cannot Do',
             hintText: 'Write here',

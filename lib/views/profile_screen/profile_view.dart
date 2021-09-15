@@ -1,3 +1,5 @@
+import 'package:fitness_99/controllers/profile_screen/profile_view_controller.dart';
+import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/profile_screen/components/redirect_list.component.dart';
@@ -5,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({Key? key}) : super(key: key);
+  final controller = Get.put(ProfileViewController());
+  final dataModel = Get.find<UserModelService>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class ProfileView extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    'Atish Manala',
+                    dataModel.getUserName(),
                     style: TextStyles.sgproBold.black.f26,
                   ),
                   const Spacer(),
@@ -59,7 +62,7 @@ class ProfileView extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      '9912471412',
+                      dataModel.getMobileNumber(),
                       style: TextStyles.sgproRegular.greyMid.f22,
                     )
                   ],
@@ -79,9 +82,9 @@ class ProfileView extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      'atishchandramanala@gmail.com',
+                      dataModel.getEmail(),
                       style: TextStyles.sgproRegular.greyMid.f22,
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -105,7 +108,7 @@ class ProfileView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          '1',
+                          dataModel.getNoOfGroups(),
                           style: TextStyles.sgproMedium.black.f20,
                         ),
                         Text(

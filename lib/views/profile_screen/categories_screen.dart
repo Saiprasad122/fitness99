@@ -32,7 +32,7 @@ class CategoriesScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Column(
               children: [
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 GestureDetector(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,17 +85,18 @@ class CategoriesScreen extends StatelessWidget {
                                     cursorColor: Colors.grey[400],
                                   ),
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: Text(
                                     'Category Names',
-                                    style: TextStyles.sgproMedium.f20,
+                                    style: TextStyles.sgproMedium.f26,
                                   ),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
                                   child: ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: controller.categoriesName.length,
@@ -117,7 +118,7 @@ class CategoriesScreen extends StatelessWidget {
                                                   controller.categoriesName[i]
                                                       .categoryName,
                                                   style: TextStyles
-                                                      .sgproRegular.f20,
+                                                      .sgproRegular.f24,
                                                 ),
                                               ),
                                               Visibility(
@@ -131,7 +132,7 @@ class CategoriesScreen extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(height: 2),
+                                          const SizedBox(height: 4),
                                         ],
                                       ),
                                     ),
@@ -141,12 +142,14 @@ class CategoriesScreen extends StatelessWidget {
                                 Center(
                                   child: GestureDetector(
                                     child: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 15),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15),
                                       child: Text(
                                         'Done',
-                                        style: TextStyles.sgproMedium.f20
-                                            .copyWith(color: Colors.amber[700]),
+                                        style:
+                                            TextStyles.sgproMedium.f22.copyWith(
+                                          color: Colors.amber[700],
+                                        ),
                                       ),
                                     ),
                                     onTap: () => Get.back(),

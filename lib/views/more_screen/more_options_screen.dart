@@ -1,12 +1,14 @@
+import 'package:fitness_99/controllers/more_screen_controller/more_screen_controller.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/helpers/auth.helper.dart';
 import 'package:fitness_99/views/profile_screen/components/redirect_list.component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MoreOptionsScreen extends StatelessWidget {
-  const MoreOptionsScreen({Key? key}) : super(key: key);
+  final controller = Get.put(MoreScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class MoreOptionsScreen extends StatelessWidget {
               height: 40,
               alignment: Alignment.centerLeft,
               child: Text(
-                'Atish Manala',
+                controller.userName.value,
                 style: TextStyles.sgproMedium.black.f30,
               ),
             ),
@@ -59,6 +61,9 @@ class MoreOptionsScreen extends StatelessWidget {
               height: 45,
               onTap: () async {
                 await AuthenticationHelper().signOut();
+                SharedPreferences preferences =
+                    await SharedPreferences.getInstance();
+                preferences.remove('email');
                 Get.offNamedUntil(Routes.OnBoardScreen, (route) => false);
               },
             ),

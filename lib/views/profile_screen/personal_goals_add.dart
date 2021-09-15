@@ -26,7 +26,7 @@ class PersonalGoalsAdd extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           CustomProfileTextField(
             displayText: 'Personal Goal',
             hintText: 'Enter your personal gaol here',

@@ -2,7 +2,7 @@
     package="com.example.fitness_99">
    <application
         android:label="fitness_99"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/laucher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

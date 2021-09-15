@@ -1,5 +1,3 @@
-import 'package:fitness_99/global/router/app_pages.dart';
-import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
 import 'package:fitness_99/global/widgets/custom_profile_textField.dart';
@@ -36,9 +34,7 @@ class CreateGroupScreen extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   Center(
                     child: CircleAvatar(
                       backgroundImage:
@@ -46,29 +42,29 @@ class CreateGroupScreen extends StatelessWidget {
                       radius: 50,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   CustomProfileTextField(
                     displayText: 'Group Name',
                     hintText: 'Stronger than yesterday',
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   CustomProfileTextField(
                     displayText: 'Gaol',
                     hintText: 'Sore Today, Strong Tomorrow',
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   CustomProfileTextField(
                     displayText: 'Zip Code',
                     hintText: '850001',
                     textInputType: TextInputType.number,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   CustomProfileTextField(
                     displayText: 'Maximum members',
                     hintText: '25',
                     textInputType: TextInputType.number,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   CustomProfileTextField(
                     displayText: 'Comments',
                     hintText: 'Enter your comments',

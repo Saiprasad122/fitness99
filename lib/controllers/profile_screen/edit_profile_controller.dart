@@ -1,10 +1,17 @@
+import 'dart:io';
+
+import 'package:fitness_99/core/services/needed_utils.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfileController extends GetxController {
+  SharedPreferences? _prefs;
+  SharedPreferences? get prefs => _prefs;
   final nameTED = TextEditingController();
   final emailTED = TextEditingController();
   final numberTED = TextEditingController();
@@ -12,6 +19,8 @@ class EditProfileController extends GetxController {
   final emailErr = ''.obs;
   final numberErr = ''.obs;
   final numberTextInputFormatter = LengthLimitingTextInputFormatter(10);
+  final picker = ImagePicker();
+  final img = File('').obs;
 
   bool validateEmail() {
     if (emailTED.value.text.isEmpty) {
@@ -52,6 +61,15 @@ class EditProfileController extends GetxController {
     }
   }
 
+  Future pickImage() async {
+    try {
+      final file = await picker.pickImage(source: ImageSource.gallery);
+      img.value = File(file!.path);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   void submit() {
     validateEmail();
     validateName();
@@ -64,5 +82,15 @@ class EditProfileController extends GetxController {
         'success',
       );
     }
+  }
+
+  @override
+  void onInit() {
+    _prefs = Get.find<NeededVariables>().sharedPreferences;
+    nameTED.text = _prefs!.getString('user_name')!;
+    emailTED.text = _prefs!.getString('email')!;
+    numberTED.text = _prefs!.getString('mobile_number')!;
+
+    super.onInit();
   }
 }

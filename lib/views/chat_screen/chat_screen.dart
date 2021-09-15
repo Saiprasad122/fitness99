@@ -1,10 +1,13 @@
+import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_search_field.dart';
+import 'package:fitness_99/global/widgets/custom_shimmer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChatScreenView extends StatelessWidget {
-  const ChatScreenView({Key? key}) : super(key: key);
+  final controller = Get.put(ChatScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +28,24 @@ class ChatScreenView extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 CustomSearchFeild(),
-                Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/gifs/group-chat.gif',
-                        height: AppSizedBoxConfigs.screenHeight * 0.5,
-                      ),
-                      Text(
-                        'Your chat list is empty',
-                        style: TextStyles.sgproMedium.f20,
-                      ),
-                    ],
-                  ),
+                Obx(
+                  () => controller.isBusy.value
+                      ? CustomShimmer()
+                      : Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/gifs/group-chat.gif',
+                                height: AppSizedBoxConfigs.screenHeight * 0.5,
+                              ),
+                              Text(
+                                'Your chat list is empty',
+                                style: TextStyles.sgproMedium.f20,
+                              ),
+                            ],
+                          ),
+                        ),
                 ),
               ],
             ),

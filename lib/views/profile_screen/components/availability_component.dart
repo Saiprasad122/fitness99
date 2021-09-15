@@ -13,7 +13,7 @@ class AvailabiltyComponent extends StatelessWidget {
           day,
           style: TextStyles.sgproBold.f22,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           'Not Available',
           style: TextStyles.sgproRegular.f20.copyWith(color: Colors.amber[700]),

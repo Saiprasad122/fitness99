@@ -25,39 +25,61 @@ class EditProfileScreen extends StatelessWidget {
       body: Obx(
         () => Column(
           children: [
-            SizedBox(height: 10),
-            Center(
-              child: CircleAvatar(
-                radius: 50,
-                foregroundImage:
-                    AssetImage('assets/images/placeholders/user.png'),
+            const SizedBox(height: 10),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    Center(
+                      child: GestureDetector(
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Colors.white,
+                          child: SizedBox.expand(
+                            child: ClipOval(
+                              child: controller.img.value.path.isEmpty
+                                  ? Image.asset(
+                                      'assets/images/onboard_img/fflogo.png')
+                                  : Image.file(
+                                      controller.img.value,
+                                      filterQuality: FilterQuality.high,
+                                      fit: BoxFit.fill,
+                                    ),
+                            ),
+                          ),
+                        ),
+                        onTap: controller.pickImage,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    CustomProfileTextField(
+                      displayText: 'Profile Name',
+                      hintText: 'john',
+                      errText: controller.nameErr.value,
+                      textEditingController: controller.nameTED,
+                    ),
+                    const SizedBox(height: 20),
+                    CustomProfileTextField(
+                      displayText: 'Email',
+                      hintText: 'john@gmail.com',
+                      textInputType: TextInputType.emailAddress,
+                      errText: controller.emailErr.value,
+                      textEditingController: controller.emailTED,
+                    ),
+                    const SizedBox(height: 20),
+                    CustomProfileTextField(
+                      displayText: 'Mobile Number',
+                      hintText: '9876XXXXXX',
+                      textInputType: TextInputType.number,
+                      errText: controller.numberErr.value,
+                      textInputFormatter: [controller.numberTextInputFormatter],
+                      textEditingController: controller.numberTED,
+                    ),
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: 20),
-            CustomProfileTextField(
-              displayText: 'Profile Name',
-              hintText: 'john',
-              errText: controller.nameErr.value,
-              textEditingController: controller.nameTED,
-            ),
-            SizedBox(height: 20),
-            CustomProfileTextField(
-              displayText: 'Email',
-              hintText: 'john@gmail.com',
-              textInputType: TextInputType.emailAddress,
-              errText: controller.emailErr.value,
-              textEditingController: controller.emailTED,
-            ),
-            SizedBox(height: 20),
-            CustomProfileTextField(
-              displayText: 'Profile Name',
-              hintText: '9876XXXXXX',
-              textInputType: TextInputType.number,
-              errText: controller.numberErr.value,
-              textInputFormatter: [controller.numberTextInputFormatter],
-              textEditingController: controller.numberTED,
-            ),
-            Spacer(),
             CustomBottomButton(text: 'Submit', onTap: controller.submit)
           ],
         ),

@@ -34,21 +34,21 @@ class PreferenceTimeScreen extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     AvailabiltyComponent(day: 'Sunday'),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     AvailabiltyComponent(day: 'Monday'),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     AvailabiltyComponent(day: 'Tuesday'),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     AvailabiltyComponent(day: 'Wednesday'),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     AvailabiltyComponent(day: 'Thursday'),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     AvailabiltyComponent(day: 'Friday'),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     AvailabiltyComponent(day: 'Saturday'),
-                    SizedBox(height: 10)
+                    const SizedBox(height: 10)
                   ],
                 ),
               ),

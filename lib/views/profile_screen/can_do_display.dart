@@ -27,7 +27,7 @@ class CanDoDisplay extends StatelessWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
                 itemCount: 20,

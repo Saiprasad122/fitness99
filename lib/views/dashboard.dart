@@ -35,7 +35,7 @@ class _DashboardViewState extends State<DashboardView>
     return Scaffold(
       body: TabBarView(
         physics: NeverScrollableScrollPhysics(),
-        children: const [
+        children: [
           ChatScreenView(),
           SearchScreenView(),
           DisplayGroupScreen(),

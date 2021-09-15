@@ -47,9 +47,11 @@ class PreferenceTimeAdd extends StatelessWidget {
                     items: controller.days
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem(
-                        child: Text(
-                          value,
-                          style: TextStyles.sgproRegular.f20,
+                        child: Center(
+                          child: Text(
+                            value,
+                            style: TextStyles.sgproRegular.f20,
+                          ),
                         ),
                         value: value,
                       );
