@@ -148,7 +148,7 @@ class CategoriesScreen extends StatelessWidget {
                                         'Done',
                                         style:
                                             TextStyles.sgproMedium.f22.copyWith(
-                                          color: Colors.amber[700],
+                                          color: AppColors.secondaryColor,
                                         ),
                                       ),
                                     ),

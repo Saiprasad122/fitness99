@@ -1,15 +1,14 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
-import 'package:fitness_99/core/services/needed_utils.dart';
+import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
+import 'package:fitness_99/models/signUpResponseRequest/sign_up_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreenController extends GetxController {
+  final userModel = Get.find<UserModelService>();
+  final apiService = Get.find<ApiService>();
   final emailTED = TextEditingController();
   final passwordTED = TextEditingController();
   final nameTED = TextEditingController();
@@ -18,8 +17,6 @@ class SignUpScreenController extends GetxController {
   final emailErr = ''.obs;
   final passwordErr = ''.obs;
   final apiCalling = false.obs;
-  SharedPreferences? _prefs;
-  SharedPreferences? get prefs => _prefs;
 
   bool validateName() {
     if (nameTED.value.text.isEmpty) {
@@ -62,74 +59,56 @@ class SignUpScreenController extends GetxController {
         email: emailTED.value.text,
         password: passwordTED.value.text,
       );
-      // AuthenticationHelper()
-      //     .signUp(email: emailTED.text, password: passwordTED.text)
-      //     .then(
-      //   (result) {
-      //     if (result == null) {
-      //       Get.back();
-      //       customSnackBar('Account created successfully!', '', 'success');
-      //       Get.offAllNamed(Routes.DashboardScreen);
-      //     } else {
-      //       apiCalling.value = false;
-      //       customSnackBar(
-      //         'Try again!',
-      //         'There is some error please try again',
-      //         'fail',
-      //       );
-      //     }
-      //   },
-      // );
     }
   }
 
-  Future<String> signUpApi({userName, email, password}) async {
+  Future<void> signUpApi({
+    required String userName,
+    required String email,
+    required String password,
+  }) async {
     // var uri = Uri.parse('http://fitness.rithlaundry.com/api/user/login');
-    Map body = {
-      "user_name": userName,
-      "email": email,
-      "password": password,
-    };
-    final response = await Dio()
-        .post('http://fitness.rithlaundry.com/api/user/register', data: body);
-    var statusBody = jsonDecode(response.toString());
-    print('The data is ${statusBody['result']}');
-    if (statusBody['message'] == 'Registered Successfully') {
+    SignUpRequest body = SignUpRequest(
+      email: email,
+      password: password,
+      userName: userName,
+    );
+    final res = await apiService.getSignUpResponse(body);
+    if (res.message.toLowerCase() == 'registered successfully') {
       apiCalling.value = false;
 
-      _prefs = Get.find<NeededVariables>().sharedPreferences;
-      _prefs!.setString('email', statusBody['result']['email']);
+      int id = res.result?.id ?? 0;
+      String name = res.result?.userName ?? "N/A";
+      String email = res.result?.email ?? "N/A";
 
-      String name = statusBody['result']['user_name'];
-      String mobileNumber = statusBody['result']['phone_number'] ??
-          'Please update your phone number';
-      String email = statusBody['result']['email'];
-
-      // preferences.setString('user_name', statusBody['result']['user_name']);
-      // preferences.setString(
-      //     'mobile_number', statusBody['result']['phone_number'] ?? 'null');
-      // preferences.setString(
-      //     'moibile_num', statusBody['result']['phone_number']);
       Get.find<UserModelService>().loggedIn(
+        id: id,
         name: name,
-        mobileNumber: mobileNumber,
         email: email,
         numberOfGroups: '0',
       );
-      print('THe shard pref is ${_prefs!.getString('email')}');
-      Get.back();
+      print('The user is ${userModel.getEmail()}');
       Get.offAllNamed(Routes.DashboardScreen);
+      // customSnackBar(
+      //   'Account Created!',
+      //   'Account has been successfully created',
+      //   'success',
+      // );
+    } else if (res.message.toLowerCase() ==
+        "the email has already been taken.") {
+      apiCalling.value = false;
+      customSnackBar(
+        'Email already exists!',
+        'The email has already been taken.',
+        'fail',
+      );
     } else {
       apiCalling.value = false;
       customSnackBar(
-        'Invalid Credentials!',
-        'The entered values are invalid',
+        'Something wrong!',
+        'Please try again.',
         'fail',
       );
     }
-    print('The status code is ${response.statusCode}');
-    print('The data is ${statusBody['result']['user_name']}');
-    apiCalling.value = false;
-    return '';
   }
 }

@@ -14,7 +14,7 @@ class CustomBottomButton extends StatelessWidget {
     return GestureDetector(
       child: Container(
         height: 50,
-        color: Colors.amber[700],
+        color: AppColors.secondaryColor,
         child: Center(
           child: Text(
             text,

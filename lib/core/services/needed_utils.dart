@@ -1,4 +1,5 @@
 import 'package:fitness_99/core/services/data_model.dart';
+import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
@@ -20,7 +21,7 @@ class NeededVariables extends GetxController {
       ..init(appDocumentDir.path)
       ..registerAdapter(DataModelAdapter());
     await Hive.openBox<DataModel>('user_data');
-
+    Get.put<UserModelService>(UserModelService());
     print('Shared Preference loaded');
   }
 

@@ -43,7 +43,7 @@ class OnBoardingView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 60),
                   Image.asset(
                     'assets/images/onboard_img/fflogo.png',
                     filterQuality: FilterQuality.high,
@@ -51,6 +51,7 @@ class OnBoardingView extends StatelessWidget {
                         150 * AppSizedBoxConfigs.responsiveHeightValueToDivide,
                     width: AppSizedBoxConfigs.screenWidth * 0.5,
                   ),
+                  const SizedBox(height: 30),
                   Text(
                     'Sign up',
                     style: TextStyles.sgproMedium.f26,
@@ -61,11 +62,11 @@ class OnBoardingView extends StatelessWidget {
                     style: TextStyles.sgproLight.f16.greyMid
                         .copyWith(letterSpacing: 1),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 30),
                   CustomButton(
                     text: 'EXISTING',
                     onTap: () => Get.toNamed(Routes.LoginScreen),
-                    color: Colors.amber[700],
+                    color: AppColors.secondaryColor,
                   ),
                   const SizedBox(height: 35),
                   Container(

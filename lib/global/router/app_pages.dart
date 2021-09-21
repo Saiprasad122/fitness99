@@ -1,17 +1,11 @@
-import 'package:fitness_99/bindings/splash_screen_binding.dart';
 import 'package:fitness_99/views/views.export.dart';
-import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 
 class AppPages {
   static const INITIAL = Routes.SplashScreen;
   static final initialBindings = SplashScreenBinding();
 
   static final routes = [
-    GetPage(
-      name: Routes.SplashScreen,
-      page: () => SplashScreenView(),
-    ),
+    GetPage(name: Routes.SplashScreen, page: () => SplashScreenView()),
     GetPage(name: Routes.OnBoardScreen, page: () => OnBoardingView()),
     GetPage(name: Routes.SignupScreen, page: () => SignUpScreenView()),
     GetPage(name: Routes.LoginScreen, page: () => LoginScreenView()),
@@ -37,7 +31,8 @@ class AppPages {
         name: Routes.PreferenceTimeScreen, page: () => PreferenceTimeScreen()),
     GetPage(name: Routes.PreferenceTimeAdd, page: () => PreferenceTimeAdd()),
     GetPage(name: Routes.InvitationScreen, page: () => InvitationScreen()),
-    GetPage(name: Routes.moreOptionsScreen, page: () => MoreOptionsScreen()),
+    GetPage(name: Routes.MoreOptionsScreen, page: () => MoreOptionsScreen()),
+    GetPage(name: Routes.ProductScreen, page: () => ProductScreen()),
   ];
 }
 
@@ -64,7 +59,8 @@ abstract class Routes {
   static const PreferenceTimeScreen = _Paths.preferenceTimeScreen;
   static const PreferenceTimeAdd = _Paths.preferenceTimeAdd;
   static const InvitationScreen = _Paths.invitationScree;
-  static const moreOptionsScreen = _Paths.moreOptionsScreen;
+  static const MoreOptionsScreen = _Paths.moreOptionsScreen;
+  static const ProductScreen = _Paths.productScreeen;
 }
 
 abstract class _Paths {
@@ -91,18 +87,19 @@ abstract class _Paths {
   static const preferenceTimeAdd = '/preferenceTimeAdd';
   static const invitationScree = '/invitationScreen';
   static const moreOptionsScreen = '/moreOptionsScreen';
+  static const productScreeen = '/productScreen';
 }
 
-Route<T> getRoute<T>(Widget page) {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => page,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      final tween = Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
-          .chain(CurveTween(curve: Curves.easeOutQuart));
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
+// Route<T> getRoute<T>(Widget page) {
+//   return PageRouteBuilder(
+//     pageBuilder: (context, animation, secondaryAnimation) => page,
+//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//       final tween = Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
+//           .chain(CurveTween(curve: Curves.easeOutQuart));
+//       return SlideTransition(
+//         position: animation.drive(tween),
+//         child: child,
+//       );
+//     },
+//   );
+// }

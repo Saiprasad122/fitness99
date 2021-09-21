@@ -4,7 +4,6 @@ import 'package:fitness_99/core/services/needed_utils.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
-import 'package:fitness_99/models/loginReposnseRequest/login_model.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,9 +11,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
-  final apiService = Get.put(ApiService.create());
-  LoginResponse? _loginResponse;
-  LoginResponse? get loginResponse => _loginResponse;
+  final apiService = Get.find<ApiService>();
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   SharedPreferences? _prefs;
   SharedPreferences? get prefs => _prefs;
@@ -77,33 +74,6 @@ class LoginController extends GetxController {
         email: emailTED.value.text,
         password: passwordTED.value.text,
       );
-
-      // AuthenticationHelper()
-      //     .signIn(email: emailTED.value.text, password: passwordTED.value.text)
-      //     .then(
-      //   (result) async {
-      //     if (result == null) {
-      //       SharedPreferences preferences =
-      //           await SharedPreferences.getInstance();
-      //       preferences.setString('email', emailTED.value.text);
-      //       print('THe shard pref is ${preferences.getString('email')}');
-      //       Get.back();
-      //       customSnackBar(
-      //         'Login Successfully',
-      //         '',
-      //         'success',
-      //       );
-      //       Get.offAllNamed(Routes.DashboardScreen);
-      //     } else {
-      //       apiCalling.value = false;
-      //       customSnackBar(
-      //         'Invalid Credentials!',
-      //         'The entered values are invalid',
-      //         'fail',
-      //       );
-      //     }
-      //   },
-      // );
     }
   }
 
@@ -115,32 +85,41 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<String> loginApi({email, password}) async {
+  Future<void> loginApi({email, password}) async {
     // var url = 'http://fitness.rithlaundry.com/api/user/login';
     LoginRequest body = LoginRequest(email: email, password: password);
     final res = await apiService.getLoginResponse(body);
 
-    // final response = await Dio().post(url, data: body);
-    // var statusBody = jsonDecode(response.toString());
-    // print('The data is ${statusBody['result']}');
     if (res.message.toLowerCase() == 'success') {
       apiCalling.value = false;
       _prefs = Get.find<NeededVariables>().sharedPreferences;
-      _prefs!.setString('email', res.result.email);
-      String name = res.result.userName;
-      String email = res.result.email;
-      String mobileNumber =
-          res.result.phoneNumber ?? 'Please update your phone number';
+      _prefs!.setString('email', res.result?.email ?? "N/A");
 
+      int id = res.result?.id ?? 0;
+      String name = res.result?.userName ?? "N/A";
+      String email = res.result?.email ?? "N/A";
+      String mobileNumber = res.result?.phoneNumber ?? 'N/A';
+      String profilePicture = res.result!.profilePicture
+              .contains('http://fitness.rithlaundry.com/uploads')
+          ? res.result!.profilePicture
+          : 'http://fitness.rithlaundry.com/uploads/${res.result?.profilePicture ?? 'images/avatar.png'}';
       Get.find<UserModelService>().loggedIn(
+        id: id,
         name: name,
         mobileNumber: mobileNumber,
         email: email,
         numberOfGroups: '0',
+        profilePicture: profilePicture,
       );
 
-      Get.back();
       Get.offAllNamed(Routes.DashboardScreen);
+      final userModel = Get.find<UserModelService>();
+      print('The profile pic is ${userModel.getProfilePicture()}');
+      // customSnackBar(
+      //   'Account Created!',
+      //   'Account has been successfully created',
+      //   'success',
+      // );
     } else {
       apiCalling.value = false;
       customSnackBar(
@@ -150,6 +129,5 @@ class LoginController extends GetxController {
       );
     }
     apiCalling.value = false;
-    return '';
   }
 }

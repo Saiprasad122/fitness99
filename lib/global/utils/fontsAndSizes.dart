@@ -229,6 +229,8 @@ class AppFontSizes {
 abstract class AppColors {
   static Color get accentColor => const Color.fromRGBO(255, 86, 122, 1);
   static Color get primaryColor => const Color.fromRGBO(5, 5, 5, 1);
+  static Color get secondaryColor => const Color.fromRGBO(234, 171, 68, 1);
+  static Color get customBlue => const Color.fromRGBO(37, 164, 209, 1);
   static Color get bottomAppBarColor => const Color.fromRGBO(243, 243, 243, 1);
   static Color get textColorBlack => const Color.fromRGBO(17, 20, 25, 1);
   static Color get textColorgrayBlue => const Color.fromRGBO(73, 86, 106, 1);

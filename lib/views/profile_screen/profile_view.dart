@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 class ProfileView extends StatelessWidget {
   final controller = Get.put(ProfileViewController());
   final dataModel = Get.find<UserModelService>();
+  final userModel = Get.find<UserModelService>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class ProfileView extends StatelessWidget {
                   CircleAvatar(
                     radius: 30,
                     foregroundImage:
-                        AssetImage('assets/images/placeholders/user.png'),
+                        NetworkImage(userModel.getProfilePicture()),
                   ),
                   const SizedBox(
                     width: 10,
@@ -62,7 +63,9 @@ class ProfileView extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      dataModel.getMobileNumber(),
+                      userModel.getMobileNumber() == 'N/A'
+                          ? 'Please update your phone number'
+                          : userModel.getMobileNumber(),
                       style: TextStyles.sgproRegular.greyMid.f22,
                     )
                   ],

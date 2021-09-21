@@ -16,7 +16,8 @@ class AvailabiltyComponent extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           'Not Available',
-          style: TextStyles.sgproRegular.f20.copyWith(color: Colors.amber[700]),
+          style: TextStyles.sgproRegular.f20
+              .copyWith(color: AppColors.secondaryColor),
         ),
       ],
     );

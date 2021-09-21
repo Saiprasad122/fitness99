@@ -6,12 +6,12 @@ import 'dart:convert';
 
 class LoginResponse {
   LoginResponse({
-    required this.result,
+    this.result,
     required this.message,
     required this.status,
   });
 
-  final Result result;
+  final Result? result;
   final String message;
   final int status;
 
@@ -21,13 +21,13 @@ class LoginResponse {
   String toRawJson() => json.encode(toJson());
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-        result: Result.fromJson(json["result"]),
+        result: json["result"] == null ? null : Result.fromJson(json["result"]),
         message: json["message"] == null ? null : json["message"],
         status: json["status"] == null ? null : json["status"],
       );
 
   Map<String, dynamic> toJson() => {
-        "result": result.toJson(),
+        "result": result?.toJson() ?? "N/A",
         "message": message,
         "status": status,
       };

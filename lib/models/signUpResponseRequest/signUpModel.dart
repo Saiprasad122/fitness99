@@ -6,14 +6,16 @@ import 'dart:convert';
 
 class SignUpResponse {
   SignUpResponse({
-    required this.result,
+    this.result,
+    this.error,
     required this.message,
     required this.status,
   });
 
-  final Result result;
+  final Result? result;
+  final String? error;
   final String message;
-  final int status;
+  final dynamic status;
 
   factory SignUpResponse.fromRawJson(String str) =>
       SignUpResponse.fromJson(json.decode(str));
@@ -21,13 +23,15 @@ class SignUpResponse {
   String toRawJson() => json.encode(toJson());
 
   factory SignUpResponse.fromJson(Map<String, dynamic> json) => SignUpResponse(
-        result: Result.fromJson(json["result"]),
+        result: json["result"] == null ? null : Result.fromJson(json["result"]),
+        error: json["error"] == null ? null : json["error"],
         message: json["message"] == null ? null : json["message"],
         status: json["status"] == null ? null : json["status"],
       );
 
   Map<String, dynamic> toJson() => {
-        "result": result.toJson(),
+        "result": result?.toJson() ?? "N/A",
+        "error": error,
         "message": message,
         "status": status,
       };
@@ -71,4 +75,6 @@ class Result {
         "created_at": createdAt.toIso8601String(),
         "id": id,
       };
+
+  toLowerCase() {}
 }

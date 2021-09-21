@@ -1,14 +1,15 @@
 import 'package:fitness_99/controllers/more_screen_controller/more_screen_controller.dart';
+import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/helpers/auth.helper.dart';
+import 'package:fitness_99/views/more_screen/Products_screen/product_screen.dart';
 import 'package:fitness_99/views/profile_screen/components/redirect_list.component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MoreOptionsScreen extends StatelessWidget {
-  final controller = Get.put(MoreScreenController());
+  final userModel = Get.find<UserModelService>();
+  final controller = Get.put(MoreOptionsScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class MoreOptionsScreen extends StatelessWidget {
               height: 40,
               alignment: Alignment.centerLeft,
               child: Text(
-                controller.userName.value,
+                userModel.getUserName(),
                 style: TextStyles.sgproMedium.black.f30,
               ),
             ),
@@ -38,6 +39,7 @@ class MoreOptionsScreen extends StatelessWidget {
               dividerUnderTitle: true,
               rightArrow: false,
               height: 45,
+              onTap: () => Get.toNamed(Routes.ProductScreen),
             ),
             RedirectListComponent(
               imageUrl: 'assets/svgs/more_options/cart.svg',
@@ -60,11 +62,7 @@ class MoreOptionsScreen extends StatelessWidget {
               rightArrow: false,
               height: 45,
               onTap: () async {
-                await AuthenticationHelper().signOut();
-                SharedPreferences preferences =
-                    await SharedPreferences.getInstance();
-                preferences.remove('email');
-                Get.offNamedUntil(Routes.OnBoardScreen, (route) => false);
+                controller.logout();
               },
             ),
           ],

@@ -51,7 +51,7 @@ class CustomDetailsTextField extends StatelessWidget {
               hintStyle: TextStyles.sgproRegular.f20.greyMid,
               prefixIcon: Icon(
                 iconData,
-                color: Colors.blue,
+                color: AppColors.customBlue,
               ),
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey),

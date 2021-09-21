@@ -1,6 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:fitness_99/models/loginReposnseRequest/login_model.dart';
+import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
+import 'package:fitness_99/models/signUpResponseRequest/signUpModel.dart';
+import 'package:fitness_99/models/signUpResponseRequest/sign_up_request.dart';
+import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_request.dart';
+import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_response.dart';
+import 'package:fitness_99/models/updateProfileResponseRequest/updateProfileResponse.dart';
+import 'package:fitness_99/models/updateProfileResponseRequest/update_profile_request.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/http.dart';
 part 'api_service.g.dart';
@@ -11,18 +17,14 @@ abstract class ApiService {
 
   @POST('/login')
   Future<LoginResponse> getLoginResponse(@Body() LoginRequest loginRequest);
-
-  // factory ApiService.create({required Dio dio}) {
-  //   final url = kDebugMode ? APP_ENV['BASE_URL_DEV'] : APP_ENV['BASE_URL'];
-  //   dio
-  //     ..options = BaseOptions(
-  //         receiveTimeout: 20000, connectTimeout: 20000, baseUrl: url)
-  //     ..interceptors.add(PrettyDioLogger(
-  //       requestBody: true,
-  //       compact: true,
-  //     ));
-  //   return ApiClient(dio);
-  // }
+  @POST('/register')
+  Future<SignUpResponse> getSignUpResponse(@Body() SignUpRequest signUpRequest);
+  @POST('/profile_update')
+  Future<UpdateProfileResponse> getUpdateProfileResponse(
+      @Body() UpdateProfileRequest updateProfileRequest);
+  @POST('/profile_pic_update')
+  Future<UpdateProfilePictureResponse> geUpdateProfilePic(
+      @Body() UpdateProfilePictureRequest updateProfilePictureRequest);
 
   factory ApiService.create() {
     final client =

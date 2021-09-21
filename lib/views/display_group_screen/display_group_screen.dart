@@ -29,7 +29,7 @@ class DisplayGroupScreen extends StatelessWidget {
                       'assets/svgs/chat_screen/add.svg',
                       width: 20,
                       height: 20,
-                      color: Colors.amber[700],
+                      color: AppColors.secondaryColor,
                     ),
                     onPressed: () => Get.toNamed(Routes.CreateGroupScreen),
                   )
