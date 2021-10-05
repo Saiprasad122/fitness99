@@ -3,7 +3,7 @@ import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_button.dart';
-import 'package:fitness_99/global/widgets/custom_detail_textField.dart';
+import 'package:fitness_99/global/widgets/custom_detail_textfield.dart';
 import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
