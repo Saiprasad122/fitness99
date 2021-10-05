@@ -58,7 +58,7 @@ class RedirectListComponent extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               title,
-                              style: TextStyles.sgproRegular.f18.black,
+                              style: TextStyles.sgproRegular.f22.black,
                             ),
                           ),
                         ),

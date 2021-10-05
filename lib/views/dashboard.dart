@@ -2,7 +2,11 @@ import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen.dart';
 import 'package:fitness_99/views/more_screen/more_options_screen.dart';
 import 'package:fitness_99/views/profile_screen/profile_view.dart';
+import 'package:fitness_99/views/search_screen/search_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import 'display_group_screen/display_group_screen.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -31,10 +35,10 @@ class _DashboardViewState extends State<DashboardView>
     return Scaffold(
       body: TabBarView(
         physics: NeverScrollableScrollPhysics(),
-        children: const [
+        children: [
           ChatScreenView(),
-          ChatScreenView(),
-          ChatScreenView(),
+          SearchScreenView(),
+          DisplayGroupScreen(),
           ProfileView(),
           MoreOptionsScreen()
         ],
@@ -52,55 +56,71 @@ class _DashboardViewState extends State<DashboardView>
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: true,
-        unselectedLabelStyle: TextStyles.sgproBold.f16.black,
+        unselectedLabelStyle: TextStyles.sgproBold.f20.black,
         selectedLabelStyle:
-            TextStyles.sgproBold.f16.copyWith(color: Colors.amber[800]),
+            TextStyles.sgproBold.f20.copyWith(color: Colors.amber[800]),
         items: [
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.groups,
+            icon: SvgPicture.asset(
+              'assets/svgs/chat_screen/user-group.svg',
+              width: 23,
+              height: 23,
               color: Colors.black,
             ),
             label: 'Groups',
-            activeIcon: Icon(
-              Icons.groups,
-              color: Colors.amber[800],
+            activeIcon: SvgPicture.asset(
+              'assets/svgs/chat_screen/user-group.svg',
+              width: 23,
+              height: 23,
+              color: AppColors.secondaryColor,
             ),
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
+            icon: SvgPicture.asset(
+              'assets/svgs/chat_screen/search-icon.svg',
+              width: 23,
+              height: 23,
               color: Colors.black,
             ),
             label: 'Search',
-            activeIcon: Icon(
-              Icons.search,
-              color: Colors.amber[800],
+            activeIcon: SvgPicture.asset(
+              'assets/svgs/chat_screen/search-icon.svg',
+              width: 23,
+              height: 23,
+              color: AppColors.secondaryColor,
             ),
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add,
+            icon: SvgPicture.asset(
+              'assets/svgs/chat_screen/add.svg',
+              width: 23,
+              height: 23,
               color: Colors.black,
             ),
             label: 'Create',
-            activeIcon: Icon(
-              Icons.add,
-              color: Colors.amber[800],
+            activeIcon: SvgPicture.asset(
+              'assets/svgs/chat_screen/add.svg',
+              width: 23,
+              height: 23,
+              color: AppColors.secondaryColor,
             ),
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outline,
+            icon: SvgPicture.asset(
+              'assets/svgs/chat_screen/man-user.svg',
+              width: 23,
+              height: 23,
               color: Colors.black,
             ),
             label: 'Profile',
-            activeIcon: Icon(
-              Icons.person_outline,
-              color: Colors.amber[800],
+            activeIcon: SvgPicture.asset(
+              'assets/svgs/chat_screen/man-user.svg',
+              width: 23,
+              height: 23,
+              color: AppColors.secondaryColor,
             ),
             backgroundColor: Colors.white,
           ),
