@@ -1,5 +1,7 @@
+import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomProductGrid extends StatelessWidget {
   final String title;
@@ -16,7 +18,7 @@ class CustomProductGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () => Get.toNamed(Routes.DetailedProductScreen),
       child: Column(
         children: [
           Container(

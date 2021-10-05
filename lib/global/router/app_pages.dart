@@ -1,3 +1,4 @@
+import 'package:fitness_99/views/more_screen/Products_screen/detailed_product.dart';
 import 'package:fitness_99/views/views.export.dart';
 
 class AppPages {
@@ -33,6 +34,7 @@ class AppPages {
     GetPage(name: Routes.InvitationScreen, page: () => InvitationScreen()),
     GetPage(name: Routes.MoreOptionsScreen, page: () => MoreOptionsScreen()),
     GetPage(name: Routes.ProductScreen, page: () => ProductScreen()),
+    GetPage(name: Routes.DetailedProductScreen, page: () => DetailedProduct())
   ];
 }
 
@@ -61,6 +63,7 @@ abstract class Routes {
   static const InvitationScreen = _Paths.invitationScree;
   static const MoreOptionsScreen = _Paths.moreOptionsScreen;
   static const ProductScreen = _Paths.productScreeen;
+  static const DetailedProductScreen = _Paths.detailedProductScreen;
 }
 
 abstract class _Paths {
@@ -88,6 +91,7 @@ abstract class _Paths {
   static const invitationScree = '/invitationScreen';
   static const moreOptionsScreen = '/moreOptionsScreen';
   static const productScreeen = '/productScreen';
+  static const detailedProductScreen = '/detailedProductScreen';
 }
 
 // Route<T> getRoute<T>(Widget page) {

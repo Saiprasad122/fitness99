@@ -45,7 +45,7 @@ class PersonalGoalsDisplay extends StatelessWidget {
                           style: TextStyles.sgproRegular.f18,
                         ),
                       ),
-                      Divider(thickness: 0.5, color: Colors.grey)
+                      const Divider(thickness: 0.5, color: Colors.grey)
                     ],
                   );
                 },

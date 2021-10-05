@@ -25,3 +25,4 @@ export './auth_screen/forgot_password_screen.dart';
 export './more_screen/Products_screen/product_screen.dart';
 export 'package:fitness_99/bindings/splash_screen_binding.dart';
 export 'package:get/get.dart';
+export '../views/more_screen/Products_screen/detailed_product.dart';

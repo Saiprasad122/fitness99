@@ -140,7 +140,7 @@ class ProfileView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    VerticalDivider(
+                    const VerticalDivider(
                       color: Colors.black,
                       thickness: 0.8,
                       width: 2,
