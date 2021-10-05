@@ -6,7 +6,7 @@ import 'package:fitness_99/controllers/auth_screen_controller/login_screen_contr
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/global/widgets/custom_detail_textField.dart';
+import 'package:fitness_99/global/widgets/custom_detail_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
