@@ -7,7 +7,6 @@ import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_request.dart';
 import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_response.dart';
-import 'package:fitness_99/models/updateProfileResponseRequest/updateProfileResponse.dart';
 import 'package:fitness_99/models/updateProfileResponseRequest/update_profile_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +16,7 @@ import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:http_parser/http_parser.dart';
 
 class EditProfileController extends GetxController {
   final apiService = Get.find<ApiService>();
@@ -24,15 +24,12 @@ class EditProfileController extends GetxController {
   final nameTED = TextEditingController();
   final emailTED = TextEditingController();
   final numberTED = TextEditingController();
-  final image = ''.obs;
+  var image = ''.obs;
   final nameErr = ''.obs;
   final emailErr = ''.obs;
   final numberErr = ''.obs;
   final numberTextInputFormatter = LengthLimitingTextInputFormatter(10);
-  final picker = ImagePicker();
-  final img = File('').obs;
   final apiCalling = false.obs;
-  MultipartFile? uploadImage;
   UpdateProfilePictureRequest req = UpdateProfilePictureRequest();
   UpdateProfilePictureResponse? response;
 
@@ -86,36 +83,59 @@ class EditProfileController extends GetxController {
 
   Future pickImage() async {
     try {
+      var picker = ImagePicker();
       final file = await picker.pickImage(
         source: ImageSource.gallery,
-        imageQuality: 85,
-        maxHeight: 500,
-        maxWidth: 500,
       );
-      img.value = File(file?.path ?? '');
-      var fileName = img.value.path.split('/').last;
-      uploadImage = MultipartFile(
-        img.value.path,
+      final img = File(file?.path ?? '');
+      String fileName = img.path.split('/').last;
+      var uploadImage = await Dio.MultipartFile.fromFile(
+        img.path,
         filename: fileName,
+        contentType: MediaType('image', 'jpg'),
       );
-      req = req.copyWith(userId: userModel.getid());
-      req = req.copyWith(profilePicture: uploadImage);
-      var formData = FormData(req.toJson());
+      req = UpdateProfilePictureRequest(
+          userId: userModel.getid(), profilePicture: uploadImage);
+
+      var formData = Dio.FormData.fromMap(req.toJson());
 
       try {
+        apiCalling.value = true;
         final dio = Dio.Dio()
           ..interceptors.add(PrettyDioLogger(requestBody: true));
         final result = await dio.post(
           'http://fitness.rithlaundry.com/api/user/profile_picture',
           data: formData,
         );
-        response = UpdateProfilePictureResponse.fromJson(result.data);
-        print('The response data is $response');
+        final response = UpdateProfilePictureResponse.fromJson(result.data);
+        if (response.message.toLowerCase() == 'success') {
+          DataModel dataModel = DataModel(
+            id: userModel.getid(),
+            userName: userModel.getUserName(),
+            email: userModel.getEmail(),
+            mobileNumber: userModel.getMobileNumber(),
+            numbesrOfGroups: "0",
+            profilePicture: response.result?.profilePicture ??
+                userModel.getProfilePicture(),
+          );
+          await Hive.box<DataModel>('user_data').put('data', dataModel);
+          image.value = userModel.getProfilePicture();
+          apiCalling.value = false;
+          customSnackBar(
+            'Success!',
+            'Your profile picture is successfully updated',
+            'success',
+          );
+        } else {
+          customSnackBar(
+            'Error!',
+            'Some error while updating profile picture please try again',
+            'fail',
+          );
+        }
       } catch (e) {}
-
-      print('The image path is ${img.value}');
     } catch (e) {
-      print(e);
+      print("The exception is $e");
     }
   }
 

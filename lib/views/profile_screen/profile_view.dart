@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_99/controllers/profile_screen/profile_view_controller.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
@@ -28,8 +29,27 @@ class ProfileView extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 30,
-                    foregroundImage:
-                        NetworkImage(userModel.getProfilePicture()),
+                    backgroundColor: Colors.white,
+                    child: SizedBox.expand(
+                      child: ClipOval(
+                        child: CachedNetworkImage(
+                          imageUrl: userModel.getProfilePicture(),
+                          placeholder: (context, s) =>
+                              CircularProgressIndicator(),
+                          filterQuality: FilterQuality.high,
+                          fit: BoxFit.fitWidth,
+                        ),
+                        // controller.image.value == ''
+                        //     ? Image.network(
+                        //         'http://fitness.rithlaundry.com/uploads/images/avatar.png',
+                        //       )
+                        //     : Image.file(
+                        //         controller.img.value,
+                        //         filterQuality: FilterQuality.high,
+                        //         fit: BoxFit.fill,
+                        //       ),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     width: 10,

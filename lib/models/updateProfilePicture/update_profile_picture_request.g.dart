@@ -10,7 +10,7 @@ UpdateProfilePictureRequest _$UpdateProfilePictureRequestFromJson(
         Map<String, dynamic> json) =>
     UpdateProfilePictureRequest(
       userId: json['user_id'] as int?,
-      profilePicture: json['profile_picture'] as MultipartFile?,
+      profilePicture: json['profile_picture'],
     );
 
 Map<String, dynamic> _$UpdateProfilePictureRequestToJson(

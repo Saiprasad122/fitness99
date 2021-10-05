@@ -2,7 +2,6 @@ import 'package:fitness_99/controllers/more_screen_controller/more_screen_contro
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/views/more_screen/Products_screen/product_screen.dart';
 import 'package:fitness_99/views/profile_screen/components/redirect_list.component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -50,6 +50,8 @@ dependencies:
     git:
       url: https://github.com/appvinio/pretty_dio_logger
   nil: ^1.1.1
+  connectivity: ^3.0.6
+  cached_network_image: ^3.1.0
 
 
 dev_dependencies:
@@ -85,12 +87,14 @@ flutter:
     - assets/images/placeholders/
     - assets/images/tabbar/
     - assets/images/search_screen/
+    - assets/images/product_screen/
     # ------------------------------
     #           S V G ' S
     # ------------------------------
     - assets/svgs/auth_screen/
     - assets/svgs/more_options/
     - assets/svgs/chat_screen/
+    - assets/svgs/product_screen/
     # ------------------------------
     #          G I F
     # ------------------------------

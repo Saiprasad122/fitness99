@@ -23,13 +23,14 @@ class UserModelService extends GetxController {
   }
 
 //create a local database and then adding all the user data in the local DB
-  void loggedIn(
-      {required int id,
-      required String name,
-      String? mobileNumber,
-      required String email,
-      required String numberOfGroups,
-      String? profilePicture}) async {
+  void loggedIn({
+    required int id,
+    required String name,
+    String? mobileNumber,
+    required String email,
+    required String numberOfGroups,
+    String? profilePicture,
+  }) async {
     _id = id;
     _name = name;
     _email = email;
@@ -85,6 +86,7 @@ class UserModelService extends GetxController {
   String getNoOfGroups() {
     var box = Hive.box<DataModel>('user_data');
     dataModel = box.get('data');
+
     return dataModel?.numbesrOfGroups ?? 'N/A';
   }
 
@@ -92,6 +94,11 @@ class UserModelService extends GetxController {
   String getProfilePicture() {
     var box = Hive.box<DataModel>('user_data');
     dataModel = box.get('data');
-    return dataModel?.profilePicture ?? "images/avatar.png";
+    return dataModel!.profilePicture
+            .contains('http://fitness.rithlaundry.com/uploads')
+        ? dataModel?.profilePicture ??
+            'http://fitness.rithlaundry.com/uploadsimages/avatar.png'
+        : 'http://fitness.rithlaundry.com/uploads/${dataModel?.profilePicture ?? 'images/avatar.png'}';
+    // return dataModel?.profilePicture ?? "images/avatar.png";
   }
 }

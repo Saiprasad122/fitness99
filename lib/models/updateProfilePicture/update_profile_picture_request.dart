@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:fitness_99/views/views.export.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'update_profile_picture_request.g.dart';
@@ -9,7 +8,7 @@ class UpdateProfilePictureRequest extends Equatable {
   @JsonKey(name: 'user_id')
   final int? userId;
   @JsonKey(name: 'profile_picture')
-  final MultipartFile? profilePicture;
+  final dynamic profilePicture;
 
   const UpdateProfilePictureRequest({this.userId, this.profilePicture});
 
@@ -21,7 +20,7 @@ class UpdateProfilePictureRequest extends Equatable {
 
   UpdateProfilePictureRequest copyWith({
     int? userId,
-    MultipartFile? profilePicture,
+    dynamic profilePicture,
   }) {
     return UpdateProfilePictureRequest(
       userId: userId ?? this.userId,

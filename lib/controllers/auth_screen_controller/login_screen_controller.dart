@@ -99,10 +99,11 @@ class LoginController extends GetxController {
       String name = res.result?.userName ?? "N/A";
       String email = res.result?.email ?? "N/A";
       String mobileNumber = res.result?.phoneNumber ?? 'N/A';
-      String profilePicture = res.result!.profilePicture
-              .contains('http://fitness.rithlaundry.com/uploads')
-          ? res.result!.profilePicture
-          : 'http://fitness.rithlaundry.com/uploads/${res.result?.profilePicture ?? 'images/avatar.png'}';
+      String profilePicture = res.result?.profilePicture ??
+          'http://fitness.rithlaundry.com/uploadsimages/avatar.png';
+      //     .contains('http://fitness.rithlaundry.com/uploads')
+      // ? res.result!.profilePicture
+      // : 'http://fitness.rithlaundry.com/uploads/${res.result?.profilePicture ?? 'images/avatar.png'}';
       Get.find<UserModelService>().loggedIn(
         id: id,
         name: name,

@@ -6,6 +6,7 @@ import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nil/nil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final controller = Get.put(EditProfileController());
@@ -43,18 +44,23 @@ class EditProfileScreen extends StatelessWidget {
                               child: SizedBox.expand(
                                 child: Obx(
                                   () => ClipOval(
-                                      child:
-                                          Image.network(controller.image.value)
-                                      // controller.image.value == ''
-                                      //     ? Image.network(
-                                      //         'http://fitness.rithlaundry.com/uploads/images/avatar.png',
-                                      //       )
-                                      //     : Image.file(
-                                      //         controller.img.value,
-                                      //         filterQuality: FilterQuality.high,
-                                      //         fit: BoxFit.fill,
-                                      //       ),
-                                      ),
+                                    child: CachedNetworkImage(
+                                      imageUrl: controller.image.value,
+                                      placeholder: (context, s) =>
+                                          CircularProgressIndicator(),
+                                      filterQuality: FilterQuality.high,
+                                      fit: BoxFit.fitWidth,
+                                    ),
+                                    // controller.image.value == ''
+                                    //     ? Image.network(
+                                    //         'http://fitness.rithlaundry.com/uploads/images/avatar.png',
+                                    //       )
+                                    //     : Image.file(
+                                    //         controller.img.value,
+                                    //         filterQuality: FilterQuality.high,
+                                    //         fit: BoxFit.fill,
+                                    //       ),
+                                  ),
                                 ),
                               ),
                             ),
