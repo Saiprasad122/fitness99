@@ -1,6 +1,5 @@
 import 'package:fitness_99/controllers/more_screen_controller/detailed_product_screen.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/global/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

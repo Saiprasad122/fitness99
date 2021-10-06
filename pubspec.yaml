@@ -46,13 +46,14 @@ dependencies:
   hive_generator: ^1.1.1
   equatable: ^2.0.3
   json_annotation: ^4.1.0
-  pretty_dio_logger: 
+  pretty_dio_logger:
     git:
       url: https://github.com/appvinio/pretty_dio_logger
   nil: ^1.1.1
   connectivity: ^3.0.6
   cached_network_image: ^3.1.0
-
+  video_player: ^2.2.5
+  image_cropper: ^1.4.1
 
 dev_dependencies:
   flutter_test:
@@ -95,6 +96,7 @@ flutter:
     - assets/svgs/more_options/
     - assets/svgs/chat_screen/
     - assets/svgs/product_screen/
+    - assets/svgs/subscription_screen/
     # ------------------------------
     #          G I F
     # ------------------------------

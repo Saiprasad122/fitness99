@@ -1,60 +1,61 @@
-import 'package:fitness_99/global/widgets/custom_product_list.dart';
 import 'package:flutter/material.dart';
+import 'custom_product_grid.dart';
 
-class ListProductsView extends StatelessWidget {
-  const ListProductsView({Key? key}) : super(key: key);
+class GridProductsView extends StatelessWidget {
+  const GridProductsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
+    return GridView.count(
       physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      crossAxisCount: 2,
       children: [
-        CustomProductList(
+        CustomProductGrid(
           title: 'Protien Powder',
-          subtitle: 'Lets science protien power',
+          subtitle: 'Lets science protien powder',
           imgName: 'protien_powder.jpg',
           onTap: () {},
         ),
-        CustomProductList(
+        CustomProductGrid(
           title: 'Protien Powder',
-          subtitle: 'Lets science protien power',
+          subtitle: 'Lets science protien powder',
           imgName: 'protien_powder.jpg',
           onTap: () {},
         ),
-        CustomProductList(
+        CustomProductGrid(
           title: 'Protien Powder',
-          subtitle: 'Lets science protien power',
+          subtitle: 'Lets science protien powder',
           imgName: 'protien_powder.jpg',
           onTap: () {},
         ),
-        CustomProductList(
+        CustomProductGrid(
           title: 'Protien Powder',
-          subtitle: 'Lets science protien power',
+          subtitle: 'Lets science protien powder',
           imgName: 'protien_powder.jpg',
           onTap: () {},
         ),
-        CustomProductList(
+        CustomProductGrid(
           title: 'Protien Powder',
-          subtitle: 'Lets science protien power',
+          subtitle: 'Lets science protien powder',
           imgName: 'protien_powder.jpg',
           onTap: () {},
         ),
-        CustomProductList(
+        CustomProductGrid(
           title: 'Protien Powder',
-          subtitle: 'Lets science protien power',
+          subtitle: 'Lets science protien powder',
           imgName: 'protien_powder.jpg',
           onTap: () {},
         ),
-        CustomProductList(
+        CustomProductGrid(
           title: 'Protien Powder',
-          subtitle: 'Lets science protien power',
+          subtitle: 'Lets science protien powder',
           imgName: 'protien_powder.jpg',
           onTap: () {},
         ),
-        CustomProductList(
+        CustomProductGrid(
           title: 'Protien Powder',
-          subtitle: 'Lets science protien power',
+          subtitle: 'Lets science protien powder',
           imgName: 'protien_powder.jpg',
           onTap: () {},
         ),

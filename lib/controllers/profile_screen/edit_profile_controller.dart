@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -81,11 +82,11 @@ class EditProfileController extends GetxController {
     }
   }
 
-  Future pickImage() async {
+  Future pickImageFromCamera() async {
     try {
       var picker = ImagePicker();
       final file = await picker.pickImage(
-        source: ImageSource.gallery,
+        source: ImageSource.camera,
       );
       final img = File(file?.path ?? '');
       String fileName = img.path.split('/').last;
@@ -139,6 +140,74 @@ class EditProfileController extends GetxController {
     }
   }
 
+  Future pickImageFromGallery() async {
+    try {
+      var picker = ImagePicker();
+      final file = await picker.pickImage(
+        source: ImageSource.gallery,
+      );
+
+      final img = File(file?.path ?? '');
+      // _cropImage(img);
+      String fileName = img.path.split('/').last;
+      var uploadImage = await Dio.MultipartFile.fromFile(
+        img.path,
+        filename: fileName,
+        contentType: MediaType('image', 'jpg'),
+      );
+      req = UpdateProfilePictureRequest(
+          userId: userModel.getid(), profilePicture: uploadImage);
+
+      var formData = Dio.FormData.fromMap(req.toJson());
+
+      try {
+        apiCalling.value = true;
+        final dio = Dio.Dio()
+          ..interceptors.add(PrettyDioLogger(requestBody: true));
+        final result = await dio.post(
+          'http://fitness.rithlaundry.com/api/user/profile_picture',
+          data: formData,
+        );
+        final response = UpdateProfilePictureResponse.fromJson(result.data);
+        if (response.message.toLowerCase() == 'success') {
+          DataModel dataModel = DataModel(
+            id: userModel.getid(),
+            userName: userModel.getUserName(),
+            email: userModel.getEmail(),
+            mobileNumber: userModel.getMobileNumber(),
+            numbesrOfGroups: "0",
+            profilePicture: response.result?.profilePicture ??
+                userModel.getProfilePicture(),
+          );
+          await Hive.box<DataModel>('user_data').put('data', dataModel);
+          image.value = userModel.getProfilePicture();
+          apiCalling.value = false;
+          customSnackBar(
+            'Success!',
+            'Your profile picture is successfully updated',
+            'success',
+          );
+        } else {
+          customSnackBar(
+            'Error!',
+            'Some error while updating profile picture please try again',
+            'fail',
+          );
+        }
+      } catch (e) {}
+    } catch (e) {
+      print("The exception is $e");
+    }
+  }
+
+  _cropImage(File picked) async {
+    final cropped = await ImageCropper.cropImage(
+      sourcePath: picked.path,
+      aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
+    );
+    if (cropped != null) {}
+  }
+
   void submit() async {
     validateEmail();
     validateName();
@@ -155,7 +224,7 @@ class EditProfileController extends GetxController {
       Get.back();
       customSnackBar(
         'Success!',
-        'Your profile is created successfully',
+        'Your profile is successfully updated',
         'success',
       );
     }
