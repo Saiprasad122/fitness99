@@ -7,7 +7,7 @@ import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nil/nil.dart';
-import 'widget/dialog_box.dart';
+import 'widget/image_dialog_box.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final controller = Get.put(EditProfileController());
@@ -56,13 +56,11 @@ class EditProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              onTap:
-                                  // controller.pickImage
-                                  () {
+                              onTap: () {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
-                                    return CustomDialoagBox(
+                                    return ImagePickerDialoagBox(
                                         controller: controller);
                                   },
                                 );

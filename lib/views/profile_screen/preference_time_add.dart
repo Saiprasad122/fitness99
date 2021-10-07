@@ -5,6 +5,8 @@ import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'widget/week_dialog_box.dart';
+
 class PreferenceTimeAdd extends StatelessWidget {
   final controller = Get.put(PreferenceTimeController());
   @override
@@ -36,28 +38,50 @@ class PreferenceTimeAdd extends StatelessWidget {
                   style: TextStyles.sgproMedium.f26,
                 ),
                 const SizedBox(height: 20),
-                Obx(
-                  () => DropdownButton(
-                    value: controller.dropdownValue.value,
-                    icon: const Icon(Icons.arrow_drop_down),
-                    iconSize: 20,
-                    onChanged: (String? newValue) {
-                      controller.onChangeDropdownValue(newValue!);
-                    },
-                    items: controller.days
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem(
-                        child: Center(
-                          child: Text(
-                            value,
-                            style: TextStyles.sgproRegular.f20,
-                          ),
+                InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Obx(
+                        () => Text(
+                          controller.selectedDay.value,
+                          style: TextStyles.sgproRegular.f20,
                         ),
-                        value: value,
-                      );
-                    }).toList(),
+                      ),
+                      const SizedBox(width: 20),
+                      Icon(Icons.arrow_drop_down)
+                    ],
                   ),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) =>
+                          WeekDialoagBox(controller: controller),
+                    );
+                  },
                 ),
+                // Obx(
+                //   () => DropdownButton(
+                //     value: controller.dropdownValue.value,
+                //     icon: const Icon(Icons.arrow_drop_down),
+                //     iconSize: 20,
+                //     onChanged: (String? newValue) {
+                //       controller.onChangeDropdownValue(newValue!);
+                //     },
+                //     items: controller.days
+                //         .map<DropdownMenuItem<String>>((String value) {
+                //       return DropdownMenuItem(
+                //         child: Center(
+                //           child: Text(
+                //             value,
+                //             style: TextStyles.sgproRegular.f20,
+                //           ),
+                //         ),
+                //         value: value,
+                //       );
+                //     }).toList(),
+                //   ),
+                // ),
                 const SizedBox(height: 50),
                 SizedBox(
                   width: AppSizedBoxConfigs.screenWidth - 10,

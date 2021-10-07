@@ -5,6 +5,7 @@ class PreferenceTimeController extends GetxController {
   Rx<String> fromTime = ''.obs;
   Rx<String> toTime = ''.obs;
   final currentTime = TimeOfDay.now();
+  final selectedDay = 'Sunday'.obs;
   final dropdownValue = 'Sunday'.obs;
   final days = [
     'Sunday',

@@ -1,10 +1,12 @@
 import 'package:fitness_99/controllers/profile_screen/edit_profile_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
-class CustomDialoagBox extends StatelessWidget {
+class ImagePickerDialoagBox extends StatelessWidget {
   final EditProfileController controller;
-  CustomDialoagBox({required this.controller});
+  ImagePickerDialoagBox({required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,10 @@ class CustomDialoagBox extends StatelessWidget {
               'Open Camera',
               style: TextStyles.sgproRegular.f20,
             ),
-            onTap: () => controller.pickImageFromCamera(),
+            onTap: () {
+              Get.back();
+              controller.getImage(ImageSource.camera);
+            },
           ),
           const SizedBox(height: 20),
           InkWell(
@@ -25,11 +30,13 @@ class CustomDialoagBox extends StatelessWidget {
               'Open Gallery',
               style: TextStyles.sgproRegular.f20,
             ),
-            onTap: () => controller.pickImageFromGallery(),
+            onTap: () {
+              Get.back();
+              controller.getImage(ImageSource.gallery);
+            },
           ),
         ],
       ),
     );
-    ;
   }
 }
