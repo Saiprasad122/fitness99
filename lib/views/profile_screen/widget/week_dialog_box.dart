@@ -1,4 +1,5 @@
 import 'package:fitness_99/controllers/profile_screen/preference_time_controller.dart';
+import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,10 +12,9 @@ class WeekDialoagBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Container(
-        width: 300,
-        height: 300,
+        width: AppSizedBoxConfigs.screenHeight * 0.8,
+        height: AppSizedBoxConfigs.screenWidth * 0.65,
         child: ListView.builder(
-          shrinkWrap: true,
           itemCount: controller.days.length,
           itemBuilder: (context, i) {
             return customWidget(controller.days[i], i);
