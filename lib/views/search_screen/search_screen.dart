@@ -1,5 +1,6 @@
 import 'package:fitness_99/controllers/search_screen/search_screen_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/global/widgets/custom_chat_tile.dart';
 import 'package:fitness_99/global/widgets/custom_search_field.dart';
 import 'package:fitness_99/global/widgets/custom_shimmer.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,32 +35,11 @@ class SearchScreenView extends StatelessWidget {
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: 20,
-                          itemBuilder: (context, i) => TextButton(
-                            style: ButtonStyle(
-                              overlayColor:
-                                  MaterialStateProperty.resolveWith<Color>(
-                                      (Set<MaterialState> states) {
-                                if (states.contains(MaterialState.pressed))
-                                  return Colors.grey;
-                                return Colors.grey;
-                              }),
-                              padding:
-                                  MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                      EdgeInsets.zero),
-                            ),
-                            onPressed: () {},
-                            child: ListTile(
-                              leading: Image.asset(
-                                  'assets/images/search_screen/fitness.png'),
-                              title: Text(
-                                'Hemanth',
-                                style: TextStyles.sgproRegular.f18,
-                              ),
-                              subtitle: Text(
-                                'Stronger today',
-                                style: TextStyles.sgproRegular.f18.greyMid,
-                              ),
-                            ),
+                          itemBuilder: (context, i) => CustomChatTile(
+                            groupName: 'Hemanth',
+                            groupGoal: 'Get Stronger',
+                            groupImage: '',
+                            onTap: () {},
                           ),
                         ),
                 ),

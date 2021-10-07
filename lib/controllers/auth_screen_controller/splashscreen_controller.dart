@@ -12,7 +12,7 @@ class SplashViewController extends GetxController {
       Duration(seconds: 2),
       () async {
         if (userModel.getEmail() != "N/A") {
-          print('THe shard pref is ${userModel.getEmail()}');
+          print('THe shared pref is ${userModel.getEmail()}');
           Get.offNamed(Routes.DashboardScreen);
         } else {
           Get.offNamed(Routes.OnBoardScreen);
