@@ -1,4 +1,4 @@
-import 'package:fitness_99/views/profile_screen/components/category_class.dart';
+import 'package:fitness_99/views/profile_screen/widget/category_class.dart';
 import 'package:get/get.dart';
 
 class CategoriesController extends GetxController {

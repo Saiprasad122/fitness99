@@ -1,5 +1,5 @@
-import 'package:fitness_99/global/widgets/custom_product_list.dart';
 import 'package:flutter/material.dart';
+import 'custom_product_list.dart';
 
 class ListProductsView extends StatelessWidget {
   const ListProductsView({Key? key}) : super(key: key);
@@ -14,41 +14,49 @@ class ListProductsView extends StatelessWidget {
           title: 'Protien Powder',
           subtitle: 'Lets science protien power',
           imgName: 'protien_powder.jpg',
+          onTap: () {},
         ),
         CustomProductList(
           title: 'Protien Powder',
           subtitle: 'Lets science protien power',
           imgName: 'protien_powder.jpg',
+          onTap: () {},
         ),
         CustomProductList(
           title: 'Protien Powder',
           subtitle: 'Lets science protien power',
           imgName: 'protien_powder.jpg',
+          onTap: () {},
         ),
         CustomProductList(
           title: 'Protien Powder',
           subtitle: 'Lets science protien power',
           imgName: 'protien_powder.jpg',
+          onTap: () {},
         ),
         CustomProductList(
           title: 'Protien Powder',
           subtitle: 'Lets science protien power',
           imgName: 'protien_powder.jpg',
+          onTap: () {},
         ),
         CustomProductList(
           title: 'Protien Powder',
           subtitle: 'Lets science protien power',
           imgName: 'protien_powder.jpg',
+          onTap: () {},
         ),
         CustomProductList(
           title: 'Protien Powder',
           subtitle: 'Lets science protien power',
           imgName: 'protien_powder.jpg',
+          onTap: () {},
         ),
         CustomProductList(
           title: 'Protien Powder',
           subtitle: 'Lets science protien power',
           imgName: 'protien_powder.jpg',
+          onTap: () {},
         ),
       ],
     );

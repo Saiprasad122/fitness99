@@ -62,7 +62,6 @@ class UserModelService extends GetxController {
     var box = Hive.box<DataModel>('user_data');
     dataModel = box.get('data');
 
-    print('The user data is ${dataModel!.userName}');
     return dataModel?.userName ?? 'N/A';
   }
 

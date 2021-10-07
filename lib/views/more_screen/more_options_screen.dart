@@ -2,7 +2,7 @@ import 'package:fitness_99/controllers/more_screen_controller/more_screen_contro
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/views/profile_screen/components/redirect_list.component.dart';
+import 'package:fitness_99/views/profile_screen/widget/redirect_list.component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,6 +46,7 @@ class MoreOptionsScreen extends StatelessWidget {
               dividerUnderTitle: true,
               rightArrow: false,
               height: 45,
+              onTap: () => Get.toNamed(Routes.OrdersScreen),
             ),
             RedirectListComponent(
               imageUrl: 'assets/svgs/more_options/tag.svg',
@@ -53,6 +54,7 @@ class MoreOptionsScreen extends StatelessWidget {
               dividerUnderTitle: true,
               rightArrow: false,
               height: 45,
+              onTap: () => Get.toNamed(Routes.SubscriptionScreen),
             ),
             RedirectListComponent(
               imageUrl: 'assets/svgs/more_options/logout.svg',
@@ -61,7 +63,18 @@ class MoreOptionsScreen extends StatelessWidget {
               rightArrow: false,
               height: 45,
               onTap: () async {
-                controller.logout();
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: Container(
+                          child: Column(
+                            children: [],
+                          ),
+                        ),
+                      );
+                    });
+                // controller.logout();
               },
             ),
           ],

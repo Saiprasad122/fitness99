@@ -1,4 +1,4 @@
-import 'package:fitness_99/views/views.export.dart';
+import 'package:fitness_99/global/router/views.export.dart';
 
 class AppPages {
   static const INITIAL = Routes.SplashScreen;
@@ -33,6 +33,9 @@ class AppPages {
     GetPage(name: Routes.InvitationScreen, page: () => InvitationScreen()),
     GetPage(name: Routes.MoreOptionsScreen, page: () => MoreOptionsScreen()),
     GetPage(name: Routes.ProductScreen, page: () => ProductScreen()),
+    GetPage(name: Routes.DetailedProductScreen, page: () => DetailedProduct()),
+    GetPage(name: Routes.OrdersScreen, page: () => OrdersScreen()),
+    GetPage(name: Routes.SubscriptionScreen, page: () => SubscriptionScreen())
   ];
 }
 
@@ -61,6 +64,9 @@ abstract class Routes {
   static const InvitationScreen = _Paths.invitationScree;
   static const MoreOptionsScreen = _Paths.moreOptionsScreen;
   static const ProductScreen = _Paths.productScreeen;
+  static const DetailedProductScreen = _Paths.detailedProductScreen;
+  static const OrdersScreen = _Paths.ordersScreen;
+  static const SubscriptionScreen = _Paths.subscriptionScreen;
 }
 
 abstract class _Paths {
@@ -88,6 +94,9 @@ abstract class _Paths {
   static const invitationScree = '/invitationScreen';
   static const moreOptionsScreen = '/moreOptionsScreen';
   static const productScreeen = '/productScreen';
+  static const detailedProductScreen = '/detailedProductScreen';
+  static const ordersScreen = '/ordersScreen';
+  static const subscriptionScreen = '/subscriptionScreen';
 }
 
 // Route<T> getRoute<T>(Widget page) {

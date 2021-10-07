@@ -1,5 +1,5 @@
-import 'package:fitness_99/global/widgets/custom_product_grid.dart';
 import 'package:flutter/material.dart';
+import 'custom_product_grid.dart';
 
 class GridProductsView extends StatelessWidget {
   const GridProductsView({Key? key}) : super(key: key);

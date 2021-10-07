@@ -1,7 +1,7 @@
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
-import 'package:fitness_99/views/profile_screen/components/availability_component.dart';
+import 'package:fitness_99/views/profile_screen/widget/availability_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart' as Dio;
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/data_model.dart';
@@ -17,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class EditProfileController extends GetxController {
   final apiService = Get.find<ApiService>();
@@ -81,61 +80,20 @@ class EditProfileController extends GetxController {
     }
   }
 
-  Future pickImage() async {
-    try {
-      var picker = ImagePicker();
-      final file = await picker.pickImage(
-        source: ImageSource.gallery,
+  getImage(ImageSource source) async {
+    final picker = ImagePicker();
+    final file = await picker.pickImage(source: source);
+    if (file != null) {
+      // final img = File(file.path);
+      String fileName = file.path.split('/').last;
+      final cropImage = await ImageCropper.cropImage(
+        sourcePath: file.path,
+        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+        maxHeight: 300,
+        maxWidth: 300,
+        androidUiSettings: AndroidUiSettings(hideBottomControls: true),
       );
-      final img = File(file?.path ?? '');
-      String fileName = img.path.split('/').last;
-      var uploadImage = await Dio.MultipartFile.fromFile(
-        img.path,
-        filename: fileName,
-        contentType: MediaType('image', 'jpg'),
-      );
-      req = UpdateProfilePictureRequest(
-          userId: userModel.getid(), profilePicture: uploadImage);
-
-      var formData = Dio.FormData.fromMap(req.toJson());
-
-      try {
-        apiCalling.value = true;
-        final dio = Dio.Dio()
-          ..interceptors.add(PrettyDioLogger(requestBody: true));
-        final result = await dio.post(
-          'http://fitness.rithlaundry.com/api/user/profile_picture',
-          data: formData,
-        );
-        final response = UpdateProfilePictureResponse.fromJson(result.data);
-        if (response.message.toLowerCase() == 'success') {
-          DataModel dataModel = DataModel(
-            id: userModel.getid(),
-            userName: userModel.getUserName(),
-            email: userModel.getEmail(),
-            mobileNumber: userModel.getMobileNumber(),
-            numbesrOfGroups: "0",
-            profilePicture: response.result?.profilePicture ??
-                userModel.getProfilePicture(),
-          );
-          await Hive.box<DataModel>('user_data').put('data', dataModel);
-          image.value = userModel.getProfilePicture();
-          apiCalling.value = false;
-          customSnackBar(
-            'Success!',
-            'Your profile picture is successfully updated',
-            'success',
-          );
-        } else {
-          customSnackBar(
-            'Error!',
-            'Some error while updating profile picture please try again',
-            'fail',
-          );
-        }
-      } catch (e) {}
-    } catch (e) {
-      print("The exception is $e");
+      await uploadImageApi(cropImage!.path, fileName);
     }
   }
 
@@ -155,10 +113,58 @@ class EditProfileController extends GetxController {
       Get.back();
       customSnackBar(
         'Success!',
-        'Your profile is created successfully',
+        'Your profile is successfully updated',
         'success',
       );
     }
+  }
+
+  Future<void> uploadImageApi(String filePath, String filename) async {
+    var uploadImage = await Dio.MultipartFile.fromFile(
+      filePath,
+      filename: filename,
+      contentType: MediaType('image', 'jpg'),
+    );
+    req = UpdateProfilePictureRequest(
+        userId: userModel.getid(), profilePicture: uploadImage);
+
+    var formData = Dio.FormData.fromMap(req.toJson());
+
+    try {
+      apiCalling.value = true;
+      final dio = Dio.Dio()
+        ..interceptors.add(PrettyDioLogger(requestBody: true));
+      final result = await dio.post(
+        'http://fitness.rithlaundry.com/api/user/profile_picture',
+        data: formData,
+      );
+      final response = UpdateProfilePictureResponse.fromJson(result.data);
+      if (response.message.toLowerCase() == 'success') {
+        DataModel dataModel = DataModel(
+          id: userModel.getid(),
+          userName: userModel.getUserName(),
+          email: userModel.getEmail(),
+          mobileNumber: userModel.getMobileNumber(),
+          numbesrOfGroups: "0",
+          profilePicture:
+              response.result?.profilePicture ?? userModel.getProfilePicture(),
+        );
+        await Hive.box<DataModel>('user_data').put('data', dataModel);
+        image.value = userModel.getProfilePicture();
+        apiCalling.value = false;
+        customSnackBar(
+          'Success!',
+          'Your profile picture is successfully updated',
+          'success',
+        );
+      } else {
+        customSnackBar(
+          'Error!',
+          'Some error while updating profile picture please try again',
+          'fail',
+        );
+      }
+    } catch (e) {}
   }
 
   Future<void> updateProfileApi({
@@ -190,4 +196,70 @@ class EditProfileController extends GetxController {
       apiCalling.value = false;
     }
   }
+  // Future pickImageFromGallery() async {
+  //   try {
+  //     var picker = ImagePicker();
+  //     final file = await picker.pickImage(
+  //       source: ImageSource.gallery,
+  //     );
+
+  //     final img = File(file?.path ?? '');
+  //     print('crop1');
+  //     final File croppedImg = _cropImage(img);
+  //     print('crop2');
+
+  //     String fileName = img.path.split('/').last;
+  //     await uploadImageApi(croppedImg.path, fileName);
+  //     print('crop3');
+
+  //     // var uploadImage = await Dio.MultipartFile.fromFile(
+  //     //   img.path,
+  //     //   filename: fileName,
+  //     //   contentType: MediaType('image', 'jpg'),
+  //     // );
+  //     // req = UpdateProfilePictureRequest(
+  //     //     userId: userModel.getid(), profilePicture: uploadImage);
+
+  //     // var formData = Dio.FormData.fromMap(req.toJson());
+
+  //     // try {
+  //     //   apiCalling.value = true;
+  //     //   final dio = Dio.Dio()
+  //     //     ..interceptors.add(PrettyDioLogger(requestBody: true));
+  //     //   final result = await dio.post(
+  //     //     'http://fitness.rithlaundry.com/api/user/profile_picture',
+  //     //     data: formData,
+  //     //   );
+  //     //   final response = UpdateProfilePictureResponse.fromJson(result.data);
+  //     //   if (response.message.toLowerCase() == 'success') {
+  //     //     DataModel dataModel = DataModel(
+  //     //       id: userModel.getid(),
+  //     //       userName: userModel.getUserName(),
+  //     //       email: userModel.getEmail(),
+  //     //       mobileNumber: userModel.getMobileNumber(),
+  //     //       numbesrOfGroups: "0",
+  //     //       profilePicture: response.result?.profilePicture ??
+  //     //           userModel.getProfilePicture(),
+  //     //     );
+  //     //     await Hive.box<DataModel>('user_data').put('data', dataModel);
+  //     //     image.value = userModel.getProfilePicture();
+  //     //     apiCalling.value = false;
+  //     //     customSnackBar(
+  //     //       'Success!',
+  //     //       'Your profile picture is successfully updated',
+  //     //       'success',
+  //     //     );
+  //     //   } else {
+  //     //     customSnackBar(
+  //     //       'Error!',
+  //     //       'Some error while updating profile picture please try again',
+  //     //       'fail',
+  //     //     );
+  //     //   }
+  //     // } catch (e) {}
+  //   } catch (e) {
+  //     print("The exception is $e");
+  //   }
+  // }
+
 }

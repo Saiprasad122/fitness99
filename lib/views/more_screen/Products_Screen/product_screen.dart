@@ -1,8 +1,8 @@
 import 'package:fitness_99/controllers/more_screen_controller/product_screen_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_search_field.dart';
-import 'package:fitness_99/views/more_screen/Products_screen/grid_product_view.dart';
-import 'package:fitness_99/views/more_screen/Products_screen/list_product_view.dart';
+import 'package:fitness_99/views/more_screen/Products_Screen/widget/grid_product_view.dart';
+import 'package:fitness_99/views/more_screen/Products_Screen/widget/list_product_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
