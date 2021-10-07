@@ -13,7 +13,8 @@ class AppPages {
         name: Routes.ForgotPasswordScreeen,
         page: () => ForgotPasswordScreeen()),
     GetPage(name: Routes.DashboardScreen, page: () => DashboardView()),
-    GetPage(name: Routes.ChatScreen, page: () => ChatScreenView()),
+    GetPage(name: Routes.ChatListScreen, page: () => ChatListScreen()),
+    GetPage(name: Routes.ChatScreen, page: () => ChatScreen()),
     GetPage(name: Routes.SearchScreen, page: () => SearchScreenView()),
     GetPage(name: Routes.DisplayGroupScreen, page: () => DisplayGroupScreen()),
     GetPage(name: Routes.CreateGroupScreen, page: () => CreateGroupScreen()),
@@ -46,6 +47,7 @@ abstract class Routes {
   static const LoginScreen = _Paths.loginScreen;
   static const ForgotPasswordScreeen = _Paths.forgotPasswordScreen;
   static const DashboardScreen = _Paths.dashboardScreen;
+  static const ChatListScreen = _Paths.chatListScreen;
   static const ChatScreen = _Paths.chatScreen;
   static const SearchScreen = _Paths.searchSreen;
   static const DisplayGroupScreen = _Paths.displayGroupScreen;
@@ -76,6 +78,7 @@ abstract class _Paths {
   static const loginScreen = '/loginScreen';
   static const forgotPasswordScreen = '/forgotPasswordScreen';
   static const dashboardScreen = '/dashboardScreen';
+  static const chatListScreen = '/chatListScreen';
   static const chatScreen = '/chatScreen';
   static const searchSreen = '/searchScreen';
   static const displayGroupScreen = '/displayGroupScreen';

@@ -1,55 +1,68 @@
-import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
-import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/global/widgets/custom_search_field.dart';
-import 'package:fitness_99/global/widgets/custom_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ChatScreenView extends StatelessWidget {
-  final controller = Get.put(ChatScreenController());
+class ChatScreen extends StatelessWidget {
+  const ChatScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Chats',
-                  style: TextStyles.sgproBold.f34,
+    return DefaultTabController(
+      length: 5,
+      initialIndex: 0,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            indicatorColor: AppColors.secondaryColor,
+            tabs: [
+              Tab(
+                icon: Icon(
+                  Icons.car_rental,
+                  color: Colors.black,
                 ),
-                const SizedBox(height: 15),
-                CustomSearchFeild(),
-                Obx(
-                  () => controller.isBusy.value
-                      ? CustomShimmer()
-                      : Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/gifs/group-chat.gif',
-                                height: AppSizedBoxConfigs.screenHeight * 0.5,
-                              ),
-                              Text(
-                                'Your chat list is empty',
-                                style: TextStyles.sgproMedium.f20,
-                              ),
-                            ],
-                          ),
-                        ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.car_rental,
+                  color: Colors.black,
                 ),
-              ],
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.car_rental,
+                  color: Colors.black,
+                ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.car_rental,
+                  color: Colors.black,
+                ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.more,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          title: Text(
+            'Demo Group Name',
+            style: TextStyles.sgproBold.f26.black,
+          ),
+          leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.black,
             ),
           ),
+        ),
+        body: Center(
+          child: Text('Chat Screen'),
         ),
       ),
     );

@@ -63,18 +63,18 @@ class MoreOptionsScreen extends StatelessWidget {
               rightArrow: false,
               height: 45,
               onTap: () async {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        content: Container(
-                          child: Column(
-                            children: [],
-                          ),
-                        ),
-                      );
-                    });
-                // controller.logout();
+                // showDialog(
+                //     context: context,
+                //     builder: (context) {
+                //       return AlertDialog(
+                //         content: Container(
+                //           child: Column(
+                //             children: [],
+                //           ),
+                //         ),
+                //       );
+                //     });
+                controller.logout();
               },
             ),
           ],
