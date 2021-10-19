@@ -32,22 +32,15 @@ class ProfileView extends StatelessWidget {
                     backgroundColor: Colors.white,
                     child: SizedBox.expand(
                       child: ClipOval(
-                        child: CachedNetworkImage(
-                          imageUrl: userModel.getProfilePicture(),
-                          placeholder: (context, s) =>
-                              CircularProgressIndicator(),
-                          filterQuality: FilterQuality.high,
-                          fit: BoxFit.fitWidth,
-                        ),
-                        // controller.image.value == ''
-                        //     ? Image.network(
-                        //         'http://fitness.rithlaundry.com/uploads/images/avatar.png',
-                        //       )
-                        //     : Image.file(
-                        //         controller.img.value,
-                        //         filterQuality: FilterQuality.high,
-                        //         fit: BoxFit.fill,
-                        //       ),
+                        child: userModel.getProfilePicture().contains('N/A')
+                            ? Image.asset('assets/images/placeholders/user.png')
+                            : CachedNetworkImage(
+                                imageUrl: userModel.getProfilePicture(),
+                                placeholder: (context, s) =>
+                                    CircularProgressIndicator(),
+                                filterQuality: FilterQuality.high,
+                                fit: BoxFit.fitWidth,
+                              ),
                       ),
                     ),
                   ),

@@ -1,5 +1,5 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/views/chat_screen/chat_screen.dart';
+import 'package:fitness_99/views/chat_screen/chat_list_screen.dart';
 import 'package:fitness_99/views/more_screen/more_options_screen.dart';
 import 'package:fitness_99/views/profile_screen/profile_view.dart';
 import 'package:fitness_99/views/search_screen/search_screen.dart';
@@ -36,7 +36,7 @@ class _DashboardViewState extends State<DashboardView>
       body: TabBarView(
         physics: NeverScrollableScrollPhysics(),
         children: [
-          ChatScreenView(),
+          ChatListScreen(),
           SearchScreenView(),
           DisplayGroupScreen(),
           ProfileView(),
@@ -62,14 +62,14 @@ class _DashboardViewState extends State<DashboardView>
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/svgs/chat_screen/user-group.svg',
+              'assets/svgs/chat_screen/group_icon.svg',
               width: 23,
               height: 23,
               color: Colors.black,
             ),
             label: 'Groups',
             activeIcon: SvgPicture.asset(
-              'assets/svgs/chat_screen/user-group.svg',
+              'assets/svgs/chat_screen/group_icon.svg',
               width: 23,
               height: 23,
               color: AppColors.secondaryColor,

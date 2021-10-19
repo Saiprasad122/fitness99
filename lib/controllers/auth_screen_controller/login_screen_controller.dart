@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/needed_utils.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
@@ -7,7 +8,6 @@ import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
@@ -86,49 +86,51 @@ class LoginController extends GetxController {
   }
 
   Future<void> loginApi({email, password}) async {
-    // var url = 'http://fitness.rithlaundry.com/api/user/login';
-    LoginRequest body = LoginRequest(email: email, password: password);
-    final res = await apiService.getLoginResponse(body);
+    try {
+      LoginRequest body = LoginRequest(email: email, password: password);
+      final res = await apiService.getLoginResponse(body);
 
-    if (res.message.toLowerCase() == 'success') {
+      if (res.status.toLowerCase() == 'success') {
+        apiCalling.value = false;
+        _prefs = Get.find<NeededVariables>().sharedPreferences;
+        _prefs!.setString('email', res.user.email);
+
+        int id = res.user.id;
+        String name = res.user.userName;
+        String email = res.user.email;
+        String mobileNumber = '7666099968';
+        String profilePicture = res.user.profilePicture ?? 'N/A';
+        //     .contains('http://fitness.rithlaundry.com/uploads')
+        // ? res.result!.profilePicture
+        // : 'http://fitness.rithlaundry.com/uploads/${res.result?.profilePicture ?? 'images/avatar.png'}';
+        Get.find<UserModelService>().loggedIn(
+          id: id,
+          name: name,
+          mobileNumber: mobileNumber,
+          email: email,
+          numberOfGroups: '0',
+          profilePicture: profilePicture,
+        );
+
+        Get.offAllNamed(Routes.DashboardScreen);
+        final userModel = Get.find<UserModelService>();
+        print('The profile pic is ${userModel.getProfilePicture()}');
+        customSnackBar(
+          'Logged In!',
+          'Logged In Successfully',
+          'success',
+        );
+      } else {
+        apiCalling.value = false;
+        customSnackBar(
+          'Invalid Credentials!',
+          'The entered values are invalid',
+          'fail',
+        );
+      }
       apiCalling.value = false;
-      _prefs = Get.find<NeededVariables>().sharedPreferences;
-      _prefs!.setString('email', res.result?.email ?? "N/A");
-
-      int id = res.result?.id ?? 0;
-      String name = res.result?.userName ?? "N/A";
-      String email = res.result?.email ?? "N/A";
-      String mobileNumber = res.result?.phoneNumber ?? 'N/A';
-      String profilePicture = res.result?.profilePicture ??
-          'http://fitness.rithlaundry.com/uploadsimages/avatar.png';
-      //     .contains('http://fitness.rithlaundry.com/uploads')
-      // ? res.result!.profilePicture
-      // : 'http://fitness.rithlaundry.com/uploads/${res.result?.profilePicture ?? 'images/avatar.png'}';
-      Get.find<UserModelService>().loggedIn(
-        id: id,
-        name: name,
-        mobileNumber: mobileNumber,
-        email: email,
-        numberOfGroups: '0',
-        profilePicture: profilePicture,
-      );
-
-      Get.offAllNamed(Routes.DashboardScreen);
-      final userModel = Get.find<UserModelService>();
-      print('The profile pic is ${userModel.getProfilePicture()}');
-      // customSnackBar(
-      //   'Account Created!',
-      //   'Account has been successfully created',
-      //   'success',
-      // );
-    } else {
-      apiCalling.value = false;
-      customSnackBar(
-        'Invalid Credentials!',
-        'The entered values are invalid',
-        'fail',
-      );
+    } catch (e) {
+      print('error');
     }
-    apiCalling.value = false;
   }
 }

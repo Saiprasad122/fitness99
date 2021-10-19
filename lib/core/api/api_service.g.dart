@@ -8,7 +8,7 @@ part of 'api_service.dart';
 
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://fitness.rithlaundry.com/api/user/';
+    baseUrl ??= 'https://dev.99fitnessfriends.com/api';
   }
 
   final Dio _dio;
@@ -27,7 +27,7 @@ class _ApiService implements ApiService {
                 .compose(_dio.options, '/login',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = LoginResponse.fromJson(_result.data!);
+    final value = LoginResponse.fromMap(_result.data!);
     return value;
   }
 
@@ -61,23 +61,6 @@ class _ApiService implements ApiService {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UpdateProfileResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<UpdateProfilePictureResponse> geUpdateProfilePic(
-      updateProfilePictureRequest) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(updateProfilePictureRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UpdateProfilePictureResponse>(
-            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/profile_pic_update',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UpdateProfilePictureResponse.fromJson(_result.data!);
     return value;
   }
 
