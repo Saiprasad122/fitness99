@@ -15,6 +15,10 @@ class AppPages {
     GetPage(name: Routes.DashboardScreen, page: () => DashboardView()),
     GetPage(name: Routes.ChatListScreen, page: () => ChatListScreen()),
     GetPage(name: Routes.ChatScreen, page: () => ChatScreen()),
+    GetPage(name: Routes.MemberList, page: () => MemberList()),
+    GetPage(name: Routes.GroupVideoList, page: () => GroupVideosList()),
+    GetPage(name: Routes.GroupImageList, page: () => GroupImagesList()),
+    GetPage(name: Routes.GroupDocList, page: () => GroupDocsList()),
     GetPage(name: Routes.SearchScreen, page: () => SearchScreenView()),
     GetPage(name: Routes.DisplayGroupScreen, page: () => DisplayGroupScreen()),
     GetPage(name: Routes.CreateGroupScreen, page: () => CreateGroupScreen()),
@@ -49,6 +53,10 @@ abstract class Routes {
   static const DashboardScreen = _Paths.dashboardScreen;
   static const ChatListScreen = _Paths.chatListScreen;
   static const ChatScreen = _Paths.chatScreen;
+  static const MemberList = _Paths.memberList;
+  static const GroupVideoList = _Paths.groupVideoList;
+  static const GroupImageList = _Paths.groupImageList;
+  static const GroupDocList = _Paths.groupDocList;
   static const SearchScreen = _Paths.searchSreen;
   static const DisplayGroupScreen = _Paths.displayGroupScreen;
   static const CreateGroupScreen = _Paths.createGroupScreen;
@@ -80,6 +88,12 @@ abstract class _Paths {
   static const dashboardScreen = '/dashboardScreen';
   static const chatListScreen = '/chatListScreen';
   static const chatScreen = '/chatScreen';
+  static const memberList = '/memberList';
+  static const groupVideoList = '/groupVideoList';
+  static const groupImageList = '/groupImageList';
+
+  static const groupDocList = '/groupDocList';
+
   static const searchSreen = '/searchScreen';
   static const displayGroupScreen = '/displayGroupScreen';
   static const createGroupScreen = '/createGroupScreen';

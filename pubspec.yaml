@@ -52,8 +52,9 @@ dependencies:
   nil: ^1.1.1
   connectivity: ^3.0.6
   cached_network_image: ^3.1.0
-  video_player: ^2.2.5
   image_cropper: ^1.4.1
+  firebase_storage: ^10.0.5
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:

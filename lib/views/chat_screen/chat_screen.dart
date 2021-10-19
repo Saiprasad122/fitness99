@@ -1,6 +1,9 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/chat_screen_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'chat_screen_tabs/more_options_chat_screen/more_options_chat_screen.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -16,27 +19,35 @@ class ChatScreen extends StatelessWidget {
             indicatorColor: AppColors.secondaryColor,
             tabs: [
               Tab(
-                icon: Icon(
-                  Icons.car_rental,
+                icon: SvgPicture.asset(
+                  'assets/svgs/chat_screen/chat_icon.svg',
                   color: Colors.black,
+                  width: 25,
+                  height: 25,
                 ),
               ),
               Tab(
-                icon: Icon(
-                  Icons.car_rental,
+                icon: SvgPicture.asset(
+                  'assets/svgs/chat_screen/calendar_event_icon.svg',
                   color: Colors.black,
+                  width: 25,
+                  height: 25,
                 ),
               ),
               Tab(
-                icon: Icon(
-                  Icons.car_rental,
+                icon: SvgPicture.asset(
+                  'assets/svgs/chat_screen/add_friend_icon.svg',
                   color: Colors.black,
+                  width: 25,
+                  height: 25,
                 ),
               ),
               Tab(
-                icon: Icon(
-                  Icons.car_rental,
+                icon: SvgPicture.asset(
+                  'assets/svgs/chat_screen/chat_icon.svg',
                   color: Colors.black,
+                  width: 25,
+                  height: 25,
                 ),
               ),
               Tab(
@@ -61,8 +72,15 @@ class ChatScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: Center(
-          child: Text('Chat Screen'),
+        body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            ChatScreenView(),
+            Text('data'),
+            Text('data'),
+            Text('data'),
+            MoreOptions(),
+          ],
         ),
       ),
     );

@@ -29,3 +29,7 @@ export '../../views/more_screen/Products_Screen/detailed_product.dart';
 export '../../views/more_screen/Orders_Screen/order_screen.dart';
 export '../../views/more_screen/Subscription_Screen/subscription_screen.dart';
 export '../../views/chat_screen/chat_screen.dart';
+export '../../views/chat_screen/chat_screen_tabs/more_options_chat_screen/doc_list.dart';
+export '../../views/chat_screen/chat_screen_tabs/more_options_chat_screen/image_list.dart';
+export '../../views/chat_screen/chat_screen_tabs/more_options_chat_screen/video_list.dart';
+export '../../views/chat_screen/chat_screen_tabs/more_options_chat_screen/member_list.dart';

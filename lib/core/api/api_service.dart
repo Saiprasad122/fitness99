@@ -1,17 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
-import 'package:fitness_99/models/signUpResponseRequest/signUpModel.dart';
+import 'package:fitness_99/models/signUpResponseRequest/sign_up_reponse.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_request.dart';
-import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_request.dart';
-import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_response.dart';
 import 'package:fitness_99/models/updateProfileResponseRequest/updateProfileResponse.dart';
 import 'package:fitness_99/models/updateProfileResponseRequest/update_profile_request.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/http.dart';
 part 'api_service.g.dart';
 
-@RestApi(baseUrl: 'http://fitness.rithlaundry.com/api/user/')
+@RestApi(baseUrl: 'https://dev.99fitnessfriends.com/api')
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
@@ -22,9 +20,9 @@ abstract class ApiService {
   @POST('/profile_update')
   Future<UpdateProfileResponse> getUpdateProfileResponse(
       @Body() UpdateProfileRequest updateProfileRequest);
-  @POST('/profile_pic_update')
-  Future<UpdateProfilePictureResponse> geUpdateProfilePic(
-      @Body() UpdateProfilePictureRequest updateProfilePictureRequest);
+  // @POST('/profile_pic_update')
+  // Future<UpdateProfilePictureResponse> geUpdateProfilePic(
+  //     @Body() UpdateProfilePictureRequest updateProfilePictureRequest);
 
   factory ApiService.create() {
     final client =

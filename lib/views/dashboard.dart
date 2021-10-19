@@ -62,14 +62,14 @@ class _DashboardViewState extends State<DashboardView>
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/svgs/chat_screen/user-group.svg',
+              'assets/svgs/chat_screen/group_icon.svg',
               width: 23,
               height: 23,
               color: Colors.black,
             ),
             label: 'Groups',
             activeIcon: SvgPicture.asset(
-              'assets/svgs/chat_screen/user-group.svg',
+              'assets/svgs/chat_screen/group_icon.svg',
               width: 23,
               height: 23,
               color: AppColors.secondaryColor,
