@@ -27,7 +27,7 @@ class _ApiService implements ApiService {
                 .compose(_dio.options, '/login',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = LoginResponse.fromMap(_result.data!);
+    final value = LoginResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -48,19 +48,19 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<UpdateProfileResponse> getUpdateProfileResponse(
-      {required updateProfileRequest, required id}) async {
+  Future<UpdateProfilePictureResponse> getUpdateProfileReponse(
+      updateProfileRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(updateProfileRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UpdateProfileResponse>(
+        _setStreamType<UpdateProfilePictureResponse>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/updateUser/$id',
+                .compose(_dio.options, '/updateUser/{id}',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UpdateProfileResponse.fromJson(_result.data!);
+    final value = UpdateProfilePictureResponse.fromJson(_result.data!);
     return value;
   }
 

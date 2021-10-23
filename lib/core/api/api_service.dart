@@ -5,7 +5,6 @@ import 'package:fitness_99/models/signUpResponseRequest/sign_up_reponse.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_request.dart';
 import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_request.dart';
 import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_response.dart';
-import 'package:fitness_99/models/updateProfileResponseRequest/updateProfileResponse.dart';
 import 'package:fitness_99/models/updateProfileResponseRequest/update_profile_request.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/http.dart';

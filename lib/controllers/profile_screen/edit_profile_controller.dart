@@ -186,11 +186,11 @@ class EditProfileController extends GetxController {
     if (res.message.toLowerCase() == 'success') {
       DataModel dataModel = DataModel(
         id: res.result!.id,
-        userName: res.result.userName,
-        email: res.result.email,
-        mobileNumber: res.result.phoneNumber,
+        userName: res.result!.userName,
+        email: res.result!.email,
+        mobileNumber: res.result!.phoneNumber,
         numbesrOfGroups: "0",
-        profilePicture: res.result.profilePicture,
+        profilePicture: res.result!.profilePicture,
       );
       await Hive.box<DataModel>('user_data').put('data', dataModel);
       apiCalling.value = false;
