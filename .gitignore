@@ -27,8 +27,8 @@
 .pub-cache/
 .pub/
 /build/
-**/*.g.dart"
-**/*.freezed.dart"
+**/*.g.dart
+**/*.freezed.dart
 **/generated_plugin_registrant.dart
 
 # Android related
