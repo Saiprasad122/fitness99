@@ -94,10 +94,8 @@ class UserModelService extends GetxController {
     var box = Hive.box<DataModel>('user_data');
     dataModel = box.get('data');
     return dataModel!.profilePicture
-            .contains('http://fitness.rithlaundry.com/uploads')
-        ? dataModel?.profilePicture ??
-            'http://fitness.rithlaundry.com/uploadsimages/avatar.png'
-        : 'http://fitness.rithlaundry.com/uploads/${dataModel?.profilePicture ?? 'images/avatar.png'}';
-    // return dataModel?.profilePicture ?? "images/avatar.png";
+            .contains('https://dev.99fitnessfriends.com/uploads')
+        ? dataModel?.profilePicture ?? 'N/A'
+        : 'https://dev.99fitnessfriends.com/uploads/${dataModel?.profilePicture ?? 'N/A'}';
   }
 }

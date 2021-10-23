@@ -135,7 +135,7 @@ class EditProfileController extends GetxController {
       final dio = Dio.Dio()
         ..interceptors.add(PrettyDioLogger(requestBody: true));
       final result = await dio.post(
-        'http://fitness.rithlaundry.com/api/user/profile_picture',
+        'https://dev.99fitnessfriends.com/api/profile_picture',
         data: formData,
       );
       final response = UpdateProfilePictureResponse.fromJson(result.data);
@@ -181,11 +181,11 @@ class EditProfileController extends GetxController {
       profilePicture: profilePicture,
       userName: userName,
     );
-    final res = await apiService.getUpdateProfileResponse(body);
+    final res = await apiService.getUpdateProfileReponse(body);
 
     if (res.message.toLowerCase() == 'success') {
       DataModel dataModel = DataModel(
-        id: res.result.id,
+        id: res.result!.id,
         userName: res.result.userName,
         email: res.result.email,
         mobileNumber: res.result.phoneNumber,

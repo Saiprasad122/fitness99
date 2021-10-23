@@ -3,6 +3,8 @@ import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_reponse.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_request.dart';
+import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_request.dart';
+import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_response.dart';
 import 'package:fitness_99/models/updateProfileResponseRequest/updateProfileResponse.dart';
 import 'package:fitness_99/models/updateProfileResponseRequest/update_profile_request.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -17,12 +19,12 @@ abstract class ApiService {
   Future<LoginResponse> getLoginResponse(@Body() LoginRequest loginRequest);
   @POST('/register')
   Future<SignUpResponse> getSignUpResponse(@Body() SignUpRequest signUpRequest);
-  @POST('/profile_update')
-  Future<UpdateProfileResponse> getUpdateProfileResponse(
+  @POST('/updateUser/{id}')
+  Future<UpdateProfilePictureResponse> getUpdateProfileReponse(
       @Body() UpdateProfileRequest updateProfileRequest);
-  // @POST('/profile_pic_update')
-  // Future<UpdateProfilePictureResponse> geUpdateProfilePic(
-  //     @Body() UpdateProfilePictureRequest updateProfilePictureRequest);
+  @POST('/profile_picture')
+  Future<UpdateProfilePictureResponse> geUpdateProfilePic(
+      @Body() UpdateProfilePictureRequest updateProfilePictureRequest);
 
   factory ApiService.create() {
     final client =
