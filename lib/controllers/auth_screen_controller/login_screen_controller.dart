@@ -98,7 +98,8 @@ class LoginController extends GetxController {
         int id = res.user.id;
         String name = res.user.userName;
         String email = res.user.email;
-        String mobileNumber = res.user.number;
+        String? mobileNumber =
+            res.user.number ?? 'Please update your mobile number';
         String profilePicture = res.user.profilePicture ?? 'N/A';
         int groupCount = res.user.groupCount;
         //     .contains('http://fitness.rithlaundry.com/uploads')

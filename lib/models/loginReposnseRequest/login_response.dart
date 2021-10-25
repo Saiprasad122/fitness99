@@ -63,27 +63,28 @@ class User {
   final int status;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final dynamic groupCount;
-  final String number;
+  final int groupCount;
+  final String? number;
   factory User.fromMap(Map<String, dynamic> json) => User(
-      id: json["id"],
-      userName: json["user_name"],
-      idProof: json["id_proof"],
-      email: json["email"],
-      password: json["password"],
-      profilePicture: json["profile_picture"],
-      personalGoal: json["personal_goal"],
-      height: json["height"],
-      weight: json["weight"],
-      gender: json["gender"],
-      dateOfBirth: json["date_of_birth"],
-      goalId: json["goal_id"],
-      goalDescription: json["goal_description"],
-      status: json["status"],
-      createdAt: DateTime.parse(json["created_at"]),
-      updatedAt: DateTime.parse(json["updated_at"]),
-      groupCount: json["group_count"],
-      number: json["number"]);
+        id: json["id"],
+        userName: json["user_name"],
+        idProof: json["id_proof"],
+        email: json["email"],
+        password: json["password"],
+        profilePicture: json["profile_picture"],
+        personalGoal: json["personal_goal"],
+        height: json["height"],
+        weight: json["weight"],
+        gender: json["gender"],
+        dateOfBirth: json["date_of_birth"],
+        goalId: json["goal_id"],
+        goalDescription: json["goal_description"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        groupCount: json["group_count"] ?? 0,
+        number: json["number"],
+      );
 
   Map<String, dynamic> toMap() => {
         "id": id,
