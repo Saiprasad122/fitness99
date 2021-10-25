@@ -6,7 +6,7 @@ import 'package:hive/hive.dart';
 
 class MoreOptionsScreenController extends GetxController {
   void logout() async {
-    await Hive.box<DataModel>('user_data').clear();
+    await Hive.box<UserLocalDataModel>('user_data').clear();
     Get.offNamedUntil(Routes.OnBoardScreen, (route) => false);
   }
 }

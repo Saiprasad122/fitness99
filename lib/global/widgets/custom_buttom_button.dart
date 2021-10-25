@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 class CustomBottomButton extends StatelessWidget {
   final String text;
   final void Function() onTap;
-  CustomBottomButton({
-    required this.text,
-    required this.onTap,
-  });
+  final bool isLoading;
+  CustomBottomButton(
+      {required this.text, required this.onTap, this.isLoading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +15,12 @@ class CustomBottomButton extends StatelessWidget {
         height: 50,
         color: AppColors.secondaryColor,
         child: Center(
-          child: Text(
-            text,
-            style: TextStyles.sgproMedium.f24.white,
-          ),
+          child: isLoading
+              ? CircularProgressIndicator()
+              : Text(
+                  text,
+                  style: TextStyles.sgproMedium.f24.white,
+                ),
         ),
       ),
       onTap: onTap,

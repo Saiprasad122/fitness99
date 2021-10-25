@@ -98,8 +98,9 @@ class LoginController extends GetxController {
         int id = res.user.id;
         String name = res.user.userName;
         String email = res.user.email;
-        String mobileNumber = '7666099968';
+        String mobileNumber = res.user.number;
         String profilePicture = res.user.profilePicture ?? 'N/A';
+        int groupCount = res.user.groupCount;
         //     .contains('http://fitness.rithlaundry.com/uploads')
         // ? res.result!.profilePicture
         // : 'http://fitness.rithlaundry.com/uploads/${res.result?.profilePicture ?? 'images/avatar.png'}';
@@ -108,13 +109,13 @@ class LoginController extends GetxController {
           name: name,
           mobileNumber: mobileNumber,
           email: email,
-          numberOfGroups: '0',
+          numberOfGroups: groupCount,
           profilePicture: profilePicture,
         );
 
         Get.offAllNamed(Routes.DashboardScreen);
         final userModel = Get.find<UserModelService>();
-        print('The profile pic is ${userModel.getProfilePicture()}');
+        print('The profile pic is ${userModel.getid()}');
         customSnackBar(
           'Logged In!',
           'Logged In Successfully',
@@ -129,7 +130,14 @@ class LoginController extends GetxController {
         );
       }
       apiCalling.value = false;
-    } catch (e) {
+    } on DioError catch (e) {
+      customSnackBar(
+        'Invalid Credentials!',
+        'The entered values are invalid',
+        'fail',
+      );
+      apiCalling.value = false;
+
       print('error');
     }
   }

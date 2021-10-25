@@ -768,11 +768,13 @@ packages:
     source: hosted
     version: "2.0.1"
   retrofit_generator:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
-      name: retrofit_generator
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: generator
+      ref: HEAD
+      resolved-ref: e3548c6d7cef03fbf7fbde41078256fc63d1ec7f
+      url: "https://github.com/aarjan/retrofit.dart"
+    source: git
     version: "2.0.1+1"
   rxdart:
     dependency: transitive

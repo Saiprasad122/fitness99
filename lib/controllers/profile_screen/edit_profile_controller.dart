@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' as Dio;
+import 'package:dio/dio.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/data_model.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
@@ -104,7 +105,6 @@ class EditProfileController extends GetxController {
     if (validateEmail() && validateName() && validateNumber()) {
       apiCalling.value = true;
       await updateProfileApi(
-        id: userModel.getid(),
         email: emailTED.value.text,
         mobileNumber: numberTED.value.text,
         profilePicture: userModel.getProfilePicture(),
@@ -140,16 +140,17 @@ class EditProfileController extends GetxController {
       );
       final response = UpdateProfilePictureResponse.fromJson(result.data);
       if (response.message.toLowerCase() == 'success') {
-        DataModel dataModel = DataModel(
+        UserLocalDataModel userLocalDataModel = UserLocalDataModel(
           id: userModel.getid(),
           userName: userModel.getUserName(),
           email: userModel.getEmail(),
           mobileNumber: userModel.getMobileNumber(),
-          numbesrOfGroups: "0",
+          numbesrOfGroups: userModel.getNoOfGroups(),
           profilePicture:
               response.result?.profilePicture ?? userModel.getProfilePicture(),
         );
-        await Hive.box<DataModel>('user_data').put('data', dataModel);
+        await Hive.box<UserLocalDataModel>('user_data')
+            .put('data', userLocalDataModel);
         image.value = userModel.getProfilePicture();
         apiCalling.value = false;
         customSnackBar(
@@ -168,31 +169,38 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> updateProfileApi({
-    required int id,
     required String email,
     required String mobileNumber,
     required String profilePicture,
     required String userName,
   }) async {
-    UpdateProfileRequest body = UpdateProfileRequest(
-      id: id,
-      email: email,
-      phoneNumber: mobileNumber,
-      profilePicture: profilePicture,
-      userName: userName,
-    );
-    final res = await apiService.getUpdateProfileReponse(body);
-
-    if (res.message.toLowerCase() == 'success') {
-      DataModel dataModel = DataModel(
-        id: res.result!.id,
-        userName: res.result!.userName,
-        email: res.result!.email,
-        mobileNumber: res.result!.phoneNumber,
-        numbesrOfGroups: "0",
-        profilePicture: res.result!.profilePicture,
+    try {
+      print(mobileNumber);
+      UpdateProfileRequest body = UpdateProfileRequest(
+        email: email,
+        phoneNumber: mobileNumber,
+        profilePicture: profilePicture,
+        userName: userName,
       );
-      await Hive.box<DataModel>('user_data').put('data', dataModel);
+      final res = await apiService.getUpdateProfileReponse(
+        updateProfileRequest: body,
+        userId: userModel.getid(),
+      );
+
+      if (res.message.toLowerCase() == 'success') {
+        UserLocalDataModel userLocalDataModel = UserLocalDataModel(
+          id: userModel.getid(),
+          userName: res.result!.userName,
+          email: res.result!.email,
+          mobileNumber: res.result!.phoneNumber ?? 'N/A',
+          numbesrOfGroups: res.result!.groupCount,
+          profilePicture: res.result!.profilePicture,
+        );
+        await Hive.box<UserLocalDataModel>('user_data')
+            .put('data', userLocalDataModel);
+        apiCalling.value = false;
+      }
+    } on DioError catch (e) {
       apiCalling.value = false;
     }
   }
@@ -232,7 +240,7 @@ class EditProfileController extends GetxController {
   //     //   );
   //     //   final response = UpdateProfilePictureResponse.fromJson(result.data);
   //     //   if (response.message.toLowerCase() == 'success') {
-  //     //     DataModel dataModel = DataModel(
+  //     //     UserLocalDataModel UserLocalDataModel = UserLocalDataModel(
   //     //       id: userModel.getid(),
   //     //       userName: userModel.getUserName(),
   //     //       email: userModel.getEmail(),
@@ -241,7 +249,7 @@ class EditProfileController extends GetxController {
   //     //       profilePicture: response.result?.profilePicture ??
   //     //           userModel.getProfilePicture(),
   //     //     );
-  //     //     await Hive.box<DataModel>('user_data').put('data', dataModel);
+  //     //     await Hive.box<UserLocalDataModel>('user_data').put('data', UserLocalDataModel);
   //     //     image.value = userModel.getProfilePicture();
   //     //     apiCalling.value = false;
   //     //     customSnackBar(

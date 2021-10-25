@@ -3,34 +3,32 @@ import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/cando_cannotdo_goal/cando_cannotdo_goal.response.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class PersonalGoalsController extends GetxController {
+class CannotDoController extends GetxController {
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
   RxBool isLoading = true.obs;
   RxBool isError = true.obs;
-  RxBool isNewGoalAdding = false.obs;
-  final TextEditingController goalTED = TextEditingController();
+  RxBool isNewCannotDoAdding = false.obs;
   RxString errorTextForTextField = ''.obs;
-  final List<GetCanDoCannotDoGoals> goals = [];
+  final TextEditingController cannotDoTED = TextEditingController();
+  final List<GetCanDoCannotDoGoals> cannotDo = [];
   @override
   void onInit() {
     super.onInit();
-    getGoals();
-    print(userModel.id);
+    getCannotDos();
   }
 
-  void getGoals() async {
+  void getCannotDos() async {
     isLoading.value = true;
     isError.value = false;
     try {
-      final res = await apiService.getGoals(userId: userModel.getid());
+      final res = await apiService.getCannotDos(userId: userModel.getid());
       if (res.data != null) {
-        goals.addAll(res.data!);
+        cannotDo.addAll(res.data!);
       }
-      // isLoading = false.obs;
     } on DioError catch (e) {
       print(e);
       isError.value = true;
@@ -40,57 +38,57 @@ class PersonalGoalsController extends GetxController {
   }
 
   void onRefresh() {
-    goals.clear();
-    getGoals();
+    cannotDo.clear();
+    getCannotDos();
   }
 
-  void addGoal() async {
-    if (validateGoal(goalTED.text.trim())) {
-      isNewGoalAdding.value = true;
+  void addCannotDo() async {
+    if (validatecannotDo(cannotDoTED.text.trim())) {
+      isNewCannotDoAdding.value = true;
       errorTextForTextField.value = '';
 
       try {
-        final res = await apiService.createGoal(
-            createGoalRequest: {'goal': goalTED.text.trim()},
+        final res = await apiService.createCannotDo(
+            createCannotDoRequest: {'cannot_do': cannotDoTED.text.trim()},
             userId: userModel.getid());
         if (res.status == 200 ||
             (res.message?.toLowerCase().contains('success') ?? false)) {
           customSnackBar(
-              'Success', 'Goal has been added successfullt', 'success');
+              'Success', 'Cannot Do has been added successfullt', 'success');
+          cannotDoTED.clear();
           onRefresh();
-          goalTED.clear();
         } else {
           customSnackBar(
-              'Failed', 'Adding goal failed due to some error', 'fail');
+              'Failed', 'Adding Cannot Do failed due to some error', 'fail');
         }
       } on DioError catch (e) {
         print(e);
       } finally {
-        isNewGoalAdding.value = false;
+        isNewCannotDoAdding.value = false;
       }
     }
   }
 
   void deleteItem(int id) async {
     try {
-      final res = await apiService.deleteGoal(goalId: id);
+      final res = await apiService.deleteCannotDo(cannotDoId: id);
       if (res.status == 200 ||
           (res.message?.toLowerCase().contains('success') ?? false)) {
         customSnackBar(
-            'Success', 'Goal has been deleted successfullt', 'success');
+            'Success', 'Cannot Do has been deleted successfullt', 'success');
         onRefresh();
       } else {
         customSnackBar(
-            'Failed', 'Deleting goal failed due to some error', 'fail');
+            'Failed', 'Deleting Cannot Do failed due to some error', 'fail');
       }
     } on DioError catch (e) {
       print(e);
     }
   }
 
-  bool validateGoal(String goal) {
-    if (goal.isEmpty) {
-      errorTextForTextField.value = 'Goal cannot be empty';
+  bool validatecannotDo(String cannotDo) {
+    if (cannotDo.isEmpty) {
+      errorTextForTextField.value = 'Cannot Do cannot be empty';
       return false;
     }
     return true;

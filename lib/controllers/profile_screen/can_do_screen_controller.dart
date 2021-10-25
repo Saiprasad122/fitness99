@@ -3,34 +3,33 @@ import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/cando_cannotdo_goal/cando_cannotdo_goal.response.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PersonalGoalsController extends GetxController {
+class CanDoController extends GetxController {
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
   RxBool isLoading = true.obs;
   RxBool isError = true.obs;
-  RxBool isNewGoalAdding = false.obs;
-  final TextEditingController goalTED = TextEditingController();
+  RxBool isNewCanDoAdding = false.obs;
+  final TextEditingController canDoTED = TextEditingController();
   RxString errorTextForTextField = ''.obs;
-  final List<GetCanDoCannotDoGoals> goals = [];
+
+  final List<GetCanDoCannotDoGoals> canDos = [];
   @override
   void onInit() {
     super.onInit();
-    getGoals();
-    print(userModel.id);
+    getcanDos();
   }
 
-  void getGoals() async {
+  void getcanDos() async {
     isLoading.value = true;
     isError.value = false;
     try {
-      final res = await apiService.getGoals(userId: userModel.getid());
+      final res = await apiService.getCanDos(userId: userModel.getid());
       if (res.data != null) {
-        goals.addAll(res.data!);
+        canDos.addAll(res.data!);
       }
-      // isLoading = false.obs;
     } on DioError catch (e) {
       print(e);
       isError.value = true;
@@ -40,57 +39,57 @@ class PersonalGoalsController extends GetxController {
   }
 
   void onRefresh() {
-    goals.clear();
-    getGoals();
+    canDos.clear();
+    getcanDos();
   }
 
-  void addGoal() async {
-    if (validateGoal(goalTED.text.trim())) {
-      isNewGoalAdding.value = true;
+  void addCanDo() async {
+    if (validatecanDo(canDoTED.text.trim())) {
+      isNewCanDoAdding.value = true;
       errorTextForTextField.value = '';
 
       try {
-        final res = await apiService.createGoal(
-            createGoalRequest: {'goal': goalTED.text.trim()},
+        final res = await apiService.createCanDo(
+            createCanDoRequest: {'can_do': canDoTED.text.trim()},
             userId: userModel.getid());
         if (res.status == 200 ||
             (res.message?.toLowerCase().contains('success') ?? false)) {
           customSnackBar(
-              'Success', 'Goal has been added successfullt', 'success');
+              'Success', 'Can Do has been added successfullt', 'success');
           onRefresh();
-          goalTED.clear();
+          canDoTED.clear();
         } else {
           customSnackBar(
-              'Failed', 'Adding goal failed due to some error', 'fail');
+              'Failed', 'Adding Can Do failed due to some error', 'fail');
         }
       } on DioError catch (e) {
         print(e);
       } finally {
-        isNewGoalAdding.value = false;
+        isNewCanDoAdding.value = false;
       }
     }
   }
 
   void deleteItem(int id) async {
     try {
-      final res = await apiService.deleteGoal(goalId: id);
+      final res = await apiService.deleteCanDo(canDoId: id);
       if (res.status == 200 ||
           (res.message?.toLowerCase().contains('success') ?? false)) {
         customSnackBar(
-            'Success', 'Goal has been deleted successfullt', 'success');
+            'Success', 'Can Do has been deleted successfullt', 'success');
         onRefresh();
       } else {
         customSnackBar(
-            'Failed', 'Deleting goal failed due to some error', 'fail');
+            'Failed', 'Deleting Can Do failed due to some error', 'fail');
       }
     } on DioError catch (e) {
       print(e);
     }
   }
 
-  bool validateGoal(String goal) {
-    if (goal.isEmpty) {
-      errorTextForTextField.value = 'Goal cannot be empty';
+  bool validatecanDo(String canDo) {
+    if (canDo.isEmpty) {
+      errorTextForTextField.value = 'Can Do cannot be empty';
       return false;
     }
     return true;
