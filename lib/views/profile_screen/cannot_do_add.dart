@@ -1,5 +1,4 @@
 import 'package:fitness_99/controllers/profile_screen/cannot_do_screen_controller.dart';
-import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
 import 'package:fitness_99/global/widgets/custom_profile_textField.dart';

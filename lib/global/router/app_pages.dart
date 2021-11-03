@@ -20,7 +20,7 @@ class AppPages {
     GetPage(name: Routes.GroupImageList, page: () => GroupImagesList()),
     GetPage(name: Routes.GroupDocList, page: () => GroupDocsList()),
     GetPage(name: Routes.SearchScreen, page: () => SearchScreenView()),
-    GetPage(name: Routes.DisplayGroupScreen, page: () => DisplayGroupScreen()),
+    GetPage(name: Routes.DisplayMyGroupScreen, page: () => DisplayMyGroup()),
     GetPage(name: Routes.CreateGroupScreen, page: () => CreateGroupScreen()),
     GetPage(name: Routes.ProfileScreen, page: () => ProfileView()),
     GetPage(name: Routes.EditProfileScreen, page: () => EditProfileScreen()),
@@ -58,7 +58,7 @@ abstract class Routes {
   static const GroupImageList = _Paths.groupImageList;
   static const GroupDocList = _Paths.groupDocList;
   static const SearchScreen = _Paths.searchSreen;
-  static const DisplayGroupScreen = _Paths.displayGroupScreen;
+  static const DisplayMyGroupScreen = _Paths.displayMyGroupScreen;
   static const CreateGroupScreen = _Paths.createGroupScreen;
   static const ProfileScreen = _Paths.profileScreen;
   static const EditProfileScreen = _Paths.editProfileScreen;
@@ -95,7 +95,7 @@ abstract class _Paths {
   static const groupDocList = '/groupDocList';
 
   static const searchSreen = '/searchScreen';
-  static const displayGroupScreen = '/displayGroupScreen';
+  static const displayMyGroupScreen = '/displayMyGroupScreen';
   static const createGroupScreen = '/createGroupScreen';
   static const profileScreen = '/profileScreen';
   static const editProfileScreen = '/editProfileScreen';
@@ -115,17 +115,3 @@ abstract class _Paths {
   static const ordersScreen = '/ordersScreen';
   static const subscriptionScreen = '/subscriptionScreen';
 }
-
-// Route<T> getRoute<T>(Widget page) {
-//   return PageRouteBuilder(
-//     pageBuilder: (context, animation, secondaryAnimation) => page,
-//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-//       final tween = Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
-//           .chain(CurveTween(curve: Curves.easeOutQuart));
-//       return SlideTransition(
-//         position: animation.drive(tween),
-//         child: child,
-//       );
-//     },
-//   );
-// }

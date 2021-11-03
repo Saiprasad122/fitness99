@@ -15,10 +15,11 @@ class ChatScreenController extends GetxController {
   final scrollController = ScrollController();
 
   void addData(String mssg) {
-    instance.collection('group1').add({
+    instance.collection('groups').add({
       'id': userModel.getid().toString(),
       'message': mssg,
       'time': DateTime.now(),
+      'imageURl': userModel.getProfilePicture()
     }).then((value) => chatTED.clear());
   }
 

@@ -9,11 +9,11 @@ import 'package:get/get.dart';
 class CanDoController extends GetxController {
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
-  RxBool isLoading = true.obs;
-  RxBool isError = true.obs;
-  RxBool isNewCanDoAdding = false.obs;
+  final isLoading = true.obs;
+  final isError = true.obs;
+  final isNewCanDoAdding = false.obs;
   final TextEditingController canDoTED = TextEditingController();
-  RxString errorTextForTextField = ''.obs;
+  final errorTextForTextField = ''.obs;
 
   final List<GetCanDoCannotDoGoals> canDos = [];
   @override

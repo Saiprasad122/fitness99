@@ -9,11 +9,11 @@ import 'package:get/get.dart';
 class PersonalGoalsController extends GetxController {
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
-  RxBool isLoading = true.obs;
-  RxBool isError = true.obs;
-  RxBool isNewGoalAdding = false.obs;
+  final isLoading = true.obs;
+  final isError = true.obs;
+  final isNewGoalAdding = false.obs;
   final TextEditingController goalTED = TextEditingController();
-  RxString errorTextForTextField = ''.obs;
+  final errorTextForTextField = ''.obs;
   final List<GetCanDoCannotDoGoals> goals = [];
   @override
   void onInit() {

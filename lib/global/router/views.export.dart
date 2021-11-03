@@ -18,7 +18,7 @@ export '../../views/profile_screen/cannot_do_add.dart';
 export '../../views/profile_screen/categories_screen.dart';
 export '../../views/profile_screen/preference_time_screen.dart';
 export '../../views/profile_screen/invitation_screen.dart';
-export '../../views/display_group_screen/display_group_screen.dart';
+export '../../views/display_group_screen/display_my_group_screen.dart';
 export '../../views/display_group_screen/create_group_screen.dart';
 export '../../views/profile_screen/preference_time_add.dart';
 export '../../views/auth_screen/forgot_password_screen.dart';

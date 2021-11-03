@@ -1,24 +1,30 @@
-import 'package:dio/dio.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
-import 'package:fitness_99/models/display_group_reponse.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:dio/dio.dart';
 
-class SearchScreenController extends GetxController {
-  final isLoading = true.obs;
+class GroupScreenController extends GetxController {
+  final groupNameTED = TextEditingController();
+  final goalTED = TextEditingController();
+  final locationTED = TextEditingController();
+  final maxMembersTED = TextEditingController();
+  final commentsTED = TextEditingController();
+  final groupList = [].obs;
+  final isLoading = false.obs;
   final userModel = Get.find<UserModelService>();
   final apiService = Get.find<ApiService>();
-  List<DisplayGroups> groupList = [];
 
   @override
   void onInit() {
-    getAllGroupData();
+    getGroupData();
     super.onInit();
   }
 
-  void getAllGroupData() async {
+  void getGroupData() async {
+    isLoading.value = true;
     try {
-      final res = await apiService.getAllGroups();
+      final res = await apiService.getMyGroups(userId: userModel.getid());
       if (res.data != null) {
         groupList.addAll(res.data!);
         isLoading.value = false;
@@ -34,4 +40,6 @@ class SearchScreenController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  void createGroup() async {}
 }

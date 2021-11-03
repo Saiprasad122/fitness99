@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
 import 'package:fitness_99/controllers/profile_screen/profile_view_controller.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
@@ -41,15 +40,9 @@ class ProfileView extends StatelessWidget {
                                     CircularProgressIndicator(),
                                 filterQuality: FilterQuality.high,
                                 fit: BoxFit.fitWidth,
-                                errorWidget: (context, value, error) {
-                                  // print(error.toString().contains('404'));
-                                  // if (error.toString().contains('404')) {
-                                  //   return Image.asset(
-                                  //       'assets/images/placeholders/user.png');
-                                  // }
-                                  return Image.asset(
-                                      'assets/images/placeholders/user.png');
-                                },
+                                errorWidget: (context, value, error) =>
+                                    Image.asset(
+                                        'assets/images/placeholders/user.png'),
                               ),
                       ),
                     ),

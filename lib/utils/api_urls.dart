@@ -14,4 +14,8 @@ class ApiUrls {
   static const CREATE_GOAL = "/createGoal/{id}";
   static const GET_GOAL = "/goal/{id}";
   static const DELETE_GOAL = "/deleteGoal/{id}";
+  static const DISPLAY_MY_GROUP = '/get_my_group/{id}';
+  static const DISPLAY_GROUP = '/get_group/{id}';
+  static const DISPLAY_ALL_GROUPS = '/get_all_group';
+  static const CREATE_NEW_GROUP = '/createGroup/{id}';
 }

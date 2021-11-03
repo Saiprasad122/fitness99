@@ -35,7 +35,7 @@ class CanDoDisplay extends StatelessWidget {
             : Column(
                 children: [
                   Expanded(
-                    child: controller.canDos.length > 0
+                    child: controller.canDos.isNotEmpty
                         ? ListView.builder(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 10),

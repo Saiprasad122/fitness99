@@ -17,6 +17,7 @@ class ChatScreen extends StatelessWidget {
         appBar: AppBar(
           bottom: TabBar(
             indicatorColor: AppColors.secondaryColor,
+            indicatorWeight: 3,
             tabs: [
               Tab(
                 icon: SvgPicture.asset(

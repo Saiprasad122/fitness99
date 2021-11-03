@@ -1,3 +1,4 @@
+import 'package:fitness_99/controllers/group_screen_controller/group_screen_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
 import 'package:fitness_99/global/widgets/custom_profile_textField.dart';
@@ -5,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateGroupScreen extends StatelessWidget {
-  const CreateGroupScreen({Key? key}) : super(key: key);
+  final controller = Get.find<GroupScreenController>();
+  CreateGroupScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,28 +48,32 @@ class CreateGroupScreen extends StatelessWidget {
                   CustomProfileTextField(
                     displayText: 'Group Name',
                     hintText: 'Stronger than yesterday',
+                    textEditingController: controller.groupNameTED,
                   ),
                   const SizedBox(height: 20),
                   CustomProfileTextField(
                     displayText: 'Gaol',
                     hintText: 'Sore Today, Strong Tomorrow',
+                    textEditingController: controller.goalTED,
                   ),
                   const SizedBox(height: 20),
                   CustomProfileTextField(
-                    displayText: 'Zip Code',
-                    hintText: '850001',
-                    textInputType: TextInputType.number,
+                    displayText: 'Location',
+                    hintText: 'Mumbai',
+                    textEditingController: controller.locationTED,
                   ),
                   const SizedBox(height: 20),
                   CustomProfileTextField(
                     displayText: 'Maximum members',
                     hintText: '25',
                     textInputType: TextInputType.number,
+                    textEditingController: controller.maxMembersTED,
                   ),
                   const SizedBox(height: 20),
                   CustomProfileTextField(
                     displayText: 'Comments',
                     hintText: 'Enter your comments',
+                    textEditingController: controller.commentsTED,
                   ),
                 ],
               ),

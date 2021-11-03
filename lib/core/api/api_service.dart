@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_99/models/baseResponse/base.response.dart';
 import 'package:fitness_99/models/cando_cannotdo_goal/cando_cannotdo_goal.response.dart';
+import 'package:fitness_99/models/display_group_reponse.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_reponse.dart';
@@ -29,6 +30,14 @@ abstract class ApiService {
   @GET(ApiUrls.GET_GOAL)
   Future<BaseResponse<List<GetCanDoCannotDoGoals>>> getGoals(
       {@Path('id') required int userId});
+  @GET(ApiUrls.DISPLAY_MY_GROUP)
+  Future<BaseResponse<List<DisplayGroups>>> getMyGroups(
+      {@Path('id') required int userId});
+  @GET(ApiUrls.DISPLAY_GROUP)
+  Future<BaseResponse<List<DisplayGroups>>> getGroups(
+      {@Path('id') required int userId});
+  @GET(ApiUrls.DISPLAY_ALL_GROUPS)
+  Future<BaseResponse<List<DisplayGroups>>> getAllGroups();
 
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //

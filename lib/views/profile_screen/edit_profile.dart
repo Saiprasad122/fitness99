@@ -58,6 +58,10 @@ class EditProfileScreen extends StatelessWidget {
                                                   CircularProgressIndicator(),
                                               filterQuality: FilterQuality.high,
                                               fit: BoxFit.fitWidth,
+                                              errorWidget: (context, value,
+                                                      error) =>
+                                                  Image.asset(
+                                                      'assets/images/placeholders/user.png'),
                                             ),
                                           ),
                                   ),

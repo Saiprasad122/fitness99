@@ -1,3 +1,4 @@
+import 'package:fitness_99/controllers/dashboard_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_list_screen.dart';
 import 'package:fitness_99/views/more_screen/more_options_screen.dart';
@@ -5,8 +6,9 @@ import 'package:fitness_99/views/profile_screen/profile_view.dart';
 import 'package:fitness_99/views/search_screen/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-import 'display_group_screen/display_group_screen.dart';
+import 'display_group_screen/display_my_group_screen.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -17,6 +19,7 @@ class DashboardView extends StatefulWidget {
 
 class _DashboardViewState extends State<DashboardView>
     with SingleTickerProviderStateMixin {
+  final controller = Get.put(DashBoardController());
   late final TabController _tabController;
   @override
   void initState() {
@@ -38,7 +41,7 @@ class _DashboardViewState extends State<DashboardView>
         children: [
           ChatListScreen(),
           SearchScreenView(),
-          DisplayGroupScreen(),
+          DisplayMyGroup(),
           ProfileView(),
           MoreOptionsScreen()
         ],
