@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
-import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:get/get.dart';
 
 class ChatListController extends GetxController {

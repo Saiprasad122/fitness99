@@ -1,17 +1,11 @@
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 
-class GroupScreenController extends GetxController {
-  final groupNameTED = TextEditingController();
-  final goalTED = TextEditingController();
-  final locationTED = TextEditingController();
-  final maxMembersTED = TextEditingController();
-  final commentsTED = TextEditingController();
+class DisplayScreenController extends GetxController {
   final groupList = [].obs;
-  final isLoading = false.obs;
+  final isLoading = true.obs;
   final userModel = Get.find<UserModelService>();
   final apiService = Get.find<ApiService>();
 
@@ -30,16 +24,9 @@ class GroupScreenController extends GetxController {
         isLoading.value = false;
       }
     } on DioError catch (e) {
-      if (e.response!.statusCode == 404) {
-        print(e);
-      } else {
-        print(e);
-      }
       print(e);
     } finally {
       isLoading.value = false;
     }
   }
-
-  void createGroup() async {}
 }

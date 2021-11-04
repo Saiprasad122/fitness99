@@ -23,6 +23,7 @@ class LoginController extends GetxController {
   final passwordErr = ''.obs;
   final apiCalling = false.obs;
   final forgotEmailErr = ''.obs;
+  final image = ''.obs;
 
   bool validateEmail() {
     if (emailTED.value.text.isEmpty) {
@@ -132,6 +133,7 @@ class LoginController extends GetxController {
       }
       apiCalling.value = false;
     } on DioError catch (e) {
+      print(e);
       customSnackBar(
         'Invalid Credentials!',
         'The entered values are invalid',

@@ -1,4 +1,4 @@
-import 'package:fitness_99/controllers/group_screen_controller/group_screen_controller.dart';
+import 'package:fitness_99/controllers/group_screen_controller/display_screen_controller.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class DisplayMyGroup extends StatelessWidget {
-  final controller = Get.put<GroupScreenController>(GroupScreenController());
+  final controller = Get.put(DisplayScreenController());
 
   @override
   Widget build(BuildContext context) {

@@ -41,41 +41,42 @@ class EditProfileScreen extends StatelessWidget {
                       children: [
                         Center(
                           child: GestureDetector(
-                              child: CircleAvatar(
-                                radius: 50,
-                                backgroundColor: Colors.white,
-                                child: SizedBox.expand(
-                                  child: ClipOval(
-                                    child: userModel
-                                            .getProfilePicture()
-                                            .contains('N/A')
-                                        ? Image.asset(
-                                            'assets/images/placeholders/user.png')
-                                        : Obx(
-                                            () => CachedNetworkImage(
-                                              imageUrl: controller.image.value,
-                                              placeholder: (context, s) =>
-                                                  CircularProgressIndicator(),
-                                              filterQuality: FilterQuality.high,
-                                              fit: BoxFit.fitWidth,
-                                              errorWidget: (context, value,
-                                                      error) =>
-                                                  Image.asset(
-                                                      'assets/images/placeholders/user.png'),
-                                            ),
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundColor: Colors.white,
+                              child: SizedBox.expand(
+                                child: ClipOval(
+                                  child: userModel
+                                          .getProfilePicture()
+                                          .contains('N/A')
+                                      ? Image.asset(
+                                          'assets/images/placeholders/user.png')
+                                      : Obx(
+                                          () => CachedNetworkImage(
+                                            imageUrl: controller.image.value,
+                                            placeholder: (context, s) =>
+                                                CircularProgressIndicator(),
+                                            filterQuality: FilterQuality.high,
+                                            fit: BoxFit.fitWidth,
+                                            errorWidget: (context, value,
+                                                    error) =>
+                                                Image.asset(
+                                                    'assets/images/placeholders/user.png'),
                                           ),
-                                  ),
+                                        ),
                                 ),
                               ),
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return ImagePickerDialoagBox(
-                                        controller: controller);
-                                  },
-                                );
-                              }),
+                            ),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return ImagePickerDialoagBox(
+                                      controller: controller);
+                                },
+                              );
+                            },
+                          ),
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(

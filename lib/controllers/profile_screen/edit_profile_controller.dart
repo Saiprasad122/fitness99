@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart' as Dio;
-import 'package:dio/dio.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/data_model.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
@@ -200,8 +199,9 @@ class EditProfileController extends GetxController {
             .put('data', userLocalDataModel);
         apiCalling.value = false;
       }
-    } on DioError catch (e) {
+    } on Dio.DioError catch (e) {
       apiCalling.value = false;
+      print(e);
     }
   }
   // Future pickImageFromGallery() async {
