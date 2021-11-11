@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:fitness_99/models/baseResponse/base.response.dart';
 import 'package:fitness_99/models/cando_cannotdo_goal/cando_cannotdo_goal.response.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
+import 'package:fitness_99/models/join_group_reponse.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_reponse.dart';
@@ -38,6 +39,10 @@ abstract class ApiService {
       {@Path('id') required int userId});
   @GET(ApiUrls.DISPLAY_ALL_GROUPS)
   Future<BaseResponse<List<DisplayGroups>>> getAllGroups();
+  @GET(ApiUrls.JOIN_GROUP)
+  Future<BaseResponse<JoinGroupResponse>> joinGroup(
+      {@Path('id') required int userID,
+      @Path('group_id') required int group_id});
 
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //

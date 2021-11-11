@@ -54,12 +54,12 @@ class CannotDoController extends GetxController {
         if (res.status == 200 ||
             (res.message?.toLowerCase().contains('success') ?? false)) {
           customSnackBar(
-              'Success', 'Cannot Do has been added successfullt', 'success');
+              'Success', 'Cannot Do has been added successfullt', true);
           cannotDoTED.clear();
           onRefresh();
         } else {
           customSnackBar(
-              'Failed', 'Adding Cannot Do failed due to some error', 'fail');
+              'Failed', 'Adding Cannot Do failed due to some error', false);
         }
       } on DioError catch (e) {
         print(e);
@@ -75,11 +75,11 @@ class CannotDoController extends GetxController {
       if (res.status == 200 ||
           (res.message?.toLowerCase().contains('success') ?? false)) {
         customSnackBar(
-            'Success', 'Cannot Do has been deleted successfullt', 'success');
+            'Success', 'Cannot Do has been deleted successfullt', true);
         onRefresh();
       } else {
         customSnackBar(
-            'Failed', 'Deleting Cannot Do failed due to some error', 'fail');
+            'Failed', 'Deleting Cannot Do failed due to some error', false);
       }
     } on DioError catch (e) {
       print(e);

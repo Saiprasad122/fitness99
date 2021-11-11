@@ -1,6 +1,7 @@
 import 'package:fitness_99/controllers/group_screen_controller/display_screen_controller.dart';
 import 'package:fitness_99/controllers/search_screen/search_screen_controller.dart';
 import 'package:fitness_99/core/api/api_service.dart';
+import 'package:fitness_99/core/services/needed_utils.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/createGroupResponseRequest/create_group_request.dart';
@@ -159,17 +160,28 @@ class CreateGroupController extends GetxController {
       );
       final res = CreateGroupResponse.fromJson(result.data);
       if (res.status == 200) {
-        customSnackBar('Group Created', 'Created Group Sucessfully', 'success');
+        await NeededVariables.firebaseInstance
+            .collection('users')
+            .doc(userModel.getid.toString())
+            .collection(userModel.getEmail())
+            .add({
+          'groupName': groupNameTED.text,
+          'goal': goalTED.text,
+          'location': locationTED.text,
+          'maxGroupMembers': maxMembersTED.text,
+          'comments': commentsTED.text,
+        });
+        customSnackBar('Group Created', 'Created Group Sucessfully', true);
         displayGrouController.getGroupData();
         searchScreenController.getAllGroupData();
         Get.back();
       } else {
-        customSnackBar('Error!', 'Please try again', 'fail');
+        customSnackBar('Error!', 'Please try again', false);
         Get.back();
       }
     } on dio.DioError catch (e) {
       print(e);
-      customSnackBar('Error!', 'Please try again', 'fail');
+      customSnackBar('Error!', 'Please try again', false);
     }
   }
 }

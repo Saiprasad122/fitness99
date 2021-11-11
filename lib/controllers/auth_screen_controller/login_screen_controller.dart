@@ -15,7 +15,6 @@ class LoginController extends GetxController {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   SharedPreferences? _prefs;
   SharedPreferences? get prefs => _prefs;
-  // DocumentSnapshot? documentSnapshot;
   final emailTED = TextEditingController();
   final passwordTED = TextEditingController();
   final forgotemailTED = TextEditingController();
@@ -103,9 +102,6 @@ class LoginController extends GetxController {
             res.user.number ?? 'Please update your mobile number';
         String profilePicture = res.user.profilePicture ?? 'N/A';
         int groupCount = res.user.groupCount;
-        //     .contains('http://fitness.rithlaundry.com/uploads')
-        // ? res.result!.profilePicture
-        // : 'http://fitness.rithlaundry.com/uploads/${res.result?.profilePicture ?? 'images/avatar.png'}';
         Get.find<UserModelService>().loggedIn(
           id: id,
           name: name,
@@ -121,14 +117,14 @@ class LoginController extends GetxController {
         customSnackBar(
           'Logged In!',
           'Logged In Successfully',
-          'success',
+          true,
         );
       } else {
         apiCalling.value = false;
         customSnackBar(
           'Invalid Credentials!',
           'The entered values are invalid',
-          'fail',
+          false,
         );
       }
       apiCalling.value = false;
@@ -137,7 +133,7 @@ class LoginController extends GetxController {
       customSnackBar(
         'Invalid Credentials!',
         'The entered values are invalid',
-        'fail',
+        false,
       );
       apiCalling.value = false;
 

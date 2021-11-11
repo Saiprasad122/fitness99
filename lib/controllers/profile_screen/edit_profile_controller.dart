@@ -113,7 +113,7 @@ class EditProfileController extends GetxController {
       customSnackBar(
         'Success!',
         'Your profile is successfully updated',
-        'success',
+        true,
       );
     }
   }
@@ -155,13 +155,13 @@ class EditProfileController extends GetxController {
         customSnackBar(
           'Success!',
           'Your profile picture is successfully updated',
-          'success',
+          true,
         );
       } else {
         customSnackBar(
           'Error!',
           'Some error while updating profile picture please try again',
-          'fail',
+          false,
         );
       }
     } catch (e) {}
@@ -261,7 +261,7 @@ class EditProfileController extends GetxController {
   //     //     customSnackBar(
   //     //       'Error!',
   //     //       'Some error while updating profile picture please try again',
-  //     //       'fail',
+  //     //       false,
   //     //     );
   //     //   }
   //     // } catch (e) {}

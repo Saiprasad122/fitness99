@@ -8,6 +8,7 @@ import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
 import 'package:fitness_99/views/profile_screen/widget/image_dialog_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nil/nil.dart';
 
 class CreateGroupScreen extends StatelessWidget {
   final controller = Get.put(CreateGroupController());
@@ -112,7 +113,7 @@ class CreateGroupScreen extends StatelessWidget {
                 )
               ],
             ),
-            controller.isBusy.value ? CustomProgressIndicator() : SizedBox(),
+            controller.isBusy.value ? CustomProgressIndicator() : nil,
           ],
         ),
       ),
