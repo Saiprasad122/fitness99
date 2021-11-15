@@ -102,6 +102,8 @@ class LoginController extends GetxController {
             res.user.number ?? 'Please update your mobile number';
         String profilePicture = res.user.profilePicture ?? 'N/A';
         int groupCount = res.user.groupCount;
+
+        //adding userData to local database
         Get.find<UserModelService>().loggedIn(
           id: id,
           name: name,
@@ -110,6 +112,7 @@ class LoginController extends GetxController {
           numberOfGroups: groupCount,
           profilePicture: profilePicture,
         );
+        //
 
         Get.offAllNamed(Routes.DashboardScreen);
         final userModel = Get.find<UserModelService>();

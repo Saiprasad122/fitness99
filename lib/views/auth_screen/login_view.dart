@@ -7,7 +7,6 @@ import 'package:fitness_99/global/widgets/custom_detail_textfield.dart';
 import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nil/nil.dart';
 
 class LoginScreenView extends StatelessWidget {
   final controller = Get.put(LoginController());
@@ -112,8 +111,8 @@ class LoginScreenView extends StatelessWidget {
               ),
               Obx(
                 () => controller.apiCalling.value
-                    ? CustomProgressIndicator()
-                    : nil,
+                    ? const CustomProgressIndicator()
+                    : const SizedBox(),
               )
             ],
           ),

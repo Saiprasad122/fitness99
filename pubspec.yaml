@@ -48,7 +48,6 @@ dependencies:
   pretty_dio_logger:
     git:
       url: https://github.com/appvinio/pretty_dio_logger
-  nil: ^1.1.1
   connectivity: ^3.0.6
   cached_network_image: ^3.1.0
   image_cropper: ^1.4.1

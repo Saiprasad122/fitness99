@@ -7,7 +7,6 @@ import 'package:fitness_99/global/widgets/custom_profile_textField.dart';
 import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nil/nil.dart';
 import 'widget/image_dialog_box.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -113,7 +112,9 @@ class EditProfileScreen extends StatelessWidget {
             ),
           ),
           Obx(
-            () => controller.apiCalling.value ? CustomProgressIndicator() : nil,
+            () => controller.apiCalling.value
+                ? const CustomProgressIndicator()
+                : const SizedBox(),
           )
         ],
       ),

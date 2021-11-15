@@ -245,40 +245,40 @@ class double {}
 class User {
   final int id;
   final String user_name;
-  final String id_proof;
+  final String? id_proof;
   final String email;
   final String password;
   final String profile_picture;
-  final String personal_goal;
-  final String height;
-  final String weight;
-  final String gender;
-  final String date_of_birth;
-  final int goal_id;
-  final String goal_description;
+  final String? personal_goal;
+  final String? height;
+  final String? weight;
+  final String? gender;
+  final String? date_of_birth;
+  final int? goal_id;
+  final String? goal_description;
   final int status;
   final String created_at;
   final String updated_at;
-  final int group_count;
+  final int? group_count;
   final String number;
   User({
     required this.id,
     required this.user_name,
-    required this.id_proof,
+    this.id_proof,
     required this.email,
     required this.password,
     required this.profile_picture,
-    required this.personal_goal,
-    required this.height,
-    required this.weight,
-    required this.gender,
-    required this.date_of_birth,
-    required this.goal_id,
-    required this.goal_description,
+    this.personal_goal,
+    this.height,
+    this.weight,
+    this.gender,
+    this.date_of_birth,
+    this.goal_id,
+    this.goal_description,
     required this.status,
     required this.created_at,
     required this.updated_at,
-    required this.group_count,
+    this.group_count,
     required this.number,
   });
 

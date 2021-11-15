@@ -40,7 +40,7 @@ abstract class ApiService {
   @GET(ApiUrls.DISPLAY_ALL_GROUPS)
   Future<BaseResponse<List<DisplayGroups>>> getAllGroups();
   @GET(ApiUrls.JOIN_GROUP)
-  Future<BaseResponse<JoinGroupResponse>> joinGroup(
+  Future<BaseResponse<List<JoinGroupResponse>>> joinGroup(
       {@Path('id') required int userID,
       @Path('group_id') required int group_id});
 

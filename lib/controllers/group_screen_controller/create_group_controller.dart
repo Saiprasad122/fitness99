@@ -160,21 +160,15 @@ class CreateGroupController extends GetxController {
       );
       final res = CreateGroupResponse.fromJson(result.data);
       if (res.status == 200) {
+        print('-----------------------------');
         await NeededVariables.firebaseInstance
-            .collection('users')
-            .doc(userModel.getid.toString())
-            .collection(userModel.getEmail())
-            .add({
-          'groupName': groupNameTED.text,
-          'goal': goalTED.text,
-          'location': locationTED.text,
-          'maxGroupMembers': maxMembersTED.text,
-          'comments': commentsTED.text,
-        });
-        customSnackBar('Group Created', 'Created Group Sucessfully', true);
+            .collection('chatRoom')
+            .doc(res.data.group.id.toString())
+            .set({});
         displayGrouController.getGroupData();
         searchScreenController.getAllGroupData();
         Get.back();
+        customSnackBar('Group Created', 'Created Group Sucessfully', true);
       } else {
         customSnackBar('Error!', 'Please try again', false);
         Get.back();

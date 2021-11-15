@@ -18,7 +18,7 @@ class SearchScreenView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'My Groups',
+          'All Groups',
           style: TextStyles.sgproBold.f34.black,
         ),
       ),

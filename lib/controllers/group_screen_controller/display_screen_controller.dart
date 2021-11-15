@@ -20,7 +20,12 @@ class DisplayScreenController extends GetxController {
     try {
       final res = await apiService.getMyGroups(userId: userModel.getid());
       if (res.data != null) {
-        groupList.addAll(res.data!);
+        if (groupList.isNotEmpty) {
+          groupList.clear();
+          groupList.addAll(res.data!);
+        } else {
+          groupList.addAll(res.data!);
+        }
         isLoading.value = false;
       }
     } on DioError catch (e) {
