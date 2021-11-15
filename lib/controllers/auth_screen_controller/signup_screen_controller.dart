@@ -67,47 +67,34 @@ class SignUpScreenController extends GetxController {
     required String email,
     required String password,
   }) async {
-    // var uri = Uri.parse('http://fitness.rithlaundry.com/api/user/login');
     SignUpRequest body = SignUpRequest(
       email: email,
       password: password,
       userName: userName,
     );
     final res = await apiService.getSignUpResponse(body);
-    if (res.message.toLowerCase() == 'registered successfully') {
+    if (res.message.toLowerCase() == 'success') {
       apiCalling.value = false;
-
-      int id = res.result?.id ?? 0;
-      String name = res.result?.userName ?? "N/A";
-      String email = res.result?.email ?? "N/A";
-
-      Get.find<UserModelService>().loggedIn(
-        id: id,
-        name: name,
-        email: email,
-        numberOfGroups: '0',
+      Get.offNamed(Routes.LoginScreen);
+      customSnackBar(
+        'Account Created!',
+        'Account has been successfully created',
+        true,
       );
-      print('The user is ${userModel.getEmail()}');
-      Get.offAllNamed(Routes.DashboardScreen);
-      // customSnackBar(
-      //   'Account Created!',
-      //   'Account has been successfully created',
-      //   'success',
-      // );
     } else if (res.message.toLowerCase() ==
         "the email has already been taken.") {
       apiCalling.value = false;
       customSnackBar(
         'Email already exists!',
         'The email has already been taken.',
-        'fail',
+        false,
       );
     } else {
       apiCalling.value = false;
       customSnackBar(
         'Something wrong!',
         'Please try again.',
-        'fail',
+        false,
       );
     }
   }

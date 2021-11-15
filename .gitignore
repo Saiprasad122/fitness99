@@ -8,24 +8,28 @@
 .buildlog/
 .history
 .svn/
+.fvm/
 
 # IntelliJ related
 *.iml
 *.ipr
 *.iws
 .idea/
-
-# Visual Studio Code related
 .vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
 .dart_tool/
 .flutter-plugins
+.flutter-plugins-dependencies
+.flu
 .packages
 .pub-cache/
 .pub/
 /build/
+**/*.g.dart
+**/*.freezed.dart
+**/generated_plugin_registrant.dart
 
 # Android related
 **/android/**/gradle-wrapper.jar

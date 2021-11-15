@@ -1,11 +1,16 @@
+import 'package:fitness_99/controllers/profile_screen/cannot_do_screen_controller.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
+import 'package:fitness_99/global/widgets/custom_list_shimmer.dart';
+import 'package:fitness_99/views/profile_screen/widget/custom_only_text_shimmer.dart';
+import 'package:fitness_99/views/profile_screen/widget/only_text_custom_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CannnotDoDisplay extends StatelessWidget {
-  const CannnotDoDisplay({Key? key}) : super(key: key);
+  CannnotDoDisplay({Key? key}) : super(key: key);
+  final controller = Get.put(CannotDoController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,39 +30,39 @@ class CannnotDoDisplay extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                itemCount: 20,
-                itemBuilder: (context, i) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Text(
-                          'Workout everyday in the morning',
-                          textAlign: TextAlign.left,
-                          style: TextStyles.sgproRegular.f18,
-                        ),
-                      ),
-                      const Divider(thickness: 0.5, color: Colors.grey)
-                    ],
-                  );
-                },
-              ),
-            ),
-          ),
-          CustomBottomButton(
-            text: 'AddNew',
-            onTap: () => Get.toNamed(Routes.CannotDoAdd),
-          )
-        ],
-      ),
+      body: Obx(() {
+        return controller.isLoading.value
+            ? ListShimmerWidget(child: CustomOnlyTextShimmer())
+            : Column(
+                children: [
+                  Expanded(
+                    child: controller.cannotDo.length > 0
+                        ? ListView.builder(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            physics: BouncingScrollPhysics(),
+                            itemCount: controller.cannotDo.length,
+                            itemBuilder: (context, i) {
+                              return CustomOnlyTextWidget(
+                                text: controller.cannotDo[i].content,
+                                onDelete: () {
+                                  controller
+                                      .deleteItem(controller.cannotDo[i].id);
+                                },
+                              );
+                            },
+                          )
+                        : Center(
+                            child: Text('No Cannot Dos\' to Display'),
+                          ),
+                  ),
+                  CustomBottomButton(
+                    text: 'AddNew',
+                    onTap: () => Get.toNamed(Routes.CannotDoAdd),
+                  )
+                ],
+              );
+      }),
     );
   }
 }

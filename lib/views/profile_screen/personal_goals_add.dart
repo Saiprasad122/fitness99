@@ -1,4 +1,4 @@
-import 'package:fitness_99/global/router/app_pages.dart';
+import 'package:fitness_99/controllers/profile_screen/persoal_goals_screen_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
 import 'package:fitness_99/global/widgets/custom_profile_textField.dart';
@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PersonalGoalsAdd extends StatelessWidget {
+  final _controller = Get.find<PersonalGoalsController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,15 +28,22 @@ class PersonalGoalsAdd extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(height: 20),
-          CustomProfileTextField(
-            displayText: 'Personal Goal',
-            hintText: 'Enter your personal gaol here',
-          ),
+          Obx(() {
+            return CustomProfileTextField(
+              displayText: 'Personal Goal',
+              hintText: 'Enter your personal gaol here',
+              errText: _controller.errorTextForTextField.value,
+              textEditingController: _controller.goalTED,
+            );
+          }),
           Spacer(),
-          CustomBottomButton(
-            text: 'Submit',
-            onTap: () => Get.toNamed(Routes.CannotDoAdd),
-          ),
+          Obx(() {
+            return CustomBottomButton(
+              text: 'Submit',
+              onTap: _controller.addGoal,
+              isLoading: _controller.isNewGoalAdding.value,
+            );
+          }),
         ],
       ),
     );

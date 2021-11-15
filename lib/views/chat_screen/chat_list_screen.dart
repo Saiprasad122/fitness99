@@ -16,54 +16,56 @@ class ChatListScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          'Chats',
+          style: TextStyles.sgproBold.f34.black,
+        ),
+      ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Chats',
-                  style: TextStyles.sgproBold.f34,
-                ),
-                const SizedBox(height: 15),
-                CustomSearchFeild(),
-                const SizedBox(height: 15),
-                Obx(
-                  () => controller.isBusy.value
-                      ? CustomShimmer()
-                      : controller.isAnyGroups.value
-                          ? ListView.builder(
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomSearchFeild(),
+              const SizedBox(height: 15),
+              Obx(
+                () => controller.isLoading.value
+                    ? CustomShimmer()
+                    : controller.groupList.isNotEmpty
+                        ? Expanded(
+                            child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: 5,
+                              itemCount: controller.groupList.length,
                               itemBuilder: (context, i) => CustomChatTile(
-                                groupName: 'Group$i',
-                                groupGoal: 'Get Stronger $i',
-                                groupImage: '',
+                                groupName: controller.groupList[i].group_name,
+                                groupGoal: controller.groupList[i].goal,
+                                groupImage: controller.groupList[i].group_image,
                                 onTap: () => Get.toNamed(Routes.ChatScreen),
                               ),
-                            )
-                          : Center(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/gifs/group-chat.gif',
-                                    height:
-                                        AppSizedBoxConfigs.screenHeight * 0.5,
-                                  ),
-                                  Text(
-                                    'Your chat list is empty',
-                                    style: TextStyles.sgproMedium.f20,
-                                  ),
-                                ],
-                              ),
                             ),
-                ),
-              ],
-            ),
+                          )
+                        : Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/gifs/group-chat.gif',
+                                  height: AppSizedBoxConfigs.screenHeight * 0.5,
+                                ),
+                                Text(
+                                  'Your chat list is empty',
+                                  style: TextStyles.sgproMedium.f20,
+                                ),
+                              ],
+                            ),
+                          ),
+              ),
+            ],
           ),
         ),
       ),

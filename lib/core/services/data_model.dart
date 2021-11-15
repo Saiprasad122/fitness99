@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 part 'data_model.g.dart';
 
 @HiveType(typeId: 0)
-class DataModel {
+class UserLocalDataModel {
   @HiveField(0)
   final int id;
   @HiveField(1)
@@ -12,11 +12,11 @@ class DataModel {
   @HiveField(3)
   final String mobileNumber;
   @HiveField(4)
-  final String numbesrOfGroups;
+  final int numbesrOfGroups;
   @HiveField(5)
   final String profilePicture;
 
-  DataModel({
+  UserLocalDataModel({
     required this.id,
     required this.userName,
     required this.email,

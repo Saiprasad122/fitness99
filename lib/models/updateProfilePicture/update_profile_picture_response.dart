@@ -38,18 +38,20 @@ class Result {
   Result({
     required this.id,
     required this.userName,
-    required this.phoneNumber,
+    this.phoneNumber,
     required this.email,
     required this.profilePicture,
     required this.status,
+    this.groupCount = 0,
   });
 
   final int id;
   final String userName;
-  final String phoneNumber;
+  final String? phoneNumber;
   final String email;
   final String profilePicture;
   final int status;
+  final int groupCount;
 
   factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
 
@@ -58,19 +60,21 @@ class Result {
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"] == null ? null : json["id"],
         userName: json["user_name"] == null ? null : json["user_name"],
-        phoneNumber: json["phone_number"] == null ? null : json["phone_number"],
+        phoneNumber: json["number"] == null ? null : json["number"],
         email: json["email"] == null ? null : json["email"],
         profilePicture:
             json["profile_picture"] == null ? null : json["profile_picture"],
         status: json["status"] == null ? null : json["status"],
+        groupCount: json["group_count"] == null ? 0 : json["group_count"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "user_name": userName,
-        "phone_number": phoneNumber,
+        "number": phoneNumber,
         "email": email,
         "profile_picture": profilePicture,
         "status": status,
+        "group_count": groupCount
       };
 }

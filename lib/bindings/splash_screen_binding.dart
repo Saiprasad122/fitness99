@@ -6,7 +6,6 @@ class SplashScreenBinding implements Bindings {
   @override
   void dependencies() {
     Get.put<SplashViewController>(SplashViewController());
-
     Get.put<ApiService>(ApiService.create());
   }
 }

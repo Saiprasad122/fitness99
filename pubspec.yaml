@@ -38,7 +38,6 @@ dependencies:
   image_picker: ^0.8.4
   dio: ^4.0.0
   retrofit: ^2.0.1
-  retrofit_generator:
   hijri_picker: ^3.0.0
   hive: ^2.0.4
   path_provider: ^2.0.3
@@ -49,19 +48,30 @@ dependencies:
   pretty_dio_logger:
     git:
       url: https://github.com/appvinio/pretty_dio_logger
-  nil: ^1.1.1
   connectivity: ^3.0.6
   cached_network_image: ^3.1.0
   image_cropper: ^1.4.1
-
+  firebase_storage: ^10.0.5
+  http: ^0.13.4
+  freezed: ^0.15.0+1
+  freezed_annotation: ^0.15.0
+  intl: ^0.17.0
+  fluttertoast: ^8.0.8
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
   very_good_analysis: ^2.3.0
   flutter_launcher_icons: ^0.9.2
-
   build_runner:
+  retrofit_generator: ^2.0.1+2
   json_serializable: ^5.0.0
+
+dependency_overrides:
+  retrofit_generator:
+    git:
+      url: https://github.com/aarjan/retrofit.dart
+      path: generator
 
 flutter_icons:
   android: "laucher_icon"

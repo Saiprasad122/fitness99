@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 void customSnackBar(
   String title,
   String message,
-  String successOrFail,
+  bool isSuccess,
 ) {
   Get.snackbar(
     '',
@@ -21,6 +21,6 @@ void customSnackBar(
     ),
     snackPosition: SnackPosition.BOTTOM,
     margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-    backgroundColor: successOrFail == 'success' ? Colors.green : Colors.red,
+    backgroundColor: isSuccess ? Colors.green : Colors.red,
   );
 }

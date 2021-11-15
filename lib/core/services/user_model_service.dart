@@ -1,20 +1,18 @@
-import 'package:fitness_99/core/services/data_model.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
+import 'data_model.dart';
+
 class UserModelService extends GetxController {
-  String _name = '',
-      _mobileNumber = '',
-      _email = '',
-      _numberOfGroups = '',
-      _profilePicture = '';
+  String _name = '', _mobileNumber = '', _email = '', _profilePicture = '';
+  int _numberOfGroups = 0;
   String get name => _name;
   int _id = 0;
   int get id => _id;
   String? get mobileNumber => _mobileNumber;
   String? get email => _email;
-  String? get numberOfGroups => _numberOfGroups;
-  DataModel? dataModel;
+  int? get numberOfGroups => _numberOfGroups;
+  UserLocalDataModel? userLocalDataModel;
 
   @override
   void onClose() {
@@ -28,7 +26,7 @@ class UserModelService extends GetxController {
     required String name,
     String? mobileNumber,
     required String email,
-    required String numberOfGroups,
+    required int numberOfGroups,
     String? profilePicture,
   }) async {
     _id = id;
@@ -37,7 +35,7 @@ class UserModelService extends GetxController {
     _mobileNumber = mobileNumber ?? 'Please update your phone number';
     _numberOfGroups = numberOfGroups;
     _profilePicture = profilePicture ?? "images/avatar.png";
-    DataModel? dataModel = DataModel(
+    UserLocalDataModel? userLocalDataModel = UserLocalDataModel(
       id: id,
       email: _email,
       mobileNumber: _mobileNumber,
@@ -45,59 +43,57 @@ class UserModelService extends GetxController {
       numbesrOfGroups: _numberOfGroups,
       profilePicture: _profilePicture,
     );
-    var box = Hive.box<DataModel>('user_data');
-    await box.put('data', dataModel);
-    dataModel = box.get('data');
+    var box = Hive.box<UserLocalDataModel>('user_data');
+    await box.put('data', userLocalDataModel);
+    userLocalDataModel = box.get('data');
   }
 
 // to get the userID from the local DB
   int getid() {
-    var box = Hive.box<DataModel>('user_data');
-    dataModel = box.get('data');
-    return dataModel?.id ?? 0;
+    var box = Hive.box<UserLocalDataModel>('user_data');
+    userLocalDataModel = box.get('data');
+    return userLocalDataModel?.id ?? 0;
   }
 
 // to get the userName from the local DB
   String getUserName() {
-    var box = Hive.box<DataModel>('user_data');
-    dataModel = box.get('data');
+    var box = Hive.box<UserLocalDataModel>('user_data');
+    userLocalDataModel = box.get('data');
 
-    return dataModel?.userName ?? 'N/A';
+    return userLocalDataModel?.userName ?? 'N/A';
   }
 
 // to get the email from the local DB
   String getEmail() {
-    var box = Hive.box<DataModel>('user_data');
-    dataModel = box.get('data');
+    var box = Hive.box<UserLocalDataModel>('user_data');
+    userLocalDataModel = box.get('data');
 
-    return dataModel?.email ?? 'N/A';
+    return userLocalDataModel?.email ?? 'N/A';
   }
 
 // to get the mobileNumber from the local DB
   String getMobileNumber() {
-    var box = Hive.box<DataModel>('user_data');
-    dataModel = box.get('data');
+    var box = Hive.box<UserLocalDataModel>('user_data');
+    userLocalDataModel = box.get('data');
 
-    return dataModel?.mobileNumber ?? 'N/A';
+    return userLocalDataModel?.mobileNumber ?? 'N/A';
   }
 
 // to get the noOfGroups from the local DB
-  String getNoOfGroups() {
-    var box = Hive.box<DataModel>('user_data');
-    dataModel = box.get('data');
+  int getNoOfGroups() {
+    var box = Hive.box<UserLocalDataModel>('user_data');
+    userLocalDataModel = box.get('data');
 
-    return dataModel?.numbesrOfGroups ?? 'N/A';
+    return userLocalDataModel?.numbesrOfGroups ?? 0;
   }
 
 // to get the profilePicture from the local DB
   String getProfilePicture() {
-    var box = Hive.box<DataModel>('user_data');
-    dataModel = box.get('data');
-    return dataModel!.profilePicture
-            .contains('http://fitness.rithlaundry.com/uploads')
-        ? dataModel?.profilePicture ??
-            'http://fitness.rithlaundry.com/uploadsimages/avatar.png'
-        : 'http://fitness.rithlaundry.com/uploads/${dataModel?.profilePicture ?? 'images/avatar.png'}';
-    // return dataModel?.profilePicture ?? "images/avatar.png";
+    var box = Hive.box<UserLocalDataModel>('user_data');
+    userLocalDataModel = box.get('data');
+    return userLocalDataModel!.profilePicture
+            .contains('https://dev.99fitnessfriends.com/uploads')
+        ? userLocalDataModel?.profilePicture ?? 'N/A'
+        : 'https://dev.99fitnessfriends.com/uploads${userLocalDataModel?.profilePicture ?? 'N/A'}';
   }
 }

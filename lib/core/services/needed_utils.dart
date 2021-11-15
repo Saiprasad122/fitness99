@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_99/core/services/data_model.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:get/get.dart';
@@ -19,11 +20,11 @@ class NeededVariables extends GetxController {
     final appDocumentDir = await getApplicationDocumentsDirectory();
     Hive
       ..init(appDocumentDir.path)
-      ..registerAdapter(DataModelAdapter());
-    await Hive.openBox<DataModel>('user_data');
+      ..registerAdapter(UserLocalDataModelAdapter());
+    await Hive.openBox<UserLocalDataModel>('user_data');
     Get.put<UserModelService>(UserModelService());
     print('Shared Preference loaded');
   }
 
-  void cacheUser() {}
+  static FirebaseFirestore firebaseInstance = FirebaseFirestore.instance;
 }

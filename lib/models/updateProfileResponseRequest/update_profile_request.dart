@@ -8,7 +8,7 @@ class UpdateProfileRequest extends Equatable {
   final int? id;
   @JsonKey(name: 'user_name')
   final String? userName;
-  @JsonKey(name: 'phone_number')
+  @JsonKey(name: 'number')
   final String? phoneNumber;
   final String? email;
   @JsonKey(name: 'profile_picture')

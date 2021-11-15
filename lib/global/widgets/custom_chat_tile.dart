@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
 
@@ -24,9 +25,21 @@ class CustomChatTile extends StatelessWidget {
       ),
       onPressed: onTap,
       child: ListTile(
-        leading: groupImage.contains('')
-            ? Image.asset('assets/images/search_screen/fitness.png')
-            : Image.network(groupImage),
+        leading: CircleAvatar(
+          radius: 30,
+          backgroundColor: Colors.white,
+          child: SizedBox.expand(
+            child: ClipOval(
+                child: CachedNetworkImage(
+              imageUrl: 'https://dev.99fitnessfriends.com/uploads$groupImage',
+              placeholder: (context, s) => CircularProgressIndicator(),
+              filterQuality: FilterQuality.high,
+              fit: BoxFit.contain,
+              errorWidget: (context, value, error) =>
+                  Image.asset('assets/images/placeholders/user.png'),
+            )),
+          ),
+        ),
         title: Text(
           groupName,
           style: TextStyles.sgproRegular.f18,
