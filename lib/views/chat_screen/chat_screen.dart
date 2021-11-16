@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'chat_screen_tabs/more_options_chat_screen/more_options_chat_screen.dart';
 
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  final int group_id;
+  const ChatScreen(this.group_id);
 
   @override
   Widget build(BuildContext context) {
@@ -76,11 +77,11 @@ class ChatScreen extends StatelessWidget {
         body: TabBarView(
           physics: NeverScrollableScrollPhysics(),
           children: [
-            ChatScreenView(),
+            ChatScreenView(group_id),
             Text('data'),
             Text('data'),
             Text('data'),
-            MoreOptions(),
+            MoreOptions(group_id),
           ],
         ),
       ),

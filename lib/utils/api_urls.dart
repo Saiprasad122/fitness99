@@ -19,4 +19,5 @@ class ApiUrls {
   static const DISPLAY_ALL_GROUPS = '/get_all_group';
   static const CREATE_NEW_GROUP = '/createGroup/{id}';
   static const JOIN_GROUP = '/join_group/{id}/{group_id}';
+  static const MEMBER_LIST = '/group_members/{group_id}';
 }

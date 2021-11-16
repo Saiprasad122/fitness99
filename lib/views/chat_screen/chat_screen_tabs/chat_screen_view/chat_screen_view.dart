@@ -12,7 +12,8 @@ import 'package:intl/intl.dart';
 class ChatScreenView extends StatelessWidget {
   final controller = Get.put(ChatScreenController());
   final userModel = Get.find<UserModelService>();
-  ChatScreenView({Key? key}) : super(key: key);
+  final int group_id;
+  ChatScreenView(this.group_id);
 
   @override
   Widget build(BuildContext context) {
