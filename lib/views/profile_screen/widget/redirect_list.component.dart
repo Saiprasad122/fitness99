@@ -3,27 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class RedirectListComponent extends StatelessWidget {
-  const RedirectListComponent(
-      {Key? key,
-      required this.imageUrl,
-      required this.title,
-      this.dividerUnderTitle = false,
-      this.height = 70,
-      this.onTap,
-      this.rightArrow = true})
-      : super(key: key);
+  const RedirectListComponent({
+    Key? key,
+    required this.imageUrl,
+    required this.title,
+    this.dividerUnderTitle = false,
+    this.height = 70,
+    this.onTap,
+    this.rightArrow = true,
+    this.iconData = Icons.arrow_right,
+    this.backgroundColor = Colors.transparent,
+  }) : super(key: key);
   final String imageUrl;
   final String title;
   final bool dividerUnderTitle;
   final bool rightArrow;
   final double height;
+  final Color backgroundColor;
   final Function()? onTap;
+  final IconData iconData;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
         height: height,
+        color: backgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -33,11 +38,12 @@ class RedirectListComponent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  if (!imageUrl.contains('svg'))
+                  if (imageUrl.contains('png'))
                     Image.asset(
                       imageUrl,
                       height: 28,
                       width: 28,
+                      filterQuality: FilterQuality.high,
                     ),
                   if (imageUrl.contains('svg'))
                     SvgPicture.asset(
@@ -75,7 +81,7 @@ class RedirectListComponent extends StatelessWidget {
                   if (rightArrow) ...[
                     const Spacer(),
                     Icon(
-                      Icons.arrow_right,
+                      iconData,
                       size: 28,
                       color: Colors.amber[800],
                     ),

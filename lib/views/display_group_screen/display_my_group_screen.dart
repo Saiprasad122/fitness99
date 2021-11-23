@@ -1,5 +1,7 @@
 import 'package:fitness_99/controllers/group_screen_controller/display_screen_controller.dart';
+import 'package:fitness_99/views/display_group_screen/group_view.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
+import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_chat_tile.dart';
@@ -55,7 +57,7 @@ class DisplayMyGroup extends StatelessWidget {
                                 groupGoal: controller.groupList[index].goal,
                                 groupImage:
                                     'https://dev.99fitnessfriends.com/uploads${controller.groupList[index].group_image}',
-                                onTap: () {},
+                                onTap: () => Get.to(GroupView()),
                               ),
                             ),
                           )

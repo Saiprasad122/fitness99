@@ -3,13 +3,13 @@ import 'package:fitness_99/controllers/profile_screen/profile_view_controller.da
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/another_profile_view.dart';
 import 'package:fitness_99/views/profile_screen/widget/redirect_list.component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileView extends StatelessWidget {
   final controller = Get.put(ProfileViewController());
-  final UserLocalDataModel = Get.find<UserModelService>();
   final userModel = Get.find<UserModelService>();
 
   @override
@@ -47,12 +47,13 @@ class ProfileView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    UserLocalDataModel.getUserName(),
-                    style: TextStyles.sgproBold.black.f26,
+                  const SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: () => Get.to(AnotherProfileView()),
+                    child: Text(
+                      userModel.getUserName(),
+                      style: TextStyles.sgproBold.black.f26,
+                    ),
                   ),
                   const Spacer(),
                   IconButton(
@@ -97,11 +98,9 @@ class ProfileView extends StatelessWidget {
                       Icons.email,
                       color: Colors.amber[800],
                     ),
-                    const SizedBox(
-                      width: 20,
-                    ),
+                    const SizedBox(width: 20),
                     Text(
-                      UserLocalDataModel.getEmail(),
+                      userModel.getEmail(),
                       style: TextStyles.sgproRegular.greyMid.f22,
                     ),
                   ],
@@ -127,7 +126,7 @@ class ProfileView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          '${UserLocalDataModel.getNoOfGroups()}',
+                          '${userModel.getNoOfGroups()}',
                           style: TextStyles.sgproMedium.black.f20,
                         ),
                         Text(

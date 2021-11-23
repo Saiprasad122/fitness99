@@ -1,5 +1,6 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/chat_screen_view.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/event_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -78,7 +79,7 @@ class ChatScreen extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           children: [
             ChatScreenView(group_id),
-            Text('data'),
+            EventScreen(),
             Text('data'),
             Text('data'),
             MoreOptions(group_id),
