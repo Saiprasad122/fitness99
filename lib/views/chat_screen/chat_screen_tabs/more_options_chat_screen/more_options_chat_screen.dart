@@ -15,7 +15,7 @@ class MoreOptions extends StatelessWidget {
         MoreOptionsWidget(
             svgSrc: 'assets/svgs/chat_screen/group_icon.svg',
             text: 'Member List',
-            onTap: () => Get.to(MemberList(group_id))),
+            onTap: () => Get.to(() => MemberList(group_id))),
         MoreOptionsWidget(
           svgSrc: 'assets/svgs/chat_screen/video_icon.svg',
           text: 'Group Videos',

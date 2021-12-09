@@ -9,7 +9,7 @@ class EventWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.to(EventDetailScreen()),
+      onTap: () => Get.to(() => EventDetailScreen()),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Card(

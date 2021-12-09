@@ -68,7 +68,7 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
                   ),
                   Text(
                     userModel.getMobileNumber() == 'N/A'
-                        ? 'Please update your phone number'
+                        ? 'Phone number not provided'
                         : userModel.getMobileNumber(),
                     style: TextStyles.sgproRegular.greyMid.f22,
                   )

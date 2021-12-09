@@ -50,7 +50,7 @@ class _MemberListState extends State<MemberList> {
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: ListTile(
-                    onTap: () => Get.to(AnotherProfileView(
+                    onTap: () => Get.to(() => AnotherProfileView(
                         id: controller.memberList[index].user_id.id
                             .toString())),
                     leading: CircleAvatar(

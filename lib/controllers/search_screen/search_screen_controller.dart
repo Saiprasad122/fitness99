@@ -48,6 +48,7 @@ class SearchScreenController extends GetxController {
           userID: userModel.getid(), group_id: group_id);
       if (res.data != null && res.status == 200) {
         chatListController.getGroupData();
+        userModel.updateGroupCount(userModel.getNoOfGroups() + 1);
         customSnackBar('Joined Group', 'Successfully Joined Group', true);
       } else {
         customSnackBar('Failed to join',

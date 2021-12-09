@@ -55,6 +55,17 @@ class UserModelService extends GetxController {
     return userLocalDataModel?.id ?? 0;
   }
 
+  void updateGroupCount([int? groupCount]) async {
+    var box = Hive.box<UserLocalDataModel>('user_data');
+    userLocalDataModel = box.get('data');
+    if (userLocalDataModel != null) {
+      await box.put(
+        'data',
+        userLocalDataModel!.copyWith(numbesrOfGroups: groupCount),
+      );
+    }
+  }
+
 // to get the userName from the local DB
   String getUserName() {
     var box = Hive.box<UserLocalDataModel>('user_data');

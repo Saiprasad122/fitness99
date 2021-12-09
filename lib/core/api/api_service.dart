@@ -48,7 +48,7 @@ abstract class ApiService {
       {@Path('group_id') required int group_id});
   @GET(ApiUrls.GET_PROFILE)
   Future<BaseResponse<User>> getProfileData(
-      {@Path('group_id') required int group_id});
+      {@Path('user_id') required int user_id});
 
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //

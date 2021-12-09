@@ -57,7 +57,7 @@ class DisplayMyGroup extends StatelessWidget {
                                 groupGoal: controller.groupList[index].goal,
                                 groupImage:
                                     'https://dev.99fitnessfriends.com/uploads${controller.groupList[index].group_image}',
-                                onTap: () => Get.to(GroupView()),
+                                onTap: () => Get.to(() => GroupView()),
                               ),
                             ),
                           )

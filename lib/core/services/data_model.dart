@@ -24,4 +24,20 @@ class UserLocalDataModel {
     required this.numbesrOfGroups,
     required this.profilePicture,
   });
+
+  UserLocalDataModel copyWith({
+    int? id,
+    String? userName,
+    String? email,
+    String? mobileNumber,
+    int? numbesrOfGroups,
+    String? profilePicture,
+  }) =>
+      UserLocalDataModel(
+          id: id ?? this.id,
+          userName: userName ?? this.userName,
+          email: email ?? this.email,
+          mobileNumber: mobileNumber ?? this.mobileNumber,
+          numbesrOfGroups: numbesrOfGroups ?? this.numbesrOfGroups,
+          profilePicture: profilePicture ?? this.profilePicture);
 }
