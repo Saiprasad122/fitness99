@@ -218,11 +218,13 @@ class ChatScreenView extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SvgPicture.asset(
-                  'assets/svgs/chat_screen/attachment_icon.svg',
-                  color: AppColors.secondaryColor,
-                  width: 25,
-                  height: 25,
+                InkWell(
+                  child: SvgPicture.asset(
+                    'assets/svgs/chat_screen/attachment_icon.svg',
+                    color: AppColors.secondaryColor,
+                    width: 25,
+                    height: 25,
+                  ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
