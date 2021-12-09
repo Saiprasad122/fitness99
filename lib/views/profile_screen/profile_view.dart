@@ -3,7 +3,6 @@ import 'package:fitness_99/controllers/profile_screen/profile_view_controller.da
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/views/another_profile_view.dart';
 import 'package:fitness_99/views/profile_screen/widget/redirect_list.component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,12 +47,9 @@ class ProfileView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: () => Get.to(AnotherProfileView()),
-                    child: Text(
-                      userModel.getUserName(),
-                      style: TextStyles.sgproBold.black.f26,
-                    ),
+                  Text(
+                    userModel.getUserName(),
+                    style: TextStyles.sgproBold.black.f26,
                   ),
                   const Spacer(),
                   IconButton(

@@ -1,7 +1,5 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/views/another_profile_view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CustomProfileIconButtom extends StatelessWidget {
   const CustomProfileIconButtom({Key? key, required this.profileName})
@@ -16,7 +14,7 @@ class CustomProfileIconButtom extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             InkWell(
-              onTap: () => Get.to(AnotherProfileView()),
+              onTap: () {},
               child: CircleAvatar(
                 radius: 35,
                 child: Image.asset(

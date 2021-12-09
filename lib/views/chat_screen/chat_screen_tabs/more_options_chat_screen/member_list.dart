@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/member_list_controller.dart';
 import 'package:fitness_99/global/router/views.export.dart';
-import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/global/widgets/custom_profile_list_shimmer.dart';
+import 'package:fitness_99/views/another_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,15 +19,12 @@ class _MemberListState extends State<MemberList> {
   final controller = Get.put(MemberListController());
   @override
   void initState() {
-    controller.isApiCalling.value = true;
     controller.getMemberList(widget.group_id);
-    controller.isApiCalling.value = false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print('THe loading value is ${controller.isApiCalling.value}');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -45,28 +43,28 @@ class _MemberListState extends State<MemberList> {
       ),
       body: Obx(
         () => controller.isApiCalling.value
-            ? Container(
-                width: AppSizedBoxConfigs.screenWidth,
-                height: AppSizedBoxConfigs.screenHeight,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              )
+            ? CustomProfileListShimmer()
             : ListView.separated(
                 separatorBuilder: (context, index) => Divider(),
                 itemCount: controller.memberList.length,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: ListTile(
-                    onTap: () {},
+                    onTap: () => Get.to(AnotherProfileView(
+                        id: controller.memberList[index].user_id.id
+                            .toString())),
                     leading: CircleAvatar(
                       radius: 30,
                       backgroundColor: Colors.white,
                       child: SizedBox.expand(
                         child: ClipOval(
                           child: CachedNetworkImage(
-                            imageUrl:
-                                'https://dev.99fitnessfriends.com/uploads/${controller.memberList[index].user_id.profile_picture}',
+                            imageUrl: controller
+                                    .memberList[index].user_id.profile_picture
+                                    .toString()
+                                    .contains('uploads')
+                                ? '${controller.memberList[index].user_id.profile_picture}'
+                                : 'https://dev.99fitnessfriends.com/uploads/${controller.memberList[index].user_id.profile_picture}',
                             placeholder: (context, s) =>
                                 CircularProgressIndicator(),
                             filterQuality: FilterQuality.high,
