@@ -9,6 +9,7 @@ class MemberListController extends GetxController {
   final memberList = [].obs;
 
   void getMemberList(int group_id) async {
+    isApiCalling.value = true;
     try {
       final res = await apiService.getMemberList(group_id: group_id);
       if (res.data != null && res.status == 200) {
@@ -25,5 +26,6 @@ class MemberListController extends GetxController {
       print(e);
       customSnackBar('Error!', 'Please try again later', false);
     }
+    isApiCalling.value = false;
   }
 }

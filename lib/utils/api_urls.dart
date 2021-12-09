@@ -20,4 +20,5 @@ class ApiUrls {
   static const CREATE_NEW_GROUP = '/createGroup/{id}';
   static const JOIN_GROUP = '/join_group/{id}/{group_id}';
   static const MEMBER_LIST = '/group_members/{group_id}';
+  static const GET_PROFILE = '/get_profile/{user_id}';
 }

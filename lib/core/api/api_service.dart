@@ -46,6 +46,9 @@ abstract class ApiService {
   @GET(ApiUrls.MEMBER_LIST)
   Future<BaseResponse<List<JoinGroupResponse>>> getMemberList(
       {@Path('group_id') required int group_id});
+  @GET(ApiUrls.GET_PROFILE)
+  Future<BaseResponse<User>> getProfileData(
+      {@Path('group_id') required int group_id});
 
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //

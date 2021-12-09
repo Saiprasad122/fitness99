@@ -4,8 +4,20 @@ import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AnotherProfileView extends StatelessWidget {
-  AnotherProfileView({Key? key}) : super(key: key);
+class AnotherProfileView extends StatefulWidget {
+  AnotherProfileView({Key? key, required this.id}) : super(key: key);
+  final String id;
+
+  @override
+  State<AnotherProfileView> createState() => _AnotherProfileViewState();
+}
+
+class _AnotherProfileViewState extends State<AnotherProfileView> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final userModel = Get.find<UserModelService>();
 
   @override
