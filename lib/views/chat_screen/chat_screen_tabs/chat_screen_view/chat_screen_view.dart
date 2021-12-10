@@ -22,6 +22,8 @@ class ChatScreenView extends StatelessWidget {
         StreamBuilder(
           stream: controller.instance
               .collection('groups')
+              .doc(group_id.toString())
+              .collection('chats')
               .orderBy('time', descending: true)
               .snapshots(),
           builder: (context,
@@ -238,8 +240,8 @@ class ChatScreenView extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 InkWell(
-                  onTap: () =>
-                      controller.addData(controller.chatTED.value.text),
+                  onTap: () => controller.addData(
+                      controller.chatTED.value.text, group_id),
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,

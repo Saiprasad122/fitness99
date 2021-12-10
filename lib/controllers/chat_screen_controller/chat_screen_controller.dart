@@ -14,8 +14,12 @@ class ChatScreenController extends GetxController {
   final List<Map<String, dynamic>> demoList = [];
   final scrollController = ScrollController();
 
-  void addData(String mssg) {
-    instance.collection('groups').add({
+  void addData(String mssg, int groupId) {
+    instance
+        .collection('groups')
+        .doc(groupId.toString())
+        .collection('chats')
+        .add({
       'id': userModel.getid().toString(),
       'message': mssg,
       'time': DateTime.now(),
