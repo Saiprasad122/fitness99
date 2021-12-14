@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,14 @@ class ChatScreenController extends GetxController {
   final List<Map<String, dynamic>> demoList = [];
   final scrollController = ScrollController();
 
-  void addData(String mssg, int groupId) {
+  void addData({
+    required String mssg,
+    required int groupId,
+    String url = '',
+    MessageType messageType = MessageType.text,
+  }) {
+    MessageType messageType = MessageType.text;
+
     instance
         .collection('groups')
         .doc(groupId.toString())
@@ -22,8 +30,10 @@ class ChatScreenController extends GetxController {
         .add({
       'id': userModel.getid().toString(),
       'message': mssg,
+      'messageType': messageType.toString(),
       'time': DateTime.now(),
-      'imageURl': userModel.getProfilePicture()
+      'imageURl': userModel.getProfilePicture(),
+      'url': url
     }).then((value) => chatTED.clear());
   }
 

@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
+import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
@@ -119,6 +122,7 @@ class ChatScreenView extends StatelessWidget {
                                 ],
                               )
                             : Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -173,6 +177,45 @@ class ChatScreenView extends StatelessWidget {
                                     ],
                                   ),
                                   const SizedBox(height: 5),
+                                  Container(
+                                    height: 200,
+                                    width: 200,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 20),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        width: 5,
+                                        color: Colors.black,
+                                      ),
+                                      color: Colors.white,
+                                    ),
+                                    child: Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        Image.asset(
+                                            'assets/images/placeholders/user.png'),
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                              sigmaX: 10,
+                                              sigmaY: 10,
+                                            ),
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: Image.asset(
+                                                'assets/images/placeholders/download_button.png',
+                                                width: 25,
+                                                height: 25,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
                                 ],
                               );
                       },
@@ -200,8 +243,9 @@ class ChatScreenView extends StatelessWidget {
                   ],
                 ),
               );
+            } else {
+              return Center(child: CircularProgressIndicator());
             }
-            return Center(child: CircularProgressIndicator());
           },
         ),
         Positioned(
@@ -241,7 +285,7 @@ class ChatScreenView extends StatelessWidget {
                 const SizedBox(width: 10),
                 InkWell(
                   onTap: () => controller.addData(
-                      controller.chatTED.value.text, group_id),
+                      mssg: controller.chatTED.value.text, groupId: group_id),
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,
@@ -257,13 +301,3 @@ class ChatScreenView extends StatelessWidget {
     );
   }
 }
-
-// List<MssgClass> chats = [
-//   MssgClass(id: 'receiver', mssg: 'Hey'),
-//   MssgClass(id: 'sender', mssg: 'Hey'),
-// ];
-
-// class MssgClass {
-//   String id, mssg;
-//   MssgClass({required this.id, required this.mssg});
-// }
