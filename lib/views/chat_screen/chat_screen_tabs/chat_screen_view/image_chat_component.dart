@@ -24,6 +24,7 @@ class ImageChatComponent extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
+                  controller.filePath.value = '';
                   Get.back();
                 },
                 icon: Icon(

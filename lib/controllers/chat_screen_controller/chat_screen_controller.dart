@@ -29,7 +29,7 @@ class ChatScreenController extends GetxController {
   void addData({
     String messageType = MessageType.text,
   }) {
-    if (!chatTED.text.isEmpty) {
+    if (chatTED.text.isNotEmpty || filePath.value.isNotEmpty) {
       final data = {
         'id': userModel.getid().toString(),
         'messageType': messageType,
@@ -47,18 +47,27 @@ class ChatScreenController extends GetxController {
           .doc(group_id.toString())
           .collection('chats')
           .add(data)
-          .then((value) => chatTED.clear());
+          .then((value) {
+        chatTED.clear();
+        filePath.value = '';
+      });
     }
   }
 
   Future<void> uploadImage() async {
     Get.back();
-    await uploadImageService.uploadImageToFirebase(
+    String? path = await uploadImageService.uploadImageToFirebase(
         group_id,
         File(filePath.value),
         (progressPercent) =>
             print('The percent is --------- $progressPercent'));
-    addData(messageType: MessageType.image);
+
+    if (path?.isNotEmpty ?? false) {
+      filePath.value = path!;
+      addData(messageType: MessageType.image);
+    } else {
+      print('error');
+    }
   }
 
   getImage(ImageSource source) async {
@@ -67,6 +76,8 @@ class ChatScreenController extends GetxController {
     if (file != null) {
       filePath.value = file.path;
       Get.to(ImageChatComponent());
+    } else {
+      filePath.value = '';
     }
   }
 

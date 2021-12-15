@@ -4,7 +4,8 @@ import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
 
 class ImageComponent extends StatelessWidget {
-  const ImageComponent({Key? key}) : super(key: key);
+  final String url;
+  ImageComponent({Key? key, required this.url}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class ImageComponent extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset('assets/images/placeholders/user.png'),
+          Image.network(url),
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: BackdropFilter(

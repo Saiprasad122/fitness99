@@ -314,7 +314,7 @@ class ChatScreenView extends StatelessWidget {
       case MessageType.text:
         return TextComponent(text: data['message'], dateTime: dateTime);
       case MessageType.image:
-        return ImageComponent();
+        return ImageComponent(url: data['url']);
       default:
         return TextComponent(text: data['message'], dateTime: dateTime);
     }

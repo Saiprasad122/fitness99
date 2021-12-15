@@ -36,14 +36,20 @@ class DownloadAndUploadService extends GetxController {
 
   Future<String?> uploadImageToFirebase(int groupId, File file,
       Function(double progressPercent)? progressListener) async {
-    final fileName =
-        'images/$groupId/image-$groupId-${DateTime.now().millisecondsSinceEpoch}';
-    final _firebaseStorage = FirebaseStorage.instance;
-    var upload = _firebaseStorage.ref().child(fileName).putFile(file);
-    upload.asStream().listen((event) {
-      progressListener?.call((event.bytesTransferred / event.totalBytes) * 100);
-    });
-    await upload;
-    return fileName;
+    try {
+      final fileName =
+          'images/$groupId/image-$groupId-${DateTime.now().millisecondsSinceEpoch}';
+      final _firebaseStorage = FirebaseStorage.instance;
+      var upload = _firebaseStorage.ref().child(fileName).putFile(file);
+      upload.snapshotEvents.listen((event) {
+        progressListener
+            ?.call((event.bytesTransferred / event.totalBytes) * 100);
+      });
+      await upload;
+      return fileName;
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 }
