@@ -6,10 +6,10 @@ import 'package:fitness_99/global/router/views.export.dart';
 // import 'package:http/http.dart' as http;
 
 class DownloadAndUploadService extends GetxController {
-  Future<bool> downloadImageFromFirebase(String imageName, int groupId,
+  Future<bool> downloadImageFromFirebase(String downloadUrl, int groupId,
       Function(double progressPercent)? progressListener) async {
     final directories = Get.find<DirectoriesService>();
-    final ref = FirebaseStorage.instance.ref(imageName);
+    final ref = FirebaseStorage.instance.refFromURL(downloadUrl);
     // final String url = await ref.getDownloadURL();
     final String name = await ref.name;
 
@@ -40,13 +40,14 @@ class DownloadAndUploadService extends GetxController {
       final fileName =
           'images/$groupId/image-$groupId-${DateTime.now().millisecondsSinceEpoch}';
       final _firebaseStorage = FirebaseStorage.instance;
-      var upload = _firebaseStorage.ref().child(fileName).putFile(file);
+      final uploadRef = _firebaseStorage.ref(fileName);
+      final upload = uploadRef.putFile(file);
       upload.snapshotEvents.listen((event) {
         progressListener
             ?.call((event.bytesTransferred / event.totalBytes) * 100);
       });
       await upload;
-      return fileName;
+      return await uploadRef.getDownloadURL();
     } catch (e) {
       print(e);
       return null;
