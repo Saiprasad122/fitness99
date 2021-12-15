@@ -7,6 +7,8 @@ import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dar
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/image_component.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/text_component.dart';
 import 'package:fitness_99/views/profile_screen/widget/image_dialog_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -129,40 +131,8 @@ class ChatScreenView extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5),
-                                        child: Align(
-                                          alignment: (Alignment.topLeft),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: (Colors.blue[200]),
-                                            ),
-                                            padding: EdgeInsets.all(10),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  snapshot.data!.docs[index]
-                                                      ['message'],
-                                                  style:
-                                                      TextStyle(fontSize: 15),
-                                                ),
-                                                Text(
-                                                  DateFormat.jm()
-                                                      .format(dateTime),
-                                                  style:
-                                                      TextStyle(fontSize: 10),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                      getChatComponent(
+                                          snapshot.data?.docs[index]),
                                       const SizedBox(width: 5),
                                       CircleAvatar(
                                         child: userModel
@@ -193,74 +163,6 @@ class ChatScreenView extends StatelessWidget {
                                     ],
                                   ),
                                   const SizedBox(height: 5),
-                                  Container(
-                                    height: 200,
-                                    width: 200,
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        width: 3,
-                                        color: Colors.grey,
-                                      ),
-                                      color: Colors.white,
-                                    ),
-                                    child: Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        Image.asset(
-                                            'assets/images/placeholders/user.png'),
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          child: BackdropFilter(
-                                            filter: ImageFilter.blur(
-                                              sigmaX: 10,
-                                              sigmaY: 10,
-                                            ),
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              child: Center(
-                                                child: InkWell(
-                                                  onTap: () {},
-                                                  child: Container(
-                                                    padding: EdgeInsets.all(10),
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.black
-                                                          .withOpacity(0.5),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        Icon(
-                                                          Icons.download,
-                                                          color: Colors.white,
-                                                        ),
-                                                        const SizedBox(
-                                                            width: 10),
-                                                        Text(
-                                                          '320 KB',
-                                                          style: TextStyles
-                                                              .sgproRegular
-                                                              .f18
-                                                              .white,
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
                                 ],
                               );
                       },
@@ -387,8 +289,7 @@ class ChatScreenView extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 InkWell(
-                  onTap: () =>
-                      controller.addData(mssg: controller.chatTED.value.text),
+                  onTap: controller.addData,
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,
@@ -402,5 +303,20 @@ class ChatScreenView extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Widget getChatComponent(data) {
+    final mssgType = data['messageType'];
+    Timestamp timestamp = data['time'];
+    DateTime dateTime =
+        DateTime.fromMicrosecondsSinceEpoch(timestamp.microsecondsSinceEpoch);
+    switch (mssgType) {
+      case MessageType.text:
+        return TextComponent(text: data['message'], dateTime: dateTime);
+      case MessageType.image:
+        return ImageComponent();
+      default:
+        return TextComponent(text: data['message'], dateTime: dateTime);
+    }
   }
 }

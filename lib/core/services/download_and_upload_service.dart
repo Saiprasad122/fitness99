@@ -29,10 +29,7 @@ class DownloadAndUploadService extends GetxController {
     final fileName =
         'images/$groupId/image-$groupId-${DateTime.now().millisecondsSinceEpoch}';
     final _firebaseStorage = FirebaseStorage.instance;
-    var upload =
-        _firebaseStorage.ref().child(fileName).putFile(file).catchError(() {
-      return null;
-    });
+    var upload = _firebaseStorage.ref().child(fileName).putFile(file);
     upload.asStream().listen((event) {
       progressListener?.call((event.bytesTransferred / event.totalBytes) * 100);
     });

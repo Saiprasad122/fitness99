@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
+import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -85,8 +86,7 @@ class ImageChatComponent extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   InkWell(
-                    onTap: () =>
-                        controller.addData(mssg: controller.chatTED.value.text),
+                    onTap: controller.uploadImage,
                     child: SvgPicture.asset(
                       'assets/svgs/chat_screen/send_icon.svg',
                       color: AppColors.secondaryColor,
