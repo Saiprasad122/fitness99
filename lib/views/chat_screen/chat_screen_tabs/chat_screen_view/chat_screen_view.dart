@@ -7,7 +7,9 @@ import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dar
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/profile_screen/widget/image_dialog_box.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -20,6 +22,7 @@ class ChatScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    controller.initializeChat(group_id);
     return Stack(
       children: [
         StreamBuilder(
@@ -92,11 +95,10 @@ class ChatScreenView extends StatelessWidget {
                                           alignment: Alignment.topRight,
                                           decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(20),
+                                                BorderRadius.circular(10),
                                             color: (Colors.blue[200]),
                                           ),
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 14, horizontal: 10),
+                                          padding: EdgeInsets.all(10),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
@@ -135,14 +137,28 @@ class ChatScreenView extends StatelessWidget {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(20),
+                                                  BorderRadius.circular(10),
                                               color: (Colors.blue[200]),
                                             ),
-                                            padding: EdgeInsets.all(16),
-                                            child: Text(
-                                              snapshot.data!.docs[index]
-                                                  ['message'],
-                                              style: TextStyle(fontSize: 15),
+                                            padding: EdgeInsets.all(10),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                  snapshot.data!.docs[index]
+                                                      ['message'],
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                                Text(
+                                                  DateFormat.jm()
+                                                      .format(dateTime),
+                                                  style:
+                                                      TextStyle(fontSize: 10),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -185,8 +201,8 @@ class ChatScreenView extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       border: Border.all(
-                                        width: 5,
-                                        color: Colors.black,
+                                        width: 3,
+                                        color: Colors.grey,
                                       ),
                                       color: Colors.white,
                                     ),
@@ -205,14 +221,43 @@ class ChatScreenView extends StatelessWidget {
                                             ),
                                             child: Container(
                                               alignment: Alignment.center,
-                                              child: Image.asset(
-                                                'assets/images/placeholders/download_button.png',
-                                                width: 25,
-                                                height: 25,
+                                              child: Center(
+                                                child: InkWell(
+                                                  onTap: () {},
+                                                  child: Container(
+                                                    padding: EdgeInsets.all(10),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black
+                                                          .withOpacity(0.5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.download,
+                                                          color: Colors.white,
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 10),
+                                                        Text(
+                                                          '320 KB',
+                                                          style: TextStyles
+                                                              .sgproRegular
+                                                              .f18
+                                                              .white,
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        )
+                                        ),
                                       ],
                                     ),
                                   )
@@ -271,6 +316,64 @@ class ChatScreenView extends StatelessWidget {
                     width: 25,
                     height: 25,
                   ),
+                  onTap: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Get.back();
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return ImagePickerDialoagBox(
+                                      controller: controller);
+                                },
+                              );
+                            },
+                            child: Text('Upload Photo',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text('Upload Video',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text('Upload Document',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text('Create Event',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text('Create Activity',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: () => Get.back(),
+                            child: Text('Cancel',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -284,8 +387,8 @@ class ChatScreenView extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 InkWell(
-                  onTap: () => controller.addData(
-                      mssg: controller.chatTED.value.text, groupId: group_id),
+                  onTap: () =>
+                      controller.addData(mssg: controller.chatTED.value.text),
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,

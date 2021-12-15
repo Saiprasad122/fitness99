@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/data_model.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:get/get.dart';
