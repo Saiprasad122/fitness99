@@ -10,7 +10,6 @@ class TextComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5),
       child: Align(
         alignment: (Alignment.topLeft),
         child: Container(

@@ -10,6 +10,6 @@ class SplashScreenBinding implements Bindings {
     Get.put<SplashViewController>(SplashViewController());
     Get.put<ApiService>(ApiService.create());
     Get.put<DownloadAndUploadService>(DownloadAndUploadService());
-    Get.put<DirectoriesService>(DirectoriesService());
+    Get.put<DirectoriesService>(DirectoriesService())..initFolder();
   }
 }

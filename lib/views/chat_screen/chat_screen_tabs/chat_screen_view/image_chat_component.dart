@@ -41,7 +41,9 @@ class ImageChatComponent extends StatelessWidget {
                       androidUiSettings:
                           AndroidUiSettings(hideBottomControls: true),
                     );
-                    controller.filePath.value = file!.path;
+                    if (file != null) {
+                      controller.filePath.value = file.path;
+                    }
                   },
                   icon: Icon(
                     Icons.crop,

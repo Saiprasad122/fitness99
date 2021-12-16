@@ -1,6 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:io';
+
 import 'package:fitness_99/controllers/chat_screen_controller/more_option_chat_controller/group_images_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/full_screen_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,7 +35,20 @@ class GroupImagesList extends StatelessWidget {
               gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
               itemBuilder: (context, i) {
-                return CachedNetworkImage(imageUrl: controller.imagesList[i]);
+                return InkWell(
+                  onTap: () {
+                    Get.to(() => FullScreenImageComponent(
+                        url: controller.imagesList[i]));
+                  },
+                  child: Hero(
+                    tag: controller.imagesList[i],
+                    child: Image.file(
+                      File(controller.imagesList[i]),
+                      filterQuality: FilterQuality.medium,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
               },
             )
           : Center(
