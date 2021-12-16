@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fitness_99/controllers/chat_screen_controller/member_list_controller.dart';
+import 'package:fitness_99/controllers/chat_screen_controller/more_option_chat_controller/member_list_controller.dart';
 import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_profile_list_shimmer.dart';

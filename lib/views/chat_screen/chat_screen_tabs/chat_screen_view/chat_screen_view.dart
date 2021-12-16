@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
+import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/image_component.dart';
@@ -20,6 +21,7 @@ class ChatScreenView extends StatelessWidget {
   final controller = Get.put(ChatScreenController());
   final userModel = Get.find<UserModelService>();
   final int group_id;
+
   ChatScreenView(this.group_id);
 
   @override
@@ -84,42 +86,8 @@ class ChatScreenView extends StatelessWidget {
                                         ),
                                       ),
                                       const SizedBox(width: 5),
-                                      IntrinsicWidth(
-                                        child: Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 5),
-                                          constraints: BoxConstraints(
-                                            maxWidth:
-                                                AppSizedBoxConfigs.screenWidth *
-                                                    0.6,
-                                            minWidth: 30,
-                                          ),
-                                          alignment: Alignment.topRight,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: (Colors.blue[200]),
-                                          ),
-                                          padding: EdgeInsets.all(10),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                snapshot.data!.docs[index]
-                                                    ['message'],
-                                                style: TextStyle(fontSize: 15),
-                                              ),
-                                              Text(
-                                                DateFormat.jm()
-                                                    .format(dateTime),
-                                                style: TextStyle(fontSize: 10),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                      getChatComponent(
+                                          snapshot.data?.docs[index]),
                                     ],
                                   ),
                                   const SizedBox(height: 5),
@@ -255,13 +223,16 @@ class ChatScreenView extends StatelessWidget {
                           ),
                           const SizedBox(height: 10),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Get.toNamed(Routes.CreateEvent);
+                            },
                             child: Text('Create Event',
                                 style: TextStyles.sgproRegular.f24.black),
                           ),
                           const SizedBox(height: 10),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () => Get.toNamed(Routes.CreateActivity),
                             child: Text('Create Activity',
                                 style: TextStyles.sgproRegular.f24.black),
                           ),
@@ -289,7 +260,20 @@ class ChatScreenView extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 InkWell(
-                  onTap: controller.addData,
+                  // onTap: controller.addData,
+                  onTap: () async {
+                    await FirebaseFirestore.instance
+                        .collection('groups')
+                        .doc(group_id.toString())
+                        .collection('chats')
+                        .orderBy('time', descending: true)
+                        .get()
+                        .then((value) {
+                      value.docs.forEach((element) {
+                        print(element.data());
+                      });
+                    });
+                  },
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,

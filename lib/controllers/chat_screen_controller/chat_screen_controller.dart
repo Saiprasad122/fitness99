@@ -21,6 +21,7 @@ class ChatScreenController extends GetxController {
   final scrollController = ScrollController();
   late int group_id;
   final filePath = ''.obs;
+  final List<String> imagesList = [];
 
   void initializeChat(int group_id) {
     this.group_id = group_id;

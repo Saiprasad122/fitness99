@@ -1,9 +1,11 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class GroupImagesList extends StatelessWidget {
-  const GroupImagesList({Key? key}) : super(key: key);
+class CreateEventScreen extends StatelessWidget {
+  const CreateEventScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +14,8 @@ class GroupImagesList extends StatelessWidget {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
-          'Group Images',
-          style: TextStyles.sgproBold.f26.black,
+          'Create Group',
+          style: TextStyles.sgproMedium.f26.black,
         ),
         leading: IconButton(
           onPressed: () => Get.back(),

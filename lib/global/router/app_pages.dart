@@ -1,4 +1,6 @@
 import 'package:fitness_99/global/router/views.export.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/create_activity.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/create_event.dart';
 
 class AppPages {
   static const INITIAL = Routes.SplashScreen;
@@ -14,8 +16,8 @@ class AppPages {
         page: () => ForgotPasswordScreeen()),
     GetPage(name: Routes.DashboardScreen, page: () => DashboardView()),
     GetPage(name: Routes.ChatListScreen, page: () => ChatListScreen()),
-    // GetPage(name: Routes.ChatScreen, page: () => ChatScreen()),
-    // GetPage(name: Routes.MemberList, page: () => MemberList()),
+    GetPage(name: Routes.CreateActivity, page: () => CreateActiviryScreen()),
+    GetPage(name: Routes.CreateEvent, page: () => CreateEventScreen()),
     GetPage(name: Routes.GroupVideoList, page: () => GroupVideosList()),
     GetPage(name: Routes.GroupImageList, page: () => GroupImagesList()),
     GetPage(name: Routes.GroupDocList, page: () => GroupDocsList()),
@@ -53,6 +55,8 @@ abstract class Routes {
   static const DashboardScreen = _Paths.dashboardScreen;
   static const ChatListScreen = _Paths.chatListScreen;
   static const ChatScreen = _Paths.chatScreen;
+  static const CreateActivity = _Paths.createActivity;
+  static const CreateEvent = _Paths.createEvent;
   static const MemberList = _Paths.memberList;
   static const GroupVideoList = _Paths.groupVideoList;
   static const GroupImageList = _Paths.groupImageList;
@@ -88,12 +92,12 @@ abstract class _Paths {
   static const dashboardScreen = '/dashboardScreen';
   static const chatListScreen = '/chatListScreen';
   static const chatScreen = '/chatScreen';
+  static const createActivity = '/createActivity';
+  static const createEvent = '/createEvent';
   static const memberList = '/memberList';
   static const groupVideoList = '/groupVideoList';
   static const groupImageList = '/groupImageList';
-
   static const groupDocList = '/groupDocList';
-
   static const searchSreen = '/searchScreen';
   static const displayMyGroupScreen = '/displayMyGroupScreen';
   static const createGroupScreen = '/createGroupScreen';

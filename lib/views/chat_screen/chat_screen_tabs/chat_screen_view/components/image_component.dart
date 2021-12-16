@@ -12,7 +12,6 @@ class ImageComponent extends StatelessWidget {
     return Container(
       height: 200,
       width: 200,
-      margin: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
@@ -24,7 +23,10 @@ class ImageComponent extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Image.network(url),
+          Image.network(
+            url,
+            filterQuality: FilterQuality.low,
+          ),
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: BackdropFilter(
