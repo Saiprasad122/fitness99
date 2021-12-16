@@ -85,12 +85,12 @@ class ChatScreenView extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(width: 5),
+                                      const SizedBox(width: 10),
                                       getChatComponent(
                                           snapshot.data?.docs[index]),
                                     ],
                                   ),
-                                  const SizedBox(height: 5),
+                                  const SizedBox(height: 8),
                                 ],
                               )
                             : Column(
@@ -101,7 +101,7 @@ class ChatScreenView extends StatelessWidget {
                                     children: [
                                       getChatComponent(
                                           snapshot.data?.docs[index]),
-                                      const SizedBox(width: 5),
+                                      const SizedBox(width: 10),
                                       CircleAvatar(
                                         child: userModel
                                                 .getProfilePicture()
