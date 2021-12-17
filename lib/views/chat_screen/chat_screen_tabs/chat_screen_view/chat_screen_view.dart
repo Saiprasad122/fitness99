@@ -211,7 +211,7 @@ class ChatScreenView extends StatelessWidget {
                           ),
                           const SizedBox(height: 10),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: controller.getVideo,
                             child: Text('Upload Video',
                                 style: TextStyles.sgproRegular.f24.black),
                           ),

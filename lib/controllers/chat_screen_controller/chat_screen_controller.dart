@@ -5,10 +5,11 @@ import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dar
 import 'package:fitness_99/core/services/download_and_upload_service.dart';
 import 'package:fitness_99/core/services/get_directories.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
-import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/image_chat_component.dart';
+import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
 
 class ChatScreenController extends GetxController {
   TextEditingController chatTED = TextEditingController();
@@ -24,6 +25,8 @@ class ChatScreenController extends GetxController {
   late int group_id;
   final filePath = ''.obs;
   final List<String> imagesOfGroup = [];
+  final picker = ImagePicker();
+  late VideoPlayerController videoPlayerController;
 
   void initializeChat(int group_id) {
     this.group_id = group_id;
@@ -96,11 +99,23 @@ class ChatScreenController extends GetxController {
   }
 
   getImage(ImageSource source) async {
-    final picker = ImagePicker();
     final file = await picker.pickImage(source: source);
     if (file != null) {
       filePath.value = file.path;
-      Get.to(ImageChatComponent());
+      Get.toNamed(Routes.ImageChatComponent);
+    } else {
+      filePath.value = '';
+    }
+  }
+
+  getVideo() async {
+    final file = await picker.pickVideo(source: ImageSource.gallery);
+    if (file != null) {
+      filePath.value = file.path;
+      videoPlayerController =
+          await VideoPlayerController.file(File(filePath.value))
+            ..initialize();
+      Get.toNamed(Routes.VideoChatComponent);
     } else {
       filePath.value = '';
     }

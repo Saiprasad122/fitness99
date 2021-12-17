@@ -57,6 +57,7 @@ dependencies:
   freezed_annotation: ^0.15.0
   intl: ^0.17.0
   fluttertoast: ^8.0.8
+  video_player: ^2.2.7
   
 dev_dependencies:
   flutter_test:
