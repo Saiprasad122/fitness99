@@ -58,8 +58,15 @@ class DownloadAndUploadService extends GetxController {
     try {
       final fileName =
           'image-$groupId-${DateTime.now().millisecondsSinceEpoch}';
-      final firebasePath = 'images/$groupId/$fileName';
 
+      final File tempFile = File(
+          directoryService.getImagesPath(groupId.toString()) +
+              fileName +
+              '.jpg');
+      if (tempFile.existsSync()) {
+        await tempFile.delete();
+      }
+      await tempFile.create(recursive: true);
       final newFile = await directoryService.moveFile(
           file,
           directoryService.getImagesPath(groupId.toString()) +
