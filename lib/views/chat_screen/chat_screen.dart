@@ -68,11 +68,17 @@ class ChatScreen extends StatelessWidget {
             group_name,
             style: TextStyles.sgproBold.f26.black,
           ),
-          leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.black,
+          leading: Hero(
+            tag: 'back_button',
+            child: Material(
+              color: Colors.transparent,
+              child: IconButton(
+                onPressed: () => Get.back(),
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.black,
+                ),
+              ),
             ),
           ),
         ),

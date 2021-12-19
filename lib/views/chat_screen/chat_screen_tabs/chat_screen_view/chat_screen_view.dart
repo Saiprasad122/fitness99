@@ -8,6 +8,7 @@ import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/models/messgae_model.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/image_component.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/text_component.dart';
 import 'package:fitness_99/views/profile_screen/widget/image_dialog_box.dart';
@@ -34,30 +35,27 @@ class ChatScreenView extends StatelessWidget {
               .collection('groups')
               .doc(group_id.toString())
               .collection('chats')
-              .orderBy('time', descending: true)
+              .orderBy('time', descending: false)
               .snapshots(),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-            if (snapshot.data?.docs.isNotEmpty ?? false) {
+            final messages = snapshot.data?.docs.reversed.toList() ?? [];
+
+            if (messages.isNotEmpty) {
               return Column(
                 children: [
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      shrinkWrap: true,
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 14,
+                      ),
+                      itemCount: messages.length,
                       reverse: true,
                       padding: EdgeInsets.only(top: 10),
                       physics: BouncingScrollPhysics(),
                       controller: controller.scrollController,
                       itemBuilder: (context, index) {
-                        Timestamp timestamp =
-                            snapshot.data!.docs[index]['time'];
-                        DateTime dateTime = DateTime.fromMicrosecondsSinceEpoch(
-                            timestamp.microsecondsSinceEpoch);
-                        print(
-                            'The time is ${DateFormat.jm().format(dateTime)}');
-
-                        return snapshot.data!.docs[index]['id'] !=
+                        return messages[index]['id'] !=
                                 controller.userModel.getid().toString()
                             ? Column(
                                 children: [
@@ -70,8 +68,8 @@ class ChatScreenView extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           child: CachedNetworkImage(
-                                            imageUrl: snapshot
-                                                .data!.docs[index]['imageURl']
+                                            imageUrl: messages[index]
+                                                    ['imageURl']
                                                 .toString(),
                                             placeholder: (context, s) =>
                                                 Image.asset(
@@ -86,8 +84,8 @@ class ChatScreenView extends StatelessWidget {
                                         ),
                                       ),
                                       const SizedBox(width: 10),
-                                      getChatComponent(
-                                          snapshot.data?.docs[index]),
+                                      getChatComponent(messages[index],
+                                          other: true),
                                     ],
                                   ),
                                   const SizedBox(height: 8),
@@ -99,8 +97,8 @@ class ChatScreenView extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      getChatComponent(
-                                          snapshot.data?.docs[index]),
+                                      getChatComponent(messages[index],
+                                          other: false),
                                       const SizedBox(width: 10),
                                       CircleAvatar(
                                         child: userModel
@@ -139,7 +137,7 @@ class ChatScreenView extends StatelessWidget {
                   const SizedBox(height: 70),
                 ],
               );
-            } else if (snapshot.data?.docs.isEmpty ?? true) {
+            } else if (messages.isEmpty) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -260,6 +258,19 @@ class ChatScreenView extends StatelessWidget {
                 const SizedBox(width: 10),
                 InkWell(
                   onTap: controller.addData,
+                  // onTap: () async {
+                  //   await FirebaseFirestore.instance
+                  //       .collection('groups')
+                  //       .doc(group_id.toString())
+                  //       .collection('chats')
+                  //       .orderBy('time', descending: true)
+                  //       .get()
+                  //       .then((value) {
+                  //     value.docs.forEach((element) {
+                  //       print(element.data());
+                  //     });
+                  //   });
+                  // },
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,
@@ -275,18 +286,33 @@ class ChatScreenView extends StatelessWidget {
     );
   }
 
-  Widget getChatComponent(data) {
-    final mssgType = data['messageType'];
-    Timestamp timestamp = data['time'];
-    DateTime dateTime =
-        DateTime.fromMicrosecondsSinceEpoch(timestamp.microsecondsSinceEpoch);
-    switch (mssgType) {
-      case MessageType.text:
-        return TextComponent(text: data['message'], dateTime: dateTime);
-      case MessageType.image:
-        return ImageComponent(url: data['url']);
-      default:
-        return TextComponent(text: data['message'], dateTime: dateTime);
+  Widget getChatComponent(QueryDocumentSnapshot<Map<String, dynamic>>? data,
+      {bool other = false}) {
+    if (data != null) {
+      final mssgType = data['messageType'];
+      Timestamp timestamp = data['time'];
+      DateTime dateTime =
+          DateTime.fromMicrosecondsSinceEpoch(timestamp.microsecondsSinceEpoch);
+      switch (mssgType) {
+        case MessageType.text:
+          return TextComponent(
+              text: data['message'], dateTime: dateTime, fromOther: other);
+        case MessageType.image:
+          final msg = data.data()['message'];
+          return ImageComponent(
+            url: data['url'],
+            msg: msg,
+            dateTime: dateTime,
+          );
+        default:
+          return TextComponent(
+            text: data['message'],
+            dateTime: dateTime,
+            fromOther: other,
+          );
+      }
+    } else {
+      return Container();
     }
   }
 }
