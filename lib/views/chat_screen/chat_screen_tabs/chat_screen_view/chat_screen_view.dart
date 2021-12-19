@@ -8,6 +8,7 @@ import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/models/messgae_model.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/image_component.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/text_component.dart';
 import 'package:fitness_99/views/profile_screen/widget/image_dialog_box.dart';
@@ -34,11 +35,13 @@ class ChatScreenView extends StatelessWidget {
               .collection('groups')
               .doc(group_id.toString())
               .collection('chats')
-              .orderBy('time', descending: true)
+              .orderBy('time', descending: false)
               .snapshots(),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-            if (snapshot.data?.docs.isNotEmpty ?? false) {
+            final messages = snapshot.data?.docs.reversed.toList() ?? [];
+
+            if (messages.isNotEmpty) {
               return Column(
                 children: [
                   Expanded(
@@ -46,21 +49,13 @@ class ChatScreenView extends StatelessWidget {
                       separatorBuilder: (context, index) => const SizedBox(
                         height: 14,
                       ),
-                      itemCount: snapshot.data!.docs.length,
-                      shrinkWrap: true,
+                      itemCount: messages.length,
                       reverse: true,
                       padding: EdgeInsets.only(top: 10),
                       physics: BouncingScrollPhysics(),
                       controller: controller.scrollController,
                       itemBuilder: (context, index) {
-                        Timestamp timestamp =
-                            snapshot.data!.docs[index]['time'];
-                        DateTime dateTime = DateTime.fromMicrosecondsSinceEpoch(
-                            timestamp.microsecondsSinceEpoch);
-                        print(
-                            'The time is ${DateFormat.jm().format(dateTime)}');
-
-                        return snapshot.data!.docs[index]['id'] !=
+                        return messages[index]['id'] !=
                                 controller.userModel.getid().toString()
                             ? Column(
                                 children: [
@@ -73,8 +68,8 @@ class ChatScreenView extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           child: CachedNetworkImage(
-                                            imageUrl: snapshot
-                                                .data!.docs[index]['imageURl']
+                                            imageUrl: messages[index]
+                                                    ['imageURl']
                                                 .toString(),
                                             placeholder: (context, s) =>
                                                 Image.asset(
@@ -89,8 +84,7 @@ class ChatScreenView extends StatelessWidget {
                                         ),
                                       ),
                                       const SizedBox(width: 10),
-                                      getChatComponent(
-                                          snapshot.data?.docs[index],
+                                      getChatComponent(messages[index],
                                           other: true),
                                     ],
                                   ),
@@ -103,8 +97,7 @@ class ChatScreenView extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      getChatComponent(
-                                          snapshot.data?.docs[index],
+                                      getChatComponent(messages[index],
                                           other: false),
                                       const SizedBox(width: 10),
                                       CircleAvatar(
@@ -144,7 +137,7 @@ class ChatScreenView extends StatelessWidget {
                   const SizedBox(height: 70),
                 ],
               );
-            } else if (snapshot.data?.docs.isEmpty ?? true) {
+            } else if (messages.isEmpty) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
