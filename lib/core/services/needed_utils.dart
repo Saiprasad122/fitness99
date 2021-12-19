@@ -25,7 +25,7 @@ class NeededVariables extends GetxController {
     Get.put<UserModelService>(UserModelService());
     // _dio.interceptors.add(LogInterceptor());
 
-    print('Shared Preference loaded');
+    print('///===Shared Preference loaded===///');
   }
 
   static FirebaseFirestore firebaseInstance = FirebaseFirestore.instance;

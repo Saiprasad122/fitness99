@@ -199,12 +199,11 @@ class ChatScreenView extends StatelessWidget {
                             onPressed: () {
                               Get.back();
                               showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return ImagePickerDialoagBox(
-                                      controller: controller);
-                                },
-                              );
+                                  context: context,
+                                  builder: (context) {
+                                    return ImagePickerDialoagBox(
+                                        controller: controller);
+                                  });
                             },
                             child: Text('Upload Photo',
                                 style: TextStyles.sgproRegular.f24.black),
@@ -260,20 +259,7 @@ class ChatScreenView extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 InkWell(
-                  // onTap: controller.addData,
-                  onTap: () async {
-                    await FirebaseFirestore.instance
-                        .collection('groups')
-                        .doc(group_id.toString())
-                        .collection('chats')
-                        .orderBy('time', descending: true)
-                        .get()
-                        .then((value) {
-                      value.docs.forEach((element) {
-                        print(element.data());
-                      });
-                    });
-                  },
+                  onTap: controller.addData,
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,

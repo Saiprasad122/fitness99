@@ -8,7 +8,8 @@ import 'chat_screen_tabs/more_options_chat_screen/more_options_chat_screen.dart'
 
 class ChatScreen extends StatelessWidget {
   final int group_id;
-  const ChatScreen(this.group_id);
+  final String group_name;
+  const ChatScreen(this.group_id, this.group_name);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,7 @@ class ChatScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           centerTitle: true,
           title: Text(
-            'Demo Group Name',
+            group_name,
             style: TextStyles.sgproBold.f26.black,
           ),
           leading: IconButton(

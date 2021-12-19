@@ -1,6 +1,4 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

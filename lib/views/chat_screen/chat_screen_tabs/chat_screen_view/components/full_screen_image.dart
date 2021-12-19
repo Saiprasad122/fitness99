@@ -1,12 +1,12 @@
 import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FullScreenImageComponent extends StatelessWidget {
-  FullScreenImageComponent({Key? key, required this.url}) : super(key: key);
+  FullScreenImageComponent({Key? key, required this.url, this.file})
+      : super(key: key);
   final String url;
+  final File? file;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +18,7 @@ class FullScreenImageComponent extends StatelessWidget {
                   child: Hero(
                 tag: url,
                 child: Image.file(
-                  File(url),
+                  file ?? File(url),
                   filterQuality: FilterQuality.high,
                   fit: BoxFit.contain,
                 ),

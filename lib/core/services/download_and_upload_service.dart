@@ -12,7 +12,8 @@ class DownloadAndUploadService extends GetxController {
       String downloadUrl,
       int groupId,
       void Function(double progressPercent, String? imageFilePath)?
-          progressListener) async {
+          progressListener,
+      void Function(File localFile)? onDoneListener) async {
     try {
       final directories = Get.find<DirectoriesService>();
       final ref = FirebaseStorage.instance.refFromURL(downloadUrl);
@@ -40,6 +41,7 @@ class DownloadAndUploadService extends GetxController {
             '${directories.getImagesPath(groupId.toString())}$name.jpg');
       });
       await downloadTask;
+      onDoneListener?.call(tempFile);
       return tempFile;
     } catch (e) {
       return null;
@@ -73,7 +75,7 @@ class DownloadAndUploadService extends GetxController {
       await upload;
       return await uploadRef.getDownloadURL();
     } catch (e) {
-      print(e);
+      print('The error is $e');
       return null;
     }
   }

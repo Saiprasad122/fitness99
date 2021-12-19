@@ -61,43 +61,38 @@ class ImageChatComponent extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              height: 60,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(width: 1),
+          Container(
+            alignment: Alignment.bottomCenter,
+            height: 60,
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(width: 1),
+              ),
+            ),
+            padding: const EdgeInsets.all(15),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: controller.chatTED,
+                    decoration: InputDecoration(
+                      hintText: 'Type a message...',
+                      hintStyle: TextStyles.sgproRegular.f20,
+                    ),
+                  ),
                 ),
-              ),
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: controller.chatTED,
-                      decoration: InputDecoration(
-                        hintText: 'Type a message...',
-                        hintStyle: TextStyles.sgproRegular.f20,
-                      ),
-                    ),
+                const SizedBox(width: 10),
+                InkWell(
+                  onTap: controller.uploadImage,
+                  child: SvgPicture.asset(
+                    'assets/svgs/chat_screen/send_icon.svg',
+                    color: AppColors.secondaryColor,
+                    width: 25,
+                    height: 25,
                   ),
-                  const SizedBox(width: 10),
-                  InkWell(
-                    onTap: controller.uploadImage,
-                    child: SvgPicture.asset(
-                      'assets/svgs/chat_screen/send_icon.svg',
-                      color: AppColors.secondaryColor,
-                      width: 25,
-                      height: 25,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

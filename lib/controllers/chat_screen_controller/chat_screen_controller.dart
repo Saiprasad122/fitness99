@@ -9,7 +9,6 @@ import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:video_player/video_player.dart';
 
 class ChatScreenController extends GetxController {
   TextEditingController chatTED = TextEditingController();
@@ -26,7 +25,6 @@ class ChatScreenController extends GetxController {
   final filePath = ''.obs;
   final List<String> imagesOfGroup = [];
   final picker = ImagePicker();
-  late VideoPlayerController videoPlayerController;
 
   void initializeChat(int group_id) {
     this.group_id = group_id;
@@ -46,12 +44,30 @@ class ChatScreenController extends GetxController {
         : directoryService.getImagesPath(group_id.toString()) + fileName;
   }
 
-  void downloadImage(
-      String url,
-      void Function(double progressPercent, String? imageFilePath)?
-          progressListener) {
-    uploadImageService.downloadImageFromFirebase(
-        url, group_id, progressListener);
+  Future<File?> getLocalImageFromDownloads(String url) async {
+    final filePath = await getLocalImagePathFromDownloads(url);
+    if (filePath != null) {
+      try {
+        final file = File(filePath + '.jpg');
+        return file;
+      } catch (e) {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  void downloadImage(String url,
+      {void Function(double progressPercent, String? imageFilePath)?
+          progressListener,
+      void Function(File localFile)? onDoneListener}) async {
+    await uploadImageService.downloadImageFromFirebase(
+      url,
+      group_id,
+      progressListener,
+      onDoneListener,
+    );
   }
 
   void addData({
@@ -89,7 +105,6 @@ class ChatScreenController extends GetxController {
         File(filePath.value),
         (progressPercent) =>
             print('The percent is --------- $progressPercent'));
-
     if (path?.isNotEmpty ?? false) {
       filePath.value = path!;
       addData(messageType: MessageType.image);
@@ -101,6 +116,7 @@ class ChatScreenController extends GetxController {
   getImage(ImageSource source) async {
     final file = await picker.pickImage(source: source);
     if (file != null) {
+      print('THe real path is ${file.path}');
       filePath.value = file.path;
       Get.toNamed(Routes.ImageChatComponent);
     } else {
@@ -112,9 +128,7 @@ class ChatScreenController extends GetxController {
     final file = await picker.pickVideo(source: ImageSource.gallery);
     if (file != null) {
       filePath.value = file.path;
-      videoPlayerController =
-          await VideoPlayerController.file(File(filePath.value))
-            ..initialize();
+
       Get.toNamed(Routes.VideoChatComponent);
     } else {
       filePath.value = '';

@@ -46,7 +46,9 @@ class ChatListScreen extends StatelessWidget {
                                 groupGoal: controller.groupList[i].goal,
                                 groupImage: controller.groupList[i].group_image,
                                 onTap: () => Get.to(
-                                    ChatScreen(controller.groupList[i].id)),
+                                  ChatScreen(controller.groupList[i].id,
+                                      controller.groupList[i].group_name),
+                                ),
                               ),
                             ),
                           )

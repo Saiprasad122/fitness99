@@ -18,7 +18,7 @@ class ImageComponent extends StatefulWidget {
 class _ImageComponentState extends State<ImageComponent> {
   final ValueNotifier<double> progress = ValueNotifier(0.0);
   final chatController = Get.find<ChatScreenController>();
-  final ValueNotifier<String?> localImagePath = ValueNotifier(null);
+  final ValueNotifier<File?> localImagePath = ValueNotifier(null);
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _ImageComponentState extends State<ImageComponent> {
 
   void loadAssets() async {
     localImagePath.value =
-        (await chatController.getLocalImagePathFromDownloads(widget.url));
+        (await chatController.getLocalImageFromDownloads(widget.url));
   }
 
   @override
@@ -46,7 +46,7 @@ class _ImageComponentState extends State<ImageComponent> {
       ),
       child: ValueListenableBuilder(
           valueListenable: localImagePath,
-          builder: (context, String? localPath, child) {
+          builder: (context, File? localPath, child) {
             return Stack(
               clipBehavior: Clip.antiAlias,
               fit: StackFit.expand,
@@ -54,13 +54,15 @@ class _ImageComponentState extends State<ImageComponent> {
                 if (localPath != null)
                   InkWell(
                     onTap: () {
-                      Get.to(() =>
-                          FullScreenImageComponent(url: localPath + '.jpg'));
+                      Get.to(() => FullScreenImageComponent(
+                            url: localPath.path,
+                            file: localPath,
+                          ));
                     },
                     child: Hero(
-                      tag: localPath + '.jpg',
+                      tag: localPath,
                       child: Image.file(
-                        File(localPath + '.jpg'),
+                        localPath,
                         filterQuality: FilterQuality.medium,
                         fit: BoxFit.cover,
                       ),
@@ -83,8 +85,13 @@ class _ImageComponentState extends State<ImageComponent> {
                         child: InkWell(
                           onTap: () {
                             chatController.downloadImage(widget.url,
-                                (progressPercent, imageFilePath) {
+                                progressListener:
+                                    (progressPercent, imageFilePath) {
+                              print(
+                                  'PROGRESS _____------------> $progressPercent');
                               progress.value = progressPercent;
+                            }, onDoneListener: (localFile) {
+                              localImagePath.value = localFile;
                             });
                           },
                           child: Container(
@@ -93,21 +100,27 @@ class _ImageComponentState extends State<ImageComponent> {
                               color: Colors.black.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.download,
-                                  color: Colors.white,
-                                ),
-                                if (progress.value > 0) ...[
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    '${progress.value}%',
-                                    style: TextStyles.sgproRegular.f18.white,
-                                  ),
-                                ]
-                              ],
+                            child: ValueListenableBuilder(
+                              valueListenable: progress,
+                              child: Icon(
+                                Icons.download,
+                                color: Colors.white,
+                              ),
+                              builder:
+                                  (context, double progressOfFile, child) =>
+                                      Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (child != null) child,
+                                  if (progressOfFile > 0) ...[
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      '${progress.value}%',
+                                      style: TextStyles.sgproRegular.f18.white,
+                                    )
+                                  ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
