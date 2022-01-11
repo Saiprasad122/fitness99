@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class InvitationScreen extends StatelessWidget {
-  const InvitationScreen({Key? key}) : super(key: key);
+  InvitationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,46 @@ class InvitationScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(),
+      body: ListView(
+        children: [
+          Dismissible(
+            key: UniqueKey(),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                      radius: 35,
+                      child:
+                          Image.asset('assets/images/placeholders/user.png')),
+                  const SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Vinay', style: TextStyles.sgproMedium.f22),
+                      RichText(
+                        text: TextSpan(
+                          text: 'Invite to join',
+                          children: [
+                            TextSpan(
+                              text: ' Be a sprites ',
+                              style: TextStyles.sgproMedium.f22,
+                            ),
+                            TextSpan(
+                                text: 'group',
+                                style: TextStyles.sgproRegular.f22.black)
+                          ],
+                          style: TextStyles.sgproRegular.f22.black,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

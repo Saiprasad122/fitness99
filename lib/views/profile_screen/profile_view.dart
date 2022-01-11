@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 
 class ProfileView extends StatelessWidget {
   final controller = Get.put(ProfileViewController());
-  final UserLocalDataModel = Get.find<UserModelService>();
   final userModel = Get.find<UserModelService>();
 
   @override
@@ -47,11 +46,9 @@ class ProfileView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  const SizedBox(width: 10),
                   Text(
-                    UserLocalDataModel.getUserName(),
+                    userModel.getUserName(),
                     style: TextStyles.sgproBold.black.f26,
                   ),
                   const Spacer(),
@@ -97,11 +94,9 @@ class ProfileView extends StatelessWidget {
                       Icons.email,
                       color: Colors.amber[800],
                     ),
-                    const SizedBox(
-                      width: 20,
-                    ),
+                    const SizedBox(width: 20),
                     Text(
-                      UserLocalDataModel.getEmail(),
+                      userModel.getEmail(),
                       style: TextStyles.sgproRegular.greyMid.f22,
                     ),
                   ],
@@ -127,7 +122,7 @@ class ProfileView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          '${UserLocalDataModel.getNoOfGroups()}',
+                          '${userModel.getNoOfGroups()}',
                           style: TextStyles.sgproMedium.black.f20,
                         ),
                         Text(

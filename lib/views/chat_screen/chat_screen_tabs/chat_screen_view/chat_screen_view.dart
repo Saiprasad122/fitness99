@@ -1,50 +1,60 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
+import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
+import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/image_component.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/text_component.dart';
+import 'package:fitness_99/views/profile_screen/widget/image_dialog_box.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+
+import 'components/document_component.dart';
 
 class ChatScreenView extends StatelessWidget {
   final controller = Get.put(ChatScreenController());
   final userModel = Get.find<UserModelService>();
-  ChatScreenView({Key? key}) : super(key: key);
+  final int group_id;
+
+  ChatScreenView(this.group_id);
 
   @override
   Widget build(BuildContext context) {
+    controller.initializeChat(group_id);
     return Stack(
       children: [
         StreamBuilder(
           stream: controller.instance
               .collection('groups')
-              .orderBy('time', descending: true)
+              .doc(group_id.toString())
+              .collection('chats')
+              .orderBy('time', descending: false)
               .snapshots(),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-            if (snapshot.data?.docs.isNotEmpty ?? false) {
+            final messages = snapshot.data?.docs.reversed.toList() ?? [];
+
+            if (messages.isNotEmpty) {
               return Column(
                 children: [
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      shrinkWrap: true,
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 15),
+                      itemCount: messages.length,
                       reverse: true,
                       padding: EdgeInsets.only(top: 10),
                       physics: BouncingScrollPhysics(),
                       controller: controller.scrollController,
                       itemBuilder: (context, index) {
-                        Timestamp timestamp =
-                            snapshot.data!.docs[index]['time'];
-                        DateTime dateTime = DateTime.fromMicrosecondsSinceEpoch(
-                            timestamp.microsecondsSinceEpoch);
-                        print(
-                            'The time is ${DateFormat.jm().format(dateTime)}');
-
-                        return snapshot.data!.docs[index]['id'] !=
+                        return messages[index]['id'] !=
                                 controller.userModel.getid().toString()
                             ? Column(
                                 children: [
@@ -57,8 +67,8 @@ class ChatScreenView extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           child: CachedNetworkImage(
-                                            imageUrl: snapshot
-                                                .data!.docs[index]['imageURl']
+                                            imageUrl: messages[index]
+                                                    ['imageURl']
                                                 .toString(),
                                             placeholder: (context, s) =>
                                                 Image.asset(
@@ -72,75 +82,23 @@ class ChatScreenView extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(width: 5),
-                                      IntrinsicWidth(
-                                        child: Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 5),
-                                          constraints: BoxConstraints(
-                                            maxWidth:
-                                                AppSizedBoxConfigs.screenWidth *
-                                                    0.6,
-                                            minWidth: 30,
-                                          ),
-                                          alignment: Alignment.topRight,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: (Colors.blue[200]),
-                                          ),
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 14, horizontal: 10),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                snapshot.data!.docs[index]
-                                                    ['message'],
-                                                style: TextStyle(fontSize: 15),
-                                              ),
-                                              Text(
-                                                DateFormat.jm()
-                                                    .format(dateTime),
-                                                style: TextStyle(fontSize: 10),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                      const SizedBox(width: 10),
+                                      getChatComponent(messages[index],
+                                          other: true),
                                     ],
                                   ),
-                                  const SizedBox(height: 5),
+                                  const SizedBox(height: 8),
                                 ],
                               )
                             : Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5),
-                                        child: Align(
-                                          alignment: (Alignment.topLeft),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: (Colors.blue[200]),
-                                            ),
-                                            padding: EdgeInsets.all(16),
-                                            child: Text(
-                                              snapshot.data!.docs[index]
-                                                  ['message'],
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
+                                      getChatComponent(messages[index],
+                                          other: false),
+                                      const SizedBox(width: 10),
                                       CircleAvatar(
                                         child: userModel
                                                 .getProfilePicture()
@@ -169,6 +127,7 @@ class ChatScreenView extends StatelessWidget {
                                       const SizedBox(width: 5),
                                     ],
                                   ),
+                                  // DocumentComponent(),
                                   const SizedBox(height: 5),
                                 ],
                               );
@@ -178,7 +137,7 @@ class ChatScreenView extends StatelessWidget {
                   const SizedBox(height: 70),
                 ],
               );
-            } else if (snapshot.data?.docs.isEmpty ?? true) {
+            } else if (messages.isEmpty) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -197,8 +156,9 @@ class ChatScreenView extends StatelessWidget {
                   ],
                 ),
               );
+            } else {
+              return Center(child: CircularProgressIndicator());
             }
-            return Center(child: CircularProgressIndicator());
           },
         ),
         Positioned(
@@ -217,11 +177,82 @@ class ChatScreenView extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SvgPicture.asset(
-                  'assets/svgs/chat_screen/attachment_icon.svg',
-                  color: AppColors.secondaryColor,
-                  width: 25,
-                  height: 25,
+                InkWell(
+                  child: SvgPicture.asset(
+                    'assets/svgs/chat_screen/attachment_icon.svg',
+                    color: AppColors.secondaryColor,
+                    width: 25,
+                    height: 25,
+                  ),
+                  onTap: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Get.back();
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return ImagePickerDialoagBox(
+                                        controller: controller);
+                                  });
+                            },
+                            child: Text('Upload Photo',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: controller.getVideo,
+                            child: Text('Upload Video',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: controller.uploadDocument,
+                            child: Text('Upload Document',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Get.toNamed(Routes.CreateEvent);
+                            },
+                            child: Text('Create Event',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Get.toNamed(Routes.CreateActivity);
+                            },
+                            child: Text('Create Activity',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text('Create Poll',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: Get.back,
+                            child: Text('Cancel',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -235,8 +266,7 @@ class ChatScreenView extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 InkWell(
-                  onTap: () =>
-                      controller.addData(controller.chatTED.value.text),
+                  onTap: controller.addData,
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,
@@ -251,14 +281,42 @@ class ChatScreenView extends StatelessWidget {
       ],
     );
   }
+
+  Widget getChatComponent(QueryDocumentSnapshot<Map<String, dynamic>>? data,
+      {bool other = false}) {
+    if (data != null) {
+      final mssgType = data['messageType'];
+      Timestamp timestamp = data['time'];
+      DateTime dateTime =
+          DateTime.fromMicrosecondsSinceEpoch(timestamp.microsecondsSinceEpoch);
+      switch (mssgType) {
+        case MessageType.text:
+          return TextComponent(
+              text: data['message'], dateTime: dateTime, fromOther: other);
+        case MessageType.image:
+          final msg = data.data()['message'];
+          return ImageComponent(
+            url: data['url'],
+            msg: msg,
+            dateTime: dateTime,
+            fromOther: other,
+          );
+        case MessageType.document:
+          return DocumentComponent(
+            url: data['url'],
+            dateTime: dateTime,
+            extension: data['extension'],
+          );
+
+        default:
+          return TextComponent(
+            text: data['message'],
+            dateTime: dateTime,
+            fromOther: other,
+          );
+      }
+    } else {
+      return const SizedBox();
+    }
+  }
 }
-
-// List<MssgClass> chats = [
-//   MssgClass(id: 'receiver', mssg: 'Hey'),
-//   MssgClass(id: 'sender', mssg: 'Hey'),
-// ];
-
-// class MssgClass {
-//   String id, mssg;
-//   MssgClass({required this.id, required this.mssg});
-// }

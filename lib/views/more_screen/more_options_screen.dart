@@ -62,19 +62,31 @@ class MoreOptionsScreen extends StatelessWidget {
               dividerUnderTitle: true,
               rightArrow: false,
               height: 45,
-              onTap: () async {
-                // showDialog(
-                //     context: context,
-                //     builder: (context) {
-                //       return AlertDialog(
-                //         content: Container(
-                //           child: Column(
-                //             children: [],
-                //           ),
-                //         ),
-                //       );
-                //     });
-                controller.logout();
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Logout'),
+                      content: Text('Do you want to logout?'),
+                      actions: [
+                        TextButton(
+                            onPressed: () => controller.logout(),
+                            child: Text(
+                              'Yes',
+                              style: TextStyles.sgproRegular.f20.black,
+                            )),
+                        TextButton(
+                          onPressed: () => Get.back(),
+                          child: Text(
+                            'No',
+                            style: TextStyles.sgproRegular.f20.black,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             ),
           ],

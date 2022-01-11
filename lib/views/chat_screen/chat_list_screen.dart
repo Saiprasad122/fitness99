@@ -1,10 +1,10 @@
 import 'package:fitness_99/controllers/chat_screen_controller/chat_list_controller.dart';
-import 'package:fitness_99/global/router/app_pages.dart';
+import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_chat_tile.dart';
 import 'package:fitness_99/global/widgets/custom_search_field.dart';
-import 'package:fitness_99/global/widgets/custom_shimmer.dart';
+import 'package:fitness_99/global/widgets/custom_list_group_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +45,10 @@ class ChatListScreen extends StatelessWidget {
                                 groupName: controller.groupList[i].group_name,
                                 groupGoal: controller.groupList[i].goal,
                                 groupImage: controller.groupList[i].group_image,
-                                onTap: () => Get.toNamed(Routes.ChatScreen),
+                                onTap: () => Get.to(
+                                  ChatScreen(controller.groupList[i].id,
+                                      controller.groupList[i].group_name),
+                                ),
                               ),
                             ),
                           )

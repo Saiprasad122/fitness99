@@ -160,7 +160,6 @@ class CreateGroupController extends GetxController {
       );
       final res = CreateGroupResponse.fromJson(result.data);
       if (res.status == 200) {
-        print('-----------------------------');
         await NeededVariables.firebaseInstance
             .collection('chatRoom')
             .doc(res.data.group.id.toString())

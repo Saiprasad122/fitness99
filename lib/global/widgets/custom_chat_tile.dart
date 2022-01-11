@@ -30,14 +30,17 @@ class CustomChatTile extends StatelessWidget {
           backgroundColor: Colors.white,
           child: SizedBox.expand(
             child: ClipOval(
-                child: CachedNetworkImage(
-              imageUrl: 'https://dev.99fitnessfriends.com/uploads$groupImage',
-              placeholder: (context, s) => CircularProgressIndicator(),
-              filterQuality: FilterQuality.high,
-              fit: BoxFit.contain,
-              errorWidget: (context, value, error) =>
-                  Image.asset('assets/images/placeholders/user.png'),
-            )),
+              child: CachedNetworkImage(
+                imageUrl: groupImage.contains('uploads')
+                    ? groupImage
+                    : 'https://dev.99fitnessfriends.com/uploads$groupImage',
+                placeholder: (context, s) => CircularProgressIndicator(),
+                filterQuality: FilterQuality.high,
+                fit: BoxFit.contain,
+                errorWidget: (context, value, error) =>
+                    Image.asset('assets/images/placeholders/user.png'),
+              ),
+            ),
           ),
         ),
         title: Text(

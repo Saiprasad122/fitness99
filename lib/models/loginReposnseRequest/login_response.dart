@@ -16,12 +16,12 @@ class LoginResponse {
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         status: json["status"],
-        user: User.fromMap(json["user"]),
+        user: User.fromJson(json["user"]),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
-        "user": user.toMap(),
+        "user": user.toJson(),
       };
 }
 
@@ -65,7 +65,7 @@ class User {
   final DateTime updatedAt;
   final int groupCount;
   final String? number;
-  factory User.fromMap(Map<String, dynamic> json) => User(
+  factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         userName: json["user_name"],
         idProof: json["id_proof"],
@@ -86,7 +86,7 @@ class User {
         number: json["number"],
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "user_name": userName,
         "id_proof": idProof,

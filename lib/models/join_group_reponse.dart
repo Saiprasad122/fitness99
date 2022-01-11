@@ -51,7 +51,7 @@ class User_id {
   final String? id_proof;
   final String email;
   final String password;
-  final String profile_picture;
+  final String? profile_picture;
   final String? personal_goal;
   final String? height;
   final String? weight;
@@ -70,7 +70,7 @@ class User_id {
     this.id_proof,
     required this.email,
     required this.password,
-    required this.profile_picture,
+    this.profile_picture,
     this.personal_goal,
     this.height,
     this.weight,

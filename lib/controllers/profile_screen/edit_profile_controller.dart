@@ -176,6 +176,7 @@ class EditProfileController extends GetxController {
     try {
       print(mobileNumber);
       UpdateProfileRequest body = UpdateProfileRequest(
+        id: userModel.getid(),
         email: email,
         phoneNumber: mobileNumber,
         profilePicture: profilePicture,

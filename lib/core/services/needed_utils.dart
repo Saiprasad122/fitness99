@@ -23,7 +23,9 @@ class NeededVariables extends GetxController {
       ..registerAdapter(UserLocalDataModelAdapter());
     await Hive.openBox<UserLocalDataModel>('user_data');
     Get.put<UserModelService>(UserModelService());
-    print('Shared Preference loaded');
+    // _dio.interceptors.add(LogInterceptor());
+
+    print('///===Shared Preference loaded===///');
   }
 
   static FirebaseFirestore firebaseInstance = FirebaseFirestore.instance;

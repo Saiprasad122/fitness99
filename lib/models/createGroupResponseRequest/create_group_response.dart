@@ -260,7 +260,7 @@ class User {
   final String created_at;
   final String updated_at;
   final int? group_count;
-  final String number;
+  final String? number;
   User({
     required this.id,
     required this.user_name,
@@ -279,7 +279,7 @@ class User {
     required this.created_at,
     required this.updated_at,
     this.group_count,
-    required this.number,
+    this.number,
   });
 
   User copyWith({
