@@ -1,4 +1,5 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/activity_view/activity_screen.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/chat_screen_view.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/event_screen.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +48,8 @@ class ChatScreen extends StatelessWidget {
                 ),
               ),
               Tab(
-                icon: SvgPicture.asset(
-                  'assets/svgs/chat_screen/chat_icon.svg',
+                icon: Image.asset(
+                  'assets/images/chat_screen/activity.png',
                   color: Colors.black,
                   width: 25,
                   height: 25,
@@ -88,7 +89,7 @@ class ChatScreen extends StatelessWidget {
             ChatScreenView(group_id),
             EventScreen(),
             Text('data'),
-            Text('data'),
+            ActivityScreen(),
             MoreOptions(group_id),
           ],
         ),

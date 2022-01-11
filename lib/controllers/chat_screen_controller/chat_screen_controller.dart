@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dart';
 import 'package:fitness_99/core/services/download_and_upload_service.dart';
 import 'package:fitness_99/core/services/get_directories.dart';
@@ -24,17 +25,21 @@ class ChatScreenController extends GetxController {
   late int group_id;
   final filePath = ''.obs;
   final List<String> imagesOfGroup = [];
+  final List<String> filesOfGroup = [];
   final picker = ImagePicker();
+  final extension = ''.obs;
 
   void initializeChat(int group_id) {
     this.group_id = group_id;
     imagesOfGroup
         .addAll(directoryService.getImagesOfGroup(group_id.toString()));
+    filesOfGroup.addAll(directoryService.getFilesOfGroup(group_id.toString()));
     print(imagesOfGroup);
   }
 
   Future<String?> getLocalImagePathFromDownloads(String url) async {
     final name = await uploadImageService.getFileNameFromDownloadUrl(url);
+
     final fileName = imagesOfGroup
         .firstWhere((element) => element.contains(name), orElse: () {
       return '';
@@ -46,6 +51,7 @@ class ChatScreenController extends GetxController {
 
   Future<File?> getLocalImageFromDownloads(String url) async {
     final filePath = await getLocalImagePathFromDownloads(url);
+
     if (filePath != null) {
       try {
         final file = File(filePath + '.jpg');
@@ -72,6 +78,7 @@ class ChatScreenController extends GetxController {
 
   void addData({
     String messageType = MessageType.text,
+    String extension = '',
   }) {
     if (chatTED.text.isNotEmpty || filePath.value.isNotEmpty) {
       final data = {
@@ -84,6 +91,11 @@ class ChatScreenController extends GetxController {
         data.addAll({'message': chatTED.text});
       }
       if (filePath.value.isNotEmpty) {
+        if (messageType == MessageType.document) {
+          data.addAll({'extension': extension});
+        } else if (messageType == MessageType.image) {
+          data.addAll({'extension': '.jpg'});
+        }
         data.addAll({'url': filePath.value});
       }
       instance
@@ -125,13 +137,63 @@ class ChatScreenController extends GetxController {
   }
 
   getVideo() async {
+    Get.back();
     final file = await picker.pickVideo(source: ImageSource.gallery);
     if (file != null) {
       filePath.value = file.path;
-
       Get.toNamed(Routes.VideoChatComponent);
     } else {
       filePath.value = '';
+    }
+  }
+
+  Future<String?> getLocalFilePathFromDownloads(String url) async {
+    final name = await uploadImageService.getFileNameFromDownloadUrl(url);
+    final fileName = filesOfGroup
+        .firstWhere((element) => element.contains(name), orElse: () {
+      return '';
+    });
+    return fileName.isEmpty
+        ? null
+        : directoryService.getFilesPath(group_id.toString()) + fileName;
+  }
+
+  Future<File?> getLocalFileFromDownloads(String url, String extension) async {
+    String? filePath = await getLocalFilePathFromDownloads(url);
+
+    if (filePath != null) {
+      print('The total file path is $filePath');
+      try {
+        filePath = filePath.replaceAll("'", '');
+        final file = File(filePath);
+        print('THe real path is ${file.path}');
+        return file;
+      } catch (e) {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  Future<void> uploadDocument() async {
+    Get.back();
+    final file = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+    if (file != null) {
+      filePath.value = file.files[0].path!;
+      extension.value = file.files[0].path!.contains('pdf') ? 'pdf' : 'docx';
+      String? path = await uploadImageService.uploadFilesToFirebase(
+        group_id,
+        File(filePath.value),
+        extension.value,
+        (progressPercent) => print('The percent is $progressPercent'),
+      );
+
+      filePath.value = path!;
+      addData(messageType: MessageType.document, extension: extension.value);
     }
   }
 

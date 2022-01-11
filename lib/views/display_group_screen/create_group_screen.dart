@@ -108,7 +108,7 @@ class CreateGroupScreen extends StatelessWidget {
                 ),
                 CustomBottomButton(
                   text: 'Submit',
-                  onTap: () => controller.createGroup(),
+                  onTap: controller.createGroup,
                 )
               ],
             ),

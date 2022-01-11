@@ -107,7 +107,7 @@ class _VideoChatComponentState extends State<VideoChatComponent> {
                 ),
                 const SizedBox(width: 10),
                 InkWell(
-                  onTap: controller.uploadImage,
+                  onTap: () {},
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,

@@ -26,9 +26,9 @@ class DirectoriesService extends GetxController {
   String getImagesPath(String groupId) =>
       _dir.path + "/assets/$groupId/images/";
   String getVideosPath(String groupId) =>
-      _dir.path + "/assets/$groupId/images/";
+      _dir.path + "/assets/$groupId/videos/";
 
-  String getFilesPath(String groupId) => _dir.path + "/assets/$groupId/images/";
+  String getFilesPath(String groupId) => _dir.path + "/assets/$groupId/files/";
 
   List<String> getImagesOfGroup(String groupId) {
     final List<String> images = [];

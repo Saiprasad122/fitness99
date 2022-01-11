@@ -59,6 +59,8 @@ dependencies:
   fluttertoast: ^8.0.8
   video_player: ^2.2.7
   chewie: ^1.2.2
+  file_picker: ^4.3.0
+  
   
 dev_dependencies:
   flutter_test:
@@ -101,6 +103,7 @@ flutter:
     - assets/images/search_screen/
     - assets/images/product_screen/
     - assets/images/group_screen/
+    - assets/images/chat_screen/
     # ------------------------------
     #           S V G ' S
     # ------------------------------

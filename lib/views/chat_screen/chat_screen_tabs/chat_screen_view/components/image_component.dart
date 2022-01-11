@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/full_screen_image.dart';
@@ -12,8 +11,14 @@ class ImageComponent extends StatefulWidget {
   final String url;
   final String? msg;
   final DateTime dateTime;
+  final bool fromOther;
+
   ImageComponent(
-      {Key? key, required this.url, this.msg, required this.dateTime})
+      {Key? key,
+      required this.url,
+      this.msg,
+      required this.dateTime,
+      this.fromOther = false})
       : super(key: key);
 
   @override
@@ -145,9 +150,14 @@ class _ImageComponentState extends State<ImageComponent> {
           Container(
             width: 200,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
-              color: (Colors.blue[200]),
-            ),
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(10)),
+                color: Colors.blue[200]
+
+                // color: widget.fromOther
+                //     ? Colors.blue[200]
+                //     : AppColors.secondaryColor,
+                ),
             child: Text(
               widget.msg!.trim(),
               // snapshot.data!.docs[index]
@@ -156,9 +166,7 @@ class _ImageComponentState extends State<ImageComponent> {
             ),
             padding: EdgeInsets.all(10),
           ),
-        const SizedBox(
-          height: 5,
-        ),
+        const SizedBox(height: 5),
         Text(
           DateFormat.jm().format(widget.dateTime),
           style: TextStyle(

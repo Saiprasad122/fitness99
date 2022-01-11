@@ -86,4 +86,41 @@ class DownloadAndUploadService extends GetxController {
       return null;
     }
   }
+
+  Future<String?> uploadFilesToFirebase(
+      int groupId,
+      File file,
+      String extension,
+      Function(double progressPercent)? progressListener) async {
+    try {
+      final fileName =
+          'files-$groupId-${DateTime.now().millisecondsSinceEpoch}';
+
+      final File tempFile = File(
+          directoryService.getFilesPath(groupId.toString()) +
+              fileName +
+              '.$extension');
+      if (tempFile.existsSync()) {
+        await tempFile.delete();
+      }
+      await tempFile.create(recursive: true);
+      final newFile = await directoryService.moveFile(
+          file,
+          directoryService.getFilesPath(groupId.toString()) +
+              fileName +
+              '.$extension');
+      final _firebaseStorage = FirebaseStorage.instance;
+      final uploadRef = _firebaseStorage.ref(fileName);
+      final upload = uploadRef.putFile(newFile);
+      upload.snapshotEvents.listen((event) {
+        progressListener
+            ?.call((event.bytesTransferred / event.totalBytes) * 100);
+      });
+      await upload;
+      return await uploadRef.getDownloadURL();
+    } catch (e) {
+      print('The error is $e');
+      return null;
+    }
+  }
 }

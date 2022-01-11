@@ -8,7 +8,6 @@ import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/models/messgae_model.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/image_component.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/text_component.dart';
 import 'package:fitness_99/views/profile_screen/widget/image_dialog_box.dart';
@@ -16,7 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+
+import 'components/document_component.dart';
 
 class ChatScreenView extends StatelessWidget {
   final controller = Get.put(ChatScreenController());
@@ -46,9 +46,8 @@ class ChatScreenView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.separated(
-                      separatorBuilder: (context, index) => const SizedBox(
-                        height: 14,
-                      ),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 15),
                       itemCount: messages.length,
                       reverse: true,
                       padding: EdgeInsets.only(top: 10),
@@ -128,6 +127,7 @@ class ChatScreenView extends StatelessWidget {
                                       const SizedBox(width: 5),
                                     ],
                                   ),
+                                  // DocumentComponent(),
                                   const SizedBox(height: 5),
                                 ],
                               );
@@ -214,7 +214,7 @@ class ChatScreenView extends StatelessWidget {
                           ),
                           const SizedBox(height: 10),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: controller.uploadDocument,
                             child: Text('Upload Document',
                                 style: TextStyles.sgproRegular.f24.black),
                           ),
@@ -229,13 +229,22 @@ class ChatScreenView extends StatelessWidget {
                           ),
                           const SizedBox(height: 10),
                           TextButton(
-                            onPressed: () => Get.toNamed(Routes.CreateActivity),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Get.toNamed(Routes.CreateActivity);
+                            },
                             child: Text('Create Activity',
                                 style: TextStyles.sgproRegular.f24.black),
                           ),
                           const SizedBox(height: 10),
                           TextButton(
-                            onPressed: () => Get.back(),
+                            onPressed: () {},
+                            child: Text('Create Poll',
+                                style: TextStyles.sgproRegular.f24.black),
+                          ),
+                          const SizedBox(height: 10),
+                          TextButton(
+                            onPressed: Get.back,
                             child: Text('Cancel',
                                 style: TextStyles.sgproRegular.f24.black),
                           ),
@@ -258,19 +267,6 @@ class ChatScreenView extends StatelessWidget {
                 const SizedBox(width: 10),
                 InkWell(
                   onTap: controller.addData,
-                  // onTap: () async {
-                  //   await FirebaseFirestore.instance
-                  //       .collection('groups')
-                  //       .doc(group_id.toString())
-                  //       .collection('chats')
-                  //       .orderBy('time', descending: true)
-                  //       .get()
-                  //       .then((value) {
-                  //     value.docs.forEach((element) {
-                  //       print(element.data());
-                  //     });
-                  //   });
-                  // },
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,
@@ -303,7 +299,15 @@ class ChatScreenView extends StatelessWidget {
             url: data['url'],
             msg: msg,
             dateTime: dateTime,
+            fromOther: other,
           );
+        case MessageType.document:
+          return DocumentComponent(
+            url: data['url'],
+            dateTime: dateTime,
+            extension: data['extension'],
+          );
+
         default:
           return TextComponent(
             text: data['message'],
@@ -312,7 +316,7 @@ class ChatScreenView extends StatelessWidget {
           );
       }
     } else {
-      return Container();
+      return const SizedBox();
     }
   }
 }
