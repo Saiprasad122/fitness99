@@ -4,7 +4,7 @@ import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_chat_tile.dart';
 import 'package:fitness_99/global/widgets/custom_search_field.dart';
-import 'package:fitness_99/global/widgets/custom_list_group_shimmer.dart';
+import 'package:fitness_99/global/widgets/custom_group_list_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

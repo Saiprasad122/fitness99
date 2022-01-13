@@ -52,7 +52,7 @@ abstract class ApiService {
   Future<BaseResponse<User>> getProfileData(
       {@Path('user_id') required int user_id});
   @GET(ApiUrls.GET_ACTIVITY)
-  Future<BaseResponse<List<DisplayActivityResponse>>> getActivityList(
+  Future<DisplayActivityResponse> getActivityList(
       {@Path('group_id') required int group_id});
 
   // ----------------------- ************************ ------------------------------ //
