@@ -3,21 +3,30 @@ import 'dart:ui';
 import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/full_screen_image.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/video_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class ImageComponent extends StatefulWidget {
   final String url;
+  final String? videoUrl;
   final String? msg;
   final DateTime dateTime;
   final bool fromOther;
+  final String? extension;
+  final bool video;
+  final double? sizeInKB;
 
   ImageComponent(
       {Key? key,
       required this.url,
+      this.videoUrl,
       this.msg,
+      this.video = false,
+      this.extension,
       required this.dateTime,
+      this.sizeInKB,
       this.fromOther = false})
       : super(key: key);
 
@@ -29,6 +38,7 @@ class _ImageComponentState extends State<ImageComponent> {
   final ValueNotifier<double> progress = ValueNotifier(0.0);
   final chatController = Get.find<ChatScreenController>();
   final ValueNotifier<File?> localImagePath = ValueNotifier(null);
+  final ValueNotifier<File?> localVideoPath = ValueNotifier(null);
 
   @override
   void initState() {
@@ -37,8 +47,15 @@ class _ImageComponentState extends State<ImageComponent> {
   }
 
   void loadAssets() async {
-    localImagePath.value =
-        (await chatController.getLocalImageFromDownloads(widget.url));
+    if (widget.video) {
+      localImagePath.value = (await chatController
+          .getLocalVideoThumbNailFromDownloads(widget.url));
+      localVideoPath.value = await chatController
+          .getLocalVideoFromDownloads(widget.videoUrl ?? widget.url);
+    } else {
+      localImagePath.value =
+          (await chatController.getLocalImageFromDownloads(widget.url));
+    }
   }
 
   @override
@@ -68,13 +85,18 @@ class _ImageComponentState extends State<ImageComponent> {
                 return Stack(
                   clipBehavior: Clip.antiAlias,
                   children: [
-                    if (localPath != null)
+                    if (localPath != null) ...[
                       InkWell(
                         onTap: () {
-                          Get.to(() => FullScreenImageComponent(
-                                url: localPath.path,
-                                file: localPath,
-                              ));
+                          Get.to(() => widget.video
+                              ? FullScreenVideoComponent(
+                                  url: localVideoPath.value!.path,
+                                  file: localVideoPath.value!,
+                                )
+                              : FullScreenImageComponent(
+                                  url: localPath.path,
+                                  file: localPath,
+                                ));
                         },
                         child: Hero(
                           tag: localPath.path,
@@ -85,6 +107,34 @@ class _ImageComponentState extends State<ImageComponent> {
                           ),
                         ),
                       ),
+                      if (widget.video)
+                        Positioned.fill(
+                          child: IgnorePointer(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(
+                                  sigmaX: 0.2,
+                                  sigmaY: 0.2,
+                                ),
+                                child: Center(
+                                  child: Container(
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.black.withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Icon(
+                                      Icons.play_arrow,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                     if (localPath == null) ...[
                       Image.network(
                         widget.url,
@@ -102,15 +152,30 @@ class _ImageComponentState extends State<ImageComponent> {
                             child: Center(
                               child: InkWell(
                                 onTap: () {
-                                  chatController.downloadImage(widget.url,
-                                      progressListener:
-                                          (progressPercent, imageFilePath) {
-                                    print(
-                                        'PROGRESS _____------------> $progressPercent');
-                                    progress.value = progressPercent;
-                                  }, onDoneListener: (localFile) {
-                                    localImagePath.value = localFile;
-                                  });
+                                  if (widget.video) {
+                                    chatController.downloadVideo(
+                                        widget.url, widget.extension,
+                                        progressListener:
+                                            (progressPercent, imageFilePath) {
+                                      print(
+                                          'PROGRESS _____------------> $progressPercent');
+                                      progress.value = progressPercent;
+                                    }, onDoneListener: (localVideoFile,
+                                            localThumbnailFile) {
+                                      localImagePath.value = localThumbnailFile;
+                                      localVideoPath.value = localVideoFile;
+                                    });
+                                  } else {
+                                    chatController.downloadImage(widget.url,
+                                        progressListener:
+                                            (progressPercent, imageFilePath) {
+                                      print(
+                                          'PROGRESS _____------------> $progressPercent');
+                                      progress.value = progressPercent;
+                                    }, onDoneListener: (localFile) {
+                                      localImagePath.value = localFile;
+                                    });
+                                  }
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(10),
@@ -142,6 +207,21 @@ class _ImageComponentState extends State<ImageComponent> {
                         ),
                       ),
                     ],
+                    if (widget.sizeInKB != null)
+                      Positioned(
+                        bottom: 10,
+                        right: 10,
+                        child: Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              '${widget.sizeInKB!.toStringAsFixed(2)} KB',
+                              style: TextStyles.sgproMedium.white78.f12,
+                            )),
+                      ),
                   ],
                 );
               }),

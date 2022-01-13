@@ -15,7 +15,6 @@ class AppPages {
     GetPage(name: Routes.DashboardScreen, page: () => DashboardView()),
     GetPage(name: Routes.ChatListScreen, page: () => ChatListScreen()),
     GetPage(name: Routes.ImageChatComponent, page: () => ImageChatComponent()),
-    GetPage(name: Routes.VideoChatComponent, page: () => VideoChatComponent()),
     GetPage(name: Routes.CreateEvent, page: () => CreateEventScreen()),
     GetPage(name: Routes.GroupVideoList, page: () => GroupVideosList()),
     GetPage(name: Routes.GroupImageList, page: () => GroupImagesList()),

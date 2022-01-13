@@ -8,31 +8,36 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
-class VideoChatComponent extends StatefulWidget {
-  VideoChatComponent({Key? key}) : super(key: key);
+class VideoSendFullScreenComponent extends StatefulWidget {
+  VideoSendFullScreenComponent(
+      {Key? key, required this.url, required this.file})
+      : super(key: key);
+  final String url;
+  final File file;
 
   @override
-  State<VideoChatComponent> createState() => _VideoChatComponentState();
+  State<VideoSendFullScreenComponent> createState() =>
+      _VideoSendFullScreenComponentState();
 }
 
-class _VideoChatComponentState extends State<VideoChatComponent> {
+class _VideoSendFullScreenComponentState
+    extends State<VideoSendFullScreenComponent> {
   late VideoPlayerController _videoPlayerController;
   late ChewieController _chewieController;
   final controller = Get.find<ChatScreenController>();
 
   @override
   void initState() {
-    _videoPlayerController =
-        VideoPlayerController.file(File(controller.filePath.value))
-          ..initialize().then((value) {
-            setState(() {});
-          });
+    super.initState();
+    _videoPlayerController = VideoPlayerController.file(widget.file)
+      ..initialize().then((value) {
+        setState(() {});
+      });
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
       allowFullScreen: false,
       showControls: true,
     );
-    super.initState();
   }
 
   @override
@@ -40,7 +45,6 @@ class _VideoChatComponentState extends State<VideoChatComponent> {
     super.dispose();
     _chewieController.dispose();
     _videoPlayerController.dispose();
-    controller.filePath.value = '';
   }
 
   @override
@@ -54,7 +58,6 @@ class _VideoChatComponentState extends State<VideoChatComponent> {
             children: [
               IconButton(
                 onPressed: () {
-                  controller.filePath.value = '';
                   Get.back();
                 },
                 icon: Icon(
@@ -107,7 +110,7 @@ class _VideoChatComponentState extends State<VideoChatComponent> {
                 ),
                 const SizedBox(width: 10),
                 InkWell(
-                  onTap: () {},
+                  onTap: controller.uploadVideo,
                   child: SvgPicture.asset(
                     'assets/svgs/chat_screen/send_icon.svg',
                     color: AppColors.secondaryColor,

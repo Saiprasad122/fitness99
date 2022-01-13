@@ -313,6 +313,19 @@ class ChatScreenView extends StatelessWidget {
             fileName: fileName,
             sizeInKB: sizeInKB,
           );
+        case MessageType.video:
+          final msg = data.data()['message'];
+
+          return ImageComponent(
+            url: data['thumbnailUrl'],
+            videoUrl: data['url'],
+            msg: msg,
+            video: true,
+            extension: data['extension'],
+            dateTime: dateTime,
+            fromOther: other,
+            sizeInKB: sizeInKB,
+          );
         default:
           return TextComponent(
             text: data['message'],
