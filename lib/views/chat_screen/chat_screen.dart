@@ -86,8 +86,8 @@ class ChatScreen extends StatelessWidget {
         body: TabBarView(
           physics: NeverScrollableScrollPhysics(),
           children: [
-            ChatScreenView(group_id),
-            DisplayEventScreen(),
+            ChatScreenView(group_id: group_id),
+            DisplayEventScreen(group_id: group_id),
             Text('data'),
             ActivityScreen(group_id: group_id),
             MoreOptions(group_id),

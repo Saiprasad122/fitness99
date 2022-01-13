@@ -1,15 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'createActivity_request.g.dart';
+part 'create_activity_request.g.dart';
 
 @JsonSerializable()
 class CreateActivityRequest {
   final String? title,
       description,
       location,
-      notes,
+      note,
       day,
-      fromTime,
-      toTime,
+      from_time,
+      to_time,
       user_id,
       group_id;
 
@@ -17,10 +17,10 @@ class CreateActivityRequest {
     required this.title,
     required this.description,
     required this.location,
-    required this.notes,
+    required this.note,
     required this.day,
-    required this.fromTime,
-    required this.toTime,
+    required this.from_time,
+    required this.to_time,
     required this.group_id,
     required this.user_id,
   });

@@ -23,4 +23,5 @@ class ApiUrls {
   static const GET_PROFILE = '/get_profile/{user_id}';
   static const CREATE_NEW_ACTIVITY = '/create_activity';
   static const GET_ACTIVITY = '/activity/{group_id}';
+  static const GET_EVENT = '/event/{group_id}';
 }

@@ -11,7 +11,6 @@ import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/v
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:media_info/media_info.dart';
 
 class ChatScreenController extends GetxController {
   TextEditingController chatTED = TextEditingController();

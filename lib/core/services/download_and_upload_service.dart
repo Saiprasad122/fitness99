@@ -5,7 +5,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fitness_99/core/services/get_directories.dart';
 import 'package:fitness_99/global/router/views.export.dart';
 import 'package:media_info/media_info.dart';
-import 'package:path_provider/path_provider.dart';
 // import 'package:http/http.dart' as http;
 
 class DownloadAndUploadService extends GetxController {
