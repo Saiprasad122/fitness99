@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class DisplayActivityController extends GetxController {
   DisplayActivityController({required this.group_id});
   final int group_id;
-  final isBusy = true.obs;
+  final isBusy = false.obs;
   final activityList = [].obs;
   final apiService = Get.find<ApiService>();
 
