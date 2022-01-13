@@ -6,18 +6,22 @@ import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:open_file/open_file.dart';
 
 class DocumentComponent extends StatefulWidget {
   final DateTime dateTime;
   final String url;
   final String extension;
-
-  DocumentComponent({
-    Key? key,
-    required this.dateTime,
-    required this.url,
-    required this.extension,
-  }) : super(key: key);
+  final String? fileName;
+  final double? sizeInKB;
+  DocumentComponent(
+      {Key? key,
+      required this.dateTime,
+      required this.url,
+      required this.extension,
+      this.fileName,
+      this.sizeInKB})
+      : super(key: key);
 
   @override
   State<DocumentComponent> createState() => _DocumentComponentState();
@@ -29,6 +33,8 @@ class _DocumentComponentState extends State<DocumentComponent> {
     loadAssets();
     super.initState();
   }
+
+  final ValueNotifier<double> progress = ValueNotifier(0.0);
 
   final chatController = Get.find<ChatScreenController>();
   final ValueNotifier<File?> localFilePath = ValueNotifier(null);
@@ -46,7 +52,13 @@ class _DocumentComponentState extends State<DocumentComponent> {
         valueListenable: localFilePath,
         builder: (context, File? localPath, child) {
           return InkWell(
-            onTap: () {},
+            onTap: () {
+              if (localPath != null) {
+                OpenFile.open(localPath.path);
+              } else {
+                downloadDocument;
+              }
+            },
             child: Column(
               children: [
                 Container(
@@ -77,22 +89,39 @@ class _DocumentComponentState extends State<DocumentComponent> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '${localPath?.path.substring(localPath.path.lastIndexOf('-') + 1) ?? 'File Name error'} ',
+                                '${localPath?.path.substring(localPath.path.lastIndexOf('-') + 1) ?? widget.fileName?.substring(widget.fileName!.lastIndexOf('-') + 1) ?? 'File Name error'} ',
                                 style: TextStyles.sgproRegular.f16,
                               ),
                               Text(
-                                '${(localPath?.readAsBytesSync().lengthInBytes)}',
+                                localPath != null
+                                    ? '${(localPath.readAsBytesSync().lengthInBytes / 1024).toStringAsFixed(2)} KB'
+                                    : '${widget.sizeInKB?.toStringAsFixed(2) ?? 0.0} KB',
                                 style: TextStyles.sgproRegular.f14.greyDark,
                               )
                             ],
                           ),
                         ),
-                        localPath == null
-                            ? Icon(
-                                Icons.download,
-                                color: Colors.white,
-                              )
-                            : const SizedBox(),
+                        ValueListenableBuilder(
+                            valueListenable: progress,
+                            builder: (context, double progressValue, child) {
+                              return localPath == null
+                                  ? Row(
+                                      children: [
+                                        InkWell(
+                                          onTap: downloadDocument,
+                                          child: Icon(
+                                            Icons.download,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        if (progressValue > 0) ...[
+                                          const SizedBox(),
+                                          Text('$progressValue')
+                                        ]
+                                      ],
+                                    )
+                                  : const SizedBox();
+                            }),
                       ],
                     ),
                   ),
@@ -110,5 +139,15 @@ class _DocumentComponentState extends State<DocumentComponent> {
             ),
           );
         });
+  }
+
+  void downloadDocument() {
+    chatController.downloadFile(widget.url, widget.extension,
+        progressListener: (progressPercent, imageFilePath) {
+      print('PROGRESS _____------------> $progressPercent');
+      progress.value = progressPercent;
+    }, onDoneListener: (localFile) {
+      localFilePath.value = localFile;
+    });
   }
 }

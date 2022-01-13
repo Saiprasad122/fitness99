@@ -287,6 +287,9 @@ class ChatScreenView extends StatelessWidget {
       {bool other = false}) {
     if (data != null) {
       final mssgType = data['messageType'];
+      final fileName = data.data()['fileName'];
+      final sizeInKB = data.data()['sizeInKB'];
+
       Timestamp timestamp = data['time'];
       DateTime dateTime =
           DateTime.fromMicrosecondsSinceEpoch(timestamp.microsecondsSinceEpoch);
@@ -307,8 +310,9 @@ class ChatScreenView extends StatelessWidget {
             url: data['url'],
             dateTime: dateTime,
             extension: data['extension'],
+            fileName: fileName,
+            sizeInKB: sizeInKB,
           );
-
         default:
           return TextComponent(
             text: data['message'],

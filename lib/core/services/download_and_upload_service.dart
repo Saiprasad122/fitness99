@@ -8,6 +8,7 @@ import 'package:fitness_99/global/router/views.export.dart';
 
 class DownloadAndUploadService extends GetxController {
   final directoryService = Get.find<DirectoriesService>();
+
   Future<File?> downloadImageFromFirebase(
       String downloadUrl,
       int groupId,
@@ -54,9 +55,10 @@ class DownloadAndUploadService extends GetxController {
   }
 
   Future<String?> uploadImageToFirebase(int groupId, File file,
-      Function(double progressPercent)? progressListener) async {
+      Function(double progressPercent)? progressListener,
+      {String? directFileName}) async {
     try {
-      final fileName =
+      final fileName = directFileName ??
           'image-$groupId-${DateTime.now().millisecondsSinceEpoch}';
 
       final File tempFile = File(
@@ -80,6 +82,7 @@ class DownloadAndUploadService extends GetxController {
             ?.call((event.bytesTransferred / event.totalBytes) * 100);
       });
       await upload;
+
       return await uploadRef.getDownloadURL();
     } catch (e) {
       print('The error is $e');
@@ -87,14 +90,15 @@ class DownloadAndUploadService extends GetxController {
     }
   }
 
-  Future<String?> uploadFilesToFirebase(
-      int groupId,
-      File file,
-      String extension,
-      Function(double progressPercent)? progressListener) async {
+  Future<String?> uploadFilesToFirebase(int groupId, File file,
+      String extension, Function(double progressPercent)? progressListener,
+      {String? directFileName}) async {
     try {
-      final fileName =
-          'files-$groupId-${DateTime.now().millisecondsSinceEpoch}';
+      final fileName = directFileName ??
+          'files-$groupId-${DateTime.now().millisecondsSinceEpoch}-${file.path.substring(
+            file.path.lastIndexOf('/') + 1,
+            file.path.lastIndexOf('.'),
+          )}';
 
       final File tempFile = File(
           directoryService.getFilesPath(groupId.toString()) +
@@ -120,6 +124,41 @@ class DownloadAndUploadService extends GetxController {
       return await uploadRef.getDownloadURL();
     } catch (e) {
       print('The error is $e');
+      return null;
+    }
+  }
+
+  Future<File?> downloadFileFromFirebase(
+      String downloadUrl,
+      String extention,
+      int groupId,
+      void Function(double progressPercent, String? filePath)? progressListener,
+      void Function(File localFile)? onDoneListener) async {
+    try {
+      final directories = Get.find<DirectoriesService>();
+      final ref = FirebaseStorage.instance.refFromURL(downloadUrl);
+      final String name = await ref.name;
+
+      final File tempFile = File(
+          '${directories.getFilesPath(groupId.toString())}$name.$extention');
+      if (tempFile.existsSync()) {
+        await tempFile.delete();
+      }
+      await tempFile.create(recursive: true);
+      final downloadTask = ref.writeToFile(tempFile);
+      downloadTask.onError((e, s) {
+        log('Error while download', error: e, stackTrace: s);
+        throw NullThrownError();
+      });
+      downloadTask.asStream().listen((event) {
+        progressListener?.call(
+            (event.bytesTransferred / event.totalBytes) * 100,
+            '${directories.getFilesPath(groupId.toString())}$name.$extention');
+      });
+      await downloadTask;
+      onDoneListener?.call(tempFile);
+      return tempFile;
+    } catch (e) {
       return null;
     }
   }

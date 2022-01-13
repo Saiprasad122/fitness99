@@ -30,6 +30,8 @@ class ChatScreenController extends GetxController {
   final extension = ''.obs;
 
   void initializeChat(int group_id) {
+    imagesOfGroup.clear();
+    filesOfGroup.clear();
     this.group_id = group_id;
     imagesOfGroup
         .addAll(directoryService.getImagesOfGroup(group_id.toString()));
@@ -76,9 +78,24 @@ class ChatScreenController extends GetxController {
     );
   }
 
+  void downloadFile(String url, String extension,
+      {void Function(double progressPercent, String? FilePath)?
+          progressListener,
+      void Function(File localFile)? onDoneListener}) async {
+    await uploadImageService.downloadFileFromFirebase(
+      url,
+      extension,
+      group_id,
+      progressListener,
+      onDoneListener,
+    );
+  }
+
   void addData({
     String messageType = MessageType.text,
-    String extension = '',
+    String? extension,
+    String? fileName,
+    double? sizeInKB,
   }) {
     if (chatTED.text.isNotEmpty || filePath.value.isNotEmpty) {
       final data = {
@@ -90,13 +107,17 @@ class ChatScreenController extends GetxController {
       if (chatTED.text.isNotEmpty) {
         data.addAll({'message': chatTED.text});
       }
+      if (fileName != null) {
+        data.addAll({'fileName': fileName});
+      }
+      if (extension != null) {
+        data.addAll({'extension': extension});
+      }
       if (filePath.value.isNotEmpty) {
-        if (messageType == MessageType.document) {
-          data.addAll({'extension': extension});
-        } else if (messageType == MessageType.image) {
-          data.addAll({'extension': '.jpg'});
-        }
         data.addAll({'url': filePath.value});
+      }
+      if (sizeInKB != null) {
+        data.addAll({'sizeInKB': sizeInKB});
       }
       instance
           .collection('groups')
@@ -112,14 +133,25 @@ class ChatScreenController extends GetxController {
 
   Future<void> uploadImage() async {
     Get.back();
+    final fileName =
+        'image-$group_id-${DateTime.now().millisecondsSinceEpoch}-${filePath.value.substring(
+      filePath.value.lastIndexOf('/') + 1,
+      filePath.value.lastIndexOf('.'),
+    )}';
+    final file = File(filePath.value);
+    final double sizeInKB = file.readAsBytesSync().lengthInBytes / 1024;
     String? path = await uploadImageService.uploadImageToFirebase(
-        group_id,
-        File(filePath.value),
-        (progressPercent) =>
-            print('The percent is --------- $progressPercent'));
+        group_id, file, (progressPercent) {},
+        directFileName: fileName);
     if (path?.isNotEmpty ?? false) {
       filePath.value = path!;
-      addData(messageType: MessageType.image);
+      initializeChat(group_id);
+
+      addData(
+          messageType: MessageType.image,
+          fileName: fileName,
+          extension: '.jpg',
+          sizeInKB: sizeInKB);
     } else {
       print('error');
     }
@@ -165,7 +197,7 @@ class ChatScreenController extends GetxController {
       print('The total file path is $filePath');
       try {
         filePath = filePath.replaceAll("'", '');
-        final file = File(filePath);
+        final file = File(filePath + '.$extension');
         print('THe real path is ${file.path}');
         return file;
       } catch (e) {
@@ -180,20 +212,35 @@ class ChatScreenController extends GetxController {
     Get.back();
     final file = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf'],
+      allowedExtensions: ['pdf', 'docx', 'zip', 'wps', 'ppt', 'pptx', 'doc'],
     );
     if (file != null) {
       filePath.value = file.files[0].path!;
-      extension.value = file.files[0].path!.contains('pdf') ? 'pdf' : 'docx';
+      final indexOfLastDot = file.files[0].path!.lastIndexOf('.');
+      extension.value = file.files[0].path!.substring(indexOfLastDot + 1);
+      final fileName =
+          'files-$group_id-${DateTime.now().millisecondsSinceEpoch}-${filePath.value.substring(
+        filePath.value.lastIndexOf('/') + 1,
+        filePath.value.lastIndexOf('.'),
+      )}';
+      final uploadingFile = File(filePath.value);
+      final double sizeInKB =
+          uploadingFile.readAsBytesSync().lengthInBytes / 1024;
       String? path = await uploadImageService.uploadFilesToFirebase(
         group_id,
-        File(filePath.value),
+        uploadingFile,
         extension.value,
-        (progressPercent) => print('The percent is $progressPercent'),
+        (progressPercent) {},
+        directFileName: fileName,
       );
-
+      initializeChat(group_id);
       filePath.value = path!;
-      addData(messageType: MessageType.document, extension: extension.value);
+      addData(
+        messageType: MessageType.document,
+        extension: extension.value,
+        fileName: fileName,
+        sizeInKB: sizeInKB,
+      );
     }
   }
 
