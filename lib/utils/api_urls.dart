@@ -21,4 +21,6 @@ class ApiUrls {
   static const JOIN_GROUP = '/join_group/{id}/{group_id}';
   static const MEMBER_LIST = '/group_members/{group_id}';
   static const GET_PROFILE = '/get_profile/{user_id}';
+  static const CREATE_NEW_ACTIVITY = '/create_activity';
+  static const GET_ACTIVITY = '/activity/{group_id}';
 }

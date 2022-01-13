@@ -111,9 +111,9 @@ class EditProfileController extends GetxController {
       );
       Get.back();
       customSnackBar(
-        'Success!',
-        'Your profile is successfully updated',
-        true,
+        title: 'Success!',
+        message: 'Your profile is successfully updated',
+        isSuccess: true,
       );
     }
   }
@@ -153,15 +153,15 @@ class EditProfileController extends GetxController {
         image.value = userModel.getProfilePicture();
         apiCalling.value = false;
         customSnackBar(
-          'Success!',
-          'Your profile picture is successfully updated',
-          true,
+          title: 'Success!',
+          message: 'Your profile picture is successfully updated',
+          isSuccess: true,
         );
       } else {
         customSnackBar(
-          'Error!',
-          'Some error while updating profile picture please try again',
-          false,
+          title: 'Error!',
+          message: 'Some error while updating profile picture please try again',
+          isSuccess: false,
         );
       }
     } catch (e) {}

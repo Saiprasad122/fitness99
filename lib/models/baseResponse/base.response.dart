@@ -4,8 +4,7 @@ part 'base.response.g.dart';
 @JsonSerializable(
     includeIfNull: false, genericArgumentFactories: true, explicitToJson: false)
 class BaseResponse<T> {
-  const BaseResponse(
-      {required this.status, required this.data, required this.message});
+  const BaseResponse({required this.status, this.data, required this.message});
   final String? message;
   final int status;
   final T? data;

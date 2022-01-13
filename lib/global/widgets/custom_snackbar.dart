@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void customSnackBar(
-  String title,
-  String message,
-  bool isSuccess,
-) {
+void customSnackBar({
+  required String title,
+  required String message,
+  required bool isSuccess,
+}) {
   Get.snackbar(
     '',
     '',

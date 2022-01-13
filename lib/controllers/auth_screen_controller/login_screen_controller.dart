@@ -85,7 +85,8 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<void> loginApi({email, password}) async {
+  Future<void> loginApi(
+      {required String email, required String password}) async {
     try {
       LoginRequest body = LoginRequest(email: email, password: password);
       final res = await apiService.getLoginResponse(body);
@@ -118,29 +119,27 @@ class LoginController extends GetxController {
         final userModel = Get.find<UserModelService>();
         print('The profile pic is ${userModel.getid()}');
         customSnackBar(
-          'Logged In!',
-          'Logged In Successfully',
-          true,
+          title: 'Logged In!',
+          message: 'Logged In Successfully',
+          isSuccess: true,
         );
       } else {
         apiCalling.value = false;
         customSnackBar(
-          'Invalid Credentials!',
-          'The entered values are invalid',
-          false,
+          title: 'Invalid Credentials!',
+          message: 'The entered values are invalid',
+          isSuccess: false,
         );
       }
       apiCalling.value = false;
     } on DioError catch (e) {
       print(e);
       customSnackBar(
-        'Invalid Credentials!',
-        'The entered values are invalid',
-        false,
+        title: 'Invalid Credentials!',
+        message: 'The entered values are invalid',
+        isSuccess: false,
       );
       apiCalling.value = false;
-
-      print('error');
     }
   }
 }

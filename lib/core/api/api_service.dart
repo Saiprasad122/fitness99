@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_99/models/baseResponse/base.response.dart';
 import 'package:fitness_99/models/cando_cannotdo_goal/cando_cannotdo_goal.response.dart';
+import 'package:fitness_99/models/createActivityRequestResponse/createActivity_request.dart';
+import 'package:fitness_99/models/display_activity_response.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
 import 'package:fitness_99/models/join_group_reponse.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
@@ -49,6 +51,9 @@ abstract class ApiService {
   @GET(ApiUrls.GET_PROFILE)
   Future<BaseResponse<User>> getProfileData(
       {@Path('user_id') required int user_id});
+  @GET(ApiUrls.GET_ACTIVITY)
+  Future<BaseResponse<List<DisplayActivityResponse>>> getActivityList(
+      {@Path('group_id') required int group_id});
 
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //
@@ -77,6 +82,9 @@ abstract class ApiService {
   Future<BaseResponse> createGoal(
       {@Body() required Map<String, dynamic> createGoalRequest,
       @Path('id') required int userId});
+  @POST(ApiUrls.CREATE_NEW_ACTIVITY)
+  Future<BaseResponse> createActivityResponse(
+      @Body() CreateActivityRequest createActivityRequest);
 
   // ----------------------- ************************ ------------------------------ //
   //                              DELETE REQUEST                                     //

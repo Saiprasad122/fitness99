@@ -1,11 +1,10 @@
-import 'package:fitness_99/controllers/profile_screen/preference_time_controller.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WeekDialoagBox extends StatelessWidget {
-  final PreferenceTimeController controller;
+  final dynamic controller;
   WeekDialoagBox({required this.controller});
 
   @override
@@ -15,7 +14,7 @@ class WeekDialoagBox extends StatelessWidget {
         width: AppSizedBoxConfigs.screenHeight * 0.8,
         height: AppSizedBoxConfigs.screenWidth * 0.65,
         child: ListView.builder(
-          itemCount: controller.days.length,
+          itemCount: 7,
           itemBuilder: (context, i) {
             return customWidget(controller.days[i], i);
           },
