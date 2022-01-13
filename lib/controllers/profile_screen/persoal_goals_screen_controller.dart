@@ -55,12 +55,19 @@ class PersonalGoalsController extends GetxController {
             userId: userModel.getid());
         if (res.status == 200 ||
             (res.message?.toLowerCase().contains('success') ?? false)) {
-          customSnackBar('Success', 'Goal has been added successfullt', true);
+          customSnackBar(
+            title: 'Success',
+            message: 'Goal has been added successfullt',
+            isSuccess: true,
+          );
           onRefresh();
           goalTED.clear();
         } else {
           customSnackBar(
-              'Failed', 'Adding goal failed due to some error', false);
+            title: 'Failed',
+            message: 'Adding goal failed due to some error',
+            isSuccess: false,
+          );
         }
       } on DioError catch (e) {
         print(e);
@@ -75,11 +82,18 @@ class PersonalGoalsController extends GetxController {
       final res = await apiService.deleteGoal(goalId: id);
       if (res.status == 200 ||
           (res.message?.toLowerCase().contains('success') ?? false)) {
-        customSnackBar('Success', 'Goal has been deleted successfullt', true);
+        customSnackBar(
+          title: 'Success',
+          message: 'Goal has been deleted successfullt',
+          isSuccess: true,
+        );
         onRefresh();
       } else {
         customSnackBar(
-            'Failed', 'Deleting goal failed due to some error', false);
+          title: 'Failed',
+          message: 'Deleting goal failed due to some error',
+          isSuccess: false,
+        );
       }
     } on DioError catch (e) {
       print(e);

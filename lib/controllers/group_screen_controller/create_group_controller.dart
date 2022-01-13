@@ -167,14 +167,26 @@ class CreateGroupController extends GetxController {
         displayGrouController.getGroupData();
         searchScreenController.getAllGroupData();
         Get.back();
-        customSnackBar('Group Created', 'Created Group Sucessfully', true);
+        customSnackBar(
+          title: 'Group Created',
+          message: 'Created Group Sucessfully',
+          isSuccess: true,
+        );
       } else {
-        customSnackBar('Error!', 'Please try again', false);
+        customSnackBar(
+          title: 'Error!',
+          message: 'Please try again',
+          isSuccess: false,
+        );
         Get.back();
       }
     } on dio.DioError catch (e) {
       print(e);
-      customSnackBar('Error!', 'Please try again', false);
+      customSnackBar(
+        title: 'Error!',
+        message: 'Please try again',
+        isSuccess: false,
+      );
     }
   }
 }

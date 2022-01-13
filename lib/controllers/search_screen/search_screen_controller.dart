@@ -49,10 +49,17 @@ class SearchScreenController extends GetxController {
       if (res.data != null && res.status == 200) {
         chatListController.getGroupData();
         userModel.updateGroupCount(userModel.getNoOfGroups() + 1);
-        customSnackBar('Joined Group', 'Successfully Joined Group', true);
+        customSnackBar(
+          title: 'Joined Group',
+          message: 'Successfully Joined Group',
+          isSuccess: true,
+        );
       } else {
-        customSnackBar('Failed to join',
-            'Failed to join the group try again later', false);
+        customSnackBar(
+          title: 'Failed to join',
+          message: 'Failed to join the group try again later',
+          isSuccess: false,
+        );
       }
     } on DioError catch (e) {
       if (e.response!.statusCode == 404 &&
@@ -61,13 +68,20 @@ class SearchScreenController extends GetxController {
               .toLowerCase()
               .contains('exists')) {
         customSnackBar(
-            'Already exists!', 'You have already joined this group', false);
+          title: 'Already exists!',
+          message: 'You have already joined this group',
+          isSuccess: false,
+        );
       } else if (e.response!.statusCode == 404 &&
           e.response!.data['message']
               .toString()
               .toLowerCase()
               .contains('full')) {
-        customSnackBar('Group full', 'You can\'t join group is full', false);
+        customSnackBar(
+          title: 'Group is full',
+          message: 'You can\'t join group is full',
+          isSuccess: false,
+        );
       }
     }
     isBusy.value = false;

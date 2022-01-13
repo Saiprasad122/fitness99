@@ -1,5 +1,4 @@
 import 'package:fitness_99/core/api/api_service.dart';
-import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_request.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpScreenController extends GetxController {
-  final userModel = Get.find<UserModelService>();
   final apiService = Get.find<ApiService>();
   final emailTED = TextEditingController();
   final passwordTED = TextEditingController();
@@ -77,24 +75,24 @@ class SignUpScreenController extends GetxController {
       apiCalling.value = false;
       Get.offNamed(Routes.LoginScreen);
       customSnackBar(
-        'Account Created!',
-        'Account has been successfully created',
-        true,
+        title: 'Account Created!',
+        message: 'Account has been successfully created',
+        isSuccess: true,
       );
     } else if (res.message.toLowerCase() ==
         "the email has already been taken.") {
       apiCalling.value = false;
       customSnackBar(
-        'Email already exists!',
-        'The email has already been taken.',
-        false,
+        title: 'Email already exists!',
+        message: 'The email has already been taken.',
+        isSuccess: false,
       );
     } else {
       apiCalling.value = false;
       customSnackBar(
-        'Something wrong!',
-        'Please try again.',
-        false,
+        title: 'Something wrong!',
+        message: 'Please try again.',
+        isSuccess: false,
       );
     }
   }

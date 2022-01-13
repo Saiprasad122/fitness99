@@ -48,8 +48,9 @@ class CreateEventScreen extends StatelessWidget {
                           hintText: 'Enter Event Description'),
                       const SizedBox(height: 20),
                       CustomProfileTextField(
-                          displayText: 'Event Locatin',
-                          hintText: 'Enter your location'),
+                        displayText: 'Event Locatin',
+                        hintText: 'Enter your location',
+                      ),
                       const SizedBox(height: 20),
                     ],
                   ),

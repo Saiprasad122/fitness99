@@ -54,12 +54,19 @@ class CanDoController extends GetxController {
             userId: userModel.getid());
         if (res.status == 200 ||
             (res.message?.toLowerCase().contains('success') ?? false)) {
-          customSnackBar('Success', 'Can Do has been added successfullt', true);
+          customSnackBar(
+            title: 'Success',
+            message: 'Can Do has been added successfullt',
+            isSuccess: true,
+          );
           onRefresh();
           canDoTED.clear();
         } else {
           customSnackBar(
-              'Failed', 'Adding Can Do failed due to some error', false);
+            title: 'Failed',
+            message: 'Adding Can Do failed due to some error',
+            isSuccess: false,
+          );
         }
       } on DioError catch (e) {
         print(e);
@@ -74,11 +81,18 @@ class CanDoController extends GetxController {
       final res = await apiService.deleteCanDo(canDoId: id);
       if (res.status == 200 ||
           (res.message?.toLowerCase().contains('success') ?? false)) {
-        customSnackBar('Success', 'Can Do has been deleted successfullt', true);
+        customSnackBar(
+          title: 'Success',
+          message: 'Can Do has been deleted successfully',
+          isSuccess: true,
+        );
         onRefresh();
       } else {
         customSnackBar(
-            'Failed', 'Deleting Can Do failed due to some error', false);
+          title: 'Failed',
+          message: 'Deleting Can Do failed due to some error',
+          isSuccess: false,
+        );
       }
     } on DioError catch (e) {
       print(e);

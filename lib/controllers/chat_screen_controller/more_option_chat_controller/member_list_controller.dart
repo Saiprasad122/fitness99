@@ -20,11 +20,19 @@ class MemberListController extends GetxController {
           memberList.addAll(res.data!);
         }
       } else {
-        customSnackBar('Error!', 'Please try again later', false);
+        customSnackBar(
+          title: 'Error!',
+          message: 'Please try again later',
+          isSuccess: false,
+        );
       }
     } on DioError catch (e) {
       print(e);
-      customSnackBar('Error!', 'Please try again later', false);
+      customSnackBar(
+        title: 'Error!',
+        message: 'Please try again later',
+        isSuccess: false,
+      );
     }
     isApiCalling.value = false;
   }
