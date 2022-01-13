@@ -3,7 +3,7 @@ import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 
-class DisplayScreenController extends GetxController {
+class DisplayGroupScreenController extends GetxController {
   final groupList = [].obs;
   final isLoading = true.obs;
   final userModel = Get.find<UserModelService>();

@@ -34,7 +34,7 @@ class ChatListScreen extends StatelessWidget {
               const SizedBox(height: 15),
               Obx(
                 () => controller.isLoading.value
-                    ? CustomShimmer()
+                    ? CustomListGroupShimmer()
                     : controller.groupList.isNotEmpty
                         ? Expanded(
                             child: ListView.builder(

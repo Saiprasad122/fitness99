@@ -34,7 +34,7 @@ class SearchScreenView extends StatelessWidget {
                     CustomSearchFeild(),
                     const SizedBox(height: 15),
                     controller.isLoading.value
-                        ? CustomShimmer()
+                        ? CustomListGroupShimmer()
                         : controller.groupList.isNotEmpty
                             ? Expanded(
                                 child: ListView.builder(

@@ -2,7 +2,7 @@ import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CustomShimmer extends StatelessWidget {
+class CustomListGroupShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(

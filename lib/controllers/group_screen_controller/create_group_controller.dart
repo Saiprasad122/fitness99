@@ -1,4 +1,3 @@
-import 'package:fitness_99/controllers/group_screen_controller/display_screen_controller.dart';
 import 'package:fitness_99/controllers/search_screen/search_screen_controller.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/needed_utils.dart';
@@ -14,6 +13,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:http_parser/http_parser.dart';
+
+import 'display_group_controller.dart';
 
 class CreateGroupController extends GetxController {
   final isBusy = false.obs;
@@ -31,7 +32,7 @@ class CreateGroupController extends GetxController {
   final file_name = ''.obs;
   final userModel = Get.find<UserModelService>();
   final searchScreenController = Get.find<SearchScreenController>();
-  final displayGrouController = Get.find<DisplayScreenController>();
+  final displayGrouController = Get.find<DisplayGroupScreenController>();
   final apiService = Get.find<ApiService>();
 
   bool validateGroupName() {

@@ -89,7 +89,7 @@ class ChatScreen extends StatelessWidget {
             ChatScreenView(group_id),
             EventScreen(),
             Text('data'),
-            ActivityScreen(),
+            ActivityScreen(group_id: group_id),
             MoreOptions(group_id),
           ],
         ),

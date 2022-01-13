@@ -94,8 +94,8 @@ class DisplayActivityResponse {
 
   String toJson() => json.encode(toMap());
 
-  factory DisplayActivityResponse.fromJson(String source) =>
-      DisplayActivityResponse.fromMap(json.decode(source));
+  factory DisplayActivityResponse.fromJson(Map<String, dynamic> source) =>
+      DisplayActivityResponse.fromMap(source);
 
   @override
   String toString() {
