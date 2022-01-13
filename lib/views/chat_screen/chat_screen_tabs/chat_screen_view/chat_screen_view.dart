@@ -10,7 +10,7 @@ import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/image_component.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/text_component.dart';
-import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/create_activity.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/create_activity_screen.dart';
 import 'package:fitness_99/views/profile_screen/widget/image_dialog_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -24,7 +24,7 @@ class ChatScreenView extends StatelessWidget {
   final userModel = Get.find<UserModelService>();
   final int group_id;
 
-  ChatScreenView(this.group_id);
+  ChatScreenView({required this.group_id});
 
   @override
   Widget build(BuildContext context) {
@@ -313,6 +313,10 @@ class ChatScreenView extends StatelessWidget {
             fileName: fileName,
             sizeInKB: sizeInKB,
           );
+        case MessageType.activity:
+          return Container();
+        case MessageType.event:
+          return Container();
         default:
           return TextComponent(
             text: data['message'],

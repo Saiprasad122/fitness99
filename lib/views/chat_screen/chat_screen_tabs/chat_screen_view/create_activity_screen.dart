@@ -80,11 +80,9 @@ class CreateActivityScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Obx(
-                                () => Text(
-                                  controller.selectedDay.value,
-                                  style: TextStyles.sgproRegular.f24,
-                                ),
+                              Text(
+                                controller.selectedDay.value,
+                                style: TextStyles.sgproRegular.f24,
                               ),
                               const SizedBox(width: 20),
                               Icon(Icons.arrow_drop_down)
@@ -142,7 +140,7 @@ class CreateActivityScreen extends StatelessWidget {
                   ),
                 ),
                 CustomBottomButton(
-                  text: 'CREATE',
+                  text: 'CREATE ACTIVITY',
                   onTap: () => controller.createActivity(group_id.toString()),
                 )
               ],

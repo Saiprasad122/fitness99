@@ -7,19 +7,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DisplayEventScreen extends StatelessWidget {
-  const DisplayEventScreen({Key? key}) : super(key: key);
+  final int group_id;
+  const DisplayEventScreen({Key? key, required this.group_id})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(DisplayEventController());
+    final controller = Get.put(DisplayEventController(group_id: group_id));
+
     return Scaffold(
       backgroundColor: Colors.black12,
       body: Obx(
         () => controller.isBusy.value
-            ? controller.eventList.isNotEmpty
+            ? CustomListEventShimmer()
+            : controller.eventList.isNotEmpty
                 ? ListView.builder(
                     physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, i) => EventWidget(),
+                    itemBuilder: (context, i) => EventWidget(
+                      title: controller.eventList[i].title,
+                      description: controller.eventList[i].description,
+                      location: controller.eventList[i].location,
+                      date: controller.eventList[i].date,
+                      time: controller.eventList[i].time,
+                    ),
                     itemCount: controller.eventList.length,
                   )
                 : Container(
@@ -30,8 +40,7 @@ class DisplayEventScreen extends StatelessWidget {
                         style: TextStyles.sgproMedium.f24,
                       ),
                     ),
-                  )
-            : CustomListEventShimmer(),
+                  ),
       ),
     );
   }

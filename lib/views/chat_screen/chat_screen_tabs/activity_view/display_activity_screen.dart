@@ -16,11 +16,19 @@ class ActivityScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black12,
       body: Obx(
-        () => !controller.isBusy.value
-            ? controller.activityList.isNotEmpty
+        () => controller.isBusy.value
+            ? CustomActivityListShimmer()
+            : controller.activityList.isNotEmpty
                 ? ListView.builder(
                     physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, i) => ActivityWidget(),
+                    itemBuilder: (context, i) => ActivityWidget(
+                      title: controller.activityList[i].title,
+                      desciription: controller.activityList[i].description,
+                      location: controller.activityList[i].location,
+                      fromTime: controller.activityList[i].from_time,
+                      toTime: controller.activityList[i].to_time,
+                      notes: controller.activityList[i].note,
+                    ),
                     itemCount: controller.activityList.length,
                   )
                 : Container(
@@ -31,8 +39,7 @@ class ActivityScreen extends StatelessWidget {
                         style: TextStyles.sgproMedium.f24,
                       ),
                     ),
-                  )
-            : CustomActivityListShimmer(),
+                  ),
       ),
     );
   }

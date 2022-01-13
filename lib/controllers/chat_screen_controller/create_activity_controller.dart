@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:fitness_99/controllers/chat_screen_controller/display_activity_controller.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
-import 'package:fitness_99/models/createActivityRequestResponse/createActivity_request.dart';
+import 'package:fitness_99/models/createActivityRequestResponse/create_activity_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateActivityController extends GetxController {
+  final diplayActivityController = Get.find<DisplayActivityController>();
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
   final titleTED = TextEditingController();
@@ -101,20 +103,20 @@ class CreateActivityController extends GetxController {
       descriptionErrText.value = '';
       locationErrText.value = '';
       notesErrText.value = '';
-      // print('The values are ${titleTED.text}, ${}')
-      isBusy.value = true;
 
+      isBusy.value = true;
       await createActivityAPI(
         title: titleTED.text,
         description: descriptionTED.text,
         location: locationTED.text,
-        notes: notesTED.text,
+        note: notesTED.text,
         day: selectedDay.value,
         fromTime: fromTime.value,
         toTime: toTime.value,
         group_id: group_id,
-        user_id: userModel.id.toString(),
+        user_id: userModel.getid().toString(),
       );
+      isBusy.value = false;
     }
   }
 
@@ -122,7 +124,7 @@ class CreateActivityController extends GetxController {
     required String title,
     required String description,
     required String location,
-    required String notes,
+    required String note,
     required String day,
     required String fromTime,
     required String toTime,
@@ -134,10 +136,10 @@ class CreateActivityController extends GetxController {
         title: title,
         description: description,
         location: location,
-        notes: notes,
+        note: note,
         day: day,
-        fromTime: fromTime,
-        toTime: toTime,
+        from_time: fromTime,
+        to_time: toTime,
         group_id: group_id,
         user_id: user_id,
       );
@@ -145,12 +147,20 @@ class CreateActivityController extends GetxController {
       final response = await apiService.createActivityResponse(body);
 
       if (response.message?.toLowerCase().contains('success') ?? false) {
+        Get.back();
+        diplayActivityController.getActivityList(int.parse(group_id));
         customSnackBar(
           title: 'Success',
           message: 'Activity created successfully',
           isSuccess: true,
         );
-      } else {}
+      } else {
+        customSnackBar(
+          title: 'Error!',
+          message: 'Please try again later',
+          isSuccess: false,
+        );
+      }
     } on DioError catch (e) {
       print(e);
       customSnackBar(
@@ -158,7 +168,6 @@ class CreateActivityController extends GetxController {
         message: 'Please try again later',
         isSuccess: false,
       );
-      isBusy.value = false;
     }
   }
 }
