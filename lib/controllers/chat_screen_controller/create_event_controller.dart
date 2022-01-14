@@ -12,9 +12,11 @@ class CreateEventController extends GetxController {
   final titleTED = TextEditingController();
   final descriptionTED = TextEditingController();
   final locationTED = TextEditingController();
+  final membersTED = TextEditingController();
   final titleErrText = ''.obs;
   final descriptionErrText = ''.obs;
   final locationErrText = ''.obs;
+  final membersErrText = ''.obs;
   final selectedDate = ''.obs;
   final selectedTime = ''.obs;
   final currentTime = TimeOfDay.now();
@@ -78,13 +80,49 @@ class CreateEventController extends GetxController {
     }
   }
 
+  bool validateMaxMembers() {
+    if (membersTED.text.isEmpty) {
+      membersErrText.value = 'Enter number';
+      return false;
+    } else if (int.parse(membersTED.text) > 25 ||
+        int.parse(membersTED.text) < 1) {
+      membersErrText.value = 'Group members range must be between 1-25';
+      return false;
+    } else if (!membersTED.text.isNum) {
+      membersErrText.value = 'Enter a valid number';
+      return false;
+    }
+    membersErrText.value = '';
+    return true;
+  }
+
   bool validateDateTime() {
     if (selectedDate.value.isEmpty && selectedTime.value.isEmpty) {
+      selectedDate.value = 'Select Date and Time';
       return false;
     } else if (selectedDate.value.isNotEmpty && selectedTime.value.isEmpty) {
+      selectedDate.value = 'Select Date and Time';
       return false;
     } else {
       return true;
+    }
+  }
+
+  void createEvent(String group_id) async {
+    validateTitle();
+    validateDescription();
+    validateLocation();
+    validateDateTime();
+    if (validateTitle() &&
+        validateDescription() &&
+        validateLocation() &&
+        validateDateTime()) {
+      titleErrText.value = '';
+      descriptionErrText.value = '';
+      locationErrText.value = '';
+      selectedDate.value = '';
+
+      isBusy.value = true;
     }
   }
 }

@@ -60,6 +60,13 @@ class CreateEventScreen extends StatelessWidget {
                           errText: controller.locationErrText.value,
                         ),
                         const SizedBox(height: 20),
+                        CustomProfileTextField(
+                          displayText: 'Maximum members',
+                          hintText: '25',
+                          textEditingController: controller.membersTED,
+                          errText: controller.locationErrText.value,
+                        ),
+                        const SizedBox(height: 20),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           width: double.infinity,
