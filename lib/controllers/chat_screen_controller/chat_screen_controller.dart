@@ -158,13 +158,14 @@ class ChatScreenController extends GetxController {
     );
   }
 
-  void downloadVideo(String url, String? extension,
+  void downloadVideo(String url, String videoUrl, String? extension,
       {void Function(double progressPercent, String? videoFilePath)?
           progressListener,
       void Function(File localVideoFile, File localThumbnailFile)?
           onDoneListener}) async {
     await uploadImageService.downloadVideoFromFirebase(
       url,
+      videoUrl,
       group_id,
       extension ?? 'mp4',
       progressListener,

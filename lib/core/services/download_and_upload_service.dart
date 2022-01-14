@@ -52,6 +52,7 @@ class DownloadAndUploadService extends GetxController {
 
   Future<List<File>?> downloadVideoFromFirebase(
       String downloadUrl,
+      String videoDownloadUrl,
       int groupId,
       String extension,
       void Function(double progressPercent, String? videoFilePath)?
@@ -60,7 +61,8 @@ class DownloadAndUploadService extends GetxController {
           onDoneListener) async {
     try {
       final directories = Get.find<DirectoriesService>();
-      final ref = FirebaseStorage.instance.refFromURL(downloadUrl);
+      final ref = FirebaseStorage.instance.refFromURL(videoDownloadUrl);
+      final thumbnailref = FirebaseStorage.instance.refFromURL(downloadUrl);
       final String name = await ref.name;
 
       final File tempFile = File(
@@ -76,7 +78,7 @@ class DownloadAndUploadService extends GetxController {
       }
       await tempThumbnailFile.create(recursive: true);
       final downloadTask = ref.writeToFile(tempFile);
-      final thumbnailDownloadTask = ref.writeToFile(tempThumbnailFile);
+      final thumbnailDownloadTask = thumbnailref.writeToFile(tempThumbnailFile);
 
       downloadTask.onError((e, s) {
         log('Error while download', error: e, stackTrace: s);

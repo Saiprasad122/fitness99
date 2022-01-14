@@ -154,8 +154,9 @@ class _ImageComponentState extends State<ImageComponent> {
                                 onTap: () {
                                   if (widget.video) {
                                     chatController.downloadVideo(
-                                        widget.url, widget.extension,
-                                        progressListener:
+                                        widget.url,
+                                        widget.videoUrl!,
+                                        widget.extension, progressListener:
                                             (progressPercent, imageFilePath) {
                                       print(
                                           'PROGRESS _____------------> $progressPercent');
