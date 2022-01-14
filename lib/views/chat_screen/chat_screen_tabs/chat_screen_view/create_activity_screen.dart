@@ -115,6 +115,12 @@ class CreateActivityScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         Text(controller.fromTime.value,
                             style: TextStyles.sgproMedium.f22),
+                        const SizedBox(height: 5),
+                        Text(
+                          controller.fromTimeErrText.value,
+                          style: TextStyles.sgproRegular.f18
+                              .copyWith(color: Colors.red[700]),
+                        ),
                         const SizedBox(height: 10),
                         SizedBox(
                           width: AppSizedBoxConfigs.screenWidth - 10,
@@ -134,6 +140,12 @@ class CreateActivityScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         Text(controller.toTime.value,
                             style: TextStyles.sgproMedium.f22),
+                        const SizedBox(height: 5),
+                        Text(
+                          controller.fromTimeErrText.value,
+                          style: TextStyles.sgproRegular.f18
+                              .copyWith(color: Colors.red[700]),
+                        ),
                         const SizedBox(height: 30),
                       ],
                     ),

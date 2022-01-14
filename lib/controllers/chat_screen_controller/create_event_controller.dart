@@ -15,6 +15,7 @@ class CreateEventController extends GetxController {
   final titleErrText = ''.obs;
   final descriptionErrText = ''.obs;
   final locationErrText = ''.obs;
+  final selectDateTimeErrText = ''.obs;
   final selectedDate = ''.obs;
   final selectedTime = ''.obs;
   final currentTime = TimeOfDay.now();
@@ -80,11 +81,29 @@ class CreateEventController extends GetxController {
 
   bool validateDateTime() {
     if (selectedDate.value.isEmpty && selectedTime.value.isEmpty) {
+      selectDateTimeErrText.value = 'Select Date and Time';
       return false;
     } else if (selectedDate.value.isNotEmpty && selectedTime.value.isEmpty) {
+      selectDateTimeErrText.value = 'Select Time';
       return false;
     } else {
       return true;
+    }
+  }
+
+  void createEvent() {
+    validateTitle();
+    validateDescription();
+    validateLocation();
+    validateDateTime();
+    if (validateTitle() &&
+        validateDescription() &&
+        validateLocation() &&
+        validateDateTime()) {
+      titleErrText.value = '';
+      descriptionErrText.value = '';
+      locationErrText.value = '';
+      selectDateTimeErrText.value = '';
     }
   }
 }
