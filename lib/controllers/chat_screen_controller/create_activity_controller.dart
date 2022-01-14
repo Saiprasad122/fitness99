@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateActivityController extends GetxController {
-  final diplayActivityController = Get.find<DisplayActivityController>();
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
   final titleTED = TextEditingController();
@@ -19,9 +18,12 @@ class CreateActivityController extends GetxController {
   final descriptionErrText = ''.obs;
   final locationErrText = ''.obs;
   final notesErrText = ''.obs;
+  final selectDayErrText = ''.obs;
+  final fromTimeErrText = ''.obs;
+  final toTimeErrText = ''.obs;
   final isBusy = false.obs;
-  final selectedDay = 'Sunday'.obs;
-  final dropdownValue = 'Sunday'.obs;
+  final selectedDay = 'Select Day'.obs;
+  final dropdownValue = 'Select Day'.obs;
   Rx<String> fromTime = '--:--'.obs;
   Rx<String> toTime = '--:--'.obs;
   final currentTime = TimeOfDay.now();
@@ -90,20 +92,58 @@ class CreateActivityController extends GetxController {
     }
   }
 
+  bool validateSelectedDay() {
+    if (selectedDay.value.toLowerCase() == 'select day') {
+      selectDayErrText.value = 'Select Day';
+      print(selectDayErrText.value);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  bool validateFromTime() {
+    if (fromTime.value.isEmpty) {
+      fromTime.value = 'Select from time';
+      print(fromTime.value);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  bool validateToTime() {
+    if (toTime.value.isEmpty) {
+      toTime.value = 'Select to time';
+      print(toTime.value);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   void createActivity(String group_id) async {
     validateTitle();
     validateDescription();
     validateLocation();
     validateNotes();
+    validateSelectedDay();
+    validateFromTime();
+    validateToTime();
     if (validateTitle() &&
         validateDescription() &&
         validateLocation() &&
-        validateNotes()) {
+        validateNotes() &&
+        validateSelectedDay() &&
+        validateFromTime() &&
+        validateToTime()) {
       titleErrText.value = '';
       descriptionErrText.value = '';
       locationErrText.value = '';
       notesErrText.value = '';
-
+      selectDayErrText.value = '';
+      fromTimeErrText.value = '';
+      toTime.value = '';
       isBusy.value = true;
       await createActivityAPI(
         title: titleTED.text,
@@ -148,6 +188,9 @@ class CreateActivityController extends GetxController {
 
       if (response.message?.toLowerCase().contains('success') ?? false) {
         Get.back();
+        final diplayActivityController = Get.put<DisplayActivityController>(
+            DisplayActivityController(group_id: int.parse(group_id)));
+
         diplayActivityController.getActivityList(int.parse(group_id));
         customSnackBar(
           title: 'Success',

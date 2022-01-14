@@ -92,6 +92,12 @@ class CreateEventScreen extends StatelessWidget {
                         Text(
                           '${controller.selectedDate} ${controller.selectedTime.value}',
                           style: TextStyles.sgproMedium.f22,
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          controller.selectDateTimeErrText.value,
+                          style: TextStyles.sgproRegular.f18
+                              .copyWith(color: Colors.red[700]),
                         )
                       ],
                     ),
@@ -99,7 +105,7 @@ class CreateEventScreen extends StatelessWidget {
                 ),
                 CustomBottomButton(
                   text: 'CREATE EVENT',
-                  onTap: () {},
+                  onTap: controller.createEvent,
                 )
               ],
             ),
