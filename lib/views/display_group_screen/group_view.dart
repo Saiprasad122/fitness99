@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
+import 'package:fitness_99/models/display_group_reponse.dart';
 import 'package:fitness_99/views/profile_screen/widget/redirect_list.component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class GroupView extends StatelessWidget {
-  const GroupView({Key? key}) : super(key: key);
+  final DisplayGroups displayGroups;
+  const GroupView({Key? key, required this.displayGroups}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +25,16 @@ class GroupView extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Image.asset(
-            'assets/images/search_screen/fitness.png',
-            height: AppSizedBoxConfigs.screenHeight * 0.5,
+          CachedNetworkImage(
+            height: AppSizedBoxConfigs.screenHeight * 0.4,
+            imageUrl: displayGroups.group_image.contains('uploads')
+                ? displayGroups.group_image
+                : 'https://dev.99fitnessfriends.com/uploads${displayGroups.group_image}',
+            placeholder: (context, s) => CircularProgressIndicator(),
+            filterQuality: FilterQuality.high,
+            fit: BoxFit.fill,
+            errorWidget: (context, value, error) =>
+                Image.asset('assets/images/placeholders/user.png'),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),

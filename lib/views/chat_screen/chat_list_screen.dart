@@ -27,24 +27,30 @@ class ChatListScreen extends StatelessWidget {
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomSearchFeild(),
-              const SizedBox(height: 15),
-              Obx(
-                () => controller.isLoading.value
+          child: Obx(
+            () => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomSearchFeild(
+                  textEditingController: controller.searchTED,
+                  onChanged: (text) =>
+                      controller.onChangedSearchTextField(text),
+                ),
+                const SizedBox(height: 15),
+                controller.isLoading.value
                     ? CustomListGroupShimmer()
-                    : controller.groupList.isNotEmpty
+                    : controller.searchedGroupList.isNotEmpty
                         ? Expanded(
                             child: ListView.builder(
                               physics: BouncingScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: controller.groupList.length,
+                              itemCount: controller.searchedGroupList.length,
                               itemBuilder: (context, i) => CustomChatTile(
-                                groupName: controller.groupList[i].group_name,
-                                groupGoal: controller.groupList[i].goal,
-                                groupImage: controller.groupList[i].group_image,
+                                groupName:
+                                    controller.searchedGroupList[i].group_name,
+                                groupGoal: controller.searchedGroupList[i].goal,
+                                groupImage:
+                                    controller.searchedGroupList[i].group_image,
                                 onTap: () => Get.to(
                                   ChatScreen(controller.groupList[i].id,
                                       controller.groupList[i].group_name),
@@ -52,23 +58,43 @@ class ChatListScreen extends StatelessWidget {
                               ),
                             ),
                           )
-                        : Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/gifs/group-chat.gif',
-                                  height: AppSizedBoxConfigs.screenHeight * 0.5,
+                        : controller.groupList.isNotEmpty
+                            ? Expanded(
+                                child: ListView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: controller.groupList.length,
+                                  itemBuilder: (context, i) => CustomChatTile(
+                                    groupName:
+                                        controller.groupList[i].group_name,
+                                    groupGoal: controller.groupList[i].goal,
+                                    groupImage:
+                                        controller.groupList[i].group_image,
+                                    onTap: () => Get.to(
+                                      ChatScreen(controller.groupList[i].id,
+                                          controller.groupList[i].group_name),
+                                    ),
+                                  ),
                                 ),
-                                Text(
-                                  'Your chat list is empty',
-                                  style: TextStyles.sgproMedium.f20,
+                              )
+                            : Center(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/gifs/group-chat.gif',
+                                      height:
+                                          AppSizedBoxConfigs.screenHeight * 0.5,
+                                    ),
+                                    Text(
+                                      'Your chat list is empty',
+                                      style: TextStyles.sgproMedium.f20,
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
-              ),
-            ],
+                              ),
+              ],
+            ),
           ),
         ),
       ),
