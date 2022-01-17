@@ -1,16 +1,12 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/activity_view/componenet/activity_class.dart';
 import 'package:flutter/material.dart';
 
 class ActivityWidget extends StatelessWidget {
-  final String title, desciription, location, notes, fromTime, toTime;
+  final ActivityClass activityClass;
   const ActivityWidget({
     Key? key,
-    required this.title,
-    required this.desciription,
-    required this.location,
-    required this.notes,
-    required this.fromTime,
-    required this.toTime,
+    required this.activityClass,
   }) : super(key: key);
 
   @override
@@ -30,12 +26,12 @@ class ActivityWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    activityClass.title,
                     style: TextStyles.sgproMedium.f24,
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    desciription,
+                    activityClass.description,
                     style: TextStyles.sgproMedium.f16.greyMid,
                   ),
                   const SizedBox(height: 10),
@@ -48,14 +44,14 @@ class ActivityWidget extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        location,
+                        activityClass.location,
                         style: TextStyles.sgproBold.f22
                             .copyWith(color: AppColors.secondaryColor),
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        'From: ${fromTime} To: ${toTime}',
-                        style: TextStyles.sgproBold.f16,
+                        'From: ${activityClass.fromTime} To: ${activityClass.toTime}',
+                        style: TextStyles.sgproBold.f20,
                       ),
                     ],
                   ),
@@ -76,7 +72,7 @@ class ActivityWidget extends StatelessWidget {
                   TextSpan(
                       text: 'Note : ', style: TextStyles.sgproBold.f18.black),
                   TextSpan(
-                    text: notes,
+                    text: activityClass.notes,
                     style: TextStyles.sgproMedium.f18.greyMid,
                   )
                 ]),

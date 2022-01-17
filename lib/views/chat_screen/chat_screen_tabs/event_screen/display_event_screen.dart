@@ -2,9 +2,10 @@ import 'package:fitness_99/controllers/chat_screen_controller/display_event_cont
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_list_event_shimmer.dart';
-import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/widget/event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'widget || component/event_widget.dart';
 
 class DisplayEventScreen extends StatelessWidget {
   final int group_id;

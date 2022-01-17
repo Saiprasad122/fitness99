@@ -29,7 +29,7 @@ class WeekDialoagBox extends StatelessWidget {
         InkWell(
           child: Text(
             text,
-            style: TextStyles.sgproRegular.f20,
+            style: TextStyles.sgproRegular.f20.copyWith(color: Colors.black),
           ),
           onTap: () {
             Get.back();

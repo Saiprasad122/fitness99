@@ -1,5 +1,6 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/event_detail_screen.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/widget%20%7C%7C%20component/event_class.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +18,15 @@ class EventWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.to(() => EventDetailScreen()),
+      onTap: () => Get.to(() => EventDetailScreen(
+            eventClass: EventClass(
+              title: title,
+              description: description,
+              location: location,
+              date: date,
+              time: time,
+            ),
+          )),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         margin: const EdgeInsets.all(10),

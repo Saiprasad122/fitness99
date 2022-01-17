@@ -1,11 +1,14 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/curtom_profile_icon_button.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/widget%20%7C%7C%20component/event_class.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EventDetailScreen extends StatelessWidget {
-  const EventDetailScreen({Key? key}) : super(key: key);
+  final EventClass eventClass;
+  const EventDetailScreen({Key? key, required this.eventClass})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +39,12 @@ class EventDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Test event',
+                      eventClass.title,
                       style: TextStyles.sgproBold.f26,
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Test description',
+                      eventClass.description,
                       style: TextStyles.sgproRegular.f20.greyMid,
                     ),
                     const SizedBox(height: 10),
@@ -56,7 +59,7 @@ class EventDetailScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              'New York',
+                              eventClass.location,
                               style: TextStyles.sgproBold.f20
                                   .copyWith(color: Colors.amber[800]),
                             )
@@ -75,7 +78,7 @@ class EventDetailScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              '23 Dec-2020 10:30 PM',
+                              '${eventClass.date} ${eventClass.time}',
                               style: TextStyles.sgproBold.f20,
                             )
                           ],

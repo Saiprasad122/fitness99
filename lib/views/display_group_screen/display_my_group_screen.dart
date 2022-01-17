@@ -1,4 +1,4 @@
-import 'package:fitness_99/controllers/group_screen_controller/display_group_controller.dart';
+import 'package:fitness_99/controllers/group_screen_controller/display_my_group_controller.dart';
 import 'package:fitness_99/views/display_group_screen/group_view.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/router/views.export.dart';

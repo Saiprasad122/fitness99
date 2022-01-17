@@ -30,9 +30,7 @@ class TextComponent extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.blue[200]
-                  // color: fromOther
-                  //     ? Color.fromRGBO(91, 140, 176, 1)
-                  //     : AppColors.secondaryColor,
+                  // color: fromOther ? Colors.grey[200] : AppColors.secondaryColor,
                   ),
               padding: EdgeInsets.all(10),
               child: Column(

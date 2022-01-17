@@ -35,5 +35,3 @@ export '../../views/chat_screen/chat_screen_tabs/more_options_chat_screen/video_
 export '../../views/chat_screen/chat_screen_tabs/more_options_chat_screen/member_list.dart';
 export '../../views/chat_screen/chat_screen_tabs/chat_screen_view/image_chat_component_screen.dart';
 export '../../views/chat_screen/chat_screen_tabs/chat_screen_view/video_chat_component_screen.dart';
-export '../../views/chat_screen/chat_screen_tabs/chat_screen_view/create_activity_screen.dart';
-export '../../views/chat_screen/chat_screen_tabs/chat_screen_view/create_event_screen.dart';

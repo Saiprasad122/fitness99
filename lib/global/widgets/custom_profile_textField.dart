@@ -8,13 +8,15 @@ class CustomProfileTextField extends StatelessWidget {
   final TextInputType? textInputType;
   final String? hintText;
   final IconData? iconData;
-  final errText;
+  final String errText;
   final Key? key;
   final FocusNode? focusNode;
   final bool isObscureText;
   final String obscuringText;
   final int? maxLength;
   final List<TextInputFormatter>? textInputFormatter;
+  final Function(String)? onSubmitted;
+  final Function(String)? onChanged;
 
   CustomProfileTextField({
     required this.displayText,
@@ -29,6 +31,8 @@ class CustomProfileTextField extends StatelessWidget {
     this.obscuringText = '*',
     this.maxLength,
     this.textInputFormatter,
+    this.onSubmitted,
+    this.onChanged,
   });
 
   @override
@@ -44,6 +48,8 @@ class CustomProfileTextField extends StatelessWidget {
             TextField(
               key: key,
               focusNode: focusNode,
+              onChanged: onChanged,
+              onSubmitted: onSubmitted,
               obscureText: isObscureText,
               obscuringCharacter: obscuringText,
               style: TextStyles.sgproRegular.f20,

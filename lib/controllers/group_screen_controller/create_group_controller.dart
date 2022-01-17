@@ -14,7 +14,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:http_parser/http_parser.dart';
 
-import 'display_group_controller.dart';
+import 'display_my_group_controller.dart';
 
 class CreateGroupController extends GetxController {
   final isBusy = false.obs;

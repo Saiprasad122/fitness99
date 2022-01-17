@@ -15,7 +15,6 @@ class AppPages {
     GetPage(name: Routes.DashboardScreen, page: () => DashboardView()),
     GetPage(name: Routes.ChatListScreen, page: () => ChatListScreen()),
     GetPage(name: Routes.ImageChatComponent, page: () => ImageChatComponent()),
-    GetPage(name: Routes.CreateEvent, page: () => CreateEventScreen()),
     GetPage(name: Routes.GroupVideoList, page: () => GroupVideosList()),
     GetPage(name: Routes.GroupImageList, page: () => GroupImagesList()),
     GetPage(name: Routes.GroupDocList, page: () => GroupDocsList()),
@@ -55,7 +54,6 @@ abstract class Routes {
   static const ChatScreen = _Paths.chatScreen;
   static const ImageChatComponent = _Paths.imageChatComponent;
   static const VideoChatComponent = _Paths.videoChatComponent;
-  static const CreateEvent = _Paths.createEvent;
   static const MemberList = _Paths.memberList;
   static const GroupVideoList = _Paths.groupVideoList;
   static const GroupImageList = _Paths.groupImageList;
@@ -93,7 +91,6 @@ abstract class _Paths {
   static const chatScreen = '/chatScreen';
   static const imageChatComponent = '/imageChatComponent';
   static const videoChatComponent = '/videoChatComponent';
-  static const createEvent = '/createEvent';
   static const memberList = '/memberList';
   static const groupVideoList = '/groupVideoList';
   static const groupImageList = '/groupImageList';

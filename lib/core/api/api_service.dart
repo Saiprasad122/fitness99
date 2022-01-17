@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:fitness_99/models/baseResponse/base.response.dart';
 import 'package:fitness_99/models/cando_cannotdo_goal/cando_cannotdo_goal.response.dart';
 import 'package:fitness_99/models/createActivityRequestResponse/create_activity_request.dart';
+import 'package:fitness_99/models/createEventRequestResponse/create_event_request.dart';
 import 'package:fitness_99/models/display_activity_response.dart';
 import 'package:fitness_99/models/display_event_response.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
@@ -89,6 +90,9 @@ abstract class ApiService {
   @POST(ApiUrls.CREATE_NEW_ACTIVITY)
   Future<BaseResponse> createActivityResponse(
       @Body() CreateActivityRequest createActivityRequest);
+  @POST(ApiUrls.CREATE_NEW_EVENT)
+  Future<BaseResponse> createEventResponse(
+      @Body() CreateEventRequest createEventRequest);
 
   // ----------------------- ************************ ------------------------------ //
   //                              DELETE REQUEST                                     //

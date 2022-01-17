@@ -48,6 +48,9 @@ class CreateActivityScreen extends StatelessWidget {
                           hintText: 'Enter Activity Title',
                           textEditingController: controller.titleTED,
                           errText: controller.titleErrText.value,
+                          onChanged: (text) {
+                            controller.onChangedTitle(text);
+                          },
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
@@ -55,6 +58,9 @@ class CreateActivityScreen extends StatelessWidget {
                           hintText: 'Enter Activity Description',
                           textEditingController: controller.descriptionTED,
                           errText: controller.descriptionErrText.value,
+                          onChanged: (text) {
+                            controller.onChangedDescription(text);
+                          },
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
@@ -62,6 +68,9 @@ class CreateActivityScreen extends StatelessWidget {
                           hintText: 'Enter your Location',
                           textEditingController: controller.locationTED,
                           errText: controller.locationErrText.value,
+                          onChanged: (text) {
+                            controller.onChangedLocation(text);
+                          },
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
@@ -69,6 +78,9 @@ class CreateActivityScreen extends StatelessWidget {
                           hintText: 'Enter your Notes',
                           textEditingController: controller.notesTED,
                           errText: controller.notesErrText.value,
+                          onChanged: (text) {
+                            controller.onChangedNotes(text);
+                          },
                         ),
                         const SizedBox(height: 20),
                         Text(
@@ -79,10 +91,12 @@ class CreateActivityScreen extends StatelessWidget {
                         InkWell(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 controller.selectedDay.value,
-                                style: TextStyles.sgproRegular.f24,
+                                style: TextStyles.sgproRegular.f24.copyWith(
+                                    color: controller.selectDayColor.value),
                               ),
                               const SizedBox(width: 20),
                               Icon(Icons.arrow_drop_down)

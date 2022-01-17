@@ -1,13 +1,14 @@
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
-import 'package:fitness_99/global/router/app_pages.dart';
+import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/activity_componenet.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/event_componenet.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/image_component.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/text_component.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/create_activity_screen.dart';
@@ -16,8 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import 'components/document_component.dart';
+import 'create_event_screen.dart';
 
 class ChatScreenView extends StatelessWidget {
   final controller = Get.put(ChatScreenController());
@@ -128,7 +129,6 @@ class ChatScreenView extends StatelessWidget {
                                       const SizedBox(width: 5),
                                     ],
                                   ),
-                                  // DocumentComponent(),
                                   const SizedBox(height: 5),
                                 ],
                               );
@@ -223,7 +223,7 @@ class ChatScreenView extends StatelessWidget {
                           TextButton(
                             onPressed: () {
                               Navigator.pop(context);
-                              Get.toNamed(Routes.CreateEvent);
+                              Get.to(CreateEventScreen(group_id: group_id));
                             },
                             child: Text('Create Event',
                                 style: TextStyles.sgproRegular.f24.black),
@@ -327,9 +327,17 @@ class ChatScreenView extends StatelessWidget {
             sizeInKB: sizeInKB,
           );
         case MessageType.activity:
-          return Container();
+          return ActivityComponent(
+            message: data['message'],
+            fromOther: other,
+            dateTime: dateTime,
+          );
         case MessageType.event:
-          return Container();
+          return EventComponent(
+            message: data['message'],
+            dateTime: dateTime,
+            fromOther: other,
+          );
         default:
           return TextComponent(
             text: data['message'],
