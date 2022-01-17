@@ -5,7 +5,7 @@ import 'package:fitness_99/global/widgets/custom_list_event_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'widget || component/event_widget.dart';
+import 'component/event_widget.dart';
 
 class DisplayEventScreen extends StatelessWidget {
   final int group_id;

@@ -31,22 +31,28 @@ class SearchScreenView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomSearchFeild(),
+                    CustomSearchFeild(
+                      textEditingController: controller.searchTED,
+                      onChanged: (text) =>
+                          controller.onChangedSearchTextField(text),
+                    ),
                     const SizedBox(height: 15),
                     controller.isLoading.value
                         ? CustomListGroupShimmer()
-                        : controller.groupList.isNotEmpty
+                        : controller.searchedGroupList.isNotEmpty
                             ? Expanded(
                                 child: ListView.builder(
                                   physics: BouncingScrollPhysics(),
                                   shrinkWrap: true,
-                                  itemCount: controller.groupList.length,
+                                  itemCount:
+                                      controller.searchedGroupList.length,
                                   itemBuilder: (context, i) => CustomChatTile(
-                                    groupName:
-                                        controller.groupList[i].group_name,
-                                    groupGoal: controller.groupList[i].goal,
-                                    groupImage:
-                                        controller.groupList[i].group_image,
+                                    groupName: controller
+                                        .searchedGroupList[i].group_name,
+                                    groupGoal:
+                                        controller.searchedGroupList[i].goal,
+                                    groupImage: controller
+                                        .searchedGroupList[i].group_image,
                                     onTap: () {
                                       showDialog(
                                         context: context,
@@ -63,8 +69,8 @@ class SearchScreenView extends StatelessWidget {
                                             TextButton(
                                               onPressed: () {
                                                 Get.back();
-                                                controller.joinGroup(
-                                                    controller.groupList[i].id);
+                                                controller.joinGroup(controller
+                                                    .searchedGroupList[i].id);
                                               },
                                               child: Text(
                                                 'Yes',
@@ -87,14 +93,70 @@ class SearchScreenView extends StatelessWidget {
                                   ),
                                 ),
                               )
-                            : Expanded(
-                                child: Center(
-                                  child: Text(
-                                    'No Groups Found',
-                                    style: TextStyles.sgproMedium.f32,
+                            : controller.groupList.isNotEmpty
+                                ? Expanded(
+                                    child: ListView.builder(
+                                      physics: BouncingScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: controller.groupList.length,
+                                      itemBuilder: (context, i) =>
+                                          CustomChatTile(
+                                        groupName:
+                                            controller.groupList[i].group_name,
+                                        groupGoal: controller.groupList[i].goal,
+                                        groupImage:
+                                            controller.groupList[i].group_image,
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              title: Text(
+                                                'Join Group',
+                                                style:
+                                                    TextStyles.sgproRegular.f18,
+                                              ),
+                                              content: Text(
+                                                'Are you sure you want to join?',
+                                                style:
+                                                    TextStyles.sgproRegular.f16,
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Get.back();
+                                                    controller.joinGroup(
+                                                        controller
+                                                            .groupList[i].id);
+                                                  },
+                                                  child: Text(
+                                                    'Yes',
+                                                    style: TextStyles
+                                                        .sgproRegular.f16,
+                                                  ),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () => Get.back(),
+                                                  child: Text(
+                                                    'No',
+                                                    style: TextStyles
+                                                        .sgproRegular.f16,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  )
+                                : Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        'No Groups Found',
+                                        style: TextStyles.sgproMedium.f32,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
                   ],
                 ),
               ),

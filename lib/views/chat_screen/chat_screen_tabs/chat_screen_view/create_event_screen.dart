@@ -46,9 +46,7 @@ class CreateEventScreen extends StatelessWidget {
                           hintText: 'Enter Event Title',
                           textEditingController: controller.titleTED,
                           errText: controller.titleErrText.value,
-                          onChanged: (text) {
-                            controller.onChangedTitle(text);
-                          },
+                          onChanged: (text) => controller.onChangedTitle(text),
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
@@ -56,9 +54,8 @@ class CreateEventScreen extends StatelessWidget {
                           hintText: 'Enter Event Description',
                           textEditingController: controller.descriptionTED,
                           errText: controller.descriptionErrText.value,
-                          onChanged: (text) {
-                            controller.onChangedDescription(text);
-                          },
+                          onChanged: (text) =>
+                              controller.onChangedDescription(text),
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
@@ -66,9 +63,8 @@ class CreateEventScreen extends StatelessWidget {
                           hintText: 'Enter your location',
                           textEditingController: controller.locationTED,
                           errText: controller.locationErrText.value,
-                          onChanged: (text) {
-                            controller.onChangedLocation(text);
-                          },
+                          onChanged: (text) =>
+                              controller.onChangedLocation(text),
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
@@ -76,18 +72,15 @@ class CreateEventScreen extends StatelessWidget {
                           hintText: '25',
                           textEditingController: controller.membersTED,
                           errText: controller.membersErrText.value,
-                          onChanged: (text) {
-                            controller.onChangedMember(text);
-                          },
+                          onChanged: (text) => controller.onChangedMember(text),
                         ),
                         const SizedBox(height: 20),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           width: double.infinity,
                           child: OutlinedButton(
-                            onPressed: () async {
-                              await controller.selectDate(context);
-                            },
+                            onPressed: () async =>
+                                await controller.selectDate(context),
                             child: Text(
                               'Choose Date and Time',
                               style: TextStyles.sgproRegular.f24,

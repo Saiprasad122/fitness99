@@ -36,6 +36,7 @@ class _DashboardViewState extends State<DashboardView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: TabBarView(
         physics: NeverScrollableScrollPhysics(),
         children: [

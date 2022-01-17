@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/chat_list_controller.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
-import 'package:fitness_99/models/display_group_reponse.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class SearchScreenController extends GetxController {
@@ -13,8 +12,9 @@ class SearchScreenController extends GetxController {
   final userModel = Get.find<UserModelService>();
   final apiService = Get.find<ApiService>();
   final chatListController = Get.find<ChatListController>();
-  List<DisplayGroups> groupList = [];
-  final usersCollection = FirebaseFirestore.instance.collection('Users');
+  final groupList = [].obs;
+  final searchedGroupList = [].obs;
+  final searchTED = TextEditingController();
 
   @override
   void onInit() {
@@ -87,18 +87,33 @@ class SearchScreenController extends GetxController {
     isBusy.value = false;
   }
 
-  void checkIfJoined(int group_id) async {
-    // var userData = await usersCollection.get();
-    // userData.docs.forEach((element) { })
-    // var snapshot = await usersCollection
-    //     .doc(userModel.getEmail())
-    //     .collection('groups')
-    //     .get();
+  // void checkIfJoined(int group_id) async {
+  // var userData = await usersCollection.get();
+  // userData.docs.forEach((element) { })
+  // var snapshot = await usersCollection
+  //     .doc(userModel.getEmail())
+  //     .collection('groups')
+  //     .get();
 
-    // snapshot.docs.forEach((element) {
-    //   if(element.exists && element.id!=group_id){
-    //     usersCollection.doc(userModel.)
-    //   }
-    // });
+  // snapshot.docs.forEach((element) {
+  //   if(element.exists && element.id!=group_id){
+  //     usersCollection.doc(userModel.)
+  //   }
+  // });
+  // }
+
+  void onChangedSearchTextField(String? text) {
+    if (text?.isNotEmpty ?? false) {
+      searchedGroupList.clear();
+      groupList.forEach((element) {
+        if (element.group_name.toString().toLowerCase().contains(text!)) {
+          searchedGroupList.add(element);
+          print(searchedGroupList);
+          print(element.group_name);
+        }
+      });
+    } else if (text?.isEmpty ?? true) {
+      searchedGroupList.clear();
+    }
   }
 }

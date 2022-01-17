@@ -43,34 +43,65 @@ class DisplayMyGroup extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: Column(
               children: [
-                CustomSearchFeild(),
+                CustomSearchFeild(
+                  textEditingController: controller.searchTED,
+                  onChanged: (text) =>
+                      controller.onChangedSearchTextField(text),
+                ),
                 const SizedBox(height: 15),
                 !controller.isLoading.value
-                    ? controller.groupList.isNotEmpty
+                    ? controller.searchedGroupList.isNotEmpty
                         ? Expanded(
                             child: ListView.builder(
                               physics: BouncingScrollPhysics(),
-                              itemCount: controller.groupList.length,
+                              itemCount: controller.searchedGroupList.length,
                               itemBuilder: (context, index) => CustomChatTile(
-                                groupName:
-                                    controller.groupList[index].group_name,
-                                groupGoal: controller.groupList[index].goal,
+                                groupName: controller
+                                    .searchedGroupList[index].group_name,
+                                groupGoal:
+                                    controller.searchedGroupList[index].goal,
                                 groupImage:
-                                    'https://dev.99fitnessfriends.com/uploads${controller.groupList[index].group_image}',
-                                onTap: () => Get.to(() => GroupView()),
+                                    'https://dev.99fitnessfriends.com/uploads${controller.searchedGroupList[index].group_image}',
+                                onTap: () => Get.to(
+                                  () => GroupView(
+                                    displayGroups:
+                                        controller.searchedGroupList[index],
+                                  ),
+                                ),
                               ),
                             ),
                           )
-                        : Container(
-                            width: AppSizedBoxConfigs.screenWidth,
-                            height: AppSizedBoxConfigs.screenHeight * 0.6,
-                            child: Center(
-                              child: Text(
-                                'Tap to on "+" to create your first group',
-                                style: TextStyles.sgproMedium.f24,
-                              ),
-                            ),
-                          )
+                        : controller.groupList.isNotEmpty
+                            ? Expanded(
+                                child: ListView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  itemCount: controller.groupList.length,
+                                  itemBuilder: (context, index) =>
+                                      CustomChatTile(
+                                    groupName:
+                                        controller.groupList[index].group_name,
+                                    groupGoal: controller.groupList[index].goal,
+                                    groupImage:
+                                        'https://dev.99fitnessfriends.com/uploads${controller.groupList[index].group_image}',
+                                    onTap: () => Get.to(
+                                      () => GroupView(
+                                        displayGroups:
+                                            controller.groupList[index],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(
+                                width: AppSizedBoxConfigs.screenWidth,
+                                height: AppSizedBoxConfigs.screenHeight * 0.6,
+                                child: Center(
+                                  child: Text(
+                                    'Tap to on "+" to create your first group',
+                                    style: TextStyles.sgproMedium.f24,
+                                  ),
+                                ),
+                              )
                     : CustomListGroupShimmer()
               ],
             ),

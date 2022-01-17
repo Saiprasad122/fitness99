@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class CustomSearchFeild extends StatelessWidget {
   final Function(String?)? onChanged;
   final Function(String?)? onSubmitted;
+  final TextEditingController? textEditingController;
 
   CustomSearchFeild({
     this.onChanged,
     this.onSubmitted,
+    this.textEditingController,
   });
 
   @override

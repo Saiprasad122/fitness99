@@ -2,14 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ChatListController extends GetxController {
+  final searchTED = TextEditingController();
   final isAnyGroups = true.obs;
   final isLoading = true.obs;
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
   final groupList = [].obs;
+  final searchedGroupList = [].obs;
   final collection = FirebaseFirestore.instance.collection('chatRoom');
 
   @override
@@ -66,5 +69,20 @@ class ChatListController extends GetxController {
     snapshot.docs.forEach((element) {
       print(element.id);
     });
+  }
+
+  void onChangedSearchTextField(String? text) {
+    if (text?.isNotEmpty ?? false) {
+      searchedGroupList.clear();
+      groupList.forEach((element) {
+        if (element.group_name.toString().toLowerCase().contains(text!)) {
+          searchedGroupList.add(element);
+          print(searchedGroupList);
+          print(element.group_name);
+        }
+      });
+    } else if (text?.isEmpty ?? true) {
+      searchedGroupList.clear();
+    }
   }
 }
