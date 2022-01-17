@@ -1,9 +1,10 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/curtom_profile_icon_button.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
-import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/widget%20%7C%7C%20component/event_class.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'component/event_class.dart';
 
 class EventDetailScreen extends StatelessWidget {
   final EventClass eventClass;
