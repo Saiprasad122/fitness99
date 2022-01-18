@@ -14,6 +14,7 @@ class AppPages {
         page: () => ForgotPasswordScreeen()),
     GetPage(name: Routes.DashboardScreen, page: () => DashboardView()),
     GetPage(name: Routes.ChatListScreen, page: () => ChatListScreen()),
+    GetPage(name: Routes.CreatePollScreen, page: () => CreatePollView()),
     GetPage(name: Routes.ImageChatComponent, page: () => ImageChatComponent()),
     GetPage(name: Routes.GroupVideoList, page: () => GroupVideosList()),
     GetPage(name: Routes.GroupImageList, page: () => GroupImagesList()),
@@ -52,6 +53,7 @@ abstract class Routes {
   static const DashboardScreen = _Paths.dashboardScreen;
   static const ChatListScreen = _Paths.chatListScreen;
   static const ChatScreen = _Paths.chatScreen;
+  static const CreatePollScreen = _Paths.createPollScreen;
   static const ImageChatComponent = _Paths.imageChatComponent;
   static const VideoChatComponent = _Paths.videoChatComponent;
   static const MemberList = _Paths.memberList;
@@ -89,6 +91,7 @@ abstract class _Paths {
   static const dashboardScreen = '/dashboardScreen';
   static const chatListScreen = '/chatListScreen';
   static const chatScreen = '/chatScreen';
+  static const createPollScreen = '/createPollScreen';
   static const imageChatComponent = '/imageChatComponent';
   static const videoChatComponent = '/videoChatComponent';
   static const memberList = '/memberList';

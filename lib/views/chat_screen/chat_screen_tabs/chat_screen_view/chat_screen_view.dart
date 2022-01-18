@@ -188,10 +188,10 @@ class ChatScreenView extends StatelessWidget {
                   onTap: () => showModalBottomSheet(
                     context: context,
                     builder: (context) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           TextButton(
@@ -210,14 +210,18 @@ class ChatScreenView extends StatelessWidget {
                           const SizedBox(height: 10),
                           TextButton(
                             onPressed: controller.getVideo,
-                            child: Text('Upload Video',
-                                style: TextStyles.sgproRegular.f24.black),
+                            child: Text(
+                              'Upload Video',
+                              style: TextStyles.sgproRegular.f24.black,
+                            ),
                           ),
                           const SizedBox(height: 10),
                           TextButton(
                             onPressed: controller.uploadDocument,
-                            child: Text('Upload Document',
-                                style: TextStyles.sgproRegular.f24.black),
+                            child: Text(
+                              'Upload Document',
+                              style: TextStyles.sgproRegular.f24.black,
+                            ),
                           ),
                           const SizedBox(height: 10),
                           TextButton(
@@ -249,7 +253,6 @@ class ChatScreenView extends StatelessWidget {
                             child: Text('Cancel',
                                 style: TextStyles.sgproRegular.f24.black),
                           ),
-                          const SizedBox(height: 10),
                         ],
                       ),
                     ),
