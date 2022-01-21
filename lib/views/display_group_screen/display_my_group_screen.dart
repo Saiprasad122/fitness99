@@ -17,6 +17,7 @@ class DisplayMyGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -97,7 +98,7 @@ class DisplayMyGroup extends StatelessWidget {
                                 height: AppSizedBoxConfigs.screenHeight * 0.6,
                                 child: Center(
                                   child: Text(
-                                    'Tap to on "+" to create your first group',
+                                    controller.textToShow.value,
                                     style: TextStyles.sgproMedium.f24,
                                   ),
                                 ),

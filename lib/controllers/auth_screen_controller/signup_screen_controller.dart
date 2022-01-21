@@ -90,7 +90,7 @@ class SignUpScreenController extends GetxController {
     } else {
       apiCalling.value = false;
       customSnackBar(
-        title: 'Something wrong!',
+        title: 'Something went Wrong!',
         message: 'Please try again.',
         isSuccess: false,
       );

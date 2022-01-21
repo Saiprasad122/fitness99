@@ -231,7 +231,6 @@ class ChatScreenController extends GetxController {
       });
     } else if (chatTED.text.isEmpty &&
         (MessageType.activity == 'activity' || MessageType.event == 'event')) {
-      print('THe messgae is $message');
       assert(message?.isNotEmpty ?? false, 'add message');
       final data = {
         'id': userModel.getid().toString(),

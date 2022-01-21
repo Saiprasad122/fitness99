@@ -1,4 +1,4 @@
-import 'package:fitness_99/controllers/chat_screen_controller/display_event_controller.dart';
+import 'package:fitness_99/controllers/chat_screen_controller/display_all_events_controller.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_list_event_shimmer.dart';
@@ -25,6 +25,7 @@ class DisplayEventScreen extends StatelessWidget {
                 ? ListView.builder(
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context, i) => EventWidget(
+                      event_id: controller.eventList[i].id,
                       title: controller.eventList[i].title,
                       description: controller.eventList[i].description,
                       location: controller.eventList[i].location,

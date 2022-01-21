@@ -111,7 +111,7 @@ class CreateEventScreen extends StatelessWidget {
               ],
             ),
             controller.isBusy.value
-                ? CustomProgressIndicator()
+                ? const CustomProgressIndicator()
                 : const SizedBox(),
           ],
         ),

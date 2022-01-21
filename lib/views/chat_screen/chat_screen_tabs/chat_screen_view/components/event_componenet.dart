@@ -1,4 +1,5 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/component/event_class.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -6,13 +7,15 @@ class EventComponent extends StatelessWidget {
   final String message;
   final DateTime dateTime;
   final bool fromOther;
+  final EventClass? eventClass;
 
-  const EventComponent({
-    Key? key,
-    required this.message,
-    required this.dateTime,
-    required this.fromOther,
-  }) : super(key: key);
+  const EventComponent(
+      {Key? key,
+      required this.message,
+      required this.dateTime,
+      required this.fromOther,
+      this.eventClass})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

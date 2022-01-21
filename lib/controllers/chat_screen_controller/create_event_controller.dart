@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
-import 'package:fitness_99/controllers/chat_screen_controller/display_event_controller.dart';
+import 'package:fitness_99/controllers/chat_screen_controller/display_all_events_controller.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/mssg_type_enum.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';

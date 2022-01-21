@@ -33,8 +33,9 @@ class AppPages {
     GetPage(name: Routes.CannotDoDisplay, page: () => CannnotDoDisplay()),
     GetPage(name: Routes.CategoriesScreen, page: () => CategoriesScreen()),
     GetPage(
-        name: Routes.PreferenceTimeScreen, page: () => PreferenceTimeScreen()),
-    GetPage(name: Routes.PreferenceTimeAdd, page: () => PreferenceTimeAdd()),
+        name: Routes.ViewPreferencesScreen,
+        page: () => ViewPreferencesScreen()),
+    GetPage(name: Routes.AddPreferenceTime, page: () => AddPreferenceTime()),
     GetPage(name: Routes.InvitationScreen, page: () => InvitationScreen()),
     GetPage(name: Routes.MoreOptionsScreen, page: () => MoreOptionsScreen()),
     GetPage(name: Routes.ProductScreen, page: () => ProductScreen()),
@@ -72,8 +73,8 @@ abstract class Routes {
   static const CannotDoAdd = _Paths.cannotDoAdd;
   static const CannotDoDisplay = _Paths.cannotDoDisplay;
   static const CategoriesScreen = _Paths.categoriesScreen;
-  static const PreferenceTimeScreen = _Paths.preferenceTimeScreen;
-  static const PreferenceTimeAdd = _Paths.preferenceTimeAdd;
+  static const ViewPreferencesScreen = _Paths.viewPreferencesScreen;
+  static const AddPreferenceTime = _Paths.addPreferenceTime;
   static const InvitationScreen = _Paths.invitationScree;
   static const MoreOptionsScreen = _Paths.moreOptionsScreen;
   static const ProductScreen = _Paths.productScreeen;
@@ -110,8 +111,8 @@ abstract class _Paths {
   static const cannotDoDisplay = '/cannotDoDisplay';
   static const cannotDoAdd = '/cannotDoAdd';
   static const categoriesScreen = '/categoriesScreen';
-  static const preferenceTimeScreen = '/preferenceTimeScreen';
-  static const preferenceTimeAdd = '/preferenceTimeAdd';
+  static const viewPreferencesScreen = '/viewPreferencesScreen';
+  static const addPreferenceTime = '/addPreferenceTime';
   static const invitationScree = '/invitationScreen';
   static const moreOptionsScreen = '/moreOptionsScreen';
   static const productScreeen = '/productScreen';

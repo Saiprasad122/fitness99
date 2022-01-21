@@ -1,14 +1,15 @@
-import 'package:fitness_99/controllers/profile_screen/preference_time_controller.dart';
+import 'package:fitness_99/controllers/profile_screen/add_preference_time_controller.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
+import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'widget/week_dialog_box.dart';
 
-class PreferenceTimeAdd extends StatelessWidget {
-  final controller = Get.put(PreferenceTimeController());
+class AddPreferenceTime extends StatelessWidget {
+  final controller = Get.put(AddPreferenceTimeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +131,10 @@ class PreferenceTimeAdd extends StatelessWidget {
                 text: 'Add',
                 onTap: controller.addPreference,
               ),
-            )
+            ),
+            controller.isBusy.value
+                ? const CustomProgressIndicator()
+                : const SizedBox(),
           ],
         ),
       ),

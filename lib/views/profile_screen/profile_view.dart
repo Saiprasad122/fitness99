@@ -187,7 +187,7 @@ class ProfileView extends StatelessWidget {
               RedirectListComponent(
                 imageUrl: 'assets/images/tabbar/timer.png',
                 title: 'Preference Time',
-                onTap: () => Get.toNamed(Routes.PreferenceTimeScreen),
+                onTap: () => Get.toNamed(Routes.ViewPreferencesScreen),
               ),
             ],
           ),

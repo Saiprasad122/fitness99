@@ -152,7 +152,7 @@ class SearchScreenView extends StatelessWidget {
                                 : Expanded(
                                     child: Center(
                                       child: Text(
-                                        'No Groups Found',
+                                        controller.textToShow.value,
                                         style: TextStyles.sgproMedium.f32,
                                       ),
                                     ),
@@ -160,7 +160,9 @@ class SearchScreenView extends StatelessWidget {
                   ],
                 ),
               ),
-              controller.isBusy.value ? CustomProgressIndicator() : SizedBox(),
+              controller.isBusy.value
+                  ? const CustomProgressIndicator()
+                  : const SizedBox(),
             ],
           ),
         ),

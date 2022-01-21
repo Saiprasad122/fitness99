@@ -165,7 +165,7 @@ class CreateActivityScreen extends StatelessWidget {
               ],
             ),
             controller.isBusy.value
-                ? CustomProgressIndicator()
+                ? const CustomProgressIndicator()
                 : const SizedBox(),
           ],
         ),

@@ -34,6 +34,7 @@ class WeekDialoagBox extends StatelessWidget {
           onTap: () {
             Get.back();
             controller.selectedDay.value = controller.days[i];
+            controller.selectDayColor.value = Colors.black;
           },
         ),
         const SizedBox(height: 20),

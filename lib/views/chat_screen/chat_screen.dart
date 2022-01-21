@@ -1,7 +1,7 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/activity_view/display_activity_screen.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/chat_screen_view.dart';
-import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/display_event_screen.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/display_all_events_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

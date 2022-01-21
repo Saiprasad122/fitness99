@@ -87,7 +87,7 @@ class ChatListScreen extends StatelessWidget {
                                           AppSizedBoxConfigs.screenHeight * 0.5,
                                     ),
                                     Text(
-                                      'Your chat list is empty',
+                                      controller.textToShow.value,
                                       style: TextStyles.sgproMedium.f20,
                                     ),
                                   ],

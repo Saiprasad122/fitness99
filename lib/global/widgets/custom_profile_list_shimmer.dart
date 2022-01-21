@@ -17,9 +17,9 @@ class CustomProfileListShimmer extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: ListTile(
               contentPadding: const EdgeInsets.all(0),
-              leading: CircleAvatar(
+              leading: const CircleAvatar(
                 radius: 40,
-                child: Container(),
+                child: const SizedBox(),
               ),
               title: Container(
                 height: 20,
