@@ -22,6 +22,12 @@ class ApiUrls {
   static const MEMBER_LIST = '/group_members/{group_id}';
   static const GET_PROFILE = '/get_profile/{user_id}';
   static const CREATE_NEW_ACTIVITY = '/create_activity';
+  static const CREATE_NEW_EVENT = '/create_event';
   static const GET_ACTIVITY = '/activity/{group_id}';
   static const GET_EVENT = '/event/{group_id}';
+  static const GET_EVENT_CHECK_IN_LIST = '/eventCheckIN/{event_id}';
+  static const GET_CHECK_IN_BY_USER_ID = '/checkin/{event_id}/{user_id}';
+  static const GET_CHECK_OUT_BY_USER_ID = '/checkOUT/{event_id}/{user_id}';
+  static const ADD_PREFERENCES = '/create_prefrence';
+  static const VIEW_PREFERENCES = '/prefrence/{user_id}';
 }

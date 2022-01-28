@@ -192,6 +192,7 @@ class ChatScreenController extends GetxController {
     String? fileName,
     String? thumbnailUrl,
     double? sizeInKB,
+    String? message,
   }) {
     if (chatTED.text.isNotEmpty || filePath.value.isNotEmpty) {
       final data = {
@@ -219,6 +220,25 @@ class ChatScreenController extends GetxController {
         data.addAll({'thumbnailUrl': thumbnailUrl});
       }
 
+      instance
+          .collection('groups')
+          .doc(group_id.toString())
+          .collection('chats')
+          .add(data)
+          .then((value) {
+        chatTED.clear();
+        filePath.value = '';
+      });
+    } else if (chatTED.text.isEmpty &&
+        (MessageType.activity == 'activity' || MessageType.event == 'event')) {
+      assert(message?.isNotEmpty ?? false, 'add message');
+      final data = {
+        'id': userModel.getid().toString(),
+        'messageType': messageType,
+        'time': DateTime.now(),
+        'imageURl': userModel.getProfilePicture(),
+        'message': message,
+      };
       instance
           .collection('groups')
           .doc(group_id.toString())

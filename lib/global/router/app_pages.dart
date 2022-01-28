@@ -14,8 +14,8 @@ class AppPages {
         page: () => ForgotPasswordScreeen()),
     GetPage(name: Routes.DashboardScreen, page: () => DashboardView()),
     GetPage(name: Routes.ChatListScreen, page: () => ChatListScreen()),
+    GetPage(name: Routes.CreatePollScreen, page: () => CreatePollView()),
     GetPage(name: Routes.ImageChatComponent, page: () => ImageChatComponent()),
-    GetPage(name: Routes.CreateEvent, page: () => CreateEventScreen()),
     GetPage(name: Routes.GroupVideoList, page: () => GroupVideosList()),
     GetPage(name: Routes.GroupImageList, page: () => GroupImagesList()),
     GetPage(name: Routes.GroupDocList, page: () => GroupDocsList()),
@@ -33,8 +33,9 @@ class AppPages {
     GetPage(name: Routes.CannotDoDisplay, page: () => CannnotDoDisplay()),
     GetPage(name: Routes.CategoriesScreen, page: () => CategoriesScreen()),
     GetPage(
-        name: Routes.PreferenceTimeScreen, page: () => PreferenceTimeScreen()),
-    GetPage(name: Routes.PreferenceTimeAdd, page: () => PreferenceTimeAdd()),
+        name: Routes.ViewPreferencesScreen,
+        page: () => ViewPreferencesScreen()),
+    GetPage(name: Routes.AddPreferenceTime, page: () => AddPreferenceTime()),
     GetPage(name: Routes.InvitationScreen, page: () => InvitationScreen()),
     GetPage(name: Routes.MoreOptionsScreen, page: () => MoreOptionsScreen()),
     GetPage(name: Routes.ProductScreen, page: () => ProductScreen()),
@@ -53,9 +54,9 @@ abstract class Routes {
   static const DashboardScreen = _Paths.dashboardScreen;
   static const ChatListScreen = _Paths.chatListScreen;
   static const ChatScreen = _Paths.chatScreen;
+  static const CreatePollScreen = _Paths.createPollScreen;
   static const ImageChatComponent = _Paths.imageChatComponent;
   static const VideoChatComponent = _Paths.videoChatComponent;
-  static const CreateEvent = _Paths.createEvent;
   static const MemberList = _Paths.memberList;
   static const GroupVideoList = _Paths.groupVideoList;
   static const GroupImageList = _Paths.groupImageList;
@@ -72,8 +73,8 @@ abstract class Routes {
   static const CannotDoAdd = _Paths.cannotDoAdd;
   static const CannotDoDisplay = _Paths.cannotDoDisplay;
   static const CategoriesScreen = _Paths.categoriesScreen;
-  static const PreferenceTimeScreen = _Paths.preferenceTimeScreen;
-  static const PreferenceTimeAdd = _Paths.preferenceTimeAdd;
+  static const ViewPreferencesScreen = _Paths.viewPreferencesScreen;
+  static const AddPreferenceTime = _Paths.addPreferenceTime;
   static const InvitationScreen = _Paths.invitationScree;
   static const MoreOptionsScreen = _Paths.moreOptionsScreen;
   static const ProductScreen = _Paths.productScreeen;
@@ -91,9 +92,9 @@ abstract class _Paths {
   static const dashboardScreen = '/dashboardScreen';
   static const chatListScreen = '/chatListScreen';
   static const chatScreen = '/chatScreen';
+  static const createPollScreen = '/createPollScreen';
   static const imageChatComponent = '/imageChatComponent';
   static const videoChatComponent = '/videoChatComponent';
-  static const createEvent = '/createEvent';
   static const memberList = '/memberList';
   static const groupVideoList = '/groupVideoList';
   static const groupImageList = '/groupImageList';
@@ -110,8 +111,8 @@ abstract class _Paths {
   static const cannotDoDisplay = '/cannotDoDisplay';
   static const cannotDoAdd = '/cannotDoAdd';
   static const categoriesScreen = '/categoriesScreen';
-  static const preferenceTimeScreen = '/preferenceTimeScreen';
-  static const preferenceTimeAdd = '/preferenceTimeAdd';
+  static const viewPreferencesScreen = '/viewPreferencesScreen';
+  static const addPreferenceTime = '/addPreferenceTime';
   static const invitationScree = '/invitationScreen';
   static const moreOptionsScreen = '/moreOptionsScreen';
   static const productScreeen = '/productScreen';

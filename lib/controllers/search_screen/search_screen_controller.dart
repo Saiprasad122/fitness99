@@ -1,10 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/chat_list_controller.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class SearchScreenController extends GetxController {
@@ -13,8 +13,11 @@ class SearchScreenController extends GetxController {
   final userModel = Get.find<UserModelService>();
   final apiService = Get.find<ApiService>();
   final chatListController = Get.find<ChatListController>();
-  List<DisplayGroups> groupList = [];
-  final usersCollection = FirebaseFirestore.instance.collection('Users');
+  final groupList = <DisplayGroups>[].obs;
+  final tempList = <DisplayGroups>[].obs;
+  final searchedGroupList = [].obs;
+  final searchTED = TextEditingController();
+  final textToShow = 'No Groups to search'.obs;
 
   @override
   void onInit() {
@@ -26,15 +29,22 @@ class SearchScreenController extends GetxController {
     try {
       final res = await apiService.getAllGroups();
       if (res.data != null) {
-        groupList.addAll(res.data!);
-        isLoading.value = false;
+        if (res.data?.isNotEmpty ?? false) {
+          textToShow.value = 'No Groups to search';
+          groupList.clear();
+          tempList.clear();
+          tempList.addAll(res.data!);
+          groupList.addAll(res.data!);
+          isLoading.value = false;
+        } else {
+          tempList.addAll(res.data!);
+          groupList.addAll(res.data!);
+        }
+      } else {
+        textToShow.value = 'No Groups to search';
       }
     } on DioError catch (e) {
-      if (e.response!.statusCode == 404) {
-        print(e);
-      } else {
-        print(e);
-      }
+      textToShow.value = 'No Groups to search';
       print(e);
     } finally {
       isLoading.value = false;
@@ -87,18 +97,22 @@ class SearchScreenController extends GetxController {
     isBusy.value = false;
   }
 
-  void checkIfJoined(int group_id) async {
-    // var userData = await usersCollection.get();
-    // userData.docs.forEach((element) { })
-    // var snapshot = await usersCollection
-    //     .doc(userModel.getEmail())
-    //     .collection('groups')
-    //     .get();
-
-    // snapshot.docs.forEach((element) {
-    //   if(element.exists && element.id!=group_id){
-    //     usersCollection.doc(userModel.)
-    //   }
-    // });
+  void onChangedSearchTextField(String? text) {
+    if (text?.isNotEmpty ?? false) {
+      searchedGroupList.clear();
+      tempList.forEach((element) {
+        searchedGroupList.addIf(
+            element.group_name.toLowerCase().startsWith(text!.toLowerCase()),
+            element);
+        if (searchedGroupList.isEmpty) {
+          groupList.clear();
+          textToShow.value = 'No Groups were found';
+        }
+      });
+    } else if (text?.isEmpty ?? true) {
+      groupList.clear();
+      groupList.addAll(tempList);
+      searchedGroupList.clear();
+    }
   }
 }

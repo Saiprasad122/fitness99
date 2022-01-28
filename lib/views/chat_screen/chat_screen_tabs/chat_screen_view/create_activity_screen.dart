@@ -48,6 +48,7 @@ class CreateActivityScreen extends StatelessWidget {
                           hintText: 'Enter Activity Title',
                           textEditingController: controller.titleTED,
                           errText: controller.titleErrText.value,
+                          onChanged: (text) => controller.onChangedTitle(text),
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
@@ -55,6 +56,8 @@ class CreateActivityScreen extends StatelessWidget {
                           hintText: 'Enter Activity Description',
                           textEditingController: controller.descriptionTED,
                           errText: controller.descriptionErrText.value,
+                          onChanged: (text) =>
+                              controller.onChangedDescription(text),
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
@@ -62,6 +65,8 @@ class CreateActivityScreen extends StatelessWidget {
                           hintText: 'Enter your Location',
                           textEditingController: controller.locationTED,
                           errText: controller.locationErrText.value,
+                          onChanged: (text) =>
+                              controller.onChangedLocation(text),
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
@@ -69,6 +74,7 @@ class CreateActivityScreen extends StatelessWidget {
                           hintText: 'Enter your Notes',
                           textEditingController: controller.notesTED,
                           errText: controller.notesErrText.value,
+                          onChanged: (text) => controller.onChangedNotes(text),
                         ),
                         const SizedBox(height: 20),
                         Text(
@@ -79,10 +85,12 @@ class CreateActivityScreen extends StatelessWidget {
                         InkWell(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 controller.selectedDay.value,
-                                style: TextStyles.sgproRegular.f24,
+                                style: TextStyles.sgproRegular.f24.copyWith(
+                                    color: controller.selectDayColor.value),
                               ),
                               const SizedBox(width: 20),
                               Icon(Icons.arrow_drop_down)
@@ -100,9 +108,8 @@ class CreateActivityScreen extends StatelessWidget {
                         SizedBox(
                           width: AppSizedBoxConfigs.screenWidth - 10,
                           child: OutlinedButton(
-                            onPressed: () async {
-                              controller.fromTimePicked(context);
-                            },
+                            onPressed: () async =>
+                                controller.fromTimePicked(context),
                             child: Text(
                               'Choose From Time',
                               style: TextStyles.sgproRegular.f22,
@@ -115,6 +122,12 @@ class CreateActivityScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         Text(controller.fromTime.value,
                             style: TextStyles.sgproMedium.f22),
+                        const SizedBox(height: 5),
+                        Text(
+                          controller.fromTimeErrText.value,
+                          style: TextStyles.sgproRegular.f18
+                              .copyWith(color: Colors.red[700]),
+                        ),
                         const SizedBox(height: 10),
                         SizedBox(
                           width: AppSizedBoxConfigs.screenWidth - 10,
@@ -134,6 +147,12 @@ class CreateActivityScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         Text(controller.toTime.value,
                             style: TextStyles.sgproMedium.f22),
+                        const SizedBox(height: 5),
+                        Text(
+                          controller.fromTimeErrText.value,
+                          style: TextStyles.sgproRegular.f18
+                              .copyWith(color: Colors.red[700]),
+                        ),
                         const SizedBox(height: 30),
                       ],
                     ),
@@ -146,7 +165,7 @@ class CreateActivityScreen extends StatelessWidget {
               ],
             ),
             controller.isBusy.value
-                ? CustomProgressIndicator()
+                ? const CustomProgressIndicator()
                 : const SizedBox(),
           ],
         ),

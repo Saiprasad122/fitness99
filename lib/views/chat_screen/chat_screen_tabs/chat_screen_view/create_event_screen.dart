@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateEventScreen extends StatelessWidget {
+  final int group_id;
   final controller = Get.put(CreateEventController());
-  CreateEventScreen({Key? key}) : super(key: key);
+  CreateEventScreen({Key? key, required this.group_id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,35 +46,41 @@ class CreateEventScreen extends StatelessWidget {
                           hintText: 'Enter Event Title',
                           textEditingController: controller.titleTED,
                           errText: controller.titleErrText.value,
+                          onChanged: (text) => controller.onChangedTitle(text),
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
-                            displayText: 'Event Description',
-                            hintText: 'Enter Event Description',
-                            textEditingController: controller.descriptionTED,
-                            errText: controller.descriptionErrText.value),
+                          displayText: 'Event Description',
+                          hintText: 'Enter Event Description',
+                          textEditingController: controller.descriptionTED,
+                          errText: controller.descriptionErrText.value,
+                          onChanged: (text) =>
+                              controller.onChangedDescription(text),
+                        ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
                           displayText: 'Event Locatin',
                           hintText: 'Enter your location',
                           textEditingController: controller.locationTED,
                           errText: controller.locationErrText.value,
+                          onChanged: (text) =>
+                              controller.onChangedLocation(text),
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
                           displayText: 'Maximum members',
                           hintText: '25',
                           textEditingController: controller.membersTED,
-                          errText: controller.locationErrText.value,
+                          errText: controller.membersErrText.value,
+                          onChanged: (text) => controller.onChangedMember(text),
                         ),
                         const SizedBox(height: 20),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           width: double.infinity,
                           child: OutlinedButton(
-                            onPressed: () async {
-                              await controller.selectDate(context);
-                            },
+                            onPressed: () async =>
+                                await controller.selectDate(context),
                             child: Text(
                               'Choose Date and Time',
                               style: TextStyles.sgproRegular.f24,
@@ -83,15 +90,15 @@ class CreateEventScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        Text(
-                          'Date and Time',
-                          style: TextStyles.sgproBold.f24,
-                        ),
-                        const SizedBox(height: 10),
                         Text(
                           '${controller.selectedDate} ${controller.selectedTime.value}',
                           style: TextStyles.sgproMedium.f22,
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          controller.selectDateTimeErrText.value,
+                          style: TextStyles.sgproRegular.f18
+                              .copyWith(color: Colors.red[700]),
                         )
                       ],
                     ),
@@ -99,12 +106,12 @@ class CreateEventScreen extends StatelessWidget {
                 ),
                 CustomBottomButton(
                   text: 'CREATE EVENT',
-                  onTap: () {},
+                  onTap: () => controller.createEvent(group_id.toString()),
                 )
               ],
             ),
             controller.isBusy.value
-                ? CustomProgressIndicator()
+                ? const CustomProgressIndicator()
                 : const SizedBox(),
           ],
         ),

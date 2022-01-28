@@ -1,5 +1,5 @@
 import 'package:fitness_99/controllers/chat_screen_controller/chat_list_controller.dart';
-import 'package:fitness_99/controllers/group_screen_controller/display_group_controller.dart';
+import 'package:fitness_99/controllers/group_screen_controller/display_my_group_controller.dart';
 import 'package:fitness_99/controllers/profile_screen/profile_view_controller.dart';
 import 'package:fitness_99/controllers/search_screen/search_screen_controller.dart';
 import 'package:fitness_99/core/services/data_model.dart';

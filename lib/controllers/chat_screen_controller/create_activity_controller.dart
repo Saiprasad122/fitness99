@@ -1,16 +1,21 @@
 import 'package:dio/dio.dart';
+import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/display_activity_controller.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
+import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/createActivityRequestResponse/create_activity_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
+import 'mssg_type_enum.dart';
 
 class CreateActivityController extends GetxController {
-  final diplayActivityController = Get.find<DisplayActivityController>();
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
+  final chatScreenController = Get.find<ChatScreenController>();
   final titleTED = TextEditingController();
   final descriptionTED = TextEditingController();
   final locationTED = TextEditingController();
@@ -19,11 +24,13 @@ class CreateActivityController extends GetxController {
   final descriptionErrText = ''.obs;
   final locationErrText = ''.obs;
   final notesErrText = ''.obs;
+  final fromTimeErrText = ''.obs;
+  final toTimeErrText = ''.obs;
   final isBusy = false.obs;
-  final selectedDay = 'Sunday'.obs;
-  final dropdownValue = 'Sunday'.obs;
-  Rx<String> fromTime = '--:--'.obs;
-  Rx<String> toTime = '--:--'.obs;
+  final selectedDay = 'Select Day'.obs;
+  final selectDayColor = Colors.black.obs;
+  final fromTime = ''.obs;
+  final toTime = ''.obs;
   final currentTime = TimeOfDay.now();
   final days = [
     'Sunday',
@@ -34,6 +41,38 @@ class CreateActivityController extends GetxController {
     'Friday',
     'Saturday'
   ];
+
+  void onChangedTitle(String text) {
+    if (text.isNotEmpty) {
+      titleErrText.value = '';
+    } else {
+      titleErrText.value = 'Enter Title';
+    }
+  }
+
+  void onChangedDescription(String text) {
+    if (text.isNotEmpty) {
+      descriptionErrText.value = '';
+    } else {
+      descriptionErrText.value = 'Enter Description';
+    }
+  }
+
+  void onChangedLocation(String text) {
+    if (text.isNotEmpty) {
+      locationErrText.value = '';
+    } else {
+      locationErrText.value = 'Enter Location';
+    }
+  }
+
+  void onChangedNotes(String text) {
+    if (text.isNotEmpty) {
+      notesErrText.value = '';
+    } else {
+      notesErrText.value = 'Enter Notes';
+    }
+  }
 
   void fromTimePicked(BuildContext context) async {
     fromTime.value = await selectTime(context);
@@ -90,20 +129,56 @@ class CreateActivityController extends GetxController {
     }
   }
 
+  bool validateSelectedDay() {
+    if (selectedDay.value.toLowerCase() == 'select day') {
+      selectDayColor.value = AppColors.error;
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  bool validateFromTime() {
+    if (fromTime.value.isEmpty) {
+      fromTimeErrText.value = 'Select from time';
+      print(fromTime.value);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  bool validateToTime() {
+    if (toTime.value.isEmpty) {
+      toTimeErrText.value = 'Select to time';
+      print(toTime.value);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   void createActivity(String group_id) async {
     validateTitle();
     validateDescription();
     validateLocation();
     validateNotes();
+    validateSelectedDay();
+    validateFromTime();
+    validateToTime();
     if (validateTitle() &&
         validateDescription() &&
         validateLocation() &&
-        validateNotes()) {
+        validateNotes() &&
+        validateSelectedDay() &&
+        validateFromTime() &&
+        validateToTime()) {
       titleErrText.value = '';
       descriptionErrText.value = '';
       locationErrText.value = '';
       notesErrText.value = '';
-
+      fromTimeErrText.value = '';
+      toTimeErrText.value = '';
       isBusy.value = true;
       await createActivityAPI(
         title: titleTED.text,
@@ -147,7 +222,15 @@ class CreateActivityController extends GetxController {
       final response = await apiService.createActivityResponse(body);
 
       if (response.message?.toLowerCase().contains('success') ?? false) {
+        chatScreenController.addData(
+            messageType: MessageType.activity,
+            message:
+                '${userModel.getUserName()} created new activity in $location @${DateFormat('dd/MM/yyyy').format(DateTime.now())} $fromTime');
+
         Get.back();
+        final diplayActivityController = Get.put<DisplayActivityController>(
+            DisplayActivityController(group_id: int.parse(group_id)));
+
         diplayActivityController.getActivityList(int.parse(group_id));
         customSnackBar(
           title: 'Success',
