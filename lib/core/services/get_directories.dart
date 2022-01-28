@@ -71,6 +71,28 @@ class DirectoriesService extends GetxController {
     }
   }
 
+  List<String> getVideosWithoutThumbnailsOfGroup(String groupId) {
+    final List<String> videos = [];
+
+    try {
+      final videosDirectory = Directory(getVideosPath(groupId));
+
+      final _videosFile =
+          videosDirectory.listSync(followLinks: false, recursive: true);
+      _videosFile.forEach((vid) {
+        String vidString = vid.toString().substring(
+            vid.toString().lastIndexOf('/') + 1, vid.toString().length);
+        if (!vidString.contains('thumbnail')) {
+          videos.add(vidString);
+        }
+      });
+    } catch (e) {
+      log('Error', error: e, name: 'Directory');
+    } finally {
+      return videos;
+    }
+  }
+
   List<String> getFilesOfGroup(String groupId) {
     final List<String> files = [];
     try {
@@ -82,6 +104,25 @@ class DirectoriesService extends GetxController {
         String vidString = file.toString().substring(
             file.toString().lastIndexOf('/') + 1,
             file.toString().lastIndexOf('.'));
+        files.add(vidString);
+      });
+    } catch (e) {
+      log('Error', error: e, name: 'Directory');
+    } finally {
+      return files;
+    }
+  }
+
+  List<String> getFullFileNamesOfGroup(String groupId) {
+    final List<String> files = [];
+    try {
+      final filesDirectory = Directory(getFilesPath(groupId));
+
+      final _filesFile =
+          filesDirectory.listSync(followLinks: false, recursive: true);
+      _filesFile.forEach((file) {
+        String vidString =
+            file.toString().substring(file.toString().lastIndexOf('/') + 1);
         files.add(vidString);
       });
     } catch (e) {
