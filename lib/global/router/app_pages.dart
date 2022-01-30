@@ -1,4 +1,5 @@
 import 'package:fitness_99/global/router/views.export.dart';
+import 'package:fitness_99/views/display_group_screen/my_group_categories.dart';
 
 class AppPages {
   static const INITIAL = Routes.SplashScreen;
@@ -21,6 +22,9 @@ class AppPages {
     GetPage(name: Routes.GroupDocList, page: () => GroupDocsList()),
     GetPage(name: Routes.SearchScreen, page: () => SearchScreenView()),
     GetPage(name: Routes.DisplayMyGroupScreen, page: () => DisplayMyGroup()),
+    GetPage(
+        name: Routes.MyGroupCategoriesScreen,
+        page: () => MyGroupCategoriesScreen()),
     GetPage(name: Routes.CreateGroupScreen, page: () => CreateGroupScreen()),
     GetPage(name: Routes.ProfileScreen, page: () => ProfileView()),
     GetPage(name: Routes.EditProfileScreen, page: () => EditProfileScreen()),
@@ -63,6 +67,7 @@ abstract class Routes {
   static const GroupDocList = _Paths.groupDocList;
   static const SearchScreen = _Paths.searchSreen;
   static const DisplayMyGroupScreen = _Paths.displayMyGroupScreen;
+  static const MyGroupCategoriesScreen = _Paths.myGroupCategoriesScreen;
   static const CreateGroupScreen = _Paths.createGroupScreen;
   static const ProfileScreen = _Paths.profileScreen;
   static const EditProfileScreen = _Paths.editProfileScreen;
@@ -101,6 +106,7 @@ abstract class _Paths {
   static const groupDocList = '/groupDocList';
   static const searchSreen = '/searchScreen';
   static const displayMyGroupScreen = '/displayMyGroupScreen';
+  static const myGroupCategoriesScreen = '/myGroupCategoriesScreen';
   static const createGroupScreen = '/createGroupScreen';
   static const profileScreen = '/profileScreen';
   static const editProfileScreen = '/editProfileScreen';

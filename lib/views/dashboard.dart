@@ -92,7 +92,6 @@ class _DashboardViewState extends State<DashboardView>
             setState(() {
               _tabController.animateTo(index);
             });
-            print('The current index is $index');
           },
           fixedColor: Colors.amber[800],
           type: BottomNavigationBarType.fixed,

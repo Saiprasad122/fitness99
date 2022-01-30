@@ -30,7 +30,7 @@ class PersonalGoalsDisplay extends StatelessWidget {
       ),
       body: Obx(() {
         return controller.isLoading.value
-            ? ListShimmerWidget(child: CustomOnlyTextShimmer())
+            ? ListShimmerWidget(child: CustomOnlyTextShimmer(), count: 20)
             : Column(
                 children: [
                   Expanded(

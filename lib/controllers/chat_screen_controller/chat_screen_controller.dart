@@ -193,6 +193,7 @@ class ChatScreenController extends GetxController {
     String? thumbnailUrl,
     double? sizeInKB,
     String? message,
+    String? id,
   }) {
     if (chatTED.text.isNotEmpty || filePath.value.isNotEmpty) {
       final data = {
@@ -238,6 +239,7 @@ class ChatScreenController extends GetxController {
         'time': DateTime.now(),
         'imageURl': userModel.getProfilePicture(),
         'message': message,
+        '${messageType}_id': id,
       };
       instance
           .collection('groups')

@@ -8,7 +8,7 @@ class DisplayEventController extends GetxController {
   final apiService = Get.find<ApiService>();
   final int group_id;
   final isBusy = false.obs;
-  final List<Content> eventList = [];
+  final List<EventContent> eventList = [];
   @override
   void onInit() {
     getEventList(group_id);

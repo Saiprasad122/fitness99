@@ -90,6 +90,10 @@ abstract class ApiService {
   Future<BaseResponse<List<PreferenceResponse>>> getPreferences(
       {@Path('user_id') required int user_id});
 
+  @GET(ApiUrls.GET_EVENT_DETAILS)
+  Future<List<EventContent>> getEventDetails(
+      {@Path('event_id') required int event_id});
+
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //
   // ----------------------- ************************ ------------------------------ //

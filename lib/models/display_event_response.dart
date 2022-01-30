@@ -57,7 +57,7 @@ class DisplayEventResponse {
 
 class Data {
   final int current_page;
-  final List<Content> content;
+  final List<EventContent> content;
   Data({
     required this.current_page,
     required this.content,
@@ -65,7 +65,7 @@ class Data {
 
   Data copyWith({
     int? current_page,
-    List<Content>? content,
+    List<EventContent>? content,
   }) {
     return Data(
       current_page: current_page ?? this.current_page,
@@ -83,7 +83,8 @@ class Data {
   factory Data.fromMap(Map<String, dynamic> map) {
     return Data(
       current_page: map['current_page']?.toInt() ?? 0,
-      content: List<Content>.from(map['data']?.map((x) => Content.fromMap(x))),
+      content: List<EventContent>.from(
+          map['data']?.map((x) => EventContent.fromMap(x))),
     );
   }
 
@@ -107,7 +108,7 @@ class Data {
   int get hashCode => current_page.hashCode ^ content.hashCode;
 }
 
-class Content {
+class EventContent {
   final int id;
   final String title;
   final String description;
@@ -119,7 +120,7 @@ class Content {
   final String created_at;
   final String updated_at;
   final String location;
-  Content({
+  EventContent({
     required this.id,
     required this.title,
     required this.description,
@@ -133,7 +134,7 @@ class Content {
     required this.location,
   });
 
-  Content copyWith({
+  EventContent copyWith({
     int? id,
     String? title,
     String? description,
@@ -146,7 +147,7 @@ class Content {
     String? updated_at,
     String? location,
   }) {
-    return Content(
+    return EventContent(
       id: id ?? this.id,
       title: title ?? this.title,
       description: description ?? this.description,
@@ -177,8 +178,8 @@ class Content {
     };
   }
 
-  factory Content.fromMap(Map<String, dynamic> map) {
-    return Content(
+  factory EventContent.fromMap(Map<String, dynamic> map) {
+    return EventContent(
       id: map['id']?.toInt() ?? 0,
       title: map['title'] ?? '',
       description: map['description'] ?? '',
@@ -195,19 +196,19 @@ class Content {
 
   String toJson() => json.encode(toMap());
 
-  factory Content.fromJson(String source) =>
-      Content.fromMap(json.decode(source));
+  factory EventContent.fromJson(Map<String, dynamic> source) =>
+      EventContent.fromMap(source);
 
   @override
   String toString() {
-    return 'Content(id: $id, title: $title, description: $description, members: $members, date: $date, time: $time, user_id: $user_id, group_id: $group_id, created_at: $created_at, updated_at: $updated_at, location: $location)';
+    return 'EventContent(id: $id, title: $title, description: $description, members: $members, date: $date, time: $time, user_id: $user_id, group_id: $group_id, created_at: $created_at, updated_at: $updated_at, location: $location)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Content &&
+    return other is EventContent &&
         other.id == id &&
         other.title == title &&
         other.description == description &&

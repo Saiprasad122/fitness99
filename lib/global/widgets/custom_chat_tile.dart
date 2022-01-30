@@ -14,16 +14,8 @@ class CustomChatTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: ButtonStyle(
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) return Colors.grey;
-          return Colors.grey;
-        }),
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.zero),
-      ),
-      onPressed: onTap,
+    return InkWell(
+      onTap: onTap,
       child: ListTile(
         leading: CircleAvatar(
           radius: 30,

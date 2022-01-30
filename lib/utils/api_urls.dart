@@ -30,4 +30,6 @@ class ApiUrls {
   static const GET_CHECK_OUT_BY_USER_ID = '/checkOUT/{event_id}/{user_id}';
   static const ADD_PREFERENCES = '/create_prefrence';
   static const VIEW_PREFERENCES = '/prefrence/{user_id}';
+  static const GET_EVENT_DETAILS = '/eventDisplay/{event_id}';
+  static const CREATE_POLL = '/createPoll';
 }
