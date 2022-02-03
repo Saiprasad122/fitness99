@@ -4,7 +4,6 @@ import 'package:fitness_99/global/widgets/custom_chat_tile.dart';
 import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
 import 'package:fitness_99/global/widgets/custom_search_field.dart';
 import 'package:fitness_99/global/widgets/custom_group_list_shimmer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

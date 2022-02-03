@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/chat_screen_controller.dart';
@@ -15,7 +14,6 @@ import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/c
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/create_activity_screen.dart';
 import 'package:fitness_99/views/profile_screen/widget/image_dialog_box.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'components/document_component.dart';

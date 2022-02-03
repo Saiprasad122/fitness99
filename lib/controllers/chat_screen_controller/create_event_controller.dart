@@ -6,7 +6,6 @@ import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/createEventRequestResponse/create_event_request.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

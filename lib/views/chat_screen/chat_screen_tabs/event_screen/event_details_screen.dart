@@ -4,7 +4,6 @@ import 'package:fitness_99/global/widgets/curtom_profile_icon_button.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
 import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 import 'component/event_class.dart';

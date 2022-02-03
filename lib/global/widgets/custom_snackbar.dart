@@ -1,5 +1,4 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

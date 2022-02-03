@@ -2,7 +2,6 @@ import 'package:fitness_99/global/router/app_pages.dart';
 import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/views/chat_screen/widget/more_options_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class MoreOptions extends StatelessWidget {
   final int group_id;
