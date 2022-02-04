@@ -10,6 +10,7 @@ import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/activity_componenet.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/event_componenet.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/image_component.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/poll_component.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/components/text_component.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/chat_screen_view/create_activity_screen.dart';
 import 'package:fitness_99/views/profile_screen/widget/image_dialog_box.dart';
@@ -41,7 +42,6 @@ class ChatScreenView extends StatelessWidget {
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             final messages = snapshot.data?.docs.reversed.toList() ?? [];
-
             if (messages.isNotEmpty) {
               return Column(
                 children: [
@@ -86,6 +86,7 @@ class ChatScreenView extends StatelessWidget {
                                       const SizedBox(width: 10),
                                       getChatComponent(messages[index],
                                           other: true),
+                                      PollChatComponent(firebaseId: 'some_id'),
                                     ],
                                   ),
                                   const SizedBox(height: 8),
@@ -342,6 +343,11 @@ class ChatScreenView extends StatelessWidget {
             message: data['message'],
             dateTime: dateTime,
             fromOther: other,
+          );
+        case MessageType.poll:
+          return PollChatComponent(
+            fromOther: other,
+            firebaseId: 'some_id',
           );
         default:
           return TextComponent(
