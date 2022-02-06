@@ -92,7 +92,6 @@ class ChatScreenView extends StatelessWidget {
                                   PollChatComponent(
                                     firebaseId: 'some_id',
                                     fromOther: true,
-                                    selectedIndex: 1,
                                   ),
                                 ],
                               )
@@ -136,7 +135,6 @@ class ChatScreenView extends StatelessWidget {
                                   const SizedBox(height: 5),
                                   PollChatComponent(
                                     firebaseId: 'some_id',
-                                    selectedIndex: 2,
                                   ),
                                 ],
                               );
