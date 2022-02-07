@@ -1,7 +1,6 @@
 import 'package:fitness_99/controllers/chat_screen_controller/create_poll_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
-import 'package:fitness_99/global/widgets/custom_button.dart';
 import 'package:fitness_99/global/widgets/custom_profile_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
