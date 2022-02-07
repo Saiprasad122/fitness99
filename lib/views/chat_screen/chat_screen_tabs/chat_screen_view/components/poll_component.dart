@@ -1,6 +1,8 @@
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/chat_screen/chat_screen_tabs/poll_view/poll_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class PollChatComponent extends StatefulWidget {
@@ -82,10 +84,13 @@ class _PollChatComponentState extends State<PollChatComponent> {
                           ? CrossAxisAlignment.start
                           : CrossAxisAlignment.end,
                       children: [
-                        Text(
-                            'Poll Question will be right here, it can be big as hell and this can big as hell again it will'
-                                .trim(),
-                            style: TextStyles.sgproBold.f20.black),
+                        GestureDetector(
+                          onTap: () => Get.to(PollDetailsScreen()),
+                          child: Text(
+                              'Poll Question will be right here, it can be big as hell and this can big as hell again it will'
+                                  .trim(),
+                              style: TextStyles.sgproBold.f20.black),
+                        ),
                         const SizedBox(
                           height: 15,
                         ),
