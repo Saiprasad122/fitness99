@@ -28,7 +28,7 @@ class PollDetailsScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: ListView(
+        body: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(10),
@@ -41,23 +41,43 @@ class PollDetailsScreen extends StatelessWidget {
               controller: controller.tabController,
               indicatorColor: AppColors.secondaryColor,
               indicatorWeight: 3,
-              tabs: [
-                ListView.builder(
-                  itemCount: controller.options.length,
-                  itemBuilder: (context, i) => Tab(
-                    text: controller.options[i],
+              tabs: controller.options.map((e) {
+                return Tab(
+                  child: Text(
+                    e,
+                    style: TextStyles.sgproMedium.f20.black,
                   ),
-                )
-              ],
+                );
+              }).toList(),
             ),
-            TabBarView(
-              controller: controller.tabController,
-              children: [
-                ListView.builder(
-                  itemCount: controller.options.length,
-                  itemBuilder: (context, i) => Container(),
-                )
-              ],
+            Expanded(
+              child: TabBarView(
+                controller: controller.tabController,
+                children: controller.options.map((e) {
+                  return ListView.separated(
+                    padding: const EdgeInsets.all(10),
+                    separatorBuilder: (context, i) =>
+                        const SizedBox(height: 10),
+                    itemCount: 10,
+                    itemBuilder: (context, i) => ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.white,
+                        child: SizedBox.expand(
+                          child: ClipOval(
+                            child: Image.asset(
+                                'assets/images/placeholders/user.png'),
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        'Saiprasad',
+                        style: TextStyles.sgproMedium.f22,
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
             )
           ],
         ),
