@@ -89,10 +89,6 @@ class ChatScreenView extends StatelessWidget {
                                     ],
                                   ),
                                   const SizedBox(height: 8),
-                                  PollChatComponent(
-                                    firebaseId: 'some_id',
-                                    fromOther: true,
-                                  ),
                                 ],
                               )
                             : Column(
@@ -133,9 +129,6 @@ class ChatScreenView extends StatelessWidget {
                                     ],
                                   ),
                                   const SizedBox(height: 5),
-                                  PollChatComponent(
-                                    firebaseId: 'some_id',
-                                  ),
                                 ],
                               );
                       },
@@ -351,9 +344,11 @@ class ChatScreenView extends StatelessWidget {
             fromOther: other,
           );
         case MessageType.poll:
-          return PollChatComponent(
-            fromOther: other,
-            firebaseId: 'some_id',
+          return Flexible(
+            child: PollChatComponent(
+              fromOther: other,
+              firebaseId: data.id,
+            ),
           );
         default:
           return TextComponent(

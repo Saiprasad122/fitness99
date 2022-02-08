@@ -34,4 +34,6 @@ class ApiUrls {
   static const CREATE_POLL = '/createPoll';
   static const ADD_CATEGORIES = '/create_categorie';
   static const GET_CATEGORIES = '/categorie/{user_id}';
+  static const GET_POLL_DETAILS = '/Poll/{firebaseId}/{userId}';
+  static const POLL_ANSWER = '/pollAnswer';
 }

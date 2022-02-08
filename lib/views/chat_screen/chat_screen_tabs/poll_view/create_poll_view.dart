@@ -86,24 +86,20 @@ class CreatePollView extends StatelessWidget {
                                   controller.optionControllerList[i],
                             ),
                           ),
-                          i == controller.optionControllerList.length - 1
-                              ? i == 3
-                                  ? IconButton(
-                                      onPressed: () =>
-                                          controller.removeElement(3),
-                                      icon: Icon(Icons.close),
-                                      padding: const EdgeInsets.all(0),
-                                    )
-                                  : IconButton(
-                                      onPressed: controller.addElement,
-                                      icon: Icon(Icons.add),
-                                      padding: const EdgeInsets.all(0),
-                                    )
-                              : IconButton(
-                                  onPressed: () => controller.removeElement(i),
-                                  icon: Icon(Icons.close),
-                                  padding: const EdgeInsets.all(0),
-                                ),
+                          if (i > 0)
+                            i == controller.optionControllerList.length - 1 &&
+                                    i != 3
+                                ? IconButton(
+                                    onPressed: controller.addElement,
+                                    icon: Icon(Icons.add),
+                                    padding: const EdgeInsets.all(0),
+                                  )
+                                : IconButton(
+                                    onPressed: () =>
+                                        controller.removeElement(i),
+                                    icon: Icon(Icons.close),
+                                    padding: const EdgeInsets.all(0),
+                                  ),
                         ],
                       );
                     },

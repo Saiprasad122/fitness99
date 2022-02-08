@@ -186,7 +186,8 @@ class ChatScreenController extends GetxController {
     );
   }
 
-  void addData({
+  Future<DocumentReference<Map<String, dynamic>>?> addData({
+    String? docId,
     String messageType = MessageType.text,
     String? extension,
     String? fileName,
@@ -194,7 +195,7 @@ class ChatScreenController extends GetxController {
     double? sizeInKB,
     String? message,
     String? id,
-  }) {
+  }) async {
     if (chatTED.text.isNotEmpty || filePath.value.isNotEmpty) {
       final data = {
         'id': userModel.getid().toString(),
@@ -221,15 +222,22 @@ class ChatScreenController extends GetxController {
         data.addAll({'thumbnailUrl': thumbnailUrl});
       }
 
-      instance
-          .collection('groups')
-          .doc(group_id.toString())
-          .collection('chats')
-          .add(data)
-          .then((value) {
-        chatTED.clear();
-        filePath.value = '';
-      });
+      if (docId == null) {
+        await instance
+            .collection('groups')
+            .doc(group_id.toString())
+            .collection('chats')
+            .add(data);
+      } else {
+        await instance
+            .collection('groups')
+            .doc(group_id.toString())
+            .collection('chats')
+            .doc(docId)
+            .set(data);
+      }
+      chatTED.clear();
+      filePath.value = '';
     } else if (chatTED.text.isEmpty &&
         (MessageType.activity == 'activity' || MessageType.event == 'event')) {
       assert(message?.isNotEmpty ?? false, 'add message');
@@ -241,15 +249,23 @@ class ChatScreenController extends GetxController {
         'message': message,
         '${messageType}_id': id,
       };
-      instance
-          .collection('groups')
-          .doc(group_id.toString())
-          .collection('chats')
-          .add(data)
-          .then((value) {
-        chatTED.clear();
-        filePath.value = '';
-      });
+      if (docId == null) {
+        await instance
+            .collection('groups')
+            .doc(group_id.toString())
+            .collection('chats')
+            .add(data);
+      } else {
+        await instance
+            .collection('groups')
+            .doc(group_id.toString())
+            .collection('chats')
+            .doc(docId)
+            .set(data);
+      }
+
+      chatTED.clear();
+      filePath.value = '';
     }
   }
 

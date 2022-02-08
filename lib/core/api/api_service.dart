@@ -6,12 +6,15 @@ import 'package:fitness_99/models/baseResponse/base.response.dart';
 import 'package:fitness_99/models/cando_cannotdo_goal/cando_cannotdo_goal.response.dart';
 import 'package:fitness_99/models/createActivityRequestResponse/create_activity_request.dart';
 import 'package:fitness_99/models/createEventRequestResponse/create_event_request.dart';
+import 'package:fitness_99/models/create_poll_req_response/create_poll_request.dart';
 import 'package:fitness_99/models/display_activity_response.dart';
 import 'package:fitness_99/models/display_event_response.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
 import 'package:fitness_99/models/join_group_reponse.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
+import 'package:fitness_99/models/poll_answer_request/poll_answer_request.dart';
+import 'package:fitness_99/models/poll_details_response/poll_details_response.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_reponse.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_request.dart';
 import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_request.dart';
@@ -99,6 +102,11 @@ abstract class ApiService {
   @GET(ApiUrls.GET_CATEGORIES)
   Future<BaseResponse<DisplayCategoriesResponse>> getCategories(
       {@Path('user_id') required int user_id});
+  @GET(ApiUrls.GET_POLL_DETAILS)
+  Future<BaseResponse<PollDetailsResponse>> getPollDetailsFromFirebaseId({
+    @Path() required String firebaseId,
+    @Path() required int userId,
+  });
 
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //
@@ -149,6 +157,12 @@ abstract class ApiService {
   @POST(ApiUrls.ADD_CATEGORIES)
   Future<BaseResponse> addCategories(
       @Body() AddCategoriesRequest addCategoriesRequest);
+  @POST(ApiUrls.CREATE_POLL)
+  Future<BaseResponse> createPoll(@Body() CreatePollRequest createPollRequest);
+
+  @POST(ApiUrls.POLL_ANSWER)
+  Future<BaseResponse<PollDetailsResponse>> answerPoll(
+      @Body() PollAnswerRequest answerRequest);
 
   // ----------------------- ************************ ------------------------------ //
   //                              DELETE REQUEST                                     //
