@@ -57,11 +57,11 @@ class SearchScreenView extends StatelessWidget {
                                         context: context,
                                         builder: (context) => AlertDialog(
                                           title: Text(
-                                            'Join Group',
+                                            'Send Invitation',
                                             style: TextStyles.sgproRegular.f18,
                                           ),
                                           content: Text(
-                                            'Are you sure you want to join?',
+                                            'Do you want to send inivaition?',
                                             style: TextStyles.sgproRegular.f16,
                                           ),
                                           actions: [
@@ -110,12 +110,12 @@ class SearchScreenView extends StatelessWidget {
                                             context: context,
                                             builder: (context) => AlertDialog(
                                               title: Text(
-                                                'Join Group',
+                                                'Send Invitation',
                                                 style:
                                                     TextStyles.sgproRegular.f18,
                                               ),
                                               content: Text(
-                                                'Are you sure you want to join?',
+                                                'Do you want to send inivaition?',
                                                 style:
                                                     TextStyles.sgproRegular.f16,
                                               ),

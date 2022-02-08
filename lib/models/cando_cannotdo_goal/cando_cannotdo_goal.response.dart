@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'cando_cannotdo_goal.response.freezed.dart';
 part 'cando_cannotdo_goal.response.g.dart';

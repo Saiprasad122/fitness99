@@ -32,4 +32,6 @@ class ApiUrls {
   static const VIEW_PREFERENCES = '/prefrence/{user_id}';
   static const GET_EVENT_DETAILS = '/eventDisplay/{event_id}';
   static const CREATE_POLL = '/createPoll';
+  static const ADD_CATEGORIES = '/create_categorie';
+  static const GET_CATEGORIES = '/categorie/{user_id}';
 }

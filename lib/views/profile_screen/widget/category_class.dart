@@ -1,5 +1,5 @@
-class CategoryClassModel {
+class CategoryClass {
   String categoryName;
   bool isTicked;
-  CategoryClassModel({required this.categoryName, required this.isTicked});
+  CategoryClass({required this.categoryName, required this.isTicked});
 }

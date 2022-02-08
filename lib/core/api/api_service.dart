@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:fitness_99/models/add&viewCategories/add_categories_request.dart';
+import 'package:fitness_99/models/add&viewCategories/display_categories.dart';
 import 'package:fitness_99/models/add_preferences_request/add_preferences_request.dart';
 import 'package:fitness_99/models/baseResponse/base.response.dart';
 import 'package:fitness_99/models/cando_cannotdo_goal/cando_cannotdo_goal.response.dart';
@@ -94,6 +96,10 @@ abstract class ApiService {
   Future<List<EventContent>> getEventDetails(
       {@Path('event_id') required int event_id});
 
+  @GET(ApiUrls.GET_CATEGORIES)
+  Future<BaseResponse<DisplayCategoriesResponse>> getCategories(
+      {@Path('user_id') required int user_id});
+
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //
   // ----------------------- ************************ ------------------------------ //
@@ -139,6 +145,10 @@ abstract class ApiService {
   @POST(ApiUrls.ADD_PREFERENCES)
   Future<BaseResponse> addPreferences(
       @Body() AddPreferencesRequest addPreferencesRequest);
+
+  @POST(ApiUrls.ADD_CATEGORIES)
+  Future<BaseResponse> addCategories(
+      @Body() AddCategoriesRequest addCategoriesRequest);
 
   // ----------------------- ************************ ------------------------------ //
   //                              DELETE REQUEST                                     //
