@@ -1,4 +1,9 @@
+import 'package:fitness_99/core/api/api_service.dart';
+import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/models/baseResponse/base.response.dart';
+import 'package:fitness_99/models/poll_answer_request/poll_answer_request.dart';
+import 'package:fitness_99/models/poll_details_response/poll_details_response.dart';
 import 'package:fitness_99/views/chat_screen/chat_screen_tabs/poll_view/poll_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -17,15 +22,14 @@ class PollChatComponent extends StatefulWidget {
   State<PollChatComponent> createState() => _PollChatComponentState();
 }
 
-class _PollChatComponentState extends State<PollChatComponent> {
+class _PollChatComponentState extends State<PollChatComponent>
+    with AutomaticKeepAliveClientMixin {
   final ValueNotifier<bool> isLoading = ValueNotifier(true);
-  final selectedIndex = 2;
-  final List<String> options = [
-    'option1',
-    'option2',
-    'option3',
-    'option4',
-  ];
+  final ValueNotifier<bool> isError = ValueNotifier(true);
+  final List<String> options = [];
+  final List<int> optionSelectedUserLength = [];
+  bool clicked = false;
+  late BaseResponse<PollDetailsResponse> pollresponse;
 
   @override
   void initState() {
@@ -33,13 +37,44 @@ class _PollChatComponentState extends State<PollChatComponent> {
     callApi();
   }
 
-  void callApi() async {
-    await Future.delayed(Duration(seconds: 2));
-    isLoading.value = false;
+  void callApi({BaseResponse<PollDetailsResponse>? res}) async {
+    options.clear();
+    optionSelectedUserLength.clear();
+    try {
+      pollresponse = res ??
+          await Get.find<ApiService>().getPollDetailsFromFirebaseId(
+            firebaseId: widget.firebaseId,
+            userId: Get.find<UserModelService>().getid(),
+          );
+      if (pollresponse.data?.poll.option1.isNotEmpty ?? false) {
+        options.add(pollresponse.data!.poll.option1);
+        optionSelectedUserLength.add(pollresponse.data!.option1.length);
+      }
+      if (pollresponse.data?.poll.option2.isNotEmpty ?? false) {
+        options.add(pollresponse.data!.poll.option2);
+        optionSelectedUserLength.add(pollresponse.data!.option2.length);
+      }
+      if (pollresponse.data?.poll.option3.isNotEmpty ?? false) {
+        options.add(pollresponse.data!.poll.option3);
+        optionSelectedUserLength.add(pollresponse.data!.option3.length);
+      }
+      if (pollresponse.data?.poll.option4.isNotEmpty ?? false) {
+        options.add(pollresponse.data!.poll.option4);
+        optionSelectedUserLength.add(pollresponse.data!.option4.length);
+      }
+
+      isError.value = false;
+    } catch (e) {
+      print(e);
+      isError.value = true;
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,7 +85,7 @@ class _PollChatComponentState extends State<PollChatComponent> {
               if (isLoading) {
                 return Container(
                   height: 200,
-                  width: double.infinity,
+                  width: 120,
                   margin: EdgeInsets.only(
                     right: widget.fromOther ? 32 : 0,
                     left: widget.fromOther ? 0 : 32,
@@ -64,49 +99,106 @@ class _PollChatComponentState extends State<PollChatComponent> {
                   child: CircularProgressIndicator(),
                 );
               }
-              return Container(
-                child: Align(
-                  alignment: (Alignment.topLeft),
-                  child: Container(
-                    margin: EdgeInsets.only(
-                      right: widget.fromOther ? 32 : 0,
-                      left: widget.fromOther ? 0 : 32,
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.blue[200]
-                        // color: fromOther ? Colors.grey[200] : AppColors.secondaryColor,
-                        ),
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: widget.fromOther
-                          ? CrossAxisAlignment.start
-                          : CrossAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () => Get.to(PollDetailsScreen()),
-                          child: Text(
-                              'Poll Question will be right here, it can be big as hell and this can big as hell again it will'
-                                  .trim(),
-                              style: TextStyles.sgproBold.f20.black),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        ...List.generate(
-                          options.length,
-                          (index) => PollOptionComponent(
-                            optionName: options[index],
-                            percentage: index * 12.5,
-                            other: widget.fromOther,
-                            isSelected: selectedIndex == index,
+              return ValueListenableBuilder(
+                valueListenable: isError,
+                builder: (context, bool error, child) => error
+                    ? Container(
+                        height: 50,
+                        width: 180,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(8),
+                        child: Text('Error while fetching poll'),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.blue[200]
+                            // color: fromOther ? Colors.grey[200] : AppColors.secondaryColor,
+                            ),
+                      )
+                    : Container(
+                        width: double.infinity,
+                        child: Align(
+                          alignment: (Alignment.topLeft),
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              right: widget.fromOther ? 32 : 0,
+                              left: widget.fromOther ? 0 : 32,
+                            ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.blue[200]
+                                // color: fromOther ? Colors.grey[200] : AppColors.secondaryColor,
+                                ),
+                            padding: EdgeInsets.all(12),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  onTap: () => Get.to(PollDetailsScreen()),
+                                  child: Text(
+                                      pollresponse.data!.poll.pollQuestion
+                                          .trim(),
+                                      style: TextStyles.sgproBold.f20.black),
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                ...List.generate(options.length, (index) {
+                                  late final int selectedIndex;
+                                  if ((pollresponse.data?.hasAnswered ?? 0) >
+                                      0) {
+                                    selectedIndex =
+                                        pollresponse.data!.hasAnswered! - 1;
+                                  } else {
+                                    selectedIndex = -1;
+                                  }
+                                  double? percentage = null;
+                                  if (selectedIndex >= 0 ||
+                                      (pollresponse.data?.poll.expire ?? 0) ==
+                                          1) {
+                                    percentage =
+                                        (optionSelectedUserLength[index] /
+                                                pollresponse
+                                                    .data!.poll.maxMember) *
+                                            100;
+                                  }
+                                  return PollOptionComponent(
+                                    optionName: options[index],
+                                    percentage: percentage,
+                                    other: widget.fromOther,
+                                    isSelected: selectedIndex == index,
+                                    onTap: selectedIndex >= 0
+                                        ? null
+                                        : () async {
+                                            if (!clicked) {
+                                              clicked = !clicked;
+                                              final answerRequest =
+                                                  PollAnswerRequest(
+                                                      pollId: pollresponse
+                                                          .data!.poll.id,
+                                                      userId: Get.find<
+                                                              UserModelService>()
+                                                          .getid(),
+                                                      answer: index + 1,
+                                                      firebaseId:
+                                                          widget.firebaseId);
+                                              final res =
+                                                  await Get.find<ApiService>()
+                                                      .answerPoll(
+                                                          answerRequest);
+                                              if (res.data != null) {
+                                                callApi(res: res);
+                                                setState(() {});
+                                              }
+                                            }
+                                          },
+                                  );
+                                }),
+                              ],
+                            ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
               );
             }),
         const SizedBox(height: 4),
@@ -123,6 +215,9 @@ class _PollChatComponentState extends State<PollChatComponent> {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class PollOptionComponent extends StatefulWidget {
@@ -133,8 +228,10 @@ class PollOptionComponent extends StatefulWidget {
     this.isSelected = false,
     this.other = false,
     this.showPercentage = false,
+    this.onTap,
   }) : super(key: key);
   final String optionName;
+  final VoidCallback? onTap;
   final double? percentage;
   final bool isSelected;
   final bool other;
@@ -151,10 +248,10 @@ class _PollOptionComponentState extends State<PollOptionComponent>
   double? ContainerWidth;
   void getContainerWidth(_) {
     if (ContainerWidth == null && containerKey.currentContext != null) {
-      setState(() {
-        ContainerWidth = containerKey.currentContext?.size?.width;
-      });
       if (widget.percentage != null) {
+        setState(() {
+          ContainerWidth = containerKey.currentContext?.size?.width;
+        });
         final animation = Tween<double>(
           begin: 0,
           end: ContainerWidth! * (widget.percentage! / 100),
@@ -174,8 +271,6 @@ class _PollOptionComponentState extends State<PollOptionComponent>
         AnimationController(vsync: this, duration: Duration(seconds: 1));
   }
 
-  void selectedOption() {}
-
   @override
   Widget build(BuildContext context) {
     SchedulerBinding.instance?.addPostFrameCallback(getContainerWidth);
@@ -185,7 +280,7 @@ class _PollOptionComponentState extends State<PollOptionComponent>
         vertical: 6,
       ),
       child: InkWell(
-        onTap: widget.percentage == null ? selectedOption : null,
+        onTap: widget.onTap,
         child: Stack(
           children: [
             Container(
