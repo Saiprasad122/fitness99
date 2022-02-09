@@ -36,7 +36,7 @@ class PollDetailsScreen extends StatelessWidget {
           children: [
             Container(
               color: Colors.grey[200],
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(24),
               child: Text(
                 poll.poll.pollQuestion,
                 style: TextStyles.sgproMedium.f24,
@@ -46,11 +46,17 @@ class PollDetailsScreen extends StatelessWidget {
               controller: controller.tabController,
               indicatorColor: AppColors.secondaryColor,
               indicatorWeight: 3,
+              isScrollable: true,
               tabs: controller.options.map((e) {
                 return Tab(
-                  child: Text(
-                    e,
-                    style: TextStyles.sgproMedium.f20.black,
+                  height: 50,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      e,
+                      style: TextStyles.sgproMedium.f20.black,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 );
               }).toList(),
