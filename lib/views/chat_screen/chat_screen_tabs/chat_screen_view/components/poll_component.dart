@@ -133,13 +133,9 @@ class _PollChatComponentState extends State<PollChatComponent>
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                GestureDetector(
-                                  onTap: () => Get.to(PollDetailsScreen()),
-                                  child: Text(
-                                      pollresponse.data!.poll.pollQuestion
-                                          .trim(),
-                                      style: TextStyles.sgproBold.f20.black),
-                                ),
+                                Text(
+                                    pollresponse.data!.poll.pollQuestion.trim(),
+                                    style: TextStyles.sgproBold.f20.black),
                                 const SizedBox(
                                   height: 15,
                                 ),
@@ -168,7 +164,11 @@ class _PollChatComponentState extends State<PollChatComponent>
                                     other: widget.fromOther,
                                     isSelected: selectedIndex == index,
                                     onTap: selectedIndex >= 0
-                                        ? null
+                                        ? () {
+                                            Get.to(() => PollDetailsScreen(
+                                                  poll: pollresponse.data!,
+                                                ));
+                                          }
                                         : () async {
                                             if (!clicked) {
                                               clicked = !clicked;
