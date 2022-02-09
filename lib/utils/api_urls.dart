@@ -36,4 +36,6 @@ class ApiUrls {
   static const GET_CATEGORIES = '/categorie/{user_id}';
   static const GET_POLL_DETAILS = '/Poll/{firebaseId}/{userId}';
   static const POLL_ANSWER = '/pollAnswer';
+  static const GET_GROUP_INVITATION = '/group_invitations/{group_id}';
+  static const GROUP_INVITATION_RESPONSE = '/invitation_response';
 }

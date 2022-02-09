@@ -15,6 +15,8 @@ import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
 import 'package:fitness_99/models/poll_answer_request/poll_answer_request.dart';
 import 'package:fitness_99/models/poll_details_response/poll_details_response.dart';
+import 'package:fitness_99/models/sendInvitationGroupRequestResponse/accept_reject_group_invitation_request.dart';
+import 'package:fitness_99/models/sendInvitationGroupRequestResponse/send_invitation_group_response.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_reponse.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_request.dart';
 import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_request.dart';
@@ -102,11 +104,16 @@ abstract class ApiService {
   @GET(ApiUrls.GET_CATEGORIES)
   Future<BaseResponse<DisplayCategoriesResponse>> getCategories(
       {@Path('user_id') required int user_id});
+
   @GET(ApiUrls.GET_POLL_DETAILS)
   Future<BaseResponse<PollDetailsResponse>> getPollDetailsFromFirebaseId({
     @Path() required String firebaseId,
     @Path() required int userId,
   });
+
+  @GET(ApiUrls.GET_GROUP_INVITATION)
+  Future<BaseResponse<SendInvitationGroupResponse>> getGroupInvitation(
+      {@Path('group_id') required int group_id});
 
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //
@@ -163,6 +170,12 @@ abstract class ApiService {
   @POST(ApiUrls.POLL_ANSWER)
   Future<BaseResponse<PollDetailsResponse>> answerPoll(
       @Body() PollAnswerRequest answerRequest);
+
+  @POST(ApiUrls.POLL_ANSWER)
+  Future<BaseResponse> groupInvitationResponse(
+      @Body()
+          AcceptRejectGroupInivitationRequest
+              acceptRejectGroupInivitationRequest);
 
   // ----------------------- ************************ ------------------------------ //
   //                              DELETE REQUEST                                     //

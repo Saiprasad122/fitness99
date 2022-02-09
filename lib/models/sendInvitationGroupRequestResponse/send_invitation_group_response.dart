@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class SendInvitationGroupResponse {
-  final List<User> user;
+  final List<Users> user;
   final int InvitationCount;
   SendInvitationGroupResponse({
     required this.user,
@@ -11,7 +11,7 @@ class SendInvitationGroupResponse {
   });
 
   SendInvitationGroupResponse copyWith({
-    List<User>? user,
+    List<Users>? user,
     int? InvitationCount,
   }) {
     return SendInvitationGroupResponse(
@@ -29,15 +29,15 @@ class SendInvitationGroupResponse {
 
   factory SendInvitationGroupResponse.fromMap(Map<String, dynamic> map) {
     return SendInvitationGroupResponse(
-      user: List<User>.from(map['user']?.map((x) => User.fromMap(x))),
+      user: List<Users>.from(map['user']?.map((x) => Users.fromMap(x))),
       InvitationCount: map['InvitationCount']?.toInt() ?? 0,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory SendInvitationGroupResponse.fromJson(String source) =>
-      SendInvitationGroupResponse.fromMap(json.decode(source));
+  factory SendInvitationGroupResponse.fromJson(source) =>
+      SendInvitationGroupResponse.fromMap(source);
 
   @override
   String toString() =>
@@ -56,7 +56,7 @@ class SendInvitationGroupResponse {
   int get hashCode => user.hashCode ^ InvitationCount.hashCode;
 }
 
-class User {
+class Users {
   final int id;
   final String user_name;
   final String id_proof;
@@ -77,7 +77,7 @@ class User {
   final String group_count;
   final String number;
   final String api_token;
-  User({
+  Users({
     required this.id,
     required this.user_name,
     required this.id_proof,
@@ -100,7 +100,7 @@ class User {
     required this.api_token,
   });
 
-  User copyWith({
+  Users copyWith({
     int? id,
     String? user_name,
     String? id_proof,
@@ -122,7 +122,7 @@ class User {
     String? number,
     String? api_token,
   }) {
-    return User(
+    return Users(
       id: id ?? this.id,
       user_name: user_name ?? this.user_name,
       id_proof: id_proof ?? this.id_proof,
@@ -171,8 +171,8 @@ class User {
     };
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
+  factory Users.fromMap(Map<String, dynamic> map) {
+    return Users(
       id: map['id']?.toInt() ?? 0,
       user_name: map['user_name'] ?? '',
       id_proof: map['id_proof'] ?? '',
@@ -198,18 +198,18 @@ class User {
 
   String toJson() => json.encode(toMap());
 
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
+  factory Users.fromJson(String source) => Users.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'User(id: $id, user_name: $user_name, id_proof: $id_proof, email: $email, password: $password, profile_picture: $profile_picture, personal_goal: $personal_goal, height: $height, weight: $weight, gender: $gender, date_of_birth: $date_of_birth, goal_id: $goal_id, goal_description: $goal_description, status: $status, created_at: $created_at, updated_at: $updated_at, otp: $otp, group_count: $group_count, number: $number, api_token: $api_token)';
+    return 'Users(id: $id, user_name: $user_name, id_proof: $id_proof, email: $email, password: $password, profile_picture: $profile_picture, personal_goal: $personal_goal, height: $height, weight: $weight, gender: $gender, date_of_birth: $date_of_birth, goal_id: $goal_id, goal_description: $goal_description, status: $status, created_at: $created_at, updated_at: $updated_at, otp: $otp, group_count: $group_count, number: $number, api_token: $api_token)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is User &&
+    return other is Users &&
         other.id == id &&
         other.user_name == user_name &&
         other.id_proof == id_proof &&
