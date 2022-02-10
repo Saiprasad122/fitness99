@@ -56,18 +56,18 @@ class SearchScreenController extends GetxController {
     try {
       final res = await apiService.joinGroup(
           userID: userModel.getid(), group_id: group_id);
-      if (res.data != null && res.status == 200) {
+      if (res.message!.toLowerCase().contains('sent') && res.status == 200) {
         chatListController.getGroupData();
         userModel.updateGroupCount(userModel.getNoOfGroups() + 1);
         customSnackBar(
-          title: 'Joined Group',
-          message: 'Successfully Joined Group',
+          title: 'Invitation Sent',
+          message: 'Successfully Invitation Sent',
           isSuccess: true,
         );
       } else {
         customSnackBar(
-          title: 'Failed to join',
-          message: 'Failed to join the group try again later',
+          title: 'Failed to Sent',
+          message: 'Failed to sent the invitation try again later',
           isSuccess: false,
         );
       }
@@ -89,7 +89,7 @@ class SearchScreenController extends GetxController {
               .contains('full')) {
         customSnackBar(
           title: 'Group is full',
-          message: 'You can\'t join group is full',
+          message: 'You can\'t send invitation group is full',
           isSuccess: false,
         );
       }

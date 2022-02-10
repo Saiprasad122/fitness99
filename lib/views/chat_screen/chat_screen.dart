@@ -89,7 +89,7 @@ class ChatScreen extends StatelessWidget {
           children: [
             ChatScreenView(group_id: group_id),
             DisplayEventScreen(group_id: group_id),
-            GroupUserRequestScreen(),
+            GroupUserRequestScreen(group_id: group_id),
             ActivityScreen(group_id: group_id),
             MoreOptions(group_id),
           ],
