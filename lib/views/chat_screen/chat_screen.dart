@@ -5,6 +5,7 @@ import 'package:fitness_99/views/chat_screen/chat_screen_tabs/event_screen/displ
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'chat_screen_tabs/group_user_request_screen/group_user_request_screen.dart';
 import 'chat_screen_tabs/more_options_chat_screen/more_options_chat_screen.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -88,7 +89,7 @@ class ChatScreen extends StatelessWidget {
           children: [
             ChatScreenView(group_id: group_id),
             DisplayEventScreen(group_id: group_id),
-            Text('data'),
+            GroupUserRequestScreen(group_id: group_id),
             ActivityScreen(group_id: group_id),
             MoreOptions(group_id),
           ],
