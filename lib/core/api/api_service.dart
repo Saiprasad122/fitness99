@@ -115,6 +115,10 @@ abstract class ApiService {
   Future<BaseResponse<SendInvitationGroupResponse>> getGroupInvitation(
       {@Path('group_id') required int group_id});
 
+  @GET(ApiUrls.GET_GROUP_CATEGORIES)
+  Future<BaseResponse<String>> getGroupCategories(
+      {@Path('group_id') required String group_id});
+
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //
   // ----------------------- ************************ ------------------------------ //
@@ -164,6 +168,7 @@ abstract class ApiService {
   @POST(ApiUrls.ADD_CATEGORIES)
   Future<BaseResponse> addCategories(
       @Body() AddCategoriesRequest addCategoriesRequest);
+
   @POST(ApiUrls.CREATE_POLL)
   Future<BaseResponse> createPoll(@Body() CreatePollRequest createPollRequest);
 
@@ -176,6 +181,10 @@ abstract class ApiService {
       @Body()
           AcceptRejectGroupInivitationRequest
               acceptRejectGroupInivitationRequest);
+
+  @POST(ApiUrls.ADD_CATEGORIES)
+  Future<BaseResponse> addGroupCategories(
+      @Body() AddCategoriesRequest addCategoriesRequest);
 
   // ----------------------- ************************ ------------------------------ //
   //                              DELETE REQUEST                                     //

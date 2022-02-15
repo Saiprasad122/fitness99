@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
+import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
 import 'package:fitness_99/views/profile_screen/widget/redirect_list.component.dart';
@@ -55,8 +56,8 @@ class GroupView extends StatelessWidget {
                           imageUrl: 'assets/images/tabbar/categories.png',
                           title: 'Group Categories',
                           iconData: Icons.keyboard_arrow_right_outlined,
-                          onTap: () =>
-                              Get.toNamed(Routes.MyGroupCategoriesScreen),
+                          onTap: () => Get.to(MyGroupCategoriesScreen(
+                              group_id: displayGroups.id)),
                           backgroundColor: Colors.white,
                         ),
                         RedirectListComponent(
