@@ -1,5 +1,4 @@
 import 'package:fitness_99/global/router/views.export.dart';
-import 'package:fitness_99/views/display_group_screen/my_group_categories.dart';
 
 class AppPages {
   static const INITIAL = Routes.SplashScreen;
@@ -22,6 +21,9 @@ class AppPages {
     GetPage(name: Routes.GroupDocList, page: () => GroupDocsList()),
     GetPage(name: Routes.SearchScreen, page: () => SearchScreenView()),
     GetPage(name: Routes.DisplayMyGroupScreen, page: () => DisplayMyGroup()),
+    GetPage(name: Routes.GroupLimitIncrease, page: () => GroupLimitIncrease()),
+    GetPage(
+        name: Routes.InviteMembersScreen, page: () => InviteMembersScreen()),
     GetPage(
         name: Routes.MyGroupCategoriesScreen,
         page: () => MyGroupCategoriesScreen()),
@@ -40,7 +42,9 @@ class AppPages {
         name: Routes.ViewPreferencesScreen,
         page: () => ViewPreferencesScreen()),
     GetPage(name: Routes.AddPreferenceTime, page: () => AddPreferenceTime()),
-    GetPage(name: Routes.InvitationScreen, page: () => InvitationScreen()),
+    GetPage(
+        name: Routes.PendingInvitationScreen,
+        page: () => PendingInvitationScreen()),
     GetPage(name: Routes.MoreOptionsScreen, page: () => MoreOptionsScreen()),
     GetPage(name: Routes.ProductScreen, page: () => ProductScreen()),
     GetPage(name: Routes.DetailedProductScreen, page: () => DetailedProduct()),
@@ -67,6 +71,8 @@ abstract class Routes {
   static const GroupDocList = _Paths.groupDocList;
   static const SearchScreen = _Paths.searchSreen;
   static const DisplayMyGroupScreen = _Paths.displayMyGroupScreen;
+  static const InviteMembersScreen = _Paths.inviteMembersScreen;
+  static const GroupLimitIncrease = _Paths.groupLimitIncrease;
   static const MyGroupCategoriesScreen = _Paths.myGroupCategoriesScreen;
   static const CreateGroupScreen = _Paths.createGroupScreen;
   static const ProfileScreen = _Paths.profileScreen;
@@ -80,7 +86,7 @@ abstract class Routes {
   static const CategoriesScreen = _Paths.categoriesScreen;
   static const ViewPreferencesScreen = _Paths.viewPreferencesScreen;
   static const AddPreferenceTime = _Paths.addPreferenceTime;
-  static const InvitationScreen = _Paths.invitationScree;
+  static const PendingInvitationScreen = _Paths.pendingInvitationScreen;
   static const MoreOptionsScreen = _Paths.moreOptionsScreen;
   static const ProductScreen = _Paths.productScreeen;
   static const DetailedProductScreen = _Paths.detailedProductScreen;
@@ -106,6 +112,8 @@ abstract class _Paths {
   static const groupDocList = '/groupDocList';
   static const searchSreen = '/searchScreen';
   static const displayMyGroupScreen = '/displayMyGroupScreen';
+  static const inviteMembersScreen = '/inviteMembersScreen';
+  static const groupLimitIncrease = '/groupLimitIncrease';
   static const myGroupCategoriesScreen = '/myGroupCategoriesScreen';
   static const createGroupScreen = '/createGroupScreen';
   static const profileScreen = '/profileScreen';
@@ -119,7 +127,7 @@ abstract class _Paths {
   static const categoriesScreen = '/categoriesScreen';
   static const viewPreferencesScreen = '/viewPreferencesScreen';
   static const addPreferenceTime = '/addPreferenceTime';
-  static const invitationScree = '/invitationScreen';
+  static const pendingInvitationScreen = '/pendingInvitationScreen';
   static const moreOptionsScreen = '/moreOptionsScreen';
   static const productScreeen = '/productScreen';
   static const detailedProductScreen = '/detailedProductScreen';

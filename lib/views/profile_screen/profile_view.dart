@@ -151,7 +151,7 @@ class ProfileView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      onTap: () => Get.toNamed(Routes.InvitationScreen),
+                      onTap: () => Get.toNamed(Routes.PendingInvitationScreen),
                     ),
                   ],
                 ),
