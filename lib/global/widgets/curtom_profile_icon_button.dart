@@ -23,8 +23,9 @@ class CustomProfileIconButtom extends StatelessWidget {
                 child: SizedBox.expand(
                   child: ClipOval(
                     child: CachedNetworkImage(
-                      imageUrl: userData.profilePicture.contains('uploads')
-                          ? userData.profilePicture
+                      imageUrl: userData.profilePicture?.contains('uploads') ??
+                              true
+                          ? userData.profilePicture ?? ''
                           : 'https://dev.99fitnessfriends.com/uploads${userData.profilePicture}',
                       placeholder: (context, s) => CircularProgressIndicator(),
                       filterQuality: FilterQuality.high,

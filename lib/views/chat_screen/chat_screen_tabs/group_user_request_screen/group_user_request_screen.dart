@@ -1,7 +1,10 @@
 import 'package:fitness_99/controllers/chat_screen_controller/group_user_request_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/views/profile_screen/widget/dismissable_user_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../another_profile_view.dart';
 
 class GroupUserRequestScreen extends StatefulWidget {
   final int group_id;
@@ -26,13 +29,20 @@ class _GroupUserRequestScreenState extends State<GroupUserRequestScreen> {
                     style: TextStyles.sgproMedium.f24,
                   ),
                 )
-              : ListView.separated(
-                  separatorBuilder: (context, i) => const SizedBox(height: 10),
-                  itemCount: 1,
-                  itemBuilder: (context, i) => Container(
-                    color: Colors.yellow,
-                    child: ListTile(
-                      title: Text('data'),
+              : ListView.builder(
+                  itemCount: controller.userList.length,
+                  itemBuilder: (context, i) => DismissableUserViewWidget(
+                    title: controller.userList[i].userName,
+                    wantsToJoinGroup: true,
+                    avatarUrl: controller.userList[i].profilePicture ?? '',
+                    onRejectTap: (dismiss) async {
+                      await Future.delayed(Duration(milliseconds: 300));
+                      await dismiss();
+                    },
+                    onTap: () => Get.to(
+                      () => AnotherProfileView(
+                        user: controller.userList[i],
+                      ),
                     ),
                   ),
                   // itemBuilder: (context, i) => Slidable(

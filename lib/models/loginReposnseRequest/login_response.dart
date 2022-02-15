@@ -29,17 +29,17 @@ class User {
   User({
     required this.id,
     required this.userName,
-    required this.idProof,
+    this.idProof,
     required this.email,
     required this.password,
-    required this.profilePicture,
-    required this.personalGoal,
-    required this.height,
-    required this.weight,
-    required this.gender,
-    required this.dateOfBirth,
-    required this.goalId,
-    required this.goalDescription,
+    this.profilePicture,
+    this.personalGoal,
+    this.height,
+    this.weight,
+    this.gender,
+    this.dateOfBirth,
+    this.goalId,
+    this.goalDescription,
     required this.status,
     required this.createdAt,
     required this.updatedAt,
@@ -49,17 +49,17 @@ class User {
 
   final int id;
   final String userName;
-  final dynamic idProof;
+  final String? idProof;
   final String email;
   final String password;
-  final dynamic profilePicture;
-  final dynamic personalGoal;
-  final dynamic height;
-  final dynamic weight;
-  final dynamic gender;
-  final dynamic dateOfBirth;
-  final dynamic goalId;
-  final dynamic goalDescription;
+  final String? profilePicture;
+  final String? personalGoal;
+  final String? height;
+  final String? weight;
+  final String? gender;
+  final String? dateOfBirth;
+  final int? goalId;
+  final String? goalDescription;
   final int status;
   final DateTime createdAt;
   final DateTime updatedAt;

@@ -22,7 +22,7 @@ class UserLocalDataModel {
     required this.email,
     required this.mobileNumber,
     required this.numbesrOfGroups,
-    required this.profilePicture,
+    this.profilePicture = '',
   });
 
   UserLocalDataModel copyWith({

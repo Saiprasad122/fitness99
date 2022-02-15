@@ -85,10 +85,11 @@ class PollDetailsScreen extends StatelessWidget {
                           child: ClipOval(
                             child: CachedNetworkImage(
                               imageUrl: e[i]
-                                      .profilePicture
-                                      .toString()
-                                      .contains('uploads')
-                                  ? e[i].profilePicture
+                                          .profilePicture
+                                          ?.toString()
+                                          .contains('uploads') ??
+                                      true
+                                  ? e[i].profilePicture ?? ''
                                   : 'https://dev.99fitnessfriends.com/uploads/${e[i].profilePicture}',
                               placeholder: (context, s) =>
                                   CircularProgressIndicator(),

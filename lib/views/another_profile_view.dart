@@ -1,24 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
+import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AnotherProfileView extends StatefulWidget {
-  AnotherProfileView({Key? key, required this.id}) : super(key: key);
-  final String id;
-
-  @override
-  State<AnotherProfileView> createState() => _AnotherProfileViewState();
-}
-
-class _AnotherProfileViewState extends State<AnotherProfileView> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  final userModel = Get.find<UserModelService>();
+class AnotherProfileView extends StatelessWidget {
+  AnotherProfileView({Key? key, required this.user}) : super(key: key);
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +25,10 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
                 backgroundColor: Colors.white,
                 child: SizedBox.expand(
                   child: ClipOval(
-                    child: userModel.getProfilePicture().contains('N/A')
+                    child: user.profilePicture?.contains('N/A') ?? true
                         ? Image.asset('assets/images/placeholders/user.png')
                         : CachedNetworkImage(
-                            imageUrl: userModel.getProfilePicture(),
+                            imageUrl: user.profilePicture!,
                             placeholder: (context, s) =>
                                 CircularProgressIndicator(),
                             filterQuality: FilterQuality.high,
@@ -52,7 +41,7 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
               ),
               const SizedBox(height: 10),
               Text(
-                'Saiprasad',
+                user.userName,
                 style: TextStyles.sgproMedium.f26,
               ),
               const SizedBox(height: 20),
@@ -67,9 +56,11 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
                     width: 10,
                   ),
                   Text(
-                    userModel.getMobileNumber() == 'N/A'
+                    user.number == null ||
+                            user.number == 'N/A' ||
+                            user.number != 0
                         ? 'Phone number not provided'
-                        : userModel.getMobileNumber(),
+                        : user.number!,
                     style: TextStyles.sgproRegular.greyMid.f22,
                   )
                 ],
@@ -84,7 +75,7 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    userModel.getEmail(),
+                    user.email,
                     style: TextStyles.sgproRegular.greyMid.f22,
                   ),
                 ],
@@ -97,7 +88,8 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
                   color: Colors.grey,
                 ),
               ),
-              Text('2', style: TextStyles.sgproMedium.f26),
+              Text(user.groupCount.toString(),
+                  style: TextStyles.sgproMedium.f26),
               Text(
                 'No of Groups',
                 style: TextStyles.sgproRegular.f26.greyMid,

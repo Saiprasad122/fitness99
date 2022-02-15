@@ -4,6 +4,8 @@ import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/models/sendInvitationGroupRequestResponse/send_invitation_group_response.dart';
 import 'package:get/get.dart';
 
+import '../../models/loginReposnseRequest/login_response.dart';
+
 class GroupUserRequestController extends GetxController {
   GroupUserRequestController({required this.group_id});
 
@@ -12,7 +14,7 @@ class GroupUserRequestController extends GetxController {
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
 
-  final userList = <Users>[].obs;
+  final userList = <User>[].obs;
 
   @override
   void onInit() {
@@ -23,13 +25,14 @@ class GroupUserRequestController extends GetxController {
   void getUserData() async {
     isBusy.value = true;
     try {
-      final res = await apiService.getGroupInvitation(group_id: group_id);
+      final res =
+          await apiService.getGroupInvitationUserList(group_id: group_id);
       if (res.message!.toLowerCase().contains('success') && res.status == 200) {
         if (userList.isNotEmpty) {
           userList.clear();
-          userList.addAll(res.data!.user);
+          userList.addAll(res.data ?? []);
         } else {
-          userList.addAll(res.data!.user);
+          userList.addAll(res.data ?? []);
         }
       }
       print(userList.length);

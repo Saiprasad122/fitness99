@@ -52,7 +52,7 @@ class _MemberListState extends State<MemberList> {
                   child: ListTile(
                     onTap: () => Get.to(
                       () => AnotherProfileView(
-                        id: controller.memberList[index].user_id.id.toString(),
+                        user: controller.memberList[index],
                       ),
                     ),
                     leading: CircleAvatar(

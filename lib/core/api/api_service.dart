@@ -115,6 +115,10 @@ abstract class ApiService {
   Future<BaseResponse<SendInvitationGroupResponse>> getGroupInvitation(
       {@Path('group_id') required int group_id});
 
+  @GET(ApiUrls.GET_INVITATION_USER_LIST_GROUP)
+  Future<BaseResponse<List<User>>> getGroupInvitationUserList(
+      {@Path('group_id') required int group_id});
+
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //
   // ----------------------- ************************ ------------------------------ //

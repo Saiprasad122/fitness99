@@ -31,7 +31,7 @@ class SplashViewController extends GetxController {
                 email: res.data!.email,
                 mobileNumber: res.data!.number ?? 'N/A',
                 numbesrOfGroups: res.data!.groupCount,
-                profilePicture: res.data!.profilePicture,
+                profilePicture: res.data!.profilePicture ?? '',
               );
               await Hive.box<UserLocalDataModel>('user_data')
                   .put('data', userLocalDataModel);
