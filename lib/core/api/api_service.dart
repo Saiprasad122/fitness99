@@ -175,8 +175,8 @@ abstract class ApiService {
   Future<BaseResponse<PollDetailsResponse>> answerPoll(
       @Body() PollAnswerRequest answerRequest);
 
-  @POST(ApiUrls.POLL_ANSWER)
-  Future<BaseResponse> groupInvitationResponse(
+  @POST(ApiUrls.GROUP_INVITATION_RESPONSE)
+  Future<BaseResponse<List<User>>> groupInvitationResponse(
       @Body()
           AcceptRejectGroupInivitationRequest
               acceptRejectGroupInivitationRequest);

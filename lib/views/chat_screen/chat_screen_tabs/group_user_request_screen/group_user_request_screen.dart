@@ -36,8 +36,17 @@ class _GroupUserRequestScreenState extends State<GroupUserRequestScreen> {
                     wantsToJoinGroup: true,
                     avatarUrl: controller.userList[i].profilePicture ?? '',
                     onRejectTap: (dismiss) async {
-                      await Future.delayed(Duration(milliseconds: 300));
+                      await controller
+                          .rejectUser(controller.userList[i].id.toString());
                       await dismiss();
+                      // controller.removeUserAtIndex(i);
+                    },
+                    onAcceptTap: (dismiss) async {
+                      await controller
+                          .acceptUser(controller.userList[i].id.toString());
+
+                      await dismiss();
+                      // controller.removeUserAtIndex(i);
                     },
                     onTap: () => Get.to(
                       () => AnotherProfileView(
