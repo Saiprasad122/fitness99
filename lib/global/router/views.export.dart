@@ -36,3 +36,7 @@ export '../../views/chat_screen/chat_screen_tabs/more_options_chat_screen/member
 export '../../views/chat_screen/chat_screen_tabs/chat_screen_view/image_chat_component_screen.dart';
 export '../../views/chat_screen/chat_screen_tabs/chat_screen_view/video_chat_component_screen.dart';
 export '../../views/chat_screen/chat_screen_tabs/poll_view/create_poll_view.dart';
+export '../../views/display_group_screen/group_limit_increase.dart';
+export '../../views/display_group_screen/my_group_categories.dart';
+export '../../views/display_group_screen/invite_members.dart';
+export '../../views/display_group_screen/group_limit_increase_create_request.dart';

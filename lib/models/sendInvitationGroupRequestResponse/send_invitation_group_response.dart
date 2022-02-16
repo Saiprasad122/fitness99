@@ -36,7 +36,7 @@ class SendInvitationGroupResponse {
 
   String toJson() => json.encode(toMap());
 
-  factory SendInvitationGroupResponse.fromJson(source) =>
+  factory SendInvitationGroupResponse.fromJson(Map<String, dynamic> source) =>
       SendInvitationGroupResponse.fromMap(source);
 
   @override
@@ -74,7 +74,7 @@ class Users {
   final String created_at;
   final String updated_at;
   final String otp;
-  final String group_count;
+  final int group_count;
   final String number;
   final String api_token;
   Users({
@@ -118,7 +118,7 @@ class Users {
     String? created_at,
     String? updated_at,
     String? otp,
-    String? group_count,
+    int? group_count,
     String? number,
     String? api_token,
   }) {
@@ -190,7 +190,7 @@ class Users {
       created_at: map['created_at'] ?? '',
       updated_at: map['updated_at'] ?? '',
       otp: map['otp'] ?? '',
-      group_count: map['group_count'] ?? '',
+      group_count: map['group_count']?.toInt() ?? 0,
       number: map['number'] ?? '',
       api_token: map['api_token'] ?? '',
     );

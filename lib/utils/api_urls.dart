@@ -38,4 +38,7 @@ class ApiUrls {
   static const POLL_ANSWER = '/pollAnswer';
   static const GET_GROUP_INVITATION = '/group_invitations/{group_id}';
   static const GROUP_INVITATION_RESPONSE = '/invitation_response';
+  static const ADD_GROUP_CATEGORIES = '/add_group_categories';
+  static const GET_GROUP_CATEGORIES = '/group_categories/{group_id}';
+  static const GET_INVITE_MEMBERS_MY_GROUPS = '/invite_user_list/10';
 }

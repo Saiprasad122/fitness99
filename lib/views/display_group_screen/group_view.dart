@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fitness_99/global/router/app_pages.dart';
+import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
 import 'package:fitness_99/views/profile_screen/widget/redirect_list.component.dart';
@@ -54,12 +56,16 @@ class GroupView extends StatelessWidget {
                           imageUrl: 'assets/images/tabbar/categories.png',
                           title: 'Group Categories',
                           iconData: Icons.keyboard_arrow_right_outlined,
+                          onTap: () => Get.to(MyGroupCategoriesScreen(
+                              group_id: displayGroups.id)),
                           backgroundColor: Colors.white,
                         ),
                         RedirectListComponent(
                           imageUrl: 'assets/images/group_screen/add_friend.png',
                           title: 'Invite Members',
                           iconData: Icons.keyboard_arrow_right_outlined,
+                          onTap: () => Get.to(
+                              InviteMembersScreen(group_id: displayGroups.id)),
                           backgroundColor: Colors.white,
                         ),
                         RedirectListComponent(
@@ -67,6 +73,7 @@ class GroupView extends StatelessWidget {
                               'assets/images/group_screen/group_limit_increase.png',
                           title: 'Group limit increase',
                           iconData: Icons.keyboard_arrow_right_outlined,
+                          onTap: () => Get.toNamed(Routes.GroupLimitIncrease),
                           backgroundColor: Colors.white,
                         ),
                       ],
