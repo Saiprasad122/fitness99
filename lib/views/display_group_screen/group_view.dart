@@ -64,7 +64,8 @@ class GroupView extends StatelessWidget {
                           imageUrl: 'assets/images/group_screen/add_friend.png',
                           title: 'Invite Members',
                           iconData: Icons.keyboard_arrow_right_outlined,
-                          onTap: () => Get.toNamed(Routes.InviteMembersScreen),
+                          onTap: () => Get.to(
+                              InviteMembersScreen(group_id: displayGroups.id)),
                           backgroundColor: Colors.white,
                         ),
                         RedirectListComponent(

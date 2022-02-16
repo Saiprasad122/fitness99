@@ -25,8 +25,6 @@ class AppPages {
     GetPage(
         name: Routes.GroupLimitCreateRequest,
         page: () => GroupLimitIncreaseCreateRequest()),
-    GetPage(
-        name: Routes.InviteMembersScreen, page: () => InviteMembersScreen()),
     GetPage(name: Routes.CreateGroupScreen, page: () => CreateGroupScreen()),
     GetPage(name: Routes.ProfileScreen, page: () => ProfileView()),
     GetPage(name: Routes.EditProfileScreen, page: () => EditProfileScreen()),
@@ -71,7 +69,6 @@ abstract class Routes {
   static const GroupDocList = _Paths.groupDocList;
   static const SearchScreen = _Paths.searchSreen;
   static const DisplayMyGroupScreen = _Paths.displayMyGroupScreen;
-  static const InviteMembersScreen = _Paths.inviteMembersScreen;
   static const GroupLimitIncrease = _Paths.groupLimitIncrease;
   static const GroupLimitCreateRequest = _Paths.groupLimitCreateRequest;
   static const CreateGroupScreen = _Paths.createGroupScreen;
@@ -112,7 +109,6 @@ abstract class _Paths {
   static const groupDocList = '/groupDocList';
   static const searchSreen = '/searchScreen';
   static const displayMyGroupScreen = '/displayMyGroupScreen';
-  static const inviteMembersScreen = '/inviteMembersScreen';
   static const groupLimitIncrease = '/groupLimitIncrease';
   static const groupLimitCreateRequest = '/groupLimitCreateRequest';
   static const createGroupScreen = '/createGroupScreen';

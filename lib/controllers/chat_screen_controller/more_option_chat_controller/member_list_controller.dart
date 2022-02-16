@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
+import 'package:fitness_99/models/join_group_reponse.dart';
 import 'package:get/get.dart';
 
 class MemberListController extends GetxController {
   final isApiCalling = false.obs;
   final apiService = Get.find<ApiService>();
-  final memberList = [].obs;
+  final memberList = <JoinGroupResponse>[].obs;
 
   void getMemberList(int group_id) async {
     isApiCalling.value = true;

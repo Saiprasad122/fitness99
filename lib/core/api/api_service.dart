@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_99/models/add&viewCategories/add_categories_request.dart';
 import 'package:fitness_99/models/add&viewCategories/display_categories.dart';
+import 'package:fitness_99/models/add&viewGroupCategories/add_group_categories_request.dart';
 import 'package:fitness_99/models/add_preferences_request/add_preferences_request.dart';
 import 'package:fitness_99/models/baseResponse/base.response.dart';
 import 'package:fitness_99/models/cando_cannotdo_goal/cando_cannotdo_goal.response.dart';
@@ -119,6 +120,10 @@ abstract class ApiService {
   Future<BaseResponse<String>> getGroupCategories(
       {@Path('group_id') required String group_id});
 
+  @GET(ApiUrls.GET_INVITE_MEMBERS_MY_GROUPS)
+  Future<BaseResponse<List<User>>> getInviteMembersMyGroup(
+      {@Path('group_id') required int group_id});
+
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //
   // ----------------------- ************************ ------------------------------ //
@@ -182,9 +187,9 @@ abstract class ApiService {
           AcceptRejectGroupInivitationRequest
               acceptRejectGroupInivitationRequest);
 
-  @POST(ApiUrls.ADD_CATEGORIES)
-  Future<BaseResponse> addGroupCategories(
-      @Body() AddCategoriesRequest addCategoriesRequest);
+  @POST(ApiUrls.ADD_GROUP_CATEGORIES)
+  Future<BaseResponse<String>> addGroupCategories(
+      @Body() AddGroupCategoriesRequest addGroupCategoriesRequest);
 
   // ----------------------- ************************ ------------------------------ //
   //                              DELETE REQUEST                                     //

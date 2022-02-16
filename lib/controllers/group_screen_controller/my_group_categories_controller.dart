@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
-import 'package:fitness_99/models/add&viewCategories/add_categories_request.dart';
+import 'package:fitness_99/models/add&viewGroupCategories/add_group_categories_request.dart';
 import 'package:fitness_99/views/profile_screen/widget/category_class.dart';
 import 'package:get/get.dart';
 
@@ -43,9 +43,8 @@ class MyGroupCategoriesController extends GetxController {
     });
     if (categoriesApiList.isNotEmpty) {
       try {
-        AddCategoriesRequest body = AddCategoriesRequest(
-            categories: finalCategoryList,
-            user_id: userModel.getid().toString());
+        AddGroupCategoriesRequest body = AddGroupCategoriesRequest(
+            categories: finalCategoryList, group_id: group_id.toString());
 
         final response = await apiService.addGroupCategories(body);
         if (response.message!.toLowerCase().contains('success')) {}
