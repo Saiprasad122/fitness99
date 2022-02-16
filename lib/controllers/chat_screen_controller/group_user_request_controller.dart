@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/models/sendInvitationGroupRequestResponse/accept_reject_group_invitation_request.dart';
-import 'package:fitness_99/models/sendInvitationGroupRequestResponse/send_invitation_group_response.dart';
 import 'package:get/get.dart';
 
 import '../../models/loginReposnseRequest/login_response.dart';

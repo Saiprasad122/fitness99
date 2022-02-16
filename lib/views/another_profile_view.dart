@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AnotherProfileView extends StatelessWidget {
   AnotherProfileView({Key? key, required this.user}) : super(key: key);
