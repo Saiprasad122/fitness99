@@ -57,6 +57,14 @@ class MoreOptionsScreen extends StatelessWidget {
               onTap: () => Get.toNamed(Routes.SubscriptionScreen),
             ),
             RedirectListComponent(
+              imageUrl: 'assets/images/more_screen/change_password.png',
+              title: 'Change Password',
+              dividerUnderTitle: true,
+              rightArrow: false,
+              height: 45,
+              onTap: () => Get.toNamed(Routes.ChangePasswordScreen),
+            ),
+            RedirectListComponent(
               imageUrl: 'assets/svgs/more_options/logout.svg',
               title: 'Log Out',
               dividerUnderTitle: true,

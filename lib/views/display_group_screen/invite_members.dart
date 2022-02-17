@@ -42,11 +42,11 @@ class InviteMembersScreen extends StatelessWidget {
                     child: SizedBox.expand(
                       child: ClipOval(
                         child: CachedNetworkImage(
-                          imageUrl: controller.userList[i].profilePicture
+                          imageUrl: controller.userList[i].profile_picture
                                   .toString()
                                   .contains('uploads')
-                              ? '${controller.userList[i].profilePicture}'
-                              : 'https://dev.99fitnessfriends.com/uploads/${controller.userList[i].profilePicture}',
+                              ? '${controller.userList[i].profile_picture}'
+                              : 'https://dev.99fitnessfriends.com/uploads/${controller.userList[i].profile_picture}',
                           placeholder: (context, s) =>
                               CircularProgressIndicator(),
                           filterQuality: FilterQuality.high,
@@ -57,7 +57,7 @@ class InviteMembersScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  title: Text(controller.userList[i].userName),
+                  title: Text(controller.userList[i].user_name),
                 ),
                 itemCount: controller.userList.length,
               ),

@@ -91,18 +91,19 @@ class LoginController extends GetxController {
       LoginRequest body = LoginRequest(email: email, password: password);
       final res = await apiService.getLoginResponse(body);
 
-      if (res.status.toLowerCase() == 'success') {
+      if (res.message!.toLowerCase() == 'success' && res.data != null) {
         apiCalling.value = false;
         _prefs = Get.find<NeededVariables>().sharedPreferences;
-        _prefs!.setString('email', res.user.email);
+        _prefs!.setString('email', res.data!.user.email);
 
-        int id = res.user.id;
-        String name = res.user.userName;
-        String email = res.user.email;
+        int id = res.data!.user.id;
+        String name = res.data!.user.user_name;
+        String email = res.data!.user.email;
         String? mobileNumber =
-            res.user.number ?? 'Please update your mobile number';
-        String profilePicture = res.user.profilePicture ?? 'N/A';
-        int groupCount = res.user.groupCount;
+            res.data!.user.number ?? 'Please update your mobile number';
+        String profilePicture = res.data!.user.profile_picture ?? 'N/A';
+        int groupCount = res.data!.user.group_count;
+        int pendingInvitation = res.data!.pending_invitation;
 
         //adding userData to local database
         Get.find<UserModelService>().loggedIn(
@@ -112,6 +113,7 @@ class LoginController extends GetxController {
           email: email,
           numberOfGroups: groupCount,
           profilePicture: profilePicture,
+          pendingInvitaion: pendingInvitation,
         );
         //
 

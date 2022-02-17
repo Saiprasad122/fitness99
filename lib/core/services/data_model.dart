@@ -15,6 +15,8 @@ class UserLocalDataModel {
   final int numbesrOfGroups;
   @HiveField(5)
   final String profilePicture;
+  @HiveField(6)
+  final int pendingInvitation;
 
   UserLocalDataModel({
     required this.id,
@@ -23,6 +25,7 @@ class UserLocalDataModel {
     required this.mobileNumber,
     required this.numbesrOfGroups,
     required this.profilePicture,
+    required this.pendingInvitation,
   });
 
   UserLocalDataModel copyWith({
@@ -32,12 +35,15 @@ class UserLocalDataModel {
     String? mobileNumber,
     int? numbesrOfGroups,
     String? profilePicture,
+    int? pendingInvitation,
   }) =>
       UserLocalDataModel(
-          id: id ?? this.id,
-          userName: userName ?? this.userName,
-          email: email ?? this.email,
-          mobileNumber: mobileNumber ?? this.mobileNumber,
-          numbesrOfGroups: numbesrOfGroups ?? this.numbesrOfGroups,
-          profilePicture: profilePicture ?? this.profilePicture);
+        id: id ?? this.id,
+        userName: userName ?? this.userName,
+        email: email ?? this.email,
+        mobileNumber: mobileNumber ?? this.mobileNumber,
+        numbesrOfGroups: numbesrOfGroups ?? this.numbesrOfGroups,
+        profilePicture: profilePicture ?? this.profilePicture,
+        pendingInvitation: pendingInvitation ?? this.pendingInvitation,
+      );
 }

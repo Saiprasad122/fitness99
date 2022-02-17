@@ -41,4 +41,5 @@ class ApiUrls {
   static const ADD_GROUP_CATEGORIES = '/add_group_categories';
   static const GET_GROUP_CATEGORIES = '/group_categories/{group_id}';
   static const GET_INVITE_MEMBERS_MY_GROUPS = '/invite_user_list/10';
+  static const CHANGE_PASSWORD = '/change_password';
 }

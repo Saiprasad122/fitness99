@@ -5,6 +5,7 @@ import 'package:fitness_99/models/add&viewGroupCategories/add_group_categories_r
 import 'package:fitness_99/models/add_preferences_request/add_preferences_request.dart';
 import 'package:fitness_99/models/baseResponse/base.response.dart';
 import 'package:fitness_99/models/cando_cannotdo_goal/cando_cannotdo_goal.response.dart';
+import 'package:fitness_99/models/change_password_req_response/change_password_request.dart';
 import 'package:fitness_99/models/createActivityRequestResponse/create_activity_request.dart';
 import 'package:fitness_99/models/createEventRequestResponse/create_event_request.dart';
 import 'package:fitness_99/models/create_poll_req_response/create_poll_request.dart';
@@ -69,7 +70,7 @@ abstract class ApiService {
       {@Path('group_id') required int group_id});
 
   @GET(ApiUrls.GET_PROFILE)
-  Future<BaseResponse<User>> getProfileData(
+  Future<BaseResponse<LoginResponse>> getProfileData(
       {@Path('user_id') required int user_id});
 
   @GET(ApiUrls.GET_ACTIVITY)
@@ -128,7 +129,8 @@ abstract class ApiService {
   //                               POST REQUEST                                      //
   // ----------------------- ************************ ------------------------------ //
   @POST(ApiUrls.lOGIN)
-  Future<LoginResponse> getLoginResponse(@Body() LoginRequest loginRequest);
+  Future<BaseResponse<LoginResponse>> getLoginResponse(
+      @Body() LoginRequest loginRequest);
 
   @POST(ApiUrls.REGISTER)
   Future<SignUpResponse> getSignUpResponse(@Body() SignUpRequest signUpRequest);
@@ -190,6 +192,10 @@ abstract class ApiService {
   @POST(ApiUrls.ADD_GROUP_CATEGORIES)
   Future<BaseResponse<String>> addGroupCategories(
       @Body() AddGroupCategoriesRequest addGroupCategoriesRequest);
+
+  @POST(ApiUrls.CHANGE_PASSWORD)
+  Future<BaseResponse> changePassword(
+      @Body() ChangePasswordRequest changePasswordRequest);
 
   // ----------------------- ************************ ------------------------------ //
   //                              DELETE REQUEST                                     //

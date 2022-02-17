@@ -47,7 +47,9 @@ class AppPages {
     GetPage(name: Routes.ProductScreen, page: () => ProductScreen()),
     GetPage(name: Routes.DetailedProductScreen, page: () => DetailedProduct()),
     GetPage(name: Routes.OrdersScreen, page: () => OrdersScreen()),
-    GetPage(name: Routes.SubscriptionScreen, page: () => SubscriptionScreen())
+    GetPage(name: Routes.SubscriptionScreen, page: () => SubscriptionScreen()),
+    GetPage(
+        name: Routes.ChangePasswordScreen, page: () => ChangePasswordScreen()),
   ];
 }
 
@@ -89,6 +91,7 @@ abstract class Routes {
   static const DetailedProductScreen = _Paths.detailedProductScreen;
   static const OrdersScreen = _Paths.ordersScreen;
   static const SubscriptionScreen = _Paths.subscriptionScreen;
+  static const ChangePasswordScreen = _Paths.changePasswordScreen;
 }
 
 abstract class _Paths {
@@ -129,4 +132,5 @@ abstract class _Paths {
   static const detailedProductScreen = '/detailedProductScreen';
   static const ordersScreen = '/ordersScreen';
   static const subscriptionScreen = '/subscriptionScreen';
+  static const changePasswordScreen = '/changePasswordScreen';
 }
