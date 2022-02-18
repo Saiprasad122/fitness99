@@ -32,6 +32,7 @@ class CreateActivityController extends GetxController {
   final fromTime = ''.obs;
   final toTime = ''.obs;
   final currentTime = TimeOfDay.now();
+  double ftime = 0.0, ttime = 0.0;
   final days = [
     'Sunday',
     'Monday',
@@ -75,22 +76,39 @@ class CreateActivityController extends GetxController {
   }
 
   void fromTimePicked(BuildContext context) async {
-    fromTime.value = await selectTime(context);
+    // fromTime.value = await selectTime(context);
+
+    await selectTime(context).then(
+      (value) {
+        ftime = value.hour.toDouble() + value.minute.toDouble();
+        fromTime.value = value.format(context);
+        fromTimeErrText.value = '';
+      },
+    );
   }
 
   void toTimePicked(BuildContext context) async {
-    toTime.value = await selectTime(context);
+    if (validateFromTime()) {
+      await selectTime(context).then(
+        (value) {
+          ttime = value.hour.toDouble() + value.minute.toDouble();
+          toTime.value = value.format(context);
+          toTimeErrText.value = '';
+        },
+      );
+    }
   }
 
-  Future<String> selectTime(BuildContext context) async {
+  Future<TimeOfDay> selectTime(BuildContext context) async {
     final picked = await showTimePicker(
       context: context,
       initialTime: currentTime,
     );
     if (picked != null) {
-      return picked.format(context);
+      return picked;
+    } else {
+      return TimeOfDay.now();
     }
-    return '';
   }
 
   bool validateTitle() {
@@ -158,6 +176,22 @@ class CreateActivityController extends GetxController {
     }
   }
 
+  bool validateRightTime(double fromtime, double totime) {
+    if (fromtime >= totime) {
+      fromTimeErrText.value =
+          'Starting time cannot be greater than Ending time';
+      toTimeErrText.value = 'Ending time cannot be lesser than Starting time';
+
+      return false;
+    } else if (fromtime <= totime) {
+      fromTimeErrText.value = '';
+      toTimeErrText.value = '';
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   void createActivity(String group_id) async {
     validateTitle();
     validateDescription();
@@ -166,6 +200,9 @@ class CreateActivityController extends GetxController {
     validateSelectedDay();
     validateFromTime();
     validateToTime();
+    if (validateFromTime() && validateToTime()) {
+      validateRightTime(ftime, ttime);
+    }
     if (validateTitle() &&
         validateDescription() &&
         validateLocation() &&
@@ -180,17 +217,17 @@ class CreateActivityController extends GetxController {
       fromTimeErrText.value = '';
       toTimeErrText.value = '';
       isBusy.value = true;
-      await createActivityAPI(
-        title: titleTED.text,
-        description: descriptionTED.text,
-        location: locationTED.text,
-        note: notesTED.text,
-        day: selectedDay.value,
-        fromTime: fromTime.value,
-        toTime: toTime.value,
-        group_id: group_id,
-        user_id: userModel.getid().toString(),
-      );
+      // await createActivityAPI(
+      //   title: titleTED.text,
+      //   description: descriptionTED.text,
+      //   location: locationTED.text,
+      //   note: notesTED.text,
+      //   day: selectedDay.value,
+      //   fromTime: fromTime.value,
+      //   toTime: toTime.value,
+      //   group_id: group_id,
+      //   user_id: userModel.getid().toString(),
+      // );
       isBusy.value = false;
     }
   }
