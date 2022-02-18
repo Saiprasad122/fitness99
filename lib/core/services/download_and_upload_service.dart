@@ -68,7 +68,7 @@ class DownloadAndUploadService extends GetxController {
       final File tempFile = File(
           '${directories.getVideosPath(groupId.toString())}$name.$extension');
       final File tempThumbnailFile = File(
-          '${directories.getVideosPath(groupId.toString())}${name}_thumbnail.$extension');
+          '${directories.getVideosPath(groupId.toString())}${name}_thumbnail.jpg');
       if (tempFile.existsSync()) {
         await tempFile.delete();
       }
@@ -87,7 +87,7 @@ class DownloadAndUploadService extends GetxController {
       downloadTask.asStream().listen((event) {
         progressListener?.call(
             (event.bytesTransferred / event.totalBytes) * 100,
-            '${directories.getVideosPath(groupId.toString())}$name.mp4');
+            '${directories.getVideosPath(groupId.toString())}$name.$extension');
       });
       await Future.wait([downloadTask, thumbnailDownloadTask]);
       onDoneListener?.call(tempFile, tempThumbnailFile);

@@ -39,9 +39,8 @@ class DirectoriesService extends GetxController {
       final _imagesFile =
           imagesDirectory.listSync(followLinks: false, recursive: true);
       _imagesFile.forEach((img) {
-        String imgString = img.toString().substring(
-            img.toString().lastIndexOf('/') + 1,
-            img.toString().lastIndexOf('.'));
+        String imgString = img.path.substring(
+            img.path.lastIndexOf('/') + 1, img.path.lastIndexOf('.'));
         images.add(imgString);
       });
     } catch (e) {
@@ -60,8 +59,9 @@ class DirectoriesService extends GetxController {
       final _videosFile =
           videosDirectory.listSync(followLinks: false, recursive: true);
       _videosFile.forEach((vid) {
-        String vidString = vid.toString().substring(
-            vid.toString().lastIndexOf('/') + 1, vid.toString().length);
+        final vidPath = vid.path;
+        String vidString =
+            vidPath.substring(vidPath.lastIndexOf('/') + 1, vidPath.length);
         videos.add(vidString);
       });
     } catch (e) {
@@ -79,9 +79,8 @@ class DirectoriesService extends GetxController {
       final _filesFile =
           filesDirectory.listSync(followLinks: false, recursive: true);
       _filesFile.forEach((file) {
-        String vidString = file.toString().substring(
-            file.toString().lastIndexOf('/') + 1,
-            file.toString().lastIndexOf('.'));
+        String vidString = file.path.substring(
+            file.path.lastIndexOf('/') + 1, file.path.lastIndexOf('.'));
         files.add(vidString);
       });
     } catch (e) {
