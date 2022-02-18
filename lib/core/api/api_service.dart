@@ -12,6 +12,7 @@ import 'package:fitness_99/models/create_poll_req_response/create_poll_request.d
 import 'package:fitness_99/models/display_activity_response.dart';
 import 'package:fitness_99/models/display_event_response.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
+import 'package:fitness_99/models/invite_members_response.dart';
 import 'package:fitness_99/models/join_group_reponse.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
@@ -20,6 +21,7 @@ import 'package:fitness_99/models/poll_answer_request/poll_answer_request.dart';
 import 'package:fitness_99/models/poll_details_response/poll_details_response.dart';
 import 'package:fitness_99/models/sendInvitationGroupRequestResponse/accept_reject_group_invitation_request.dart';
 import 'package:fitness_99/models/sendInvitationGroupRequestResponse/send_invitation_group_response.dart';
+import 'package:fitness_99/models/send_request_from_my_group_request.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_reponse.dart';
 import 'package:fitness_99/models/signUpResponseRequest/sign_up_request.dart';
 import 'package:fitness_99/models/updateProfilePicture/update_profile_picture_request.dart';
@@ -118,15 +120,12 @@ abstract class ApiService {
   Future<BaseResponse<SendInvitationGroupResponse>> getGroupInvitation(
       {@Path('group_id') required int group_id});
 
-  @GET(ApiUrls.GET_INVITATION_USER_LIST_GROUP)
-  Future<BaseResponse<List<User>>> getGroupInvitationUserList(
-      {@Path('group_id') required int group_id});
   @GET(ApiUrls.GET_GROUP_CATEGORIES)
   Future<BaseResponse<String>> getGroupCategories(
       {@Path('group_id') required String group_id});
 
   @GET(ApiUrls.GET_INVITE_MEMBERS_MY_GROUPS)
-  Future<BaseResponse<List<User>>> getInviteMembersMyGroup(
+  Future<BaseResponse<InviteUserListResponse>> getInviteMembersMyGroup(
       {@Path('group_id') required int group_id});
 
   @GET(ApiUrls.GET_USER_PENDING_INVITATION)
@@ -210,6 +209,10 @@ abstract class ApiService {
   @POST(ApiUrls.CHANGE_PASSWORD)
   Future<BaseResponse> changePassword(
       @Body() ChangePasswordRequest changePasswordRequest);
+
+  @POST(ApiUrls.SEND_INVITATION_TO_USER)
+  Future<BaseResponse> sendInvitationFromMyGroup(
+      @Body() SendReqFromMyGroupRequest sendReqFromMyGroupRequest);
 
   // ----------------------- ************************ ------------------------------ //
   //                              DELETE REQUEST                                     //

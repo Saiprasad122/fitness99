@@ -6,7 +6,6 @@ import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/profile_screen/widget/redirect_list.component.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ProfileView extends StatelessWidget {
   final controller = Get.put(ProfileViewController());
