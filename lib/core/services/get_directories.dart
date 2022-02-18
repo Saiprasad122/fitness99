@@ -79,9 +79,8 @@ class DirectoriesService extends GetxController {
       final _filesFile =
           filesDirectory.listSync(followLinks: false, recursive: true);
       _filesFile.forEach((file) {
-        String vidString = file.path.substring(
-            file.path.lastIndexOf('/') + 1, file.path.lastIndexOf('.'));
-        files.add(vidString);
+        String fileString = file.path.substring(file.path.lastIndexOf('/') + 1);
+        files.add(fileString);
       });
     } catch (e) {
       log('Error', error: e, name: 'Directory');
