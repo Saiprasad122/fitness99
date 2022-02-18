@@ -36,57 +36,40 @@ class ViewPreferencesScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 50),
                 Expanded(
-                  child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        AvailabiltyComponent(
-                          day: 'Sunday',
-                          dayPreferenceList: controller.sundayPreferenceList,
-                        ),
-                        const SizedBox(height: 20),
-                        AvailabiltyComponent(
-                            day: 'Monday',
-                            dayPreferenceList: controller.mondayPreferenceList),
-                        const SizedBox(height: 20),
-                        AvailabiltyComponent(
-                            day: 'Tuesday',
-                            dayPreferenceList:
-                                controller.tuesdayPreferenceList),
-                        const SizedBox(height: 20),
-                        AvailabiltyComponent(
-                            day: 'Wednesday',
-                            dayPreferenceList:
-                                controller.wednesdayPreferenceList),
-                        const SizedBox(height: 20),
-                        AvailabiltyComponent(
-                            day: 'Thursday',
-                            dayPreferenceList:
-                                controller.thursdayPreferenceList),
-                        const SizedBox(height: 20),
-                        AvailabiltyComponent(
-                            day: 'Friday',
-                            dayPreferenceList: controller.fridayPreferenceList),
-                        const SizedBox(height: 20),
-                        AvailabiltyComponent(
-                            day: 'Saturday',
-                            dayPreferenceList:
-                                controller.saturdayPreferenceList),
-                        const SizedBox(height: 10)
-                      ],
-                    ),
+                  child: ListView(
+                    children: [
+                      AvailabiltyComponent(
+                        day: 'Sunday',
+                        dayPreferenceList: controller.sundayPreferenceList,
+                      ),
+                      const SizedBox(height: 20),
+                      AvailabiltyComponent(
+                          day: 'Monday',
+                          dayPreferenceList: controller.mondayPreferenceList),
+                      const SizedBox(height: 20),
+                      AvailabiltyComponent(
+                          day: 'Tuesday',
+                          dayPreferenceList: controller.tuesdayPreferenceList),
+                      const SizedBox(height: 20),
+                      AvailabiltyComponent(
+                          day: 'Wednesday',
+                          dayPreferenceList:
+                              controller.wednesdayPreferenceList),
+                      const SizedBox(height: 20),
+                      AvailabiltyComponent(
+                          day: 'Thursday',
+                          dayPreferenceList: controller.thursdayPreferenceList),
+                      const SizedBox(height: 20),
+                      AvailabiltyComponent(
+                          day: 'Friday',
+                          dayPreferenceList: controller.fridayPreferenceList),
+                      const SizedBox(height: 20),
+                      AvailabiltyComponent(
+                          day: 'Saturday',
+                          dayPreferenceList: controller.saturdayPreferenceList),
+                      const SizedBox(height: 10)
+                    ],
                   ),
-                  // ListView.separated(
-                  //   physics: ClampingScrollPhysics(),
-                  //   separatorBuilder: (context, i) =>
-                  //       const SizedBox(height: 30),
-                  //   itemCount: controller.days.length,
-                  //   itemBuilder: (context, i) {
-                  //     return AvailabiltyComponent(
-                  //         day: controller.days[i],
-                  //         dayPreferenceList: controller.availabiltyList);
-                  //   },
-                  // ),
                 ),
                 CustomBottomButton(
                   text: 'Add your availability',

@@ -40,8 +40,8 @@ class PreferenceController extends GetxController {
             mondayPreferenceList.add(element);
           } else if (element.day.toLowerCase().contains('tuesday')) {
             tuesdayPreferenceList.add(element);
-            wednesdayPreferenceList.add(element);
           } else if (element.day.toLowerCase().contains('wednesday')) {
+            wednesdayPreferenceList.add(element);
           } else if (element.day.toLowerCase().contains('thursday')) {
             thursdayPreferenceList.add(element);
           } else if (element.day.toLowerCase().contains('friday')) {

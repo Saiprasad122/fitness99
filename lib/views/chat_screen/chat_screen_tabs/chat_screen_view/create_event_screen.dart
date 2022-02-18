@@ -59,7 +59,7 @@ class CreateEventScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         CustomProfileTextField(
-                          displayText: 'Event Locatin',
+                          displayText: 'Event Location',
                           hintText: 'Enter your location',
                           textEditingController: controller.locationTED,
                           errText: controller.locationErrText.value,

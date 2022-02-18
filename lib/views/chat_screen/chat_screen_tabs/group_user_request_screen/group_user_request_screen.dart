@@ -22,7 +22,7 @@ class _GroupUserRequestScreenState extends State<GroupUserRequestScreen> {
     return Obx(
       () => Stack(
         children: [
-          controller.userList.isEmpty && controller.isBusy.value
+          controller.userList.isEmpty && !controller.isBusy.value
               ? Center(
                   child: Text(
                     'No Invitaitions',
@@ -39,14 +39,14 @@ class _GroupUserRequestScreenState extends State<GroupUserRequestScreen> {
                       await controller
                           .rejectUser(controller.userList[i].id.toString());
                       await dismiss();
-                      // controller.removeUserAtIndex(i);
+                      controller.removeUserWithId(controller.userList[i].id);
                     },
                     onAcceptTap: (dismiss) async {
                       await controller
                           .acceptUser(controller.userList[i].id.toString());
 
                       await dismiss();
-                      // controller.removeUserAtIndex(i);
+                      controller.removeUserWithId(controller.userList[i].id);
                     },
                     onTap: () => Get.to(
                       () => AnotherProfileView(

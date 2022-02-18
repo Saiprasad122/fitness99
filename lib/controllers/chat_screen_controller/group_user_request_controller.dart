@@ -63,7 +63,7 @@ class GroupUserRequestController extends GetxController {
     }
   }
 
-  void removeUserAtIndex(int index) {
-    userList.removeAt(index);
+  void removeUserWithId(int userId) {
+    userList.removeWhere((element) => element.id == userId);
   }
 }

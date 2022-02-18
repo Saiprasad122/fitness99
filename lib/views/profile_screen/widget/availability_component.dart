@@ -13,37 +13,35 @@ class AvailabiltyComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100 * AppSizedBoxConfigs.responsiveHeightValueToDivide,
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(day, style: TextStyles.sgproBold.f22),
             const SizedBox(height: 10),
-            Flexible(
-                fit: FlexFit.loose,
-                child: dayPreferenceList.isNotEmpty
-                    ? ListView.separated(
-                        itemCount: dayPreferenceList.length,
-                        separatorBuilder: (context, i) => Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const SizedBox(width: 5),
-                            Text(
-                              '||',
-                              style: TextStyles.sgproMedium.f20,
-                            ),
-                            const SizedBox(width: 5),
-                          ],
-                        ),
-                        itemBuilder: (context, i) => Text(
-                          '${dayPreferenceList[i].from_time}-${dayPreferenceList[i].to_time}',
+            dayPreferenceList.isNotEmpty
+                ? ListView.separated(
+                    itemCount: dayPreferenceList.length,
+                    separatorBuilder: (context, i) => Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(width: 5),
+                        Text(
+                          '||',
                           style: TextStyles.sgproMedium.f20,
                         ),
-                        scrollDirection: Axis.horizontal,
-                      )
-                    : Text('Not Available', style: TextStyles.sgproMedium.f20))
+                        const SizedBox(width: 5),
+                      ],
+                    ),
+                    itemBuilder: (context, i) => Text(
+                      '${dayPreferenceList[i].from_time}-${dayPreferenceList[i].to_time}',
+                      style: TextStyles.sgproMedium.f20,
+                    ),
+                    scrollDirection: Axis.horizontal,
+                  )
+                : Text('Not Available', style: TextStyles.sgproMedium.f20)
           ],
         ),
       ),
