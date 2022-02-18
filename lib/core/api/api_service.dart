@@ -15,6 +15,7 @@ import 'package:fitness_99/models/display_group_reponse.dart';
 import 'package:fitness_99/models/join_group_reponse.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_request.dart';
+import 'package:fitness_99/models/pending_invitation_response/pending_invitation_model.dart';
 import 'package:fitness_99/models/poll_answer_request/poll_answer_request.dart';
 import 'package:fitness_99/models/poll_details_response/poll_details_response.dart';
 import 'package:fitness_99/models/sendInvitationGroupRequestResponse/accept_reject_group_invitation_request.dart';
@@ -128,6 +129,10 @@ abstract class ApiService {
   Future<BaseResponse<List<User>>> getInviteMembersMyGroup(
       {@Path('group_id') required int group_id});
 
+  @GET(ApiUrls.GET_USER_PENDING_INVITATION)
+  Future<BaseResponse<List<PendingInvitationModel>>>
+      getPendingInvitationsForUser({@Path() required int userId});
+
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //
   // ----------------------- ************************ ------------------------------ //
@@ -188,6 +193,12 @@ abstract class ApiService {
 
   @POST(ApiUrls.GROUP_INVITATION_RESPONSE)
   Future<BaseResponse<List<User>>> groupInvitationResponse(
+      @Body()
+          AcceptRejectGroupInivitationRequest
+              acceptRejectGroupInivitationRequest);
+
+  @POST(ApiUrls.USER_PENDING_INVITATION_RESPOSNE)
+  Future<BaseResponse<List<User>>> userPendingInvitationResponse(
       @Body()
           AcceptRejectGroupInivitationRequest
               acceptRejectGroupInivitationRequest);

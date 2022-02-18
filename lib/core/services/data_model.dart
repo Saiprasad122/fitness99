@@ -23,9 +23,9 @@ class UserLocalDataModel {
     required this.userName,
     required this.email,
     required this.mobileNumber,
-    required this.numbesrOfGroups,
+    this.numbesrOfGroups = 0,
     required this.profilePicture,
-    required this.pendingInvitation,
+    this.pendingInvitation = 0,
   });
 
   UserLocalDataModel copyWith({
