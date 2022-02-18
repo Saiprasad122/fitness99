@@ -1,4 +1,6 @@
+import 'package:badges/badges.dart';
 import 'package:fitness_99/controllers/dashboard_controller.dart';
+import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/chat_screen/chat_list_screen.dart';
 import 'package:fitness_99/views/more_screen/more_options_screen.dart';
@@ -150,11 +152,25 @@ class _DashboardViewState extends State<DashboardView>
               backgroundColor: Colors.white,
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/svgs/chat_screen/man-user.svg',
-                width: 23,
-                height: 23,
-                color: Colors.black,
+              icon: Badge(
+                toAnimate: true,
+                animationType: BadgeAnimationType.fade,
+                badgeColor: AppColors.error,
+                showBadge:
+                    Get.find<UserModelService>().getPendingInvitation() > 0,
+                stackFit: StackFit.loose,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(6),
+                badgeContent: Text(
+                  '${Get.find<UserModelService>().getPendingInvitation()}',
+                  style: TextStyles.sgproMedium.white78.f12,
+                ),
+                child: SvgPicture.asset(
+                  'assets/svgs/chat_screen/man-user.svg',
+                  width: 23,
+                  height: 23,
+                  color: Colors.black,
+                ),
               ),
               label: 'Profile',
               activeIcon: SvgPicture.asset(

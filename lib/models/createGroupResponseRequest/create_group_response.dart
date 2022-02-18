@@ -73,14 +73,14 @@ class Data {
 
   Map<String, dynamic> toMap() {
     return {
-      'group': group.toMap(),
+      'group': group.toJson(),
       'user': user.toMap(),
     };
   }
 
   factory Data.fromMap(Map<String, dynamic> map) {
     return Data(
-      group: Group.fromMap(map['group']),
+      group: Group.fromJson(json.decode(map['group'])),
       user: User.fromMap(map['user']),
     );
   }
@@ -104,7 +104,7 @@ class Data {
 }
 
 class Group {
-  final String user_id;
+  final int user_id;
   final String group_name;
   final String goal;
   final int active_members;
@@ -132,7 +132,7 @@ class Group {
   });
 
   Group copyWith({
-    String? user_id,
+    int? user_id,
     String? group_name,
     String? goal,
     int? active_members,
@@ -161,7 +161,7 @@ class Group {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'user_id': user_id,
       'group_name': group_name,
@@ -178,12 +178,12 @@ class Group {
     };
   }
 
-  factory Group.fromMap(Map<String, dynamic> map) {
+  factory Group.fromJson(Map<String, dynamic> map) {
     return Group(
       user_id: map['user_id'],
       group_name: map['group_name'],
       goal: map['goal'],
-      active_members: map['active_members']?.toInt(),
+      active_members: int.parse(map['active_members']),
       max_group_members: map['max_group_members'],
       location: map['location'],
       comments: map['comments'],
@@ -194,10 +194,6 @@ class Group {
       id: map['id']?.toInt(),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Group.fromJson(String source) => Group.fromMap(json.decode(source));
 
   @override
   String toString() {
