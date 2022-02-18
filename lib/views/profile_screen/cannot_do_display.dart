@@ -9,11 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CannnotDoDisplay extends StatelessWidget {
-  CannnotDoDisplay({Key? key}) : super(key: key);
-  final controller = Get.put(CannotDoController());
+  final int user_id;
+  final bool isUser;
+  CannnotDoDisplay({required this.user_id, this.isUser = true});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CannotDoController(user_id: user_id));
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -56,10 +59,12 @@ class CannnotDoDisplay extends StatelessWidget {
                             child: Text('No Cannot Dos\' to Display'),
                           ),
                   ),
-                  CustomBottomButton(
-                    text: 'AddNew',
-                    onTap: () => Get.toNamed(Routes.CannotDoAdd),
-                  )
+                  isUser
+                      ? CustomBottomButton(
+                          text: 'AddNew',
+                          onTap: () => Get.toNamed(Routes.CannotDoAdd),
+                        )
+                      : const SizedBox(),
                 ],
               );
       }),

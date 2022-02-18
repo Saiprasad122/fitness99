@@ -54,12 +54,24 @@ class CategoriesController extends GetxController {
           );
         }
       } on DioError catch (e) {
-        print(e);
-        customSnackBar(
-          title: 'Error!',
-          message: 'Please try again later',
-          isSuccess: false,
-        );
+        if (e.response!.statusCode == 400 &&
+            e.response!.data['categories']
+                .toString()
+                .toLowerCase()
+                .contains('categories field is required')) {
+          customSnackBar(
+            title: 'No categories selected!',
+            message: 'Please select any categories and submit',
+            isSuccess: false,
+          );
+        } else {
+          print(e);
+          customSnackBar(
+            title: 'Error!',
+            message: 'Please try again later',
+            isSuccess: false,
+          );
+        }
       }
     }
     isBusy.value = false;

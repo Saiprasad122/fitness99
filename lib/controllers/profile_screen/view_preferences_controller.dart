@@ -6,6 +6,8 @@ import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/preferences_response.dart';
 
 class PreferenceController extends GetxController {
+  PreferenceController({required this.user_id});
+  final user_id;
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
   final isBusy = false.obs;
@@ -27,8 +29,7 @@ class PreferenceController extends GetxController {
   void getPreference() async {
     isBusy.value = true;
     try {
-      final response =
-          await apiService.getPreferences(user_id: userModel.getid());
+      final response = await apiService.getPreferences(user_id: user_id);
 
       if (response.status == 200 &&
           response.message!.toLowerCase().contains('success')) {
@@ -59,12 +60,19 @@ class PreferenceController extends GetxController {
         );
       }
     } on DioError catch (e) {
-      print(e);
-      customSnackBar(
-        title: 'Something went Wrong!',
-        message: 'Please try again.',
-        isSuccess: false,
-      );
+      if (e.response!.statusCode == 404 &&
+          e.response!.data['message']
+              .toString()
+              .toLowerCase()
+              .contains('prefrence are empty')) {
+      } else {
+        print(e);
+        customSnackBar(
+          title: 'Something went Wrong!',
+          message: 'Please try again.',
+          isSuccess: false,
+        );
+      }
     }
     isBusy.value = false;
   }

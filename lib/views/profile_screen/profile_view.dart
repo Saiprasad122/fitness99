@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_99/controllers/profile_screen/profile_view_controller.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/router/app_pages.dart';
+import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/views/profile_screen/widget/redirect_list.component.dart';
 import 'package:flutter/material.dart';
@@ -167,17 +168,19 @@ class ProfileView extends StatelessWidget {
               RedirectListComponent(
                 imageUrl: 'assets/images/tabbar/target.png',
                 title: 'Personal Goals',
-                onTap: () => Get.toNamed(Routes.PersonalGoalsDisplay),
+                onTap: () => Get.to(
+                    () => PersonalGoalsDisplay(user_id: userModel.getid())),
               ),
               RedirectListComponent(
-                imageUrl: 'assets/images/tabbar/dos&donts.png',
-                title: 'Can do',
-                onTap: () => Get.toNamed(Routes.CanDoDislay),
-              ),
+                  imageUrl: 'assets/images/tabbar/dos&donts.png',
+                  title: 'Can do',
+                  onTap: () =>
+                      Get.to(() => CanDoDisplay(user_id: userModel.getid()))),
               RedirectListComponent(
                 imageUrl: 'assets/images/tabbar/dos&donts.png',
                 title: 'Cannot do',
-                onTap: () => Get.toNamed(Routes.CannotDoDisplay),
+                onTap: () =>
+                    Get.to(() => CannnotDoDisplay(user_id: userModel.getid())),
               ),
               RedirectListComponent(
                 imageUrl: 'assets/images/tabbar/categories.png',
@@ -187,7 +190,8 @@ class ProfileView extends StatelessWidget {
               RedirectListComponent(
                 imageUrl: 'assets/images/tabbar/timer.png',
                 title: 'Preference Time',
-                onTap: () => Get.toNamed(Routes.ViewPreferencesScreen),
+                onTap: () => Get.to(
+                    () => ViewPreferencesScreen(user_id: userModel.getid())),
               ),
             ],
           ),

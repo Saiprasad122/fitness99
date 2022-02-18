@@ -1,4 +1,3 @@
-import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/models/preferences_response.dart';
 import 'package:flutter/material.dart';

@@ -7,6 +7,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class CannotDoController extends GetxController {
+  CannotDoController({required this.user_id});
+  final int user_id;
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
   final isLoading = true.obs;
@@ -25,7 +27,7 @@ class CannotDoController extends GetxController {
     isLoading.value = true;
     isError.value = false;
     try {
-      final res = await apiService.getCannotDos(userId: userModel.getid());
+      final res = await apiService.getCannotDos(userId: user_id);
       if (res.data != null) {
         cannotDo.addAll(res.data!);
       }

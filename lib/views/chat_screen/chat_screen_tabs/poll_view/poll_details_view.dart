@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_99/controllers/chat_screen_controller/poll_details_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/models/poll_details_response/poll_details_response.dart';
+import 'package:fitness_99/views/another_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -78,6 +79,10 @@ class PollDetailsScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                     itemCount: e.length,
                     itemBuilder: (context, i) => ListTile(
+                      onTap: () => Get.to(() => AnotherProfileView(
+                            userId: e[i].id,
+                            user: e[i],
+                          )),
                       leading: CircleAvatar(
                         radius: 30,
                         backgroundColor: Colors.white,

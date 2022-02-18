@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class PersonalGoalsController extends GetxController {
+  PersonalGoalsController({required this.user_id});
+  final int user_id;
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
   final isLoading = true.obs;
@@ -26,7 +28,7 @@ class PersonalGoalsController extends GetxController {
     isLoading.value = true;
     isError.value = false;
     try {
-      final res = await apiService.getGoals(userId: userModel.getid());
+      final res = await apiService.getGoals(userId: user_id);
       if (res.data != null) {
         goals.addAll(res.data!);
       }

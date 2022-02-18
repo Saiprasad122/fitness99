@@ -51,7 +51,7 @@ class ChatListScreen extends StatelessWidget {
                                 groupImage:
                                     controller.searchedGroupList[i].group_image,
                                 onTap: () => Get.to(
-                                  ChatScreen(controller.groupList[i].id,
+                                  () => ChatScreen(controller.groupList[i].id,
                                       controller.groupList[i].group_name),
                                 ),
                               ),
@@ -70,7 +70,8 @@ class ChatListScreen extends StatelessWidget {
                                     groupImage:
                                         controller.groupList[i].group_image,
                                     onTap: () => Get.to(
-                                      ChatScreen(controller.groupList[i].id,
+                                      () => ChatScreen(
+                                          controller.groupList[i].id,
                                           controller.groupList[i].group_name),
                                     ),
                                   ),

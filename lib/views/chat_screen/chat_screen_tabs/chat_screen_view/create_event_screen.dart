@@ -73,6 +73,7 @@ class CreateEventScreen extends StatelessWidget {
                           textEditingController: controller.membersTED,
                           errText: controller.membersErrText.value,
                           onChanged: (text) => controller.onChangedMember(text),
+                          textInputType: TextInputType.number,
                         ),
                         const SizedBox(height: 20),
                         Container(
@@ -91,7 +92,7 @@ class CreateEventScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${controller.selectedDate} ${controller.selectedTime.value}',
+                          '${controller.selectedDate.value} ${controller.selectedTime.value}',
                           style: TextStyles.sgproMedium.f22,
                         ),
                         const SizedBox(height: 10),

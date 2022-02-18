@@ -226,7 +226,8 @@ class ChatScreenView extends StatelessWidget {
                           TextButton(
                             onPressed: () {
                               Navigator.pop(context);
-                              Get.to(CreateEventScreen(group_id: group_id));
+                              Get.to(
+                                  () => CreateEventScreen(group_id: group_id));
                             },
                             child: Text('Create Event',
                                 style: TextStyles.sgproRegular.f24.black),
@@ -235,7 +236,8 @@ class ChatScreenView extends StatelessWidget {
                           TextButton(
                             onPressed: () {
                               Navigator.pop(context);
-                              Get.to(CreateActivityScreen(group_id: group_id));
+                              Get.to(() =>
+                                  CreateActivityScreen(group_id: group_id));
                             },
                             child: Text('Create Activity',
                                 style: TextStyles.sgproRegular.f24.black),
