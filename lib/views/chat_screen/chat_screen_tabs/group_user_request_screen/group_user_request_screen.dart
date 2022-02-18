@@ -32,9 +32,9 @@ class _GroupUserRequestScreenState extends State<GroupUserRequestScreen> {
               : ListView.builder(
                   itemCount: controller.userList.length,
                   itemBuilder: (context, i) => DismissableUserViewWidget(
-                    title: controller.userList[i].userName,
+                    title: controller.userList[i].user_name,
                     wantsToJoinGroup: true,
-                    avatarUrl: controller.userList[i].profilePicture ?? '',
+                    avatarUrl: controller.userList[i].profile_picture ?? '',
                     onRejectTap: (dismiss) async {
                       await controller
                           .rejectUser(controller.userList[i].id.toString());
@@ -51,6 +51,7 @@ class _GroupUserRequestScreenState extends State<GroupUserRequestScreen> {
                     onTap: () => Get.to(
                       () => AnotherProfileView(
                         user: controller.userList[i],
+                        userId: controller.userList[i].id,
                       ),
                     ),
                   ),

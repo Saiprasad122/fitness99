@@ -27,11 +27,12 @@ class SplashViewController extends GetxController {
             if (res.message?.toLowerCase() == 'success') {
               UserLocalDataModel userLocalDataModel = UserLocalDataModel(
                 id: userModel.getid(),
-                userName: res.data!.userName,
-                email: res.data!.email,
-                mobileNumber: res.data!.number ?? 'N/A',
-                numbesrOfGroups: res.data!.groupCount,
-                profilePicture: res.data!.profilePicture ?? '',
+                userName: res.data!.user.user_name,
+                email: res.data!.user.email,
+                mobileNumber: res.data!.user.number ?? 'N/A',
+                numbesrOfGroups: res.data!.user.group_count,
+                profilePicture: res.data!.user.profile_picture ?? '',
+                pendingInvitation: res.data!.pending_invitation,
               );
               await Hive.box<UserLocalDataModel>('user_data')
                   .put('data', userLocalDataModel);

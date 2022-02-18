@@ -17,6 +17,7 @@ class CustomProfileTextField extends StatelessWidget {
   final List<TextInputFormatter>? textInputFormatter;
   final Function(String)? onSubmitted;
   final Function(String)? onChanged;
+  final Widget? suffixIcon;
 
   CustomProfileTextField({
     required this.displayText,
@@ -33,6 +34,7 @@ class CustomProfileTextField extends StatelessWidget {
     this.textInputFormatter,
     this.onSubmitted,
     this.onChanged,
+    this.suffixIcon,
   });
 
   @override
@@ -64,6 +66,7 @@ class CustomProfileTextField extends StatelessWidget {
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey),
                 ),
+                suffixIcon: suffixIcon,
               ),
             ),
             const SizedBox(height: 2),

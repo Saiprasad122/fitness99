@@ -23,10 +23,10 @@ class CustomProfileIconButtom extends StatelessWidget {
                 child: SizedBox.expand(
                   child: ClipOval(
                     child: CachedNetworkImage(
-                      imageUrl: userData.profilePicture?.contains('uploads') ??
+                      imageUrl: userData.profile_picture?.contains('uploads') ??
                               true
-                          ? userData.profilePicture ?? ''
-                          : 'https://dev.99fitnessfriends.com/uploads${userData.profilePicture}',
+                          ? userData.profile_picture ?? ''
+                          : 'https://dev.99fitnessfriends.com/uploads${userData.profile_picture}',
                       placeholder: (context, s) => CircularProgressIndicator(),
                       filterQuality: FilterQuality.high,
                       fit: BoxFit.contain,
@@ -38,7 +38,7 @@ class CustomProfileIconButtom extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 15),
-            Text(userData.userName, style: TextStyles.sgproBold.f24),
+            Text(userData.user_name, style: TextStyles.sgproBold.f24),
           ],
         ),
         const SizedBox(height: 10),

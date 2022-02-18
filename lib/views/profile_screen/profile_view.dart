@@ -142,7 +142,7 @@ class ProfileView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            '0',
+                            '${userModel.getPendingInvitation()}',
                             style: TextStyles.sgproMedium.black.f20,
                           ),
                           Text(

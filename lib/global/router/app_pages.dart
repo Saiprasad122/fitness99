@@ -23,10 +23,8 @@ class AppPages {
     GetPage(name: Routes.DisplayMyGroupScreen, page: () => DisplayMyGroup()),
     GetPage(name: Routes.GroupLimitIncrease, page: () => GroupLimitIncrease()),
     GetPage(
-        name: Routes.InviteMembersScreen, page: () => InviteMembersScreen()),
-    GetPage(
-        name: Routes.MyGroupCategoriesScreen,
-        page: () => MyGroupCategoriesScreen()),
+        name: Routes.GroupLimitCreateRequest,
+        page: () => GroupLimitIncreaseCreateRequest()),
     GetPage(name: Routes.CreateGroupScreen, page: () => CreateGroupScreen()),
     GetPage(name: Routes.ProfileScreen, page: () => ProfileView()),
     GetPage(name: Routes.EditProfileScreen, page: () => EditProfileScreen()),
@@ -49,7 +47,9 @@ class AppPages {
     GetPage(name: Routes.ProductScreen, page: () => ProductScreen()),
     GetPage(name: Routes.DetailedProductScreen, page: () => DetailedProduct()),
     GetPage(name: Routes.OrdersScreen, page: () => OrdersScreen()),
-    GetPage(name: Routes.SubscriptionScreen, page: () => SubscriptionScreen())
+    GetPage(name: Routes.SubscriptionScreen, page: () => SubscriptionScreen()),
+    GetPage(
+        name: Routes.ChangePasswordScreen, page: () => ChangePasswordScreen()),
   ];
 }
 
@@ -71,9 +71,8 @@ abstract class Routes {
   static const GroupDocList = _Paths.groupDocList;
   static const SearchScreen = _Paths.searchSreen;
   static const DisplayMyGroupScreen = _Paths.displayMyGroupScreen;
-  static const InviteMembersScreen = _Paths.inviteMembersScreen;
   static const GroupLimitIncrease = _Paths.groupLimitIncrease;
-  static const MyGroupCategoriesScreen = _Paths.myGroupCategoriesScreen;
+  static const GroupLimitCreateRequest = _Paths.groupLimitCreateRequest;
   static const CreateGroupScreen = _Paths.createGroupScreen;
   static const ProfileScreen = _Paths.profileScreen;
   static const EditProfileScreen = _Paths.editProfileScreen;
@@ -92,6 +91,7 @@ abstract class Routes {
   static const DetailedProductScreen = _Paths.detailedProductScreen;
   static const OrdersScreen = _Paths.ordersScreen;
   static const SubscriptionScreen = _Paths.subscriptionScreen;
+  static const ChangePasswordScreen = _Paths.changePasswordScreen;
 }
 
 abstract class _Paths {
@@ -112,9 +112,8 @@ abstract class _Paths {
   static const groupDocList = '/groupDocList';
   static const searchSreen = '/searchScreen';
   static const displayMyGroupScreen = '/displayMyGroupScreen';
-  static const inviteMembersScreen = '/inviteMembersScreen';
   static const groupLimitIncrease = '/groupLimitIncrease';
-  static const myGroupCategoriesScreen = '/myGroupCategoriesScreen';
+  static const groupLimitCreateRequest = '/groupLimitCreateRequest';
   static const createGroupScreen = '/createGroupScreen';
   static const profileScreen = '/profileScreen';
   static const editProfileScreen = '/editProfileScreen';
@@ -133,4 +132,5 @@ abstract class _Paths {
   static const detailedProductScreen = '/detailedProductScreen';
   static const ordersScreen = '/ordersScreen';
   static const subscriptionScreen = '/subscriptionScreen';
+  static const changePasswordScreen = '/changePasswordScreen';
 }

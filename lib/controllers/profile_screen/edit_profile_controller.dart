@@ -147,6 +147,7 @@ class EditProfileController extends GetxController {
           numbesrOfGroups: userModel.getNoOfGroups(),
           profilePicture:
               response.result?.profilePicture ?? userModel.getProfilePicture(),
+          pendingInvitation: userModel.getPendingInvitation(),
         );
         await Hive.box<UserLocalDataModel>('user_data')
             .put('data', userLocalDataModel);
@@ -195,6 +196,7 @@ class EditProfileController extends GetxController {
           mobileNumber: res.result!.phoneNumber ?? 'N/A',
           numbesrOfGroups: res.result!.groupCount,
           profilePicture: res.result!.profilePicture,
+          pendingInvitation: userModel.getPendingInvitation(),
         );
         await Hive.box<UserLocalDataModel>('user_data')
             .put('data', userLocalDataModel);

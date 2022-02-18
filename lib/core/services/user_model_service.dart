@@ -5,13 +5,14 @@ import 'data_model.dart';
 
 class UserModelService extends GetxController {
   String _name = '', _mobileNumber = '', _email = '', _profilePicture = '';
-  int _numberOfGroups = 0;
+  int _numberOfGroups = 0, _pendingInvitaion = 0;
   String get name => _name;
   int _id = 0;
   int get id => _id;
   String? get mobileNumber => _mobileNumber;
   String? get email => _email;
   int? get numberOfGroups => _numberOfGroups;
+  int get pendingInvitation => _pendingInvitaion;
   UserLocalDataModel? userLocalDataModel;
 
   @override
@@ -28,6 +29,7 @@ class UserModelService extends GetxController {
     required String email,
     required int numberOfGroups,
     String? profilePicture,
+    required int pendingInvitaion,
   }) async {
     _id = id;
     _name = name;
@@ -35,14 +37,15 @@ class UserModelService extends GetxController {
     _mobileNumber = mobileNumber ?? 'Please update your phone number';
     _numberOfGroups = numberOfGroups;
     _profilePicture = profilePicture ?? "images/avatar.png";
+    _pendingInvitaion = pendingInvitaion;
     UserLocalDataModel? userLocalDataModel = UserLocalDataModel(
-      id: id,
-      email: _email,
-      mobileNumber: _mobileNumber,
-      userName: _name,
-      numbesrOfGroups: _numberOfGroups,
-      profilePicture: _profilePicture,
-    );
+        id: id,
+        email: _email,
+        mobileNumber: _mobileNumber,
+        userName: _name,
+        numbesrOfGroups: _numberOfGroups,
+        profilePicture: _profilePicture,
+        pendingInvitation: _pendingInvitaion);
     var box = Hive.box<UserLocalDataModel>('user_data');
     await box.put('data', userLocalDataModel);
     userLocalDataModel = box.get('data');
@@ -106,5 +109,12 @@ class UserModelService extends GetxController {
             .contains('https://dev.99fitnessfriends.com/uploads')
         ? userLocalDataModel?.profilePicture ?? 'N/A'
         : 'https://dev.99fitnessfriends.com/uploads${userLocalDataModel?.profilePicture ?? 'N/A'}';
+  }
+
+  // to get the pending invitation list from the local DB
+  int getPendingInvitation() {
+    var box = Hive.box<UserLocalDataModel>('user_data');
+    userLocalDataModel = box.get('data');
+    return userLocalDataModel?.pendingInvitation ?? 0;
   }
 }

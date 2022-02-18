@@ -85,12 +85,12 @@ class PollDetailsScreen extends StatelessWidget {
                           child: ClipOval(
                             child: CachedNetworkImage(
                               imageUrl: e[i]
-                                          .profilePicture
+                                          .profile_picture
                                           ?.toString()
                                           .contains('uploads') ??
                                       true
-                                  ? e[i].profilePicture ?? ''
-                                  : 'https://dev.99fitnessfriends.com/uploads/${e[i].profilePicture}',
+                                  ? e[i].profile_picture ?? ''
+                                  : 'https://dev.99fitnessfriends.com/uploads/${e[i].profile_picture}',
                               placeholder: (context, s) =>
                                   CircularProgressIndicator(),
                               filterQuality: FilterQuality.high,
@@ -103,7 +103,7 @@ class PollDetailsScreen extends StatelessWidget {
                         ),
                       ),
                       title: Text(
-                        e[i].userName,
+                        e[i].user_name,
                         style: TextStyles.sgproMedium.f22,
                       ),
                     ),
