@@ -46,7 +46,13 @@ class CategoriesController extends GetxController {
             user_id: userModel.getid().toString());
 
         final response = await apiService.addCategories(body);
-        if (response.message!.toLowerCase().contains('success')) {}
+        if (response.message!.toLowerCase().contains('success')) {
+          customSnackBar(
+            title: 'Categories Updated',
+            message: 'Catgories Updated Successfully',
+            isSuccess: true,
+          );
+        }
       } on DioError catch (e) {
         print(e);
         customSnackBar(

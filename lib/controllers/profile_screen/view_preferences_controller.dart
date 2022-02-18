@@ -32,6 +32,7 @@ class PreferenceController extends GetxController {
 
       if (response.status == 200 &&
           response.message!.toLowerCase().contains('success')) {
+        print(response.data![2].day);
         response.data!.forEach((element) {
           availabiltyList.add(element);
           if (element.day.toLowerCase().contains('sunday')) {
