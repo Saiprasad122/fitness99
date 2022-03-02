@@ -23,6 +23,7 @@ class EditProfileController extends GetxController {
   final nameTED = TextEditingController();
   final emailTED = TextEditingController();
   final numberTED = TextEditingController();
+  final ImageCropper imageCropper = ImageCropper();
   var image = ''.obs;
   final nameErr = ''.obs;
   final emailErr = ''.obs;
@@ -86,7 +87,7 @@ class EditProfileController extends GetxController {
     if (file != null) {
       // final img = File(file.path);
       String fileName = file.path.split('/').last;
-      final cropImage = await ImageCropper.cropImage(
+      final cropImage = await imageCropper.cropImage(
         sourcePath: file.path,
         aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
         maxHeight: 300,

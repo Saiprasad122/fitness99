@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:dio/dio.dart';
 import 'package:fitness_99/controllers/group_screen_controller/display_my_group_controller.dart';
 import 'package:fitness_99/core/api/api_service.dart';
