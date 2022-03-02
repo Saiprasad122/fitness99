@@ -46,12 +46,23 @@ class InviteMembersController extends GetxController {
         );
       }
     } on DioError catch (e) {
+      if (e.response!.statusCode == 404 &&
+          e.response!.data['message']
+              .toString()
+              .toLowerCase()
+              .contains('categories doesn\'t exists')) {
+        customSnackBar(
+            title: 'Select Categories',
+            message: 'Please select some categories for group',
+            isSuccess: false);
+      } else {
+        customSnackBar(
+          title: 'Error!',
+          message: 'Please try again later',
+          isSuccess: false,
+        );
+      }
       print(e);
-      customSnackBar(
-        title: 'Error!',
-        message: 'Please try again later',
-        isSuccess: false,
-      );
     }
     isBusy.value = false;
   }
@@ -80,12 +91,13 @@ class InviteMembersController extends GetxController {
         );
       }
     } on DioError catch (e) {
-      print(e);
       customSnackBar(
         title: 'Error!',
         message: 'Please try again later',
         isSuccess: false,
       );
+
+      print(e);
     }
     isBusy.value = false;
   }

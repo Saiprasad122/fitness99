@@ -44,10 +44,12 @@ class PendingInvitationController extends GetxController {
   Future<void> acceptGroupInvitation(int groupId) async {
     try {
       final res = await apiService.userPendingInvitationResponse(
-          AcceptRejectGroupInivitationRequest(
-              user_id: userModel.getid().toString(),
-              group_id: groupId.toString(),
-              status: '1'));
+        AcceptRejectGroupInivitationRequest(
+            user_id: userModel.getid().toString(),
+            group_id: groupId.toString(),
+            status: '1'),
+      );
+
       Get.find<DisplayGroupScreenController>().getGroupData();
 
       print(pendingInvitesList.length);
@@ -59,10 +61,11 @@ class PendingInvitationController extends GetxController {
   Future<void> rejectGroupInvitation(int groupId) async {
     try {
       final res = await apiService.groupInvitationResponse(
-          AcceptRejectGroupInivitationRequest(
-              user_id: userModel.getid().toString(),
-              group_id: groupId.toString(),
-              status: '0'));
+        AcceptRejectGroupInivitationRequest(
+            user_id: userModel.getid().toString(),
+            group_id: groupId.toString(),
+            status: '0'),
+      );
       Get.find<DisplayGroupScreenController>().getGroupData();
       print(pendingInvitesList.length);
     } on DioError catch (e) {
