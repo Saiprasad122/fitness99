@@ -46,21 +46,24 @@ class InviteMembersController extends GetxController {
         );
       }
     } on DioError catch (e) {
-
-      if(e.response!.data["message"].toString().toLowerCase().contains("categories doesn't exists")){
+      if (e.response!.data["message"]
+          .toString()
+          .toLowerCase()
+          .contains("categories doesn't exists")) {
         customSnackBar(
           title: 'Select Categories!',
           message: 'Please select Group Categories and try again.',
           isSuccess: false,
         );
-      }
-      else if(e.response!.data["message"].toString().toLowerCase().contains("empty")){
+      } else if (e.response!.data["message"]
+          .toString()
+          .toLowerCase()
+          .contains("empty")) {
         customSnackBar(
           title: 'User List empty!',
           message: 'List is empty.',
           isSuccess: false,
         );
-
       } else {
         customSnackBar(
           title: 'Error!',
@@ -98,13 +101,7 @@ class InviteMembersController extends GetxController {
         );
       }
     } on DioError catch (e) {
-<<<<<<< HEAD
-
-      print("The data is ${e.response!.data["message"]}");
-
       print(e);
-=======
->>>>>>> 677d1e3c9de683aaa80124c8e5032d986ac89ff7
       customSnackBar(
         title: 'Error!',
         message: 'Please try again later',
