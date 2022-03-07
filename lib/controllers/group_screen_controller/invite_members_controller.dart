@@ -61,15 +61,15 @@ class InviteMembersController extends GetxController {
           isSuccess: false,
         );
 
+      } else {
+        customSnackBar(
+          title: 'Error!',
+          message: 'Please try again later',
+          isSuccess: false,
+        );
       }
 
-      print("The message is ${e.response!.data["message"]}");
       print(e);
-      customSnackBar(
-        title: 'Error!',
-        message: 'Please try again later',
-        isSuccess: false,
-      );
     }
     isBusy.value = false;
   }
@@ -98,15 +98,20 @@ class InviteMembersController extends GetxController {
         );
       }
     } on DioError catch (e) {
+<<<<<<< HEAD
 
       print("The data is ${e.response!.data["message"]}");
 
       print(e);
+=======
+>>>>>>> 677d1e3c9de683aaa80124c8e5032d986ac89ff7
       customSnackBar(
         title: 'Error!',
         message: 'Please try again later',
         isSuccess: false,
       );
+
+      print(e);
     }
     isBusy.value = false;
   }
