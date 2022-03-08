@@ -28,6 +28,7 @@ class CreateEventController extends GetxController {
   final apiSelectedDate = ''.obs;
   final selectedTime = ''.obs;
   final currentTime = TimeOfDay.now();
+  final eventType = 'public'.obs;
   final days = [
     'Sunday',
     'Monday',

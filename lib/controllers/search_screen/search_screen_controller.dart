@@ -4,25 +4,43 @@ import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SearchScreenController extends GetxController {
-  final isLoading = true.obs;
+import '../../models/displayGlobalEventListResponse.dart';
+
+class SearchScreenController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  TabController? tabController;
+  final isGroupLoading = true.obs;
+  final isEventLoading = true.obs;
   final isBusy = false.obs;
   final userModel = Get.find<UserModelService>();
   final apiService = Get.find<ApiService>();
   final chatListController = Get.find<ChatListController>();
   final groupList = <DisplayGroups>[].obs;
-  final tempList = <DisplayGroups>[].obs;
+  final tempGroupList = <DisplayGroups>[].obs;
+  final tempEventList = <DisplayGlobalEventList>[].obs;
+  final eventList = <DisplayGlobalEventList>[].obs;
   final searchedGroupList = [].obs;
-  final searchTED = TextEditingController();
-  final textToShow = 'No Groups to search'.obs;
+  final searchedEventList = <DisplayGlobalEventList>[].obs;
+  final searchGroupsTED = TextEditingController();
+  final searchEventsTED = TextEditingController();
+  final textToShowGroups = 'No Groups to search'.obs;
+  final textToShowEvents = 'No Events to search'.obs;
 
   @override
   void onInit() {
+    getAllEventList();
     getAllGroupData();
+    tabController = TabController(length: 2, vsync: this);
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    tabController!.dispose();
+    super.dispose();
   }
 
   void getAllGroupData() async {
@@ -30,24 +48,46 @@ class SearchScreenController extends GetxController {
       final res = await apiService.getAllGroups();
       if (res.data != null) {
         if (res.data?.isNotEmpty ?? false) {
-          textToShow.value = 'No Groups to search';
+          textToShowGroups.value = 'No Groups to search';
           groupList.clear();
-          tempList.clear();
-          tempList.addAll(res.data!);
+          tempGroupList.clear();
+          tempGroupList.addAll(res.data!);
           groupList.addAll(res.data!);
-          isLoading.value = false;
+          isGroupLoading.value = false;
         } else {
-          tempList.addAll(res.data!);
+          tempGroupList.addAll(res.data!);
           groupList.addAll(res.data!);
         }
       } else {
-        textToShow.value = 'No Groups to search';
+        textToShowGroups.value = 'No Groups to search';
       }
     } on DioError catch (e) {
-      textToShow.value = 'No Groups to search';
+      textToShowGroups.value = 'No Groups to search';
       print(e);
     } finally {
-      isLoading.value = false;
+      isGroupLoading.value = false;
+    }
+  }
+
+  void getAllEventList() async {
+    try {
+      final res = await apiService.getGlobalEventList();
+      if (res.data != null) {
+        if (res.data?.isNotEmpty ?? false) {
+          tempEventList.clear();
+          eventList.clear();
+          tempEventList.addAll(res.data!);
+          eventList.addAll(res.data!);
+          isEventLoading.value = false;
+        } else {
+          tempEventList.addAll(res.data!);
+          eventList.addAll(res.data!);
+        }
+      }
+    } on DioError catch (e) {
+      print(e);
+    } finally {
+      isEventLoading.value = false;
     }
   }
 
@@ -97,22 +137,42 @@ class SearchScreenController extends GetxController {
     isBusy.value = false;
   }
 
-  void onChangedSearchTextField(String? text) {
+  void onChangedGroupListSearchTextField(String? text) {
     if (text?.isNotEmpty ?? false) {
       searchedGroupList.clear();
-      tempList.forEach((element) {
+      tempGroupList.forEach((element) {
         searchedGroupList.addIf(
-            element.group_name.toLowerCase().startsWith(text!.toLowerCase()),
-            element);
+          element.group_name.toLowerCase().startsWith(text!.toLowerCase()),
+          element,
+        );
         if (searchedGroupList.isEmpty) {
           groupList.clear();
-          textToShow.value = 'No Groups were found';
+          textToShowGroups.value = 'No Groups were found';
         }
       });
     } else if (text?.isEmpty ?? true) {
       groupList.clear();
-      groupList.addAll(tempList);
+      groupList.addAll(tempGroupList);
       searchedGroupList.clear();
+    }
+  }
+
+  void onChangedEventListSearchTextField(String? text) {
+    if (text?.isNotEmpty ?? false) {
+      searchedEventList.clear();
+      tempEventList.forEach((element) {
+        searchedEventList.addIf(
+            element.title.toLowerCase().startsWith(text!.toLowerCase()),
+            element);
+        if (searchedGroupList.isEmpty) {
+          eventList.clear();
+          textToShowEvents.value = 'No Groups were found';
+        }
+      });
+    } else if (text?.isEmpty ?? true) {
+      eventList.clear();
+      eventList.addAll(tempEventList);
+      searchedEventList.clear();
     }
   }
 }

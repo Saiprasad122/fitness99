@@ -9,6 +9,7 @@ import 'package:fitness_99/models/change_password_req_response/change_password_r
 import 'package:fitness_99/models/createActivityRequestResponse/create_activity_request.dart';
 import 'package:fitness_99/models/createEventRequestResponse/create_event_request.dart';
 import 'package:fitness_99/models/create_poll_req_response/create_poll_request.dart';
+import 'package:fitness_99/models/displayGlobalEventListResponse.dart';
 import 'package:fitness_99/models/display_activity_response.dart';
 import 'package:fitness_99/models/display_event_response.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
@@ -131,6 +132,9 @@ abstract class ApiService {
   @GET(ApiUrls.GET_USER_PENDING_INVITATION)
   Future<BaseResponse<List<PendingInvitationModel>>>
       getPendingInvitationsForUser({@Path() required int userId});
+
+  @GET(ApiUrls.GLOBAL_EVENT)
+  Future<BaseResponse<List<DisplayGlobalEventList>>> getGlobalEventList();
 
   // ----------------------- ************************ ------------------------------ //
   //                               POST REQUEST                                      //

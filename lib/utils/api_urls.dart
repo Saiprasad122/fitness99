@@ -46,4 +46,5 @@ class ApiUrls {
   static const GET_INVITE_MEMBERS_MY_GROUPS = '/invite_user_list/{group_id}';
   static const CHANGE_PASSWORD = '/change_password';
   static const SEND_INVITATION_TO_USER = '/invite_user';
+  static const GLOBAL_EVENT = '/event_global';
 }
