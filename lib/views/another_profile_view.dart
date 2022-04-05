@@ -4,7 +4,6 @@ import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AnotherProfileView extends StatefulWidget {
   AnotherProfileView({Key? key, this.user, required this.userId})
