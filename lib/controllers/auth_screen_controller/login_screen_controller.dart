@@ -25,10 +25,10 @@ class LoginController extends GetxController {
   final image = ''.obs;
 
   bool validateEmail() {
-    if (emailTED.value.text.isEmpty) {
+    if (emailTED.value.text.trim().isEmpty) {
       emailErr.value = 'Enter email address';
       return false;
-    } else if (!GetUtils.isEmail(emailTED.value.text)) {
+    } else if (!GetUtils.isEmail(emailTED.value.text.trim())) {
       emailErr.value = 'Enter valid email address';
       return false;
     } else {
@@ -71,7 +71,7 @@ class LoginController extends GetxController {
     if (validateEmail() && validateEmail()) {
       apiCalling.value = true;
       await loginApi(
-        email: emailTED.value.text,
+        email: emailTED.value.text.trim(),
         password: passwordTED.value.text,
       );
     }

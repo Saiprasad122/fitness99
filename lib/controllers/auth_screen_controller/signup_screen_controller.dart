@@ -17,7 +17,7 @@ class SignUpScreenController extends GetxController {
   final apiCalling = false.obs;
 
   bool validateName() {
-    if (nameTED.value.text.isEmpty) {
+    if (nameTED.value.text.trim().isEmpty) {
       nameErr.value = 'Enter user name';
       return false;
     } else {
@@ -26,10 +26,10 @@ class SignUpScreenController extends GetxController {
   }
 
   bool validateEmail() {
-    if (emailTED.value.text.isEmpty) {
+    if (emailTED.value.text.trim().isEmpty) {
       emailErr.value = 'Enter email address';
       return false;
-    } else if (!GetUtils.isEmail(emailTED.value.text)) {
+    } else if (!GetUtils.isEmail(emailTED.value.text.trim())) {
       emailErr.value = 'Enter valid email address';
       return false;
     } else {
@@ -53,8 +53,8 @@ class SignUpScreenController extends GetxController {
     if (validateName() && validateEmail() && validatePassword()) {
       apiCalling.value = true;
       signUpApi(
-        userName: nameTED.value.text,
-        email: emailTED.value.text,
+        userName: nameTED.value.text.trim(),
+        email: emailTED.value.text.trim(),
         password: passwordTED.value.text,
       );
     }
