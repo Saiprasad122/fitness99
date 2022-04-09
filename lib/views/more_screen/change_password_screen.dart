@@ -1,7 +1,6 @@
 import 'package:fitness_99/controllers/more_screen_controller/change_password_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/global/widgets/custom_buttom_button.dart';
-import 'package:fitness_99/global/widgets/custom_detail_textfield.dart';
 import 'package:fitness_99/global/widgets/custom_profile_textField.dart';
 import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';

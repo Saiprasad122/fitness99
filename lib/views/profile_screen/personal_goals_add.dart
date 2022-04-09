@@ -31,7 +31,7 @@ class PersonalGoalsAdd extends StatelessWidget {
           Obx(() {
             return CustomProfileTextField(
               displayText: 'Personal Goal',
-              hintText: 'Enter your personal gaol here',
+              hintText: 'Enter your personal goal here',
               errText: _controller.errorTextForTextField.value,
               textEditingController: _controller.goalTED,
             );

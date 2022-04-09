@@ -50,7 +50,7 @@ dependencies:
       url: https://github.com/appvinio/pretty_dio_logger
   connectivity: ^3.0.6
   cached_network_image: ^3.1.0
-  image_cropper: ^1.4.1
+  image_cropper: ^1.5.1
   uuid: ^3.0.5
   firebase_storage: ^10.0.5
   http: ^0.13.4

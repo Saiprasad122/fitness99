@@ -18,7 +18,7 @@ class SignUpScreenController extends GetxController {
 
   bool validateName() {
     if (nameTED.value.text.isEmpty) {
-      nameErr.value = 'Enter user name';
+      nameErr.value = 'Enter Username';
       return false;
     } else {
       return true;
@@ -27,10 +27,10 @@ class SignUpScreenController extends GetxController {
 
   bool validateEmail() {
     if (emailTED.value.text.isEmpty) {
-      emailErr.value = 'Enter email address';
+      emailErr.value = 'Enter Email Address';
       return false;
     } else if (!GetUtils.isEmail(emailTED.value.text)) {
-      emailErr.value = 'Enter valid email address';
+      emailErr.value = 'Enter valid Email Address';
       return false;
     } else {
       return true;
@@ -39,7 +39,7 @@ class SignUpScreenController extends GetxController {
 
   bool validatePassword() {
     if (passwordTED.value.text.isEmpty) {
-      passwordErr.value = 'Enter password';
+      passwordErr.value = 'Enter Password';
       return false;
     } else {
       return true;

@@ -75,11 +75,13 @@ class ProfileView extends StatelessWidget {
                     const SizedBox(
                       width: 20,
                     ),
-                    Text(
-                      userModel.getMobileNumber() == 'N/A'
-                          ? 'Please update your phone number'
-                          : userModel.getMobileNumber(),
-                      style: TextStyles.sgproRegular.greyMid.f22,
+                    Obx(
+                      () => Text(
+                        controller.mobileNumber.value == 'N/A'
+                            ? 'Please update your phone number'
+                            : controller.mobileNumber.value,
+                        style: TextStyles.sgproRegular.greyMid.f22,
+                      ),
                     )
                   ],
                 ),
@@ -95,9 +97,11 @@ class ProfileView extends StatelessWidget {
                       color: Colors.amber[800],
                     ),
                     const SizedBox(width: 20),
-                    Text(
-                      userModel.getEmail(),
-                      style: TextStyles.sgproRegular.greyMid.f22,
+                    Obx(
+                      () => Text(
+                        controller.email.value,
+                        style: TextStyles.sgproRegular.greyMid.f22,
+                      ),
                     ),
                   ],
                 ),
@@ -121,9 +125,11 @@ class ProfileView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          '${userModel.getNoOfGroups()}',
-                          style: TextStyles.sgproMedium.black.f20,
+                        Obx(
+                          () => Text(
+                            controller.numbesrOfGroups.value.toString(),
+                            style: TextStyles.sgproMedium.black.f20,
+                          ),
                         ),
                         Text(
                           'No of Groups',
@@ -141,9 +147,11 @@ class ProfileView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            '${userModel.getPendingInvitation()}',
-                            style: TextStyles.sgproMedium.black.f20,
+                          Obx(
+                            () => Text(
+                              controller.pendingInvitation.value.toString(),
+                              style: TextStyles.sgproMedium.black.f20,
+                            ),
                           ),
                           Text(
                             'Pending Invitations',

@@ -50,11 +50,11 @@ class PersonalGoalsDisplay extends StatelessWidget {
                             },
                           )
                         : Center(
-                            child: Text('No Goals to Display'),
+                            child: Text('No Persnal Goals to Display'),
                           ),
                   ),
                   CustomBottomButton(
-                    text: 'AddNew',
+                    text: 'Add New',
                     onTap: () => Get.toNamed(Routes.PersonalGoalsAdd),
                   )
                 ],

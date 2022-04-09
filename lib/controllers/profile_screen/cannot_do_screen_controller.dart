@@ -55,11 +55,12 @@ class CannotDoController extends GetxController {
             (res.message?.toLowerCase().contains('success') ?? false)) {
           customSnackBar(
             title: 'Success',
-            message: 'Cannot Do has been added successfullt',
+            message: 'Cannot Do has been added successfully',
             isSuccess: true,
           );
           cannotDoTED.clear();
           onRefresh();
+          Get.back();
         } else {
           customSnackBar(
             title: 'Failed',
@@ -82,7 +83,7 @@ class CannotDoController extends GetxController {
           (res.message?.toLowerCase().contains('success') ?? false)) {
         customSnackBar(
           title: 'Success',
-          message: 'Cannot Do has been deleted successfullt',
+          message: 'Cannot Do has been deleted successfully',
           isSuccess: true,
         );
         onRefresh();

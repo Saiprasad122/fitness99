@@ -57,11 +57,12 @@ class PersonalGoalsController extends GetxController {
             (res.message?.toLowerCase().contains('success') ?? false)) {
           customSnackBar(
             title: 'Success',
-            message: 'Goal has been added successfullt',
+            message: 'Goal has been added successfully',
             isSuccess: true,
           );
           onRefresh();
           goalTED.clear();
+          Get.back();
         } else {
           customSnackBar(
             title: 'Failed',
@@ -84,7 +85,7 @@ class PersonalGoalsController extends GetxController {
           (res.message?.toLowerCase().contains('success') ?? false)) {
         customSnackBar(
           title: 'Success',
-          message: 'Goal has been deleted successfullt',
+          message: 'Goal has been deleted successfully',
           isSuccess: true,
         );
         onRefresh();

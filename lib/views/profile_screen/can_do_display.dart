@@ -52,11 +52,11 @@ class CanDoDisplay extends StatelessWidget {
                             },
                           )
                         : Center(
-                            child: Text('No Can Dos\' to Display'),
+                            child: Text('No Can Do\'s to Display'),
                           ),
                   ),
                   CustomBottomButton(
-                    text: 'AddNew',
+                    text: 'Add New',
                     onTap: () => Get.toNamed(Routes.CanDoAdd),
                   )
                 ],

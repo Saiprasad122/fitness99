@@ -26,10 +26,10 @@ class LoginController extends GetxController {
 
   bool validateEmail() {
     if (emailTED.value.text.isEmpty) {
-      emailErr.value = 'Enter email address';
+      emailErr.value = 'Enter Email Address';
       return false;
     } else if (!GetUtils.isEmail(emailTED.value.text)) {
-      emailErr.value = 'Enter valid email address';
+      emailErr.value = 'Enter valid Email Address';
       return false;
     } else {
       return true;
@@ -38,7 +38,7 @@ class LoginController extends GetxController {
 
   bool validatePassword() {
     if (passwordTED.value.text.isEmpty) {
-      passwordErr.value = 'Enter password';
+      passwordErr.value = 'Enter Password';
       return false;
     } else {
       return true;
@@ -47,10 +47,10 @@ class LoginController extends GetxController {
 
   bool validateForgotEmail() {
     if (forgotemailTED.value.text.isEmpty) {
-      forgotEmailErr.value = 'Enter email address';
+      forgotEmailErr.value = 'Enter Email Address';
       return false;
     } else if (!GetUtils.isEmail(forgotemailTED.value.text)) {
-      forgotEmailErr.value = 'Enter valid email address';
+      forgotEmailErr.value = 'Enter valid Email Address';
       return false;
     } else {
       return true;
