@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' as Dio;
+import 'package:fitness_99/controllers/profile_screen/profile_view_controller.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/data_model.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
@@ -20,6 +21,7 @@ import 'package:image_cropper/image_cropper.dart';
 class EditProfileController extends GetxController {
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
+  final profileViewController = Get.find<ProfileViewController>();
   final nameTED = TextEditingController();
   final emailTED = TextEditingController();
   final numberTED = TextEditingController();
@@ -44,10 +46,10 @@ class EditProfileController extends GetxController {
 
   bool validateEmail() {
     if (emailTED.value.text.isEmpty) {
-      emailErr.value = 'Enter email address';
+      emailErr.value = 'Enter Email Address';
       return false;
     } else if (!GetUtils.isEmail(emailTED.value.text)) {
-      emailErr.value = 'Enter valid email address';
+      emailErr.value = 'Enter valid Email Address';
       return false;
     } else {
       emailErr.value = '';
@@ -57,7 +59,7 @@ class EditProfileController extends GetxController {
 
   bool validateName() {
     if (nameTED.value.text.isEmpty) {
-      nameErr.value = 'Enter user name';
+      nameErr.value = 'Enter Username';
       return false;
     } else {
       nameErr.value = '';
@@ -67,13 +69,13 @@ class EditProfileController extends GetxController {
 
   bool validateNumber() {
     if (numberTED.value.text.isEmpty) {
-      numberErr.value = 'Enter mobile number';
+      numberErr.value = 'Enter Mobile Number';
       return false;
     } else if (!numberTED.value.text.isPhoneNumber) {
-      numberErr.value = 'Enter valid mobile number';
+      numberErr.value = 'Enter valid Mobile Number';
       return false;
     } else if (!numberTED.value.text.startsWith(RegExp(r'[6-9]'))) {
-      numberErr.value = 'Enter a valid mobile number';
+      numberErr.value = 'Enter a valid Mobile Number';
       return false;
     } else {
       numberErr.value = '';
@@ -87,7 +89,7 @@ class EditProfileController extends GetxController {
     if (file != null) {
       // final img = File(file.path);
       String fileName = file.path.split('/').last;
-      final cropImage = await imageCropper.cropImage(
+      final cropImage = await ImageCropper().cropImage(
         sourcePath: file.path,
         aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
         maxHeight: 300,
@@ -113,7 +115,7 @@ class EditProfileController extends GetxController {
       Get.back();
       customSnackBar(
         title: 'Success!',
-        message: 'Your profile is successfully updated',
+        message: 'Your Profile is successfully updated',
         isSuccess: true,
       );
     }
@@ -201,6 +203,15 @@ class EditProfileController extends GetxController {
         );
         await Hive.box<UserLocalDataModel>('user_data')
             .put('data', userLocalDataModel);
+        // profileViewController.userName.value = res.result!.userName;
+        // profileViewController.email.value = res.result!.email;
+        // profileViewController.mobileNumber.value =
+        //     res.result!.phoneNumber ?? 'N/A';
+        // profileViewController.numbesrOfGroups.value = res.result!.groupCount;
+        // profileViewController.profilePicture.value = res.result!.profilePicture;
+        // profileViewController.pendingInvitation.value =
+        //     userModel.getPendingInvitation();
+
         apiCalling.value = false;
       }
     } on Dio.DioError catch (e) {

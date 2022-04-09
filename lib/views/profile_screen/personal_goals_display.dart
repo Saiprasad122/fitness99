@@ -53,7 +53,7 @@ class PersonalGoalsDisplay extends StatelessWidget {
                             },
                           )
                         : Center(
-                            child: Text('No Goals to Display'),
+                            child: Text('No Persnal Goals to Display'),
                           ),
                   ),
                   isUser

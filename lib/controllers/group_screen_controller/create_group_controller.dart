@@ -38,7 +38,7 @@ class CreateGroupController extends GetxController {
 
   bool validateGroupName() {
     if (groupNameTED.text.isEmpty) {
-      groupNameErr.value = 'Enter group name';
+      groupNameErr.value = 'Enter Group Name';
       return false;
     }
     groupNameErr.value = '';
@@ -47,7 +47,7 @@ class CreateGroupController extends GetxController {
 
   bool validateGoal() {
     if (goalTED.text.isEmpty) {
-      goalErr.value = 'Enter goal';
+      goalErr.value = 'Enter Goal';
       return false;
     }
     goalErr.value = '';
@@ -56,7 +56,7 @@ class CreateGroupController extends GetxController {
 
   bool validateLocation() {
     if (locationTED.text.isEmpty) {
-      locationErr.value = 'Enter location';
+      locationErr.value = 'Enter Location';
       return false;
     }
     locationErr.value = '';
@@ -65,7 +65,7 @@ class CreateGroupController extends GetxController {
 
   bool validateMaxMembers() {
     if (maxMembersTED.text.isEmpty) {
-      maxMembersErr.value = 'Enter number';
+      maxMembersErr.value = 'Enter Number';
       return false;
     } else if (int.parse(maxMembersTED.text) > 25 ||
         int.parse(maxMembersTED.text) < 1) {
@@ -81,7 +81,7 @@ class CreateGroupController extends GetxController {
 
   bool validateComments() {
     if (commentsTED.text.isEmpty) {
-      commentsErr.value = 'Enter comments';
+      commentsErr.value = 'Enter Comments';
       return false;
     }
     commentsErr.value = '';

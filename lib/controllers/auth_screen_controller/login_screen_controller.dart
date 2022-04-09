@@ -25,11 +25,19 @@ class LoginController extends GetxController {
   final image = ''.obs;
 
   bool validateEmail() {
+<<<<<<< HEAD
     if (emailTED.value.text.trim().isEmpty) {
       emailErr.value = 'Enter email address';
       return false;
     } else if (!GetUtils.isEmail(emailTED.value.text.trim())) {
       emailErr.value = 'Enter valid email address';
+=======
+    if (emailTED.value.text.isEmpty) {
+      emailErr.value = 'Enter Email Address';
+      return false;
+    } else if (!GetUtils.isEmail(emailTED.value.text)) {
+      emailErr.value = 'Enter valid Email Address';
+>>>>>>> 698d9f8c256141699d62db6624ae30208c4fda72
       return false;
     } else {
       return true;
@@ -38,7 +46,7 @@ class LoginController extends GetxController {
 
   bool validatePassword() {
     if (passwordTED.value.text.isEmpty) {
-      passwordErr.value = 'Enter password';
+      passwordErr.value = 'Enter Password';
       return false;
     } else {
       return true;
@@ -47,10 +55,10 @@ class LoginController extends GetxController {
 
   bool validateForgotEmail() {
     if (forgotemailTED.value.text.isEmpty) {
-      forgotEmailErr.value = 'Enter email address';
+      forgotEmailErr.value = 'Enter Email Address';
       return false;
     } else if (!GetUtils.isEmail(forgotemailTED.value.text)) {
-      forgotEmailErr.value = 'Enter valid email address';
+      forgotEmailErr.value = 'Enter valid Email Address';
       return false;
     } else {
       return true;

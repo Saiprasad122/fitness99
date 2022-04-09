@@ -48,7 +48,7 @@ class ChangePasswordController extends GetxController {
 
   bool validateRetypeNewPassoword() {
     if (retypeNewPasswordTED.value.text.isEmpty) {
-      retypeNewPasswordErrTxt.value = 'Reype the New assword';
+      retypeNewPasswordErrTxt.value = 'ReType the New Password';
       return false;
     } else if (retypeNewPasswordTED.value.text.isNotEmpty &&
         newPasswordTED.text != retypeNewPasswordTED.text) {

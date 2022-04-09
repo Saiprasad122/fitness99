@@ -56,7 +56,7 @@ class CannnotDoDisplay extends StatelessWidget {
                             },
                           )
                         : Center(
-                            child: Text('No Cannot Dos\' to Display'),
+                            child: Text('No Cannot Do\'s to Display'),
                           ),
                   ),
                   isUser

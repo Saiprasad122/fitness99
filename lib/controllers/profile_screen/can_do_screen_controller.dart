@@ -63,6 +63,7 @@ class CanDoController extends GetxController {
           );
           onRefresh();
           canDoTED.clear();
+          Get.back();
         } else {
           customSnackBar(
             title: 'Failed',
