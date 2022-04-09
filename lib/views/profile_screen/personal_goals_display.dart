@@ -9,9 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PersonalGoalsDisplay extends StatelessWidget {
-  final controller = Get.put(PersonalGoalsController());
+  final int user_id;
+  final bool isUser;
+  PersonalGoalsDisplay({required this.user_id, this.isUser = true});
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(PersonalGoalsController(user_id: user_id));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -53,10 +56,12 @@ class PersonalGoalsDisplay extends StatelessWidget {
                             child: Text('No Persnal Goals to Display'),
                           ),
                   ),
-                  CustomBottomButton(
-                    text: 'Add New',
-                    onTap: () => Get.toNamed(Routes.PersonalGoalsAdd),
-                  )
+                  isUser
+                      ? CustomBottomButton(
+                          text: 'AddNew',
+                          onTap: () => Get.toNamed(Routes.PersonalGoalsAdd),
+                        )
+                      : const SizedBox(),
                 ],
               );
       }),

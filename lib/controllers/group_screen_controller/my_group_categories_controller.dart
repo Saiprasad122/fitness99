@@ -47,14 +47,32 @@ class MyGroupCategoriesController extends GetxController {
             categories: finalCategoryList, group_id: group_id.toString());
 
         final response = await apiService.addGroupCategories(body);
-        if (response.message!.toLowerCase().contains('success')) {}
+        if (response.message!.toLowerCase().contains('success')) {
+          customSnackBar(
+            title: 'Updated Successfully',
+            message: 'Categories updated successfully',
+            isSuccess: true,
+          );
+        }
       } on DioError catch (e) {
-        print(e);
-        customSnackBar(
-          title: 'Error!',
-          message: 'Please try again later',
-          isSuccess: false,
-        );
+        if (e.response!.statusCode == 401 &&
+            e.response!.data['categories']
+                .toString()
+                .toLowerCase()
+                .contains('categories field is required')) {
+          customSnackBar(
+            title: 'No categories selected!',
+            message: 'Please select any categories and submit',
+            isSuccess: false,
+          );
+        } else {
+          print(e);
+          customSnackBar(
+            title: 'Error!',
+            message: 'Please try again later',
+            isSuccess: false,
+          );
+        }
       }
     }
     isBusy.value = false;
@@ -73,16 +91,6 @@ class MyGroupCategoriesController extends GetxController {
             categoriesApiList[i].isTicked = true;
           }
         }
-
-        categoriesApiList.forEach((element) {
-          print('${element.categoryName} && ${element.isTicked}');
-        });
-      } else {
-        customSnackBar(
-          title: 'Error!',
-          message: 'Please try again later',
-          isSuccess: false,
-        );
       }
     } on DioError catch (e) {
       print(e);

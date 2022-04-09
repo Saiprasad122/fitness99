@@ -46,14 +46,32 @@ class CategoriesController extends GetxController {
             user_id: userModel.getid().toString());
 
         final response = await apiService.addCategories(body);
-        if (response.message!.toLowerCase().contains('success')) {}
+        if (response.message!.toLowerCase().contains('success')) {
+          customSnackBar(
+            title: 'Categories Updated',
+            message: 'Catgories Updated Successfully',
+            isSuccess: true,
+          );
+        }
       } on DioError catch (e) {
-        print(e);
-        customSnackBar(
-          title: 'Error!',
-          message: 'Please try again later',
-          isSuccess: false,
-        );
+        if (e.response!.statusCode == 400 &&
+            e.response!.data['categories']
+                .toString()
+                .toLowerCase()
+                .contains('categories field is required')) {
+          customSnackBar(
+            title: 'No categories selected!',
+            message: 'Please select any categories and submit',
+            isSuccess: false,
+          );
+        } else {
+          print(e);
+          customSnackBar(
+            title: 'Error!',
+            message: 'Please try again later',
+            isSuccess: false,
+          );
+        }
       }
     }
     isBusy.value = false;

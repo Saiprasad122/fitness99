@@ -34,6 +34,7 @@ class CreateGroupController extends GetxController {
   final searchScreenController = Get.find<SearchScreenController>();
   final displayGrouController = Get.find<DisplayGroupScreenController>();
   final apiService = Get.find<ApiService>();
+  final ImageCropper imageCropper = ImageCropper();
 
   bool validateGroupName() {
     if (groupNameTED.text.isEmpty) {
@@ -104,7 +105,7 @@ class CreateGroupController extends GetxController {
     final file = await picker.pickImage(source: source);
     if (file != null) {
       String fileName = file.path.split('/').last;
-      final cropImage = await ImageCropper().cropImage(
+      final cropImage = await imageCropper.cropImage(
         sourcePath: file.path,
         aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
         maxHeight: 300,

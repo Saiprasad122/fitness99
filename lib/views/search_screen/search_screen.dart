@@ -1,9 +1,8 @@
 import 'package:fitness_99/controllers/search_screen/search_screen_controller.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
-import 'package:fitness_99/global/widgets/custom_chat_tile.dart';
 import 'package:fitness_99/global/widgets/custom_progress_indicator.dart';
-import 'package:fitness_99/global/widgets/custom_search_field.dart';
-import 'package:fitness_99/global/widgets/custom_group_list_shimmer.dart';
+import 'package:fitness_99/views/search_screen/globalEventListTab.dart';
+import 'package:fitness_99/views/search_screen/globalGroupListTab.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,134 +27,48 @@ class SearchScreenView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomSearchFeild(
-                      textEditingController: controller.searchTED,
-                      onChanged: (text) =>
-                          controller.onChangedSearchTextField(text),
+                    TabBar(
+                      controller: controller.tabController,
+                      indicatorColor: AppColors.secondaryColor,
+                      indicatorWeight: 3,
+                      tabs: [
+                        Tab(
+                          height: 50,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Groups',
+                              style: TextStyles.sgproMedium.f20.black,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          height: 50,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Events',
+                              style: TextStyles.sgproMedium.f20.black,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 15),
-                    controller.isLoading.value
-                        ? CustomListGroupShimmer()
-                        : controller.searchedGroupList.isNotEmpty
-                            ? Expanded(
-                                child: ListView.builder(
-                                  physics: BouncingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount:
-                                      controller.searchedGroupList.length,
-                                  itemBuilder: (context, i) => CustomChatTile(
-                                    groupName: controller
-                                        .searchedGroupList[i].group_name,
-                                    groupGoal:
-                                        controller.searchedGroupList[i].goal,
-                                    groupImage: controller
-                                        .searchedGroupList[i].group_image,
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                          title: Text(
-                                            'Send Invitation',
-                                            style: TextStyles.sgproRegular.f18,
-                                          ),
-                                          content: Text(
-                                            'Do you want to send inivaition?',
-                                            style: TextStyles.sgproRegular.f16,
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () {
-                                                Get.back();
-                                                controller.joinGroup(controller
-                                                    .searchedGroupList[i].id);
-                                              },
-                                              child: Text(
-                                                'Yes',
-                                                style:
-                                                    TextStyles.sgproRegular.f16,
-                                              ),
-                                            ),
-                                            TextButton(
-                                              onPressed: () => Get.back(),
-                                              child: Text(
-                                                'No',
-                                                style:
-                                                    TextStyles.sgproRegular.f16,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              )
-                            : controller.groupList.isNotEmpty
-                                ? Expanded(
-                                    child: ListView.builder(
-                                      physics: BouncingScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemCount: controller.groupList.length,
-                                      itemBuilder: (context, i) =>
-                                          CustomChatTile(
-                                        groupName:
-                                            controller.groupList[i].group_name,
-                                        groupGoal: controller.groupList[i].goal,
-                                        groupImage:
-                                            controller.groupList[i].group_image,
-                                        onTap: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) => AlertDialog(
-                                              title: Text(
-                                                'Send Invitation',
-                                                style:
-                                                    TextStyles.sgproRegular.f18,
-                                              ),
-                                              content: Text(
-                                                'Do you want to send inivaition?',
-                                                style:
-                                                    TextStyles.sgproRegular.f16,
-                                              ),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Get.back();
-                                                    controller.joinGroup(
-                                                        controller
-                                                            .groupList[i].id);
-                                                  },
-                                                  child: Text(
-                                                    'Yes',
-                                                    style: TextStyles
-                                                        .sgproRegular.f16,
-                                                  ),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () => Get.back(),
-                                                  child: Text(
-                                                    'No',
-                                                    style: TextStyles
-                                                        .sgproRegular.f16,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  )
-                                : Expanded(
-                                    child: Center(
-                                      child: Text(
-                                        controller.textToShow.value,
-                                        style: TextStyles.sgproMedium.f32,
-                                      ),
-                                    ),
-                                  ),
+                    const SizedBox(height: 20),
+                    Expanded(
+                      child: TabBarView(
+                        controller: controller.tabController,
+                        children: [
+                          GlobalGroupsListTab(controller: controller),
+                          GlobalEventListTab(
+                            controller: controller,
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

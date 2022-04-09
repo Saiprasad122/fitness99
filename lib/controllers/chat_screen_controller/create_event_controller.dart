@@ -28,6 +28,7 @@ class CreateEventController extends GetxController {
   final apiSelectedDate = ''.obs;
   final selectedTime = ''.obs;
   final currentTime = TimeOfDay.now();
+  final eventType = 'public'.obs;
   final days = [
     'Sunday',
     'Monday',
@@ -76,8 +77,28 @@ class CreateEventController extends GetxController {
       initialTime: currentTime,
     );
     if (picked != null) {
-      selectedTime.value = picked.format(context);
-      selectDateTimeErrText.value = '';
+      DateTime selectedDateTime =
+          DateFormat('dd/MM/yyyy').parse(selectedDate.value);
+      double pickedDateTotal = selectedDateTime.day.toDouble() +
+          selectedDateTime.month.toDouble() +
+          selectedDateTime.year.toDouble();
+      double currentDateTotal = DateTime.now().day.toDouble() +
+          DateTime.now().month.toDouble() +
+          DateTime.now().year.toDouble();
+      double pickedTimeTotal =
+          picked.hour.toDouble() + picked.minute.toDouble();
+      double currentTimeTotal =
+          TimeOfDay.now().hour.toDouble() + TimeOfDay.now().minute.toDouble();
+      if (pickedTimeTotal <= currentTimeTotal &&
+          pickedDateTotal == currentDateTotal) {
+        selectedDate.value = '';
+        selectedTime.value = '';
+        selectDateTimeErrText.value =
+            'Selected time should be greater than current time';
+      } else {
+        selectedTime.value = picked.format(context);
+        selectDateTimeErrText.value = '';
+      }
     }
   }
 
@@ -85,7 +106,7 @@ class CreateEventController extends GetxController {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2090),
     );
     if (picked != null) {

@@ -29,16 +29,9 @@ class AppPages {
     GetPage(name: Routes.ProfileScreen, page: () => ProfileView()),
     GetPage(name: Routes.EditProfileScreen, page: () => EditProfileScreen()),
     GetPage(name: Routes.PersonalGoalsAdd, page: () => PersonalGoalsAdd()),
-    GetPage(
-        name: Routes.PersonalGoalsDisplay, page: () => PersonalGoalsDisplay()),
     GetPage(name: Routes.CanDoAdd, page: () => CanDoAdd()),
-    GetPage(name: Routes.CanDoDislay, page: () => CanDoDisplay()),
     GetPage(name: Routes.CannotDoAdd, page: () => CannotDoAdd()),
-    GetPage(name: Routes.CannotDoDisplay, page: () => CannnotDoDisplay()),
     GetPage(name: Routes.CategoriesScreen, page: () => CategoriesScreen()),
-    GetPage(
-        name: Routes.ViewPreferencesScreen,
-        page: () => ViewPreferencesScreen()),
     GetPage(name: Routes.AddPreferenceTime, page: () => AddPreferenceTime()),
     GetPage(
         name: Routes.PendingInvitationScreen,
@@ -77,13 +70,9 @@ abstract class Routes {
   static const ProfileScreen = _Paths.profileScreen;
   static const EditProfileScreen = _Paths.editProfileScreen;
   static const PersonalGoalsAdd = _Paths.personalGoalsAdd;
-  static const PersonalGoalsDisplay = _Paths.personalGoalsDisplay;
-  static const CanDoDislay = _Paths.canDoDisplay;
   static const CanDoAdd = _Paths.canDoAdd;
   static const CannotDoAdd = _Paths.cannotDoAdd;
-  static const CannotDoDisplay = _Paths.cannotDoDisplay;
   static const CategoriesScreen = _Paths.categoriesScreen;
-  static const ViewPreferencesScreen = _Paths.viewPreferencesScreen;
   static const AddPreferenceTime = _Paths.addPreferenceTime;
   static const PendingInvitationScreen = _Paths.pendingInvitationScreen;
   static const MoreOptionsScreen = _Paths.moreOptionsScreen;
@@ -118,13 +107,9 @@ abstract class _Paths {
   static const profileScreen = '/profileScreen';
   static const editProfileScreen = '/editProfileScreen';
   static const personalGoalsAdd = '/personalGoalsAdd';
-  static const personalGoalsDisplay = '/personalGoalsDisplay';
-  static const canDoDisplay = '/canDoDisplay';
   static const canDoAdd = '/canDoAdd';
-  static const cannotDoDisplay = '/cannotDoDisplay';
   static const cannotDoAdd = '/cannotDoAdd';
   static const categoriesScreen = '/categoriesScreen';
-  static const viewPreferencesScreen = '/viewPreferencesScreen';
   static const addPreferenceTime = '/addPreferenceTime';
   static const pendingInvitationScreen = '/pendingInvitationScreen';
   static const moreOptionsScreen = '/moreOptionsScreen';

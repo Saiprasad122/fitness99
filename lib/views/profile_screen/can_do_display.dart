@@ -9,10 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CanDoDisplay extends StatelessWidget {
-  final controller = Get.put(CanDoController());
+  final user_id;
+  final bool isUser;
+  CanDoDisplay({required this.user_id, this.isUser = true});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CanDoController(user_id: user_id));
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -55,10 +59,12 @@ class CanDoDisplay extends StatelessWidget {
                             child: Text('No Can Do\'s to Display'),
                           ),
                   ),
-                  CustomBottomButton(
-                    text: 'Add New',
-                    onTap: () => Get.toNamed(Routes.CanDoAdd),
-                  )
+                  isUser
+                      ? CustomBottomButton(
+                          text: 'AddNew',
+                          onTap: () => Get.toNamed(Routes.CanDoAdd),
+                        )
+                      : const SizedBox(),
                 ],
               );
       }),

@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_99/core/api/api_service.dart';
+import 'package:fitness_99/global/router/views.export.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
 import 'package:fitness_99/models/loginReposnseRequest/login_response.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AnotherProfileView extends StatefulWidget {
   AnotherProfileView({Key? key, this.user, required this.userId})
@@ -164,6 +164,12 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   ListTile(
+                                    onTap: () => Get.to(
+                                      () => PersonalGoalsDisplay(
+                                        user_id: widget.userId,
+                                        isUser: false,
+                                      ),
+                                    ),
                                     leading: Image.asset(
                                       'assets/images/tabbar/target.png',
                                       height: 48,
@@ -179,6 +185,12 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
                                     color: Colors.grey,
                                   ),
                                   ListTile(
+                                    onTap: () => Get.to(
+                                      () => CanDoDisplay(
+                                        user_id: widget.userId,
+                                        isUser: false,
+                                      ),
+                                    ),
                                     leading: Image.asset(
                                       'assets/images/tabbar/dos&donts.png',
                                       height: 48,
@@ -194,6 +206,12 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
                                     color: Colors.grey,
                                   ),
                                   ListTile(
+                                    onTap: () => Get.to(
+                                      () => CannnotDoDisplay(
+                                        user_id: widget.userId,
+                                        isUser: false,
+                                      ),
+                                    ),
                                     leading: Image.asset(
                                       'assets/images/tabbar/dos&donts.png',
                                       height: 48,
@@ -209,6 +227,12 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
                                     color: Colors.grey,
                                   ),
                                   ListTile(
+                                    onTap: () => Get.to(
+                                      () => ViewPreferencesScreen(
+                                        user_id: widget.userId,
+                                        isUser: false,
+                                      ),
+                                    ),
                                     leading: Image.asset(
                                       'assets/images/tabbar/timer.png',
                                       height: 48,

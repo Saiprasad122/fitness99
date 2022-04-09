@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CanDoController extends GetxController {
+  CanDoController({required this.user_id});
+  final user_id;
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
   final isLoading = true.obs;
@@ -26,7 +28,7 @@ class CanDoController extends GetxController {
     isLoading.value = true;
     isError.value = false;
     try {
-      final res = await apiService.getCanDos(userId: userModel.getid());
+      final res = await apiService.getCanDos(userId: user_id);
       if (res.data != null) {
         canDos.addAll(res.data!);
       }

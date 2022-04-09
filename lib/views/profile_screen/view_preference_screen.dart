@@ -8,11 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ViewPreferencesScreen extends StatelessWidget {
-  ViewPreferencesScreen({Key? key}) : super(key: key);
-
+  final int user_id;
+  final bool isUser;
+  ViewPreferencesScreen({required this.user_id, this.isUser = true});
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(PreferenceController());
+    final controller = Get.put(PreferenceController(user_id: user_id));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -71,10 +72,12 @@ class ViewPreferencesScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                CustomBottomButton(
-                  text: 'Add your availability',
-                  onTap: () => Get.toNamed(Routes.AddPreferenceTime),
-                )
+                isUser
+                    ? CustomBottomButton(
+                        text: 'Add your availability',
+                        onTap: () => Get.toNamed(Routes.AddPreferenceTime),
+                      )
+                    : const SizedBox(),
               ],
             ),
             controller.isBusy.value

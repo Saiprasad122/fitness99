@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:fitness_99/controllers/profile_screen/view_preferences_controller.dart';
 import 'package:fitness_99/core/api/api_service.dart';
 import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/utils/fontsAndSizes.dart';
@@ -10,6 +11,7 @@ import 'package:get/get.dart';
 class AddPreferenceTimeController extends GetxController {
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
+  final preferenceController = Get.find<PreferenceController>();
   final fromTime = ''.obs;
   final toTime = ''.obs;
   final fromTimeErrText = ''.obs;
@@ -138,12 +140,13 @@ class AddPreferenceTimeController extends GetxController {
 
       if (response.message!.toLowerCase().contains('success') &&
           response.status == 200) {
+        preferenceController.getPreference();
+        Get.back();
         customSnackBar(
           title: 'Added Preference!',
           message: 'Your Preference added successfully',
           isSuccess: true,
         );
-        Get.back();
       } else {
         customSnackBar(
           title: 'Something went Wrong!',

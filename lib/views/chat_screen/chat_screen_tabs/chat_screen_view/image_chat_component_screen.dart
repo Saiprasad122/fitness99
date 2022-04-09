@@ -33,7 +33,7 @@ class ImageChatComponent extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () async {
-                    final file = await ImageCropper().cropImage(
+                    final file = await controller.imageCropper.cropImage(
                       sourcePath: controller.filePath.value,
                       aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
                       maxHeight: 300,

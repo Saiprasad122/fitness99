@@ -5,7 +5,6 @@ import 'package:fitness_99/global/utils/dimensions.dart';
 import 'package:fitness_99/models/display_group_reponse.dart';
 import 'package:fitness_99/views/profile_screen/widget/redirect_list.component.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class GroupView extends StatelessWidget {
   final DisplayGroups displayGroups;
@@ -56,7 +55,7 @@ class GroupView extends StatelessWidget {
                           imageUrl: 'assets/images/tabbar/categories.png',
                           title: 'Group Categories',
                           iconData: Icons.keyboard_arrow_right_outlined,
-                          onTap: () => Get.to(MyGroupCategoriesScreen(
+                          onTap: () => Get.to(() => MyGroupCategoriesScreen(
                               group_id: displayGroups.id)),
                           backgroundColor: Colors.white,
                         ),
@@ -64,7 +63,7 @@ class GroupView extends StatelessWidget {
                           imageUrl: 'assets/images/group_screen/add_friend.png',
                           title: 'Invite Members',
                           iconData: Icons.keyboard_arrow_right_outlined,
-                          onTap: () => Get.to(
+                          onTap: () => Get.to(() =>
                               InviteMembersScreen(group_id: displayGroups.id)),
                           backgroundColor: Colors.white,
                         ),
