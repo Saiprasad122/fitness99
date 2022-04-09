@@ -89,7 +89,7 @@ class EditProfileController extends GetxController {
     if (file != null) {
       // final img = File(file.path);
       String fileName = file.path.split('/').last;
-      final cropImage = await imageCropper.cropImage(
+      final cropImage = await ImageCropper().cropImage(
         sourcePath: file.path,
         aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
         maxHeight: 300,
@@ -203,14 +203,14 @@ class EditProfileController extends GetxController {
         );
         await Hive.box<UserLocalDataModel>('user_data')
             .put('data', userLocalDataModel);
-        profileViewController.userName.value = res.result!.userName;
-        profileViewController.email.value = res.result!.email;
-        profileViewController.mobileNumber.value =
-            res.result!.phoneNumber ?? 'N/A';
-        profileViewController.numbesrOfGroups.value = res.result!.groupCount;
-        profileViewController.profilePicture.value = res.result!.profilePicture;
-        profileViewController.pendingInvitation.value =
-            userModel.getPendingInvitation();
+        // profileViewController.userName.value = res.result!.userName;
+        // profileViewController.email.value = res.result!.email;
+        // profileViewController.mobileNumber.value =
+        //     res.result!.phoneNumber ?? 'N/A';
+        // profileViewController.numbesrOfGroups.value = res.result!.groupCount;
+        // profileViewController.profilePicture.value = res.result!.profilePicture;
+        // profileViewController.pendingInvitation.value =
+        //     userModel.getPendingInvitation();
 
         apiCalling.value = false;
       }
