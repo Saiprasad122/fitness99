@@ -45,10 +45,10 @@ class EditProfileController extends GetxController {
   }
 
   bool validateEmail() {
-    if (emailTED.value.text.isEmpty) {
+    if (emailTED.value.text.trim().isEmpty) {
       emailErr.value = 'Enter Email Address';
       return false;
-    } else if (!GetUtils.isEmail(emailTED.value.text)) {
+    } else if (!GetUtils.isEmail(emailTED.value.text.trim())) {
       emailErr.value = 'Enter valid Email Address';
       return false;
     } else {
@@ -58,7 +58,7 @@ class EditProfileController extends GetxController {
   }
 
   bool validateName() {
-    if (nameTED.value.text.isEmpty) {
+    if (nameTED.value.text.trim().isEmpty) {
       nameErr.value = 'Enter Username';
       return false;
     } else {
@@ -68,13 +68,13 @@ class EditProfileController extends GetxController {
   }
 
   bool validateNumber() {
-    if (numberTED.value.text.isEmpty) {
+    if (numberTED.value.text.trim().isEmpty) {
       numberErr.value = 'Enter Mobile Number';
       return false;
-    } else if (!numberTED.value.text.isPhoneNumber) {
+    } else if (!numberTED.value.text.trim().isPhoneNumber) {
       numberErr.value = 'Enter valid Mobile Number';
       return false;
-    } else if (!numberTED.value.text.startsWith(RegExp(r'[6-9]'))) {
+    } else if (!numberTED.value.text.trim().startsWith(RegExp(r'[6-9]'))) {
       numberErr.value = 'Enter a valid Mobile Number';
       return false;
     } else {
@@ -107,10 +107,10 @@ class EditProfileController extends GetxController {
     if (validateEmail() && validateName() && validateNumber()) {
       apiCalling.value = true;
       await updateProfileApi(
-        email: emailTED.value.text,
-        mobileNumber: numberTED.value.text,
+        email: emailTED.value.text.trim(),
+        mobileNumber: numberTED.value.text.trim(),
         profilePicture: userModel.getProfilePicture(),
-        userName: nameTED.value.text,
+        userName: nameTED.value.text.trim(),
       );
       Get.back();
       customSnackBar(
@@ -203,6 +203,7 @@ class EditProfileController extends GetxController {
         );
         await Hive.box<UserLocalDataModel>('user_data')
             .put('data', userLocalDataModel);
+        print("The data is ${Get.find<UserModelService>().getUserName()}");
         // profileViewController.userName.value = res.result!.userName;
         // profileViewController.email.value = res.result!.email;
         // profileViewController.mobileNumber.value =
@@ -219,70 +220,4 @@ class EditProfileController extends GetxController {
       print(e);
     }
   }
-  // Future pickImageFromGallery() async {
-  //   try {
-  //     var picker = ImagePicker();
-  //     final file = await picker.pickImage(
-  //       source: ImageSource.gallery,
-  //     );
-
-  //     final img = File(file?.path ?? '');
-  //     print('crop1');
-  //     final File croppedImg = _cropImage(img);
-  //     print('crop2');
-
-  //     String fileName = img.path.split('/').last;
-  //     await uploadImageApi(croppedImg.path, fileName);
-  //     print('crop3');
-
-  //     // var uploadImage = await Dio.MultipartFile.fromFile(
-  //     //   img.path,
-  //     //   filename: fileName,
-  //     //   contentType: MediaType('image', 'jpg'),
-  //     // );
-  //     // req = UpdateProfilePictureRequest(
-  //     //     userId: userModel.getid(), profilePicture: uploadImage);
-
-  //     // var formData = Dio.FormData.fromMap(req.toJson());
-
-  //     // try {
-  //     //   apiCalling.value = true;
-  //     //   final dio = Dio.Dio()
-  //     //     ..interceptors.add(PrettyDioLogger(requestBody: true));
-  //     //   final result = await dio.post(
-  //     //     'http://fitness.rithlaundry.com/api/user/profile_picture',
-  //     //     data: formData,
-  //     //   );
-  //     //   final response = UpdateProfilePictureResponse.fromJson(result.data);
-  //     //   if (response.message.toLowerCase() == 'success') {
-  //     //     UserLocalDataModel UserLocalDataModel = UserLocalDataModel(
-  //     //       id: userModel.getid(),
-  //     //       userName: userModel.getUserName(),
-  //     //       email: userModel.getEmail(),
-  //     //       mobileNumber: userModel.getMobileNumber(),
-  //     //       numbesrOfGroups: "0",
-  //     //       profilePicture: response.result?.profilePicture ??
-  //     //           userModel.getProfilePicture(),
-  //     //     );
-  //     //     await Hive.box<UserLocalDataModel>('user_data').put('data', UserLocalDataModel);
-  //     //     image.value = userModel.getProfilePicture();
-  //     //     apiCalling.value = false;
-  //     //     customSnackBar(
-  //     //       'Success!',
-  //     //       'Your profile picture is successfully updated',
-  //     //       'success',
-  //     //     );
-  //     //   } else {
-  //     //     customSnackBar(
-  //     //       'Error!',
-  //     //       'Some error while updating profile picture please try again',
-  //     //       false,
-  //     //     );
-  //     //   }
-  //     // } catch (e) {}
-  //   } catch (e) {
-  //     print("The exception is $e");
-  //   }
-  // }
-
 }

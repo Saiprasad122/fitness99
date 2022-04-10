@@ -32,17 +32,6 @@ class MoreOptionsScreen extends StatelessWidget {
             const SizedBox(
               height: 10.0,
             ),
-            Container(
-              height: 40,
-              alignment: Alignment.centerLeft,
-              child: Text(
-                userModel.getMobileNumber(),
-                style: TextStyles.sgproMedium.black.f30,
-              ),
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
             RedirectListComponent(
               imageUrl: 'assets/svgs/more_options/products.svg',
               title: 'Products',

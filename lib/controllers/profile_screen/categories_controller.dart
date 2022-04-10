@@ -47,6 +47,7 @@ class CategoriesController extends GetxController {
 
         final response = await apiService.addCategories(body);
         if (response.message!.toLowerCase().contains('success')) {
+          Get.back();
           customSnackBar(
             title: 'Categories Updated',
             message: 'Catgories Updated Successfully',
@@ -61,7 +62,7 @@ class CategoriesController extends GetxController {
                 .contains('categories field is required')) {
           customSnackBar(
             title: 'No categories selected!',
-            message: 'Please select any categories and submit',
+            message: 'Please select any categories and update',
             isSuccess: false,
           );
         } else {
