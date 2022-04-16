@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_99/models/add&viewCategories/add_categories_request.dart';
-import 'package:fitness_99/models/add&viewCategories/display_categories.dart';
+import 'package:fitness_99/models/add&viewCategories/display_categories_response.dart';
 import 'package:fitness_99/models/add&viewGroupCategories/add_group_categories_request.dart';
 import 'package:fitness_99/models/add_preferences_request/add_preferences_request.dart';
 import 'package:fitness_99/models/baseResponse/base.response.dart';

@@ -59,7 +59,7 @@ class CategoriesScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      controller.categoriesApiList.isNotEmpty
+                      controller.tempCategoriesList.isNotEmpty
                           ? Container(
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 10),
@@ -73,9 +73,9 @@ class CategoriesScreen extends StatelessWidget {
                                     physics: BouncingScrollPhysics(),
                                     scrollDirection: Axis.horizontal,
                                     itemCount:
-                                        controller.categoriesApiList.length,
+                                        controller.tempCategoriesList.length,
                                     itemBuilder: (context, i) => controller
-                                            .categoriesApiList[i].isTicked
+                                            .tempCategoriesList[i].isTicked
                                         ? Container(
                                             width: 100,
                                             decoration: BoxDecoration(
@@ -91,7 +91,7 @@ class CategoriesScreen extends StatelessWidget {
                                                   MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 Text(controller
-                                                    .categoriesApiList[i]
+                                                    .tempCategoriesList[i]
                                                     .categoryName),
                                                 InkWell(
                                                   onTap: () => controller

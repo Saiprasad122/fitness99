@@ -47,7 +47,38 @@ class PersonalGoalsDisplay extends StatelessWidget {
                               return CustomOnlyTextWidget(
                                 text: controller.goals[i].content,
                                 onDelete: () {
-                                  controller.deleteItem(controller.goals[i].id);
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text('Delete?'),
+                                        content: Text(
+                                            'Are you sure you want to delete this?'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              controller.deleteItem(
+                                                  controller.goals[i].id);
+                                              Get.back();
+                                            },
+                                            child: Text(
+                                              'Yes',
+                                              style: TextStyles
+                                                  .sgproRegular.f20.black,
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () => Get.back(),
+                                            child: Text(
+                                              'No',
+                                              style: TextStyles
+                                                  .sgproRegular.f20.black,
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 },
                               );
                             },

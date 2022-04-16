@@ -79,6 +79,7 @@ class CannotDoController extends GetxController {
   }
 
   void deleteItem(int id) async {
+    isLoading.value = true;
     try {
       final res = await apiService.deleteCannotDo(cannotDoId: id);
       if (res.status == 200 ||
@@ -99,6 +100,7 @@ class CannotDoController extends GetxController {
     } on DioError catch (e) {
       print(e);
     }
+    isLoading.value = false;
   }
 
   bool validatecannotDo(String cannotDo) {

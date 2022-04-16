@@ -4,13 +4,14 @@ import 'package:fitness_99/core/services/user_model_service.dart';
 import 'package:fitness_99/global/widgets/custom_snackbar.dart';
 import 'package:fitness_99/models/add&viewCategories/add_categories_request.dart';
 import 'package:fitness_99/views/profile_screen/widget/category_class.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CategoriesController extends GetxController {
   final isBusy = false.obs;
   final apiService = Get.find<ApiService>();
   final userModel = Get.find<UserModelService>();
-
+  final tempCategoriesList = <CategoryClass>[].obs;
   final categoriesApiList = <CategoryClass>[
     CategoryClass(categoryName: 'Cricket', isTicked: false),
     CategoryClass(categoryName: 'Jogging', isTicked: false),
@@ -19,16 +20,45 @@ class CategoriesController extends GetxController {
     CategoryClass(categoryName: 'Swimming', isTicked: false),
     CategoryClass(categoryName: 'Skipping', isTicked: false),
   ].obs;
+  final searchedCategoriesList = <CategoryClass>[].obs;
+  final searchCategoryTED = TextEditingController();
+  final textToShow = ''.obs;
 
   @override
   void onInit() {
     getCategories();
+    tempCategoriesList.addAll(categoriesApiList);
+    print("The length of temp list is ${tempCategoriesList.length}");
     super.onInit();
   }
 
   void changeVisibility(int i) {
     categoriesApiList[i].isTicked = !(categoriesApiList[i].isTicked);
     update();
+  }
+
+  void searchCatgoryMethod(String text) {
+    if (text.isNotEmpty) {
+      searchedCategoriesList.clear();
+      tempCategoriesList.forEach(
+        (element) {
+          searchedCategoriesList.addIf(
+              element.categoryName.toLowerCase().startsWith(text.toLowerCase()),
+              element);
+          if (searchedCategoriesList.isEmpty) {
+            textToShow.value = 'No Groups were found';
+            categoriesApiList.clear();
+          }
+        },
+      );
+    } else if (text.isEmpty) {
+      categoriesApiList.clear();
+      categoriesApiList.addAll(tempCategoriesList);
+      searchedCategoriesList.clear();
+    }
+
+    print("The length of searched is ${searchedCategoriesList.length}");
+    print("The length of category list is ${categoriesApiList.length}");
   }
 
   void updateCategoryList() async {
@@ -92,10 +122,6 @@ class CategoriesController extends GetxController {
             categoriesApiList[i].isTicked = true;
           }
         }
-
-        categoriesApiList.forEach((element) {
-          print('${element.categoryName} && ${element.isTicked}');
-        });
       } else {
         customSnackBar(
           title: 'Error!',

@@ -80,6 +80,7 @@ class CanDoController extends GetxController {
   }
 
   void deleteItem(int id) async {
+    isLoading.value = true;
     try {
       final res = await apiService.deleteCanDo(canDoId: id);
       if (res.status == 200 ||
@@ -100,6 +101,7 @@ class CanDoController extends GetxController {
     } on DioError catch (e) {
       print(e);
     }
+    isLoading.value = false;
   }
 
   bool validatecanDo(String canDo) {

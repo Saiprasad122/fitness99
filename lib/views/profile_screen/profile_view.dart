@@ -187,7 +187,7 @@ class ProfileView extends StatelessWidget {
                 imageUrl: 'assets/images/tabbar/dos&donts.png',
                 title: 'Cannot do',
                 onTap: () =>
-                    Get.to(() => CannnotDoDisplay(user_id: userModel.getid())),
+                    Get.to(() => CannotDoDisplay(user_id: userModel.getid())),
               ),
               RedirectListComponent(
                 imageUrl: 'assets/images/tabbar/categories.png',

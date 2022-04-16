@@ -207,7 +207,7 @@ class _AnotherProfileViewState extends State<AnotherProfileView> {
                                   ),
                                   ListTile(
                                     onTap: () => Get.to(
-                                      () => CannnotDoDisplay(
+                                      () => CannotDoDisplay(
                                         user_id: widget.userId,
                                         isUser: false,
                                       ),

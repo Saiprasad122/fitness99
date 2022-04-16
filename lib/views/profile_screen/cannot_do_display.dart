@@ -8,10 +8,10 @@ import 'package:fitness_99/views/profile_screen/widget/only_text_custom_componen
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CannnotDoDisplay extends StatelessWidget {
+class CannotDoDisplay extends StatelessWidget {
   final int user_id;
   final bool isUser;
-  CannnotDoDisplay({required this.user_id, this.isUser = true});
+  CannotDoDisplay({required this.user_id, this.isUser = true});
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +49,38 @@ class CannnotDoDisplay extends StatelessWidget {
                               return CustomOnlyTextWidget(
                                 text: controller.cannotDo[i].content,
                                 onDelete: () {
-                                  controller
-                                      .deleteItem(controller.cannotDo[i].id);
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text('Delete?'),
+                                        content: Text(
+                                            'Are you sure you want to delete this?'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              controller.deleteItem(
+                                                  controller.cannotDo[i].id);
+                                              Get.back();
+                                            },
+                                            child: Text(
+                                              'Yes',
+                                              style: TextStyles
+                                                  .sgproRegular.f20.black,
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () => Get.back(),
+                                            child: Text(
+                                              'No',
+                                              style: TextStyles
+                                                  .sgproRegular.f20.black,
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 },
                               );
                             },

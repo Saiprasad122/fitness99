@@ -81,6 +81,7 @@ class PersonalGoalsController extends GetxController {
   }
 
   void deleteItem(int id) async {
+    isLoading.value = true;
     try {
       final res = await apiService.deleteGoal(goalId: id);
       if (res.status == 200 ||
@@ -101,6 +102,7 @@ class PersonalGoalsController extends GetxController {
     } on DioError catch (e) {
       print(e);
     }
+    isLoading.value = false;
   }
 
   bool validateGoal(String goal) {
