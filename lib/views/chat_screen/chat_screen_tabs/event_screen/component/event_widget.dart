@@ -50,42 +50,46 @@ class EventWidget extends StatelessWidget {
                 style: TextStyles.sgproRegular.f20.greyMid,
               ),
               const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.location_on,
-                        color: Colors.amber[800],
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        location,
-                        style: TextStyles.sgproBold.f20
-                            .copyWith(color: Colors.amber[800]),
-                      )
-                    ],
-                  ),
-                  Container(
-                    height: 40,
-                    width: 2,
-                    color: Colors.black,
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.calendar_today_outlined,
-                        color: Colors.amber[800],
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        '${date} ${time}',
-                        style: TextStyles.sgproBold.f20,
-                      )
-                    ],
-                  )
-                ],
+              FittedBox(
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          color: Colors.amber[800],
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          location,
+                          style: TextStyles.sgproBold.f20
+                              .copyWith(color: Colors.amber[800]),
+                        )
+                      ],
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      height: 40,
+                      width: 2,
+                      color: Colors.black,
+                    ),
+                    const SizedBox(width: 10),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.calendar_today_outlined,
+                          color: Colors.amber[800],
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          '${date} ${time}',
+                          style: TextStyles.sgproBold.f20,
+                        )
+                      ],
+                    ),
+                    const SizedBox(width: 10),
+                  ],
+                ),
               ),
               const SizedBox(height: 10),
             ],
