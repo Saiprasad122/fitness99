@@ -192,27 +192,32 @@ class EditProfileController extends GetxController {
       );
 
       if (res.message.toLowerCase() == 'success') {
-        UserLocalDataModel userLocalDataModel = UserLocalDataModel(
+        userModel.loggedIn(
           id: userModel.getid(),
-          userName: res.result!.userName,
+          name: res.result!.userName,
           email: res.result!.email,
           mobileNumber: res.result!.phoneNumber ?? 'N/A',
-          numbesrOfGroups: res.result!.groupCount,
+          numberOfGroups: res.result!.groupCount,
           profilePicture: res.result!.profilePicture,
-          pendingInvitation: userModel.getPendingInvitation(),
+          pendingInvitaion: userModel.getPendingInvitation(),
         );
-        await Hive.box<UserLocalDataModel>('user_data')
-            .put('data', userLocalDataModel);
+        // UserLocalDataModel userLocalDataModel = UserLocalDataModel(
+        //   id: userModel.getid(),
+        //   userName: res.result!.userName,
+        //   email: res.result!.email,
+        //   mobileNumber: res.result!.phoneNumber ?? 'N/A',
+        //   numbesrOfGroups: res.result!.groupCount,
+        //   profilePicture: res.result!.profilePicture,
+        //   pendingInvitation: userModel.getPendingInvitation(),
+        // );
+        // await Hive.box<UserLocalDataModel>('user_data')
+        //     .put('data', userLocalDataModel);
         print("The data is ${Get.find<UserModelService>().getUserName()}");
-        // profileViewController.userName.value = res.result!.userName;
-        // profileViewController.email.value = res.result!.email;
-        // profileViewController.mobileNumber.value =
-        //     res.result!.phoneNumber ?? 'N/A';
-        // profileViewController.numbesrOfGroups.value = res.result!.groupCount;
-        // profileViewController.profilePicture.value = res.result!.profilePicture;
-        // profileViewController.pendingInvitation.value =
-        //     userModel.getPendingInvitation();
-
+        profileViewController.userName.value = res.result!.userName;
+        profileViewController.email.value = res.result!.email;
+        profileViewController.mobileNumber.value =
+            res.result!.phoneNumber ?? 'N/A';
+        profileViewController.profilePicture.value = res.result!.profilePicture;
         apiCalling.value = false;
       }
     } on Dio.DioError catch (e) {

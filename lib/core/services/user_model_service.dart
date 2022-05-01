@@ -39,13 +39,14 @@ class UserModelService extends GetxController {
     _profilePicture = profilePicture ?? "images/avatar.png";
     _pendingInvitaion = pendingInvitaion;
     UserLocalDataModel? userLocalDataModel = UserLocalDataModel(
-        id: id,
-        email: _email,
-        mobileNumber: _mobileNumber,
-        userName: _name,
-        numbesrOfGroups: _numberOfGroups,
-        profilePicture: _profilePicture,
-        pendingInvitation: _pendingInvitaion);
+      id: id,
+      email: _email,
+      mobileNumber: _mobileNumber,
+      userName: _name,
+      numbesrOfGroups: _numberOfGroups,
+      profilePicture: _profilePicture,
+      pendingInvitation: _pendingInvitaion,
+    );
     var box = Hive.box<UserLocalDataModel>('user_data');
     await box.put('data', userLocalDataModel);
     userLocalDataModel = box.get('data');
@@ -73,7 +74,6 @@ class UserModelService extends GetxController {
   String getUserName() {
     var box = Hive.box<UserLocalDataModel>('user_data');
     userLocalDataModel = box.get('data');
-
     return userLocalDataModel?.userName ?? 'N/A';
   }
 

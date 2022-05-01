@@ -47,9 +47,11 @@ class ProfileView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Text(
-                    userModel.getUserName(),
-                    style: TextStyles.sgproBold.black.f26,
+                  Obx(
+                    () => Text(
+                      controller.userName.value,
+                      style: TextStyles.sgproBold.black.f26,
+                    ),
                   ),
                   const Spacer(),
                   IconButton(
@@ -125,11 +127,9 @@ class ProfileView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Obx(
-                          () => Text(
-                            controller.numbesrOfGroups.value.toString(),
-                            style: TextStyles.sgproMedium.black.f20,
-                          ),
+                        Text(
+                          userModel.getNoOfGroups().toString(),
+                          style: TextStyles.sgproMedium.black.f20,
                         ),
                         Text(
                           'No of Groups',
@@ -147,11 +147,9 @@ class ProfileView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Obx(
-                            () => Text(
-                              controller.pendingInvitation.value.toString(),
-                              style: TextStyles.sgproMedium.black.f20,
-                            ),
+                          Text(
+                            userModel.getPendingInvitation().toString(),
+                            style: TextStyles.sgproMedium.black.f20,
                           ),
                           Text(
                             'Pending Invitations',

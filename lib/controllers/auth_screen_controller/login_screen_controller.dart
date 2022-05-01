@@ -118,8 +118,6 @@ class LoginController extends GetxController {
         //
 
         Get.offAllNamed(Routes.DashboardScreen);
-        final userModel = Get.find<UserModelService>();
-        print('The profile pic is ${userModel.getid()}');
         customSnackBar(
           title: 'Logged In!',
           message: 'Logged In Successfully',

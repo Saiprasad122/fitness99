@@ -5,8 +5,6 @@ class ProfileViewController extends GetxController {
   final userName = ''.obs;
   final mobileNumber = 'N/A'.obs;
   final email = ''.obs;
-  final numbesrOfGroups = 0.obs;
-  final pendingInvitation = 0.obs;
   final profilePicture = ''.obs;
   final userModel = Get.find<UserModelService>();
 
@@ -15,8 +13,6 @@ class ProfileViewController extends GetxController {
     userName.value = userModel.getUserName();
     mobileNumber.value = userModel.getMobileNumber();
     email.value = userModel.getEmail();
-    numbesrOfGroups.value = userModel.getNoOfGroups();
-    pendingInvitation.value = userModel.getPendingInvitation();
     profilePicture.value = userModel.getProfilePicture();
     super.onInit();
   }
