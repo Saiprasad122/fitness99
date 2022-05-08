@@ -20,7 +20,7 @@ class FullScreenImageComponent extends StatelessWidget {
                 child: Image.file(
                   file ?? File(url),
                   filterQuality: FilterQuality.high,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                 ),
               ))),
           Positioned(
