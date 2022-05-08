@@ -80,7 +80,7 @@ class Data {
 
   factory Data.fromMap(Map<String, dynamic> map) {
     return Data(
-      group: Group.fromJson(json.decode(map['group'])),
+      group: Group.fromJson(map['group']),
       user: User.fromMap(map['user']),
     );
   }
@@ -180,10 +180,10 @@ class Group {
 
   factory Group.fromJson(Map<String, dynamic> map) {
     return Group(
-      user_id: map['user_id'],
+      user_id: int.parse(map['user_id']?.toString() ?? '0'),
       group_name: map['group_name'],
       goal: map['goal'],
-      active_members: int.parse(map['active_members']),
+      active_members: int.parse(map['active_members'].toString()),
       max_group_members: map['max_group_members'],
       location: map['location'],
       comments: map['comments'],
@@ -191,7 +191,7 @@ class Group {
       group_image: map['group_image'],
       updated_at: map['updated_at'],
       created_at: map['created_at'],
-      id: map['id']?.toInt(),
+      id: int.parse(map['id']?.toString() ?? '0'),
     );
   }
 
