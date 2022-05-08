@@ -71,7 +71,7 @@ class _MemberListState extends State<MemberList> {
                             placeholder: (context, s) =>
                                 CircularProgressIndicator(),
                             filterQuality: FilterQuality.high,
-                            fit: BoxFit.contain,
+                            fit: BoxFit.cover,
                             errorWidget: (context, value, error) => Image.asset(
                                 'assets/images/placeholders/user.png'),
                           ),

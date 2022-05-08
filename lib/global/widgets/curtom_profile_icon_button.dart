@@ -29,7 +29,7 @@ class CustomProfileIconButtom extends StatelessWidget {
                           : 'https://dev.99fitnessfriends.com/uploads${userData.profile_picture}',
                       placeholder: (context, s) => CircularProgressIndicator(),
                       filterQuality: FilterQuality.high,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.cover,
                       errorWidget: (context, value, error) =>
                           Image.asset('assets/images/placeholders/user.png'),
                     ),

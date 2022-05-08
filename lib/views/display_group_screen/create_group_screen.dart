@@ -58,9 +58,12 @@ class CreateGroupScreen extends StatelessWidget {
                               child: ClipOval(
                                 child: controller.image.value == ''
                                     ? Image.asset(
-                                        'assets/images/search_screen/fitness.png')
+                                        'assets/images/search_screen/fitness.png',
+                                        fit: BoxFit.cover,
+                                      )
                                     : Image.file(
                                         File(controller.image.value),
+                                        fit: BoxFit.cover,
                                       ),
                               ),
                             ),
