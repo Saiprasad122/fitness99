@@ -58,7 +58,7 @@ class CanDoController extends GetxController {
             (res.message?.toLowerCase().contains('success') ?? false)) {
           customSnackBar(
             title: 'Success',
-            message: 'Can Do has been added successfullt',
+            message: 'Can Do has been added successfully',
             isSuccess: true,
           );
           onRefresh();

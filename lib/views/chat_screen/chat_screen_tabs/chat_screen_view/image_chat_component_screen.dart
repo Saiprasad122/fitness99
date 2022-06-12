@@ -38,8 +38,7 @@ class ImageChatComponent extends StatelessWidget {
                       aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
                       maxHeight: 300,
                       maxWidth: 300,
-                      androidUiSettings:
-                          AndroidUiSettings(hideBottomControls: true),
+                      uiSettings: [AndroidUiSettings(hideBottomControls: true)],
                     );
                     if (file != null) {
                       controller.filePath.value = file.path;

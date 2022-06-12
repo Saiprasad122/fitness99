@@ -273,7 +273,7 @@ class _PollOptionComponentState extends State<PollOptionComponent>
 
   @override
   Widget build(BuildContext context) {
-    SchedulerBinding.instance?.addPostFrameCallback(getContainerWidth);
+    SchedulerBinding.instance.addPostFrameCallback(getContainerWidth);
 
     return Container(
       margin: const EdgeInsets.symmetric(

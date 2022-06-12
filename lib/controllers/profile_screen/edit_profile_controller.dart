@@ -94,7 +94,7 @@ class EditProfileController extends GetxController {
         aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
         maxHeight: 300,
         maxWidth: 300,
-        androidUiSettings: AndroidUiSettings(hideBottomControls: true),
+        uiSettings: [AndroidUiSettings(hideBottomControls: true)],
       );
       await uploadImageApi(cropImage!.path, fileName);
     }
