@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WeekDialoagBox extends StatelessWidget {
-  final dynamic controller;
+  final controller;
   WeekDialoagBox({required this.controller});
 
   @override
@@ -14,6 +14,7 @@ class WeekDialoagBox extends StatelessWidget {
         width: AppSizedBoxConfigs.screenHeight * 0.8,
         height: AppSizedBoxConfigs.screenWidth * 0.65,
         child: ListView.builder(
+          physics: ClampingScrollPhysics(),
           itemCount: 7,
           itemBuilder: (context, i) {
             return customWidget(controller.days[i], i);

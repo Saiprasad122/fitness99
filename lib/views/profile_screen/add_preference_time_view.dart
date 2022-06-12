@@ -71,7 +71,7 @@ class AddPreferenceTime extends StatelessWidget {
                         controller.fromTimePicked(context);
                       },
                       child: Text(
-                        'Choose from time',
+                        'Choose start time',
                         style: TextStyles.sgproRegular.f22,
                       ),
                       style: OutlinedButton.styleFrom(
@@ -99,7 +99,7 @@ class AddPreferenceTime extends StatelessWidget {
                         controller.toTimePicked(context);
                       },
                       child: Text(
-                        'Choose to time',
+                        'Choose end time',
                         style: TextStyles.sgproRegular.f22,
                       ),
                       style: OutlinedButton.styleFrom(

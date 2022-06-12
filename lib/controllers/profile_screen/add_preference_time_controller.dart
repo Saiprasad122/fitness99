@@ -60,9 +60,8 @@ class AddPreferenceTimeController extends GetxController {
 
   bool validateRightTime(double fromtime, double totime) {
     if (fromtime >= totime) {
-      fromTimeErrText.value =
-          'Starting time cannot be greater than Ending time';
-      toTimeErrText.value = 'Ending time cannot be lesser than Starting time';
+      fromTimeErrText.value = 'Start time cannot be greater than End time';
+      toTimeErrText.value = 'End time cannot be lesser than Start time';
 
       return false;
     } else if (fromtime <= totime) {
